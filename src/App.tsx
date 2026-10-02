@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import './App.css'
 
 const WHATSAPP = 'https://wa.me/14384668971'
@@ -26,42 +26,28 @@ function useReveal() {
 }
 
 function App() {
-  const [menuOpen, setMenuOpen] = useState(false)
   useReveal()
-
-  const closeMenu = () => setMenuOpen(false)
 
   return (
     <div className="site">
       <header className="nav">
-        <a className="nav-brand" href="#top" onClick={closeMenu}>
+        <a className="nav-brand" href="#top">
           <img src="/eclipsetone-logo.jpg" alt="" width={40} height={40} />
           <span>
             Eclipse<span className="tone">Tone</span>
           </span>
         </a>
 
-        <button
-          className="nav-toggle"
-          type="button"
-          aria-label={menuOpen ? 'Close menu' : 'Open menu'}
-          aria-expanded={menuOpen}
-          onClick={() => setMenuOpen((open) => !open)}
-        >
+        <input id="nav-menu" className="nav-checkbox" type="checkbox" />
+        <label className="nav-toggle" htmlFor="nav-menu" aria-label="Menu">
           <span />
-        </button>
+        </label>
 
-        <nav className={`nav-links${menuOpen ? ' open' : ''}`} aria-label="Primary">
-          <a href="#services" onClick={closeMenu}>
-            Services
-          </a>
-          <a href="#approach" onClick={closeMenu}>
-            Approach
-          </a>
-          <a href="#team" onClick={closeMenu}>
-            Team
-          </a>
-          <a className="nav-cta" href="#booking" onClick={closeMenu}>
+        <nav className="nav-links" aria-label="Primary">
+          <a href="#services">Services</a>
+          <a href="#approach">Approach</a>
+          <a href="#team">Team</a>
+          <a className="nav-cta" href="#booking">
             Book
           </a>
         </nav>
