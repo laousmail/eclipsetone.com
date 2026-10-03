@@ -1,22 +1,30 @@
 # EclipseTone Productions
 
-Official website for [eclipsetone.com](https://eclipsetone.com) — recording, arranging, mixing, mastering, vocal production, and sound for motion. Based in Montréal, Québec.
+Artist-first site for [Laousmail](https://instagram.com/laousmail) / EclipseTone — Montréal.
 
-## Develop
+**Live:** https://laousmail.github.io/eclipsetone.com/
+
+## Stack
+
+Static site (`index.html`, `styles.css`, `main.js`, `blog/`). No build step. GitHub Pages serves the branch root.
+
+## Local preview
 
 ```bash
-npm install
-npm run dev
+npx --yes serve .
 ```
 
-## Build
+## Challenge admin
 
-```bash
-npm run build
-npm run preview
-```
+1. Open the site → footer **Admin** (or `#admin`)
+2. Passphrase default: `eclipsetone-admin` (change in `main.js`)
+3. Add title + listen link per slot — data stores in **this browser’s** `localStorage` (Pages has no backend)
+
+## Brand brief
+
+Internal reference: `docs/brand-brief.md`
 
 ## Contact
 
-- Instagram: [@eclipsetone](https://instagram.com/eclipsetone)
+- Instagram: [@laousmail](https://instagram.com/laousmail) · [@eclipsetone](https://instagram.com/eclipsetone)
 - WhatsApp: +1 438 466 8971

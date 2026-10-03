@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="EclipseTone blog — notes from Laousmail on music, freedom, and the 15-song challenge." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Outfit:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../styles.css" />
+    <title>Blog — EclipseTone</title>
+  </head>
+  <body>
+    <div class="site">
+      <header class="nav">
+        <a class="nav-brand" href="../index.html">
+          <img src="../eclipsetone-logo.jpg" alt="" width="40" height="40" />
+          <span>Eclipse<span class="tone">Tone</span></span>
+        </a>
+        <div class="nav-actions">
+          <div class="lang-switch" role="group" aria-label="Language">
+            <button type="button" data-lang-btn="en" aria-pressed="true">EN</button>
+            <button type="button" data-lang-btn="fr" aria-pressed="false">FR</button>
+          </div>
+          <input id="nav-menu" class="nav-checkbox" type="checkbox" />
+          <label class="nav-toggle" for="nav-menu" aria-label="Menu"><span></span></label>
+        </div>
+        <nav class="nav-links" aria-label="Primary">
+          <a href="../index.html#story"><span data-lang="en">Story</span><span data-lang="fr">Histoire</span></a>
+          <a href="../index.html#challenge"><span data-lang="en">Challenge</span><span data-lang="fr">Défi</span></a>
+          <a href="index.html" aria-current="page">Blog</a>
+          <a class="nav-cta" href="../index.html#booking"><span data-lang="en">Book</span><span data-lang="fr">Réserver</span></a>
+        </nav>
+      </header>
+
+      <main class="section blog" style="padding-top: calc(var(--nav-h) + 3rem)">
+        <div class="section-inner">
+          <p class="section-label">Blog</p>
+          <h1 class="section-title">
+            <span data-lang="en">Notes from the process.</span>
+            <span data-lang="fr">Notes du processus.</span>
+          </h1>
+          <article class="blog-card">
+            <p class="blog-meta">2026 · Challenge</p>
+            <h3>
+              <span data-lang="en">Why 15 songs before 2026</span>
+              <span data-lang="fr">Pourquoi 15 chansons avant 2026</span>
+            </h3>
+            <p>
+              <span data-lang="en">Where the challenge came from — and where it’s going.</span>
+              <span data-lang="fr">D’où vient le défi — et où il mène.</span>
+            </p>
+            <div class="cta-row">
+              <a class="btn btn-primary" href="15-songs-before-2026.html">EN</a>
+              <a class="btn btn-ghost" href="15-songs-before-2026.fr.html">FR</a>
+            </div>
+          </article>
+        </div>
+      </main>
+
+      <footer class="footer">
+        <div>
+          <strong>Eclipse<span class="tone">Tone</span></strong>
+          <div>Laousmail · Montréal</div>
+        </div>
+        <div>© 2026 EclipseTone Productions</div>
+      </footer>
+    </div>
+    <script src="../main.js" defer></script>
+  </body>
+</html>
