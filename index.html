@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
@@ -14,10 +14,248 @@
       href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Outfit:wght@300;400;500;600&display=swap"
       rel="stylesheet"
     />
+    <link rel="stylesheet" href="styles.css" />
     <title>EclipseTone Productions — Montréal</title>
   </head>
   <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+    <div class="site">
+      <header class="nav">
+        <a class="nav-brand" href="#top">
+          <img src="eclipsetone-logo.jpg" alt="" width="40" height="40" />
+          <span>Eclipse<span class="tone">Tone</span></span>
+        </a>
+
+        <input id="nav-menu" class="nav-checkbox" type="checkbox" />
+        <label class="nav-toggle" for="nav-menu" aria-label="Menu">
+          <span></span>
+        </label>
+
+        <nav class="nav-links" aria-label="Primary">
+          <a href="#services">Services</a>
+          <a href="#approach">Approach</a>
+          <a href="#team">Team</a>
+          <a class="nav-cta" href="#booking">Book</a>
+        </nav>
+      </header>
+
+      <main id="top">
+        <section class="hero" aria-label="EclipseTone Productions">
+          <div class="hero-visual" aria-hidden="true">
+            <div class="eclipse"></div>
+          </div>
+
+          <div class="hero-copy">
+            <div class="brand-lockup">
+              <h1 class="brand-name">
+                <span class="eclipse-word">Eclipse</span><span class="tone-word">Tone</span>
+              </h1>
+              <p class="brand-sub">Productions</p>
+            </div>
+
+            <h2>Every artist has a sun. We help the world see it.</h2>
+            <p class="hero-lead">
+              Like a sun alone, your music can feel ordinary — until the right
+              presence draws beside it, and the eclipse begins.
+            </p>
+
+            <div class="cta-row">
+              <a
+                class="btn btn-primary"
+                href="https://wa.me/14384668971"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Book on WhatsApp
+              </a>
+              <a
+                class="btn btn-ghost"
+                href="https://instagram.com/eclipsetone"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Instagram
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <section class="section services" id="services">
+          <div class="section-inner">
+            <div class="services-head reveal">
+              <p class="section-label">Services</p>
+              <h2 class="section-title">What we bring into focus</h2>
+              <p class="section-lead">
+                A service-based production house — we meet you in the process,
+                across studios, and make what you hear in your head real.
+              </p>
+            </div>
+
+            <div class="service-grid">
+              <div class="service-col reveal">
+                <h3>For artists</h3>
+                <p>
+                  From first take to final master — across styles, with a team
+                  that builds around your voice.
+                </p>
+                <ul class="service-list">
+                  <li>Recording songs</li>
+                  <li>Arranging</li>
+                  <li>Mixing</li>
+                  <li>Mastering</li>
+                  <li>Vocal production</li>
+                  <li>Vocal coaching</li>
+                </ul>
+              </div>
+
+              <div class="service-col reveal">
+                <h3>For motion &amp; business</h3>
+                <p>
+                  Sound design and score that carry picture, brand, and story —
+                  not just fill the silence.
+                </p>
+                <ul class="service-list">
+                  <li>Sound for motion</li>
+                  <li>Film &amp; media scoring</li>
+                  <li>Brand &amp; commercial audio</li>
+                  <li>Custom sound design</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section approach" id="approach">
+          <div class="section-inner approach-layout">
+            <div class="approach-visual reveal" aria-hidden="true">
+              <div class="vinyl"></div>
+            </div>
+
+            <div class="approach-copy reveal">
+              <p class="section-label">Approach</p>
+              <h2 class="section-title">Not a room you visit. A vision you hear.</h2>
+              <p class="section-lead">
+                We work with artists and creators across multiple studios. The
+                place changes — the craft and the partnership stay.
+              </p>
+              <ol class="steps">
+                <li>
+                  <div>
+                    <strong>Listen</strong>
+                    <span>You show us the sun — the song, the scene, the feeling.</span>
+                  </div>
+                </li>
+                <li>
+                  <div>
+                    <strong>Align</strong>
+                    <span>We shape arrangement, performance, and tone around it.</span>
+                  </div>
+                </li>
+                <li>
+                  <div>
+                    <strong>Reveal</strong>
+                    <span>Mix, master, and deliver what the world is meant to hear.</span>
+                  </div>
+                </li>
+              </ol>
+            </div>
+          </div>
+        </section>
+
+        <section class="section team" id="team">
+          <div class="section-inner">
+            <div class="team-head reveal">
+              <p class="section-label">Team</p>
+              <h2 class="section-title">Guided by people, not just process</h2>
+              <p class="section-lead">
+                Many hands, many styles — EclipseTone is a collective craft, not
+                a one-person booth.
+              </p>
+            </div>
+
+            <div class="team-list">
+              <article class="person reveal">
+                <h3>Smail Laouchedi</h3>
+                <p class="role">Production guidance · Vocal production</p>
+                <p>
+                  Leads artists through recording and vocal production — helping
+                  the performance land the way it was meant to feel.
+                </p>
+              </article>
+
+              <article class="person reveal">
+                <h3>Raouf Abbout</h3>
+                <p class="role">Vocal coach</p>
+                <p>
+                  Strengthens the voice before and during the session — technique,
+                  control, and confidence in the booth.
+                </p>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section class="section booking" id="booking">
+          <div class="section-inner">
+            <div class="booking-panel">
+              <div class="booking-copy reveal">
+                <p class="section-label">Booking</p>
+                <h2 class="section-title">Ready to start the eclipse?</h2>
+                <p class="section-lead">
+                  Message us on WhatsApp — tell us about your project, your
+                  timeline, and the sound you want the world to see.
+                </p>
+                <div class="cta-row">
+                  <a
+                    class="btn btn-primary"
+                    href="https://wa.me/14384668971"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    WhatsApp +1 438 466 8971
+                  </a>
+                  <a
+                    class="btn btn-ghost"
+                    href="https://instagram.com/eclipsetone"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    @eclipsetone
+                  </a>
+                </div>
+                <div class="contact-meta">
+                  <p>
+                    <strong>Based in</strong>
+                    Montréal, Québec
+                  </p>
+                  <a href="https://wa.me/14384668971" target="_blank" rel="noreferrer">
+                    <strong>Preferred</strong>
+                    WhatsApp · +1 438 466 8971
+                  </a>
+                </div>
+              </div>
+
+              <div class="booking-aside reveal">
+                <img
+                  src="eclipsetone-logo.jpg"
+                  alt="EclipseTone Productions logo"
+                  width="256"
+                  height="256"
+                />
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="footer">
+        <div>
+          <strong>Eclipse<span class="tone">Tone</span></strong>
+          <div>Productions · Montréal</div>
+        </div>
+        <div>© 2026 EclipseTone Productions</div>
+      </footer>
+    </div>
+
+    <script src="main.js" defer></script>
   </body>
 </html>

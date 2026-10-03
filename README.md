@@ -1,20 +1,20 @@
 # EclipseTone Productions
 
-Official website for [eclipsetone.com](https://eclipsetone.com) — recording, arranging, mixing, mastering, vocal production, and sound for motion. Based in Montréal, Québec.
+Official website for [eclipsetone.com](https://eclipsetone.com) — served via GitHub Pages.
 
-## Develop
+**Live:** https://laousmail.github.io/eclipsetone.com/
+
+## Stack
+
+Static site: `index.html`, `styles.css`, `main.js`. No build step required.
+
+## Local preview
 
 ```bash
-npm install
-npm run dev
+npx --yes serve .
 ```
 
-## Build
-
-```bash
-npm run build
-npm run preview
-```
+Then open the URL shown in the terminal.
 
 ## Contact
 
