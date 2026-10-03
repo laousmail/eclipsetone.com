@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="EclipseTone Productions — recording, arranging, mixing, mastering, vocal production, and sound for motion. Montréal."
+      content="EclipseTone Productions — Laousmail. Artist-first studio in Montréal. 15 songs before 2026. Book a session."
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -15,182 +15,388 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles.css" />
-    <title>EclipseTone Productions — Montréal</title>
+    <title>EclipseTone — Laousmail · Montréal</title>
   </head>
   <body>
     <div class="site">
       <header class="nav">
-        <a class="nav-brand" href="#top">
+        <a class="nav-brand" href="index.html#top">
           <img src="eclipsetone-logo.jpg" alt="" width="40" height="40" />
           <span>Eclipse<span class="tone">Tone</span></span>
         </a>
 
-        <input id="nav-menu" class="nav-checkbox" type="checkbox" />
-        <label class="nav-toggle" for="nav-menu" aria-label="Menu">
-          <span></span>
-        </label>
+        <div class="nav-actions">
+          <div class="lang-switch" role="group" aria-label="Language">
+            <button type="button" data-lang-btn="en" aria-pressed="true">EN</button>
+            <button type="button" data-lang-btn="fr" aria-pressed="false">FR</button>
+          </div>
+          <input id="nav-menu" class="nav-checkbox" type="checkbox" />
+          <label class="nav-toggle" for="nav-menu" aria-label="Menu"><span></span></label>
+        </div>
 
         <nav class="nav-links" aria-label="Primary">
-          <a href="#services">Services</a>
-          <a href="#approach">Approach</a>
-          <a href="#team">Team</a>
-          <a class="nav-cta" href="#booking">Book</a>
+          <a href="#story"><span data-lang="en">Story</span><span data-lang="fr">Histoire</span></a>
+          <a href="#services"><span data-lang="en">Services</span><span data-lang="fr">Services</span></a>
+          <a href="#challenge"><span data-lang="en">Challenge</span><span data-lang="fr">Défi</span></a>
+          <a href="#team"><span data-lang="en">People</span><span data-lang="fr">Équipe</span></a>
+          <a href="blog/index.html"><span data-lang="en">Blog</span><span data-lang="fr">Blog</span></a>
+          <a class="nav-cta" href="#booking"><span data-lang="en">Book</span><span data-lang="fr">Réserver</span></a>
         </nav>
       </header>
 
       <main id="top">
         <section class="hero" aria-label="EclipseTone Productions">
-          <div class="hero-visual" aria-hidden="true">
-            <div class="eclipse"></div>
-          </div>
-
+          <div class="hero-visual" aria-hidden="true"><div class="eclipse"></div></div>
           <div class="hero-copy">
+            <p class="artist-chip">Laousmail · SMA!L</p>
             <div class="brand-lockup">
               <h1 class="brand-name">
                 <span class="eclipse-word">Eclipse</span><span class="tone-word">Tone</span>
               </h1>
               <p class="brand-sub">Productions</p>
             </div>
-
-            <h2>Every artist has a sun. We help the world see it.</h2>
+            <h2>
+              <span data-lang="en">Freedom sounds like this.</span>
+              <span data-lang="fr">La liberté sonne comme ça.</span>
+            </h2>
             <p class="hero-lead">
-              Like a sun alone, your music can feel ordinary — until the right
-              presence draws beside it, and the eclipse begins.
+              <span data-lang="en">
+                Every artist has a sun. We help the world see it — through music made in community, not alone with a screen.
+              </span>
+              <span data-lang="fr">
+                Chaque artiste a un soleil. On aide le monde à le voir — une musique faite en communauté, pas seul devant un écran.
+              </span>
             </p>
-
             <div class="cta-row">
-              <a
-                class="btn btn-primary"
-                href="https://wa.me/14384668971"
-                target="_blank"
-                rel="noreferrer"
-              >
-                Book on WhatsApp
+              <a class="btn btn-primary" href="https://wa.me/14384668971" target="_blank" rel="noreferrer">
+                <span data-lang="en">Book a session</span>
+                <span data-lang="fr">Réserver une session</span>
               </a>
-              <a
-                class="btn btn-ghost"
-                href="https://instagram.com/eclipsetone"
-                target="_blank"
-                rel="noreferrer"
-              >
-                Instagram
+              <a class="btn btn-ghost" href="#challenge">
+                <span data-lang="en">15 songs · 2026</span>
+                <span data-lang="fr">15 chansons · 2026</span>
               </a>
+            </div>
+          </div>
+        </section>
+
+        <section class="section story" id="story">
+          <div class="section-inner">
+            <p class="section-label reveal">
+              <span data-lang="en">Story</span><span data-lang="fr">Histoire</span>
+            </p>
+            <h2 class="section-title reveal">
+              <span data-lang="en">A tone from the eclipse.</span>
+              <span data-lang="fr">Une tonalité de l’éclipse.</span>
+            </h2>
+            <div class="story-grid">
+              <blockquote class="story-quote reveal">
+                <span data-lang="en">“There is nothing where you are freer than music.”</span>
+                <span data-lang="fr">« Il n’y a rien où tu es plus libre que la musique. »</span>
+              </blockquote>
+              <p class="story-note reveal">
+                <span data-lang="en">
+                  Montréal, April 8, 2024 — first total eclipse. The name sang itself.
+                  From a hard low point to a dusty MIDI found on the road that still works today.
+                  What started alone is becoming a crew.
+                </span>
+                <span data-lang="fr">
+                  Montréal, 8 avril 2024 — première éclipse totale. Le nom s’est chanté tout seul.
+                  D’un creux dur à un MIDI poussiéreux trouvé sur la route, qui marche encore.
+                  Ce qui a commencé seul devient une équipe.
+                </span>
+              </p>
             </div>
           </div>
         </section>
 
         <section class="section services" id="services">
           <div class="section-inner">
-            <div class="services-head reveal">
-              <p class="section-label">Services</p>
-              <h2 class="section-title">What we bring into focus</h2>
-              <p class="section-lead">
-                A service-based production house — we meet you in the process,
-                across studios, and make what you hear in your head real.
-              </p>
-            </div>
+            <p class="section-label reveal">
+              <span data-lang="en">Services</span><span data-lang="fr">Services</span>
+            </p>
+            <h2 class="section-title reveal">
+              <span data-lang="en">Craft, not shortcuts.</span>
+              <span data-lang="fr">Du métier, pas des raccourcis.</span>
+            </h2>
+            <p class="section-lead reveal">
+              <span data-lang="en">
+                Recording to master. Vocals and harmonies. Sound for picture. No AI-generated music — we don’t support that.
+              </span>
+              <span data-lang="fr">
+                De l’enregistrement au master. Voix et harmonies. Son pour l’image. Pas de musique générée par IA — on ne soutient pas ça.
+              </span>
+            </p>
 
             <div class="service-grid">
               <div class="service-col reveal">
-                <h3>For artists</h3>
+                <h3>
+                  <span data-lang="en">For artists</span>
+                  <span data-lang="fr">Pour les artistes</span>
+                </h3>
                 <p>
-                  From first take to final master — across styles, with a team
-                  that builds around your voice.
+                  <span data-lang="en">Jazz, R&amp;B, rock, Kabyle, Chaabi — and the spaces between.</span>
+                  <span data-lang="fr">Jazz, R&amp;B, rock, kabyle, chaabi — et tout ce qu’il y a entre.</span>
                 </p>
                 <ul class="service-list">
-                  <li>Recording songs</li>
-                  <li>Arranging</li>
-                  <li>Mixing</li>
-                  <li>Mastering</li>
-                  <li>Vocal production</li>
-                  <li>Vocal coaching</li>
+                  <li><span data-lang="en">Recording (full songs)</span><span data-lang="fr">Enregistrement (chanson complète)</span></li>
+                  <li><span data-lang="en">Vocal production &amp; backing harmonies</span><span data-lang="fr">Prod vocale &amp; harmonies</span></li>
+                  <li><span data-lang="en">Arranging</span><span data-lang="fr">Arrangements</span></li>
+                  <li><span data-lang="en">Mixing · Mastering</span><span data-lang="fr">Mix · Mastering</span></li>
                 </ul>
+                <ul class="price-list" style="margin-top: 1.5rem">
+                  <li>
+                    <span data-lang="en">Song package</span><span data-lang="fr">Forfait chanson</span>
+                    <strong>$600</strong>
+                  </li>
+                </ul>
+                <p style="margin-top: 0.75rem; color: var(--text-muted); font-weight: 300; font-size: 0.92rem">
+                  <span data-lang="en">Recording, mix, master, vocal production + 3h studio.</span>
+                  <span data-lang="fr">Enregistrement, mix, master, prod vocale + 3 h studio.</span>
+                </p>
               </div>
 
               <div class="service-col reveal">
-                <h3>For motion &amp; business</h3>
+                <h3>
+                  <span data-lang="en">For motion</span>
+                  <span data-lang="fr">Pour l’image</span>
+                </h3>
                 <p>
-                  Sound design and score that carry picture, brand, and story —
-                  not just fill the silence.
+                  <span data-lang="en">Film, games, brand — foley, ambience, score.</span>
+                  <span data-lang="fr">Film, jeux, marque — bruitages, ambiances, partition.</span>
                 </p>
                 <ul class="service-list">
-                  <li>Sound for motion</li>
-                  <li>Film &amp; media scoring</li>
-                  <li>Brand &amp; commercial audio</li>
-                  <li>Custom sound design</li>
+                  <li><span data-lang="en">Sound design</span><span data-lang="fr">Design sonore</span></li>
+                  <li><span data-lang="en">Film scoring</span><span data-lang="fr">Musique de film</span></li>
+                  <li><span data-lang="en">Game scoring</span><span data-lang="fr">Musique de jeu</span></li>
                 </ul>
+                <ul class="price-list" style="margin-top: 1.5rem">
+                  <li>
+                    <span data-lang="en">Scoring</span><span data-lang="fr">Partition</span>
+                    <strong>$1,000<span style="font-size: 0.85rem; color: var(--text-muted)"> / 10 min</span></strong>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="values-strip reveal">
+              <div>
+                <strong><span data-lang="en">Value</span><span data-lang="fr">Valeur</span></strong>
+                <span data-lang="en">Human-made music only</span>
+                <span data-lang="fr">Musique humaine seulement</span>
+              </div>
+              <div>
+                <strong><span data-lang="en">For</span><span data-lang="fr">Pour</span></strong>
+                <span data-lang="en">Talent, message, respect, real budget</span>
+                <span data-lang="fr">Talent, message, respect, vrai budget</span>
               </div>
             </div>
           </div>
         </section>
 
-        <section class="section approach" id="approach">
-          <div class="section-inner approach-layout">
-            <div class="approach-visual reveal" aria-hidden="true">
-              <div class="vinyl"></div>
+        <section class="section challenge" id="challenge">
+          <div class="section-inner">
+            <div class="challenge-head">
+              <div class="reveal">
+                <p class="section-label">
+                  <span data-lang="en">The challenge</span><span data-lang="fr">Le défi</span>
+                </p>
+                <h2 class="section-title">
+                  <span data-lang="en">15 songs before the end of 2026.</span>
+                  <span data-lang="fr">15 chansons avant la fin de 2026.</span>
+                </h2>
+                <p class="section-lead">
+                  <span data-lang="en">
+                    Original music toward a real stage show — not another bar night. Dream room: L’Olympia, Montréal.
+                  </span>
+                  <span data-lang="fr">
+                    De la musique originale pour un vrai spectacle — pas une autre soirée de bar. Rêve : L’Olympia, Montréal.
+                  </span>
+                </p>
+              </div>
+              <div class="challenge-count reveal" data-challenge-count><span>3</span> of 15</div>
             </div>
 
-            <div class="approach-copy reveal">
-              <p class="section-label">Approach</p>
-              <h2 class="section-title">Not a room you visit. A vision you hear.</h2>
-              <p class="section-lead">
-                We work with artists and creators across multiple studios. The
-                place changes — the craft and the partnership stay.
-              </p>
-              <ol class="steps">
-                <li>
-                  <div>
-                    <strong>Listen</strong>
-                    <span>You show us the sun — the song, the scene, the feeling.</span>
-                  </div>
-                </li>
-                <li>
-                  <div>
-                    <strong>Align</strong>
-                    <span>We shape arrangement, performance, and tone around it.</span>
-                  </div>
-                </li>
-                <li>
-                  <div>
-                    <strong>Reveal</strong>
-                    <span>Mix, master, and deliver what the world is meant to hear.</span>
-                  </div>
-                </li>
-              </ol>
+            <div class="challenge-bar" aria-hidden="true"><i data-challenge-bar></i></div>
+            <div class="song-grid" data-song-grid></div>
+
+            <div class="cta-row" style="margin-top: 2rem">
+              <a class="btn btn-ghost" href="blog/15-songs-before-2026.html">
+                <span data-lang="en">Read the story</span>
+                <span data-lang="fr">Lire l’histoire</span>
+              </a>
+              <a class="btn btn-primary" href="https://wa.me/14384668971" target="_blank" rel="noreferrer">
+                <span data-lang="en">Book a session</span>
+                <span data-lang="fr">Réserver une session</span>
+              </a>
+            </div>
+
+            <div class="admin-panel" data-admin-panel>
+              <h3>Challenge admin</h3>
+              <p class="admin-note">Updates save in this browser only (GitHub Pages has no server). Change the passphrase in <code>main.js</code>.</p>
+              <form class="admin-form" data-admin-form>
+                <label>
+                  Slot
+                  <select name="slot" data-admin-slot></select>
+                </label>
+                <label>
+                  Status
+                  <select name="status">
+                    <option value="released">Released</option>
+                    <option value="mystery">Mystery</option>
+                  </select>
+                </label>
+                <label>
+                  Title
+                  <input name="title" type="text" placeholder="Song title" />
+                </label>
+                <label>
+                  Listen link
+                  <input name="link" type="url" placeholder="https://" />
+                </label>
+                <label>
+                  Mystery hint (optional)
+                  <input name="hint" type="text" placeholder="Teaser text" />
+                </label>
+                <div class="admin-tools">
+                  <button class="btn btn-primary" type="submit">Save slot</button>
+                  <button class="btn btn-ghost" type="button" data-admin-reset>Reset data</button>
+                </div>
+              </form>
             </div>
           </div>
         </section>
 
         <section class="section team" id="team">
           <div class="section-inner">
-            <div class="team-head reveal">
-              <p class="section-label">Team</p>
-              <h2 class="section-title">Guided by people, not just process</h2>
-              <p class="section-lead">
-                Many hands, many styles — EclipseTone is a collective craft, not
-                a one-person booth.
-              </p>
+            <p class="section-label reveal">
+              <span data-lang="en">People</span><span data-lang="fr">Équipe</span>
+            </p>
+            <h2 class="section-title reveal">
+              <span data-lang="en">Artist first. Crew always.</span>
+              <span data-lang="fr">L’artiste d’abord. L’équipe toujours.</span>
+            </h2>
+
+            <div class="artist-feature reveal">
+              <img class="artist-mark" src="eclipsetone-logo.jpg" alt="" width="72" height="72" />
+              <div>
+                <h3>Smail Laouchedi</h3>
+                <p class="role">Laousmail · SMA!L · Guitar · Production</p>
+                <p>
+                  <span data-lang="en">
+                    Open in the session. Off-grid on stage. Building EclipseTone with musicians who care about the craft.
+                  </span>
+                  <span data-lang="fr">
+                    Ouvert en session. Hors grille sur scène. Il bâtit EclipseTone avec des musiciens qui respectent le métier.
+                  </span>
+                </p>
+              </div>
             </div>
 
             <div class="team-list">
               <article class="person reveal">
-                <h3>Smail Laouchedi</h3>
-                <p class="role">Production guidance · Vocal production</p>
+                <h3>Raouf</h3>
+                <p class="role"><span data-lang="en">Vocals · Melodies · Kabyle</span><span data-lang="fr">Voix · Mélodies · Kabyle</span></p>
                 <p>
-                  Leads artists through recording and vocal production — helping
-                  the performance land the way it was meant to feel.
+                  <span data-lang="en">Vocal guidance, melodies, Kabyle and celebration music.</span>
+                  <span data-lang="fr">Guidance vocale, mélodies, kabyle et musique de fête.</span>
                 </p>
               </article>
-
               <article class="person reveal">
-                <h3>Raouf Abbout</h3>
-                <p class="role">Vocal coach</p>
+                <h3>Yanis</h3>
+                <p class="role"><span data-lang="en">Arranger</span><span data-lang="fr">Arrangeur</span></p>
                 <p>
-                  Strengthens the voice before and during the session — technique,
-                  control, and confidence in the booth.
+                  <span data-lang="en">Kabyle, Arabic, Raï arrangements.</span>
+                  <span data-lang="fr">Arrangements kabyles, arabes, raï.</span>
+                </p>
+              </article>
+              <article class="person reveal">
+                <h3>Lyes Refsi</h3>
+                <p class="role"><span data-lang="en">Guitar</span><span data-lang="fr">Guitare</span></p>
+                <p>
+                  <span data-lang="en">Guitarist — heard on “Ur yettajja.”</span>
+                  <span data-lang="fr">Guitariste — sur « Ur yettajja ».</span>
+                </p>
+              </article>
+              <article class="person reveal">
+                <h3>Hamid</h3>
+                <p class="role"><span data-lang="en">Violin</span><span data-lang="fr">Violon</span></p>
+                <p>
+                  <span data-lang="en">Violin color and lines.</span>
+                  <span data-lang="fr">Couleur et lignes au violon.</span>
+                </p>
+              </article>
+              <article class="person reveal">
+                <h3>Ferhat</h3>
+                <p class="role"><span data-lang="en">Bass</span><span data-lang="fr">Basse</span></p>
+                <p>
+                  <span data-lang="en">Bass — stage time with known Algerian artists.</span>
+                  <span data-lang="fr">Basse — scènes avec des artistes algériens connus.</span>
+                </p>
+              </article>
+              <article class="person reveal">
+                <h3>Antoine</h3>
+                <p class="role"><span data-lang="en">Multi-instrument · Game audio</span><span data-lang="fr">Multi-instruments · Audio jeu</span></p>
+                <p>
+                  <span data-lang="en">Guitar, piano, bass, harmony — also game sound design.</span>
+                  <span data-lang="fr">Guitare, piano, basse, harmonie — aussi design sonore de jeux.</span>
+                </p>
+              </article>
+              <article class="person reveal">
+                <h3>Ahmed</h3>
+                <p class="role"><span data-lang="en">Video</span><span data-lang="fr">Vidéo</span></p>
+                <p>
+                  <span data-lang="en">Clips and video — credits include work with Soolking.</span>
+                  <span data-lang="fr">Clips et vidéo — notamment avec Soolking.</span>
+                </p>
+              </article>
+              <article class="person reveal">
+                <h3>Kashia</h3>
+                <p class="role"><span data-lang="en">Photography</span><span data-lang="fr">Photo</span></p>
+                <p>
+                  <span data-lang="en">The eye behind the stills.</span>
+                  <span data-lang="fr">L’œil derrière les images.</span>
                 </p>
               </article>
             </div>
+          </div>
+        </section>
+
+        <section class="section blog" id="blog">
+          <div class="section-inner">
+            <p class="section-label reveal">Blog</p>
+            <h2 class="section-title reveal">
+              <span data-lang="en">Notes from the process.</span>
+              <span data-lang="fr">Notes du processus.</span>
+            </h2>
+            <article class="blog-card reveal">
+              <p class="blog-meta">
+                <span data-lang="en">Challenge · First post</span>
+                <span data-lang="fr">Défi · Premier billet</span>
+              </p>
+              <h3>
+                <span data-lang="en">Why 15 songs before 2026</span>
+                <span data-lang="fr">Pourquoi 15 chansons avant 2026</span>
+              </h3>
+              <p>
+                <span data-lang="en">
+                  A backlog, a conversation after a covers night, and the decision to build a real original show.
+                </span>
+                <span data-lang="fr">
+                  Un tiroir plein de morceaux, une conversation après une soirée de reprises, et la décision de monter un vrai spectacle original.
+                </span>
+              </p>
+              <div class="cta-row">
+                <a class="btn btn-ghost" href="blog/15-songs-before-2026.html">
+                  <span data-lang="en">Read in English</span>
+                  <span data-lang="fr">Lire en anglais</span>
+                </a>
+                <a class="btn btn-ghost" href="blog/15-songs-before-2026.fr.html">
+                  <span data-lang="en">Lire en français</span>
+                  <span data-lang="fr">Lire en français</span>
+                </a>
+              </div>
+            </article>
           </div>
         </section>
 
@@ -198,49 +404,42 @@
           <div class="section-inner">
             <div class="booking-panel">
               <div class="booking-copy reveal">
-                <p class="section-label">Booking</p>
-                <h2 class="section-title">Ready to start the eclipse?</h2>
+                <p class="section-label">
+                  <span data-lang="en">Contact</span><span data-lang="fr">Contact</span>
+                </p>
+                <h2 class="section-title">
+                  <span data-lang="en">Book a session.</span>
+                  <span data-lang="fr">Réserve une session.</span>
+                </h2>
                 <p class="section-lead">
-                  Message us on WhatsApp — tell us about your project, your
-                  timeline, and the sound you want the world to see.
+                  <span data-lang="en">WhatsApp preferred. Instagram, TikTok, or Facebook DM also work.</span>
+                  <span data-lang="fr">WhatsApp de préférence. Instagram, TikTok ou Facebook DM aussi.</span>
                 </p>
                 <div class="cta-row">
-                  <a
-                    class="btn btn-primary"
-                    href="https://wa.me/14384668971"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
+                  <a class="btn btn-primary" href="https://wa.me/14384668971" target="_blank" rel="noreferrer">
                     WhatsApp +1 438 466 8971
                   </a>
-                  <a
-                    class="btn btn-ghost"
-                    href="https://instagram.com/eclipsetone"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
+                  <a class="btn btn-ghost" href="https://instagram.com/laousmail" target="_blank" rel="noreferrer">
+                    @laousmail
+                  </a>
+                  <a class="btn btn-ghost" href="https://instagram.com/eclipsetone" target="_blank" rel="noreferrer">
                     @eclipsetone
                   </a>
                 </div>
                 <div class="contact-meta">
                   <p>
-                    <strong>Based in</strong>
+                    <strong><span data-lang="en">Based in</span><span data-lang="fr">Basé à</span></strong>
                     Montréal, Québec
                   </p>
-                  <a href="https://wa.me/14384668971" target="_blank" rel="noreferrer">
-                    <strong>Preferred</strong>
-                    WhatsApp · +1 438 466 8971
-                  </a>
+                  <p>
+                    <strong>YouTube</strong>
+                    <span data-lang="en">EclipseTone Productions — search “Ur yettajja”</span>
+                    <span data-lang="fr">EclipseTone Productions — chercher « Ur yettajja »</span>
+                  </p>
                 </div>
               </div>
-
               <div class="booking-aside reveal">
-                <img
-                  src="eclipsetone-logo.jpg"
-                  alt="EclipseTone Productions logo"
-                  width="256"
-                  height="256"
-                />
+                <img src="eclipsetone-logo.jpg" alt="EclipseTone Productions logo" width="256" height="256" />
               </div>
             </div>
           </div>
@@ -250,12 +449,14 @@
       <footer class="footer">
         <div>
           <strong>Eclipse<span class="tone">Tone</span></strong>
-          <div>Productions · Montréal</div>
+          <div>Laousmail · Montréal</div>
         </div>
-        <div>© 2026 EclipseTone Productions</div>
+        <div>
+          <button type="button" class="footer-admin" data-admin-open>Admin</button>
+          <div>© 2026 EclipseTone Productions</div>
+        </div>
       </footer>
     </div>
-
     <script src="main.js" defer></script>
   </body>
 </html>
