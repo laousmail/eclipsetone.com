@@ -125,11 +125,33 @@ function profilePage(p, others) {
               <div data-lang="en"><ul class="profile-focus">${focusEn}</ul></div>
               <div data-lang="fr"><ul class="profile-focus">${focusFr}</ul></div>
               <div class="cta-row" style="margin-top: 1.5rem">
-                <a class="btn btn-primary" href="../index.html#booking">
+                ${
+                  p.artistSite
+                    ? `<a class="btn btn-primary" href="${esc(p.artistSite)}">
+                  <span data-lang="en">Explore his music</span>
+                  <span data-lang="fr">Explorer sa musique</span>
+                </a>`
+                    : ''
+                }
+                ${
+                  p.spotifyUrl
+                    ? `<a class="btn btn-ghost" href="${esc(p.spotifyUrl)}" target="_blank" rel="noreferrer">Spotify</a>`
+                    : ''
+                }
+                <a class="btn btn-ghost" href="../index.html#booking">
                   <span data-lang="en">Book a session</span>
                   <span data-lang="fr">Réserver une session</span>
                 </a>
               </div>
+              ${
+                p.instagram || p.tiktok
+                  ? `<p class="admin-note" style="margin-top:1rem">
+                  ${p.instagram ? `<a href="${esc(p.instagram)}" target="_blank" rel="noreferrer">Instagram</a>` : ''}
+                  ${p.instagram && p.tiktok ? ' · ' : ''}
+                  ${p.tiktok ? `<a href="${esc(p.tiktok)}" target="_blank" rel="noreferrer">TikTok</a>` : ''}
+                </p>`
+                  : ''
+              }
             </aside>
           </div>
 

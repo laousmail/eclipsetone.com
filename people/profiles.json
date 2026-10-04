@@ -109,27 +109,33 @@
     "slug": "khaled-ouzzir",
     "name": "Khaled Ouzzir",
     "role": {
-      "en": "Mixing · Mastering · Guitar",
-      "fr": "Mix · Mastering · Guitare"
+      "en": "Singer · Mixing · Mastering · Guitar",
+      "fr": "Chanteur · Mix · Mastering · Guitare"
     },
     "summary": {
-      "en": "Mixing, mastering, and guitars of every kind.",
-      "fr": "Mix, mastering, et guitares de tout genre."
+      "en": "Singer-songwriter and session craft — explore his music, then book the mix/guitar ear.",
+      "fr": "Auteur-compositeur-interprète et craft de session — explore sa musique, puis réserve l’oreille mix/guitare."
     },
     "body": {
       "en": [
-        "Mixing and mastering for EclipseTone releases and client work.",
-        "Guitar across styles — all kinds of guitar work in session and production."
+        "Singer and songwriter with Kabyle-language singles on Spotify (Tudert, Aeic di Lahna, ANDA TELLIḌ).",
+        "Mixing, mastering, and guitars of every kind for EclipseTone releases and client work.",
+        "Follow @khaledouzzir on Instagram and TikTok — full artist page at artists/khaled-ouzzir/."
       ],
       "fr": [
-        "Mix et mastering pour les sorties EclipseTone et le travail client.",
-        "Guitare dans tous les styles — tout type de travail guitare en session et en production."
+        "Chanteur et auteur-compositeur avec des singles en kabyle sur Spotify (Tudert, Aeic di Lahna, ANDA TELLIḌ).",
+        "Mix, mastering et guitares de tout genre pour EclipseTone et le travail client.",
+        "Suis @khaledouzzir sur Instagram et TikTok — page artiste complète sur artists/khaled-ouzzir/."
       ]
     },
     "focus": {
-      "en": ["Mixing", "Mastering", "Guitar"],
-      "fr": ["Mix", "Mastering", "Guitare"]
-    }
+      "en": ["Singer", "Songwriter", "Mixing", "Mastering", "Guitar"],
+      "fr": ["Chanteur", "Auteur-compositeur", "Mix", "Mastering", "Guitare"]
+    },
+    "artistSite": "../artists/khaled-ouzzir/",
+    "spotifyUrl": "https://open.spotify.com/artist/0SHkB2NSyGNqur4XX6tZxX",
+    "instagram": "https://www.instagram.com/khaledouzzir/",
+    "tiktok": "https://www.tiktok.com/@khaledouzzir"
   },
   {
     "slug": "hamid",

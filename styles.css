@@ -953,6 +953,18 @@ html[lang="fr"] .lang-only-en {
   opacity: 0.92;
 }
 
+/* Artist microsites */
+.artist-hero .brand-name {
+  font-size: clamp(2.8rem, 9vw, 5.5rem);
+}
+
+.artist-hero .tone-word {
+  background: linear-gradient(120deg, #e8eef5 0%, #9aa8bc 55%, #4d5d78 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
 /* Profile pages */
 .profile {
   padding: calc(var(--nav-h) + 2.5rem) clamp(1.25rem, 4vw, 3rem) 5rem;

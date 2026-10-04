@@ -16,6 +16,12 @@ Bios live in `people/profiles.json`. Regenerate pages after edits:
 node people/generate.mjs
 ```
 
+### Artist microsites
+
+- [Khaled Ouzzir](artists/khaled-ouzzir/) — singer page + Spotify releases (`artists/khaled-ouzzir/releases.json`)
+
+Verified socials note: `docs/team-socials.md`
+
 ## Local preview
 
 ```bash
