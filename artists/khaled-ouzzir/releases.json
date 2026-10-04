@@ -7,7 +7,14 @@
     "imageUrl": "https://image-cdn-fa.spotifycdn.com/image/ab67616100005174028d3d3a96b4f9ad283890a0",
     "instagram": "https://www.instagram.com/khaledouzzir/",
     "tiktok": "https://www.tiktok.com/@khaledouzzir",
-    "facebook": "https://www.facebook.com/khaledouzzir1/"
+    "facebook": "https://www.facebook.com/khaledouzzir1/",
+    "youtube": "https://www.youtube.com/@khaledouzzir",
+    "appleMusic": "https://music.apple.com/us/artist/khaled-ouzzir/1649008987",
+    "deezer": "https://www.deezer.com/artist/185901347",
+    "bio": {
+      "youtubeAbout": "Bienvenue sur la chaîne youtube officielle de KHALED OUZZIR qui est un artiste indépendant né le 11 décembre 1993. Il chante du Pop Amaziɣ, il est pour l'humanité, fraternité, unité et liberté. Il cherche a ajouté une certaine fraîcheur a la chanson Amaziɣ. Fiere d'etre africain.",
+      "facebook": "Bienvenue sur la page officielle de KHALED OUZZIR qui est un artiste indépendant singer songwriter."
+    }
   },
   "releases": [
     {
@@ -32,7 +39,7 @@
     {
       "title": "ANDA TELLIḌ",
       "type": "single",
-      "releaseDate": "2022",
+      "releaseDate": "2022-10-06",
       "year": "2022",
       "spotifyAlbumUrl": "https://open.spotify.com/album/3y3Iix8D5qIGEFhhZBh2eS",
       "spotifyTrackUrl": "https://open.spotify.com/track/28w7BrZP9q1ubVqJ31Dxso",
