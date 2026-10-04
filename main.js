@@ -3,7 +3,8 @@
   const LANG_KEY = 'eclipsetone-lang'
   // Change this passphrase anytime — only you should know it.
   const ADMIN_PASS = 'eclipsetone-admin'
-  const DATA_URL = new URL('challenge-data.json', window.location.href).href
+  const styleHref = document.querySelector('link[rel="stylesheet"]')?.href
+  const DATA_URL = new URL('challenge-data.json', styleHref || window.location.href).href
 
   const GOAL = 15
   let songsCache = null
@@ -247,8 +248,19 @@
     if (window.location.hash === '#admin') openAdmin()
   }
 
+  function initNavMenu() {
+    const checkbox = document.querySelector('.nav-checkbox')
+    if (!checkbox) return
+    document.querySelectorAll('.nav-links a').forEach((link) => {
+      link.addEventListener('click', () => {
+        checkbox.checked = false
+      })
+    })
+  }
+
   initLang()
   initReveal()
   initAdmin()
+  initNavMenu()
   ensureSongs().then(renderChallenge)
 })()
