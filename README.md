@@ -6,7 +6,15 @@ Artist-first site for [Laousmail](https://instagram.com/laousmail) / EclipseTone
 
 ## Stack
 
-Static site (`index.html`, `styles.css`, `main.js`, `blog/`). No build step. GitHub Pages serves the branch root.
+Static site (`index.html`, `styles.css`, `main.js`, `blog/`, `people/`). No build step. GitHub Pages serves the branch root.
+
+### People profiles
+
+Bios live in `people/profiles.json`. Regenerate pages after edits:
+
+```bash
+node people/generate.mjs
+```
 
 ## Local preview
 

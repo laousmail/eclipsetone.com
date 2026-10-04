@@ -1,0 +1,264 @@
+[
+  {
+    "slug": "smail-laouchedi",
+    "name": "Smail Laouchedi",
+    "role": {
+      "en": "Laousmail · SMA!L · Guitar · Production",
+      "fr": "Laousmail · SMA!L · Guitare · Production"
+    },
+    "summary": {
+      "en": "Open in the session. Off-grid on stage. Building EclipseTone with musicians who care about the craft.",
+      "fr": "Ouvert en session. Hors grille sur scène. Il bâtit EclipseTone avec des musiciens qui respectent le métier."
+    },
+    "body": {
+      "en": [
+        "Founder of EclipseTone Productions. Artist name Laousmail (also styled SMA!L). Based in Montréal.",
+        "Guitar, production, and the voice of the brand — sessions that stay open and transparent, stage work that stays in the groove.",
+        "Leading the public challenge: 15 original songs before the end of 2026, toward a real produced show."
+      ],
+      "fr": [
+        "Fondateur d’EclipseTone Productions. Nom d’artiste Laousmail (aussi stylé SMA!L). Basé à Montréal.",
+        "Guitare, production, et la voix de la marque — des sessions ouvertes et transparentes, une scène dans le groove.",
+        "Il mène le défi public : 15 chansons originales avant la fin de 2026, vers un vrai spectacle produit."
+      ]
+    },
+    "focus": {
+      "en": ["Artist", "Production", "Guitar", "Direction"],
+      "fr": ["Artiste", "Production", "Guitare", "Direction"]
+    }
+  },
+  {
+    "slug": "raouf",
+    "name": "Raouf",
+    "role": {
+      "en": "Vocals · Melodies · Kabyle",
+      "fr": "Voix · Mélodies · Kabyle"
+    },
+    "summary": {
+      "en": "Vocal guidance, melodies, Kabyle and celebration music.",
+      "fr": "Guidance vocale, mélodies, kabyle et musique de fête."
+    },
+    "body": {
+      "en": [
+        "Vocal coaching and vocal guidance inside EclipseTone sessions.",
+        "Writes melodies and songs with a specialty in Kabyle — including celebration and fête-style music."
+      ],
+      "fr": [
+        "Coaching et guidance vocale dans les sessions EclipseTone.",
+        "Écrit mélodies et chansons, avec une spécialité kabyle — y compris la musique de fête."
+      ]
+    },
+    "focus": {
+      "en": ["Vocals", "Melodies", "Kabyle"],
+      "fr": ["Voix", "Mélodies", "Kabyle"]
+    }
+  },
+  {
+    "slug": "yanis",
+    "name": "Yanis",
+    "role": {
+      "en": "Arranger",
+      "fr": "Arrangeur"
+    },
+    "summary": {
+      "en": "Kabyle, Arabic, and Raï arrangements.",
+      "fr": "Arrangements kabyles, arabes et raï."
+    },
+    "body": {
+      "en": [
+        "Arranger for EclipseTone projects.",
+        "Specializes in Kabyle, Arabic, and Raï styles — shaping songs so the arrangement carries the culture and the groove."
+      ],
+      "fr": [
+        "Arrangeur sur les projets EclipseTone.",
+        "Spécialiste des styles kabyles, arabes et raï — pour que l’arrangement porte la culture et le groove."
+      ]
+    },
+    "focus": {
+      "en": ["Arranging", "Kabyle", "Arabic", "Raï"],
+      "fr": ["Arrangements", "Kabyle", "Arabe", "Raï"]
+    }
+  },
+  {
+    "slug": "lyes-refsi",
+    "name": "Lyes Refsi",
+    "role": {
+      "en": "Guitar",
+      "fr": "Guitare"
+    },
+    "summary": {
+      "en": "Guitarist — heard on “Ur yettajja.”",
+      "fr": "Guitariste — sur « Ur yettajja »."
+    },
+    "body": {
+      "en": [
+        "Guitarist with EclipseTone.",
+        "Credited on the cover “Ur yettajja” (Aït Menguellet), released on the EclipseTone Productions YouTube channel."
+      ],
+      "fr": [
+        "Guitariste avec EclipseTone.",
+        "Crédité sur la reprise « Ur yettajja » (Aït Menguellet), sur la chaîne YouTube EclipseTone Productions."
+      ]
+    },
+    "focus": {
+      "en": ["Guitar", "Performance"],
+      "fr": ["Guitare", "Performance"]
+    }
+  },
+  {
+    "slug": "khaled-ouzzir",
+    "name": "Khaled Ouzzir",
+    "role": {
+      "en": "Mixing · Mastering · Guitar",
+      "fr": "Mix · Mastering · Guitare"
+    },
+    "summary": {
+      "en": "Mixing, mastering, and guitars of every kind.",
+      "fr": "Mix, mastering, et guitares de tout genre."
+    },
+    "body": {
+      "en": [
+        "Mixing and mastering for EclipseTone releases and client work.",
+        "Guitar across styles — all kinds of guitar work in session and production."
+      ],
+      "fr": [
+        "Mix et mastering pour les sorties EclipseTone et le travail client.",
+        "Guitare dans tous les styles — tout type de travail guitare en session et en production."
+      ]
+    },
+    "focus": {
+      "en": ["Mixing", "Mastering", "Guitar"],
+      "fr": ["Mix", "Mastering", "Guitare"]
+    }
+  },
+  {
+    "slug": "hamid",
+    "name": "Hamid",
+    "role": {
+      "en": "Violin",
+      "fr": "Violon"
+    },
+    "summary": {
+      "en": "Violin color and lines.",
+      "fr": "Couleur et lignes au violon."
+    },
+    "body": {
+      "en": [
+        "Violinist with the EclipseTone crew.",
+        "Brings violin color and melodic lines into arrangements and live/session work."
+      ],
+      "fr": [
+        "Violoniste de l’équipe EclipseTone.",
+        "Apporte la couleur du violon et des lignes mélodiques aux arrangements et au travail live/session."
+      ]
+    },
+    "focus": {
+      "en": ["Violin"],
+      "fr": ["Violon"]
+    }
+  },
+  {
+    "slug": "ferhat",
+    "name": "Ferhat",
+    "role": {
+      "en": "Bass",
+      "fr": "Basse"
+    },
+    "summary": {
+      "en": "Bass — stage time with known Algerian artists.",
+      "fr": "Basse — scènes avec des artistes algériens connus."
+    },
+    "body": {
+      "en": [
+        "Bassist for EclipseTone.",
+        "Has played with well-known Algerian artists — low-end that holds the pocket on stage and in session."
+      ],
+      "fr": [
+        "Bassiste pour EclipseTone.",
+        "A joué avec des artistes algériens connus — un grave qui tient le pocket en scène et en session."
+      ]
+    },
+    "focus": {
+      "en": ["Bass", "Live"],
+      "fr": ["Basse", "Live"]
+    }
+  },
+  {
+    "slug": "antoine",
+    "name": "Antoine",
+    "role": {
+      "en": "Multi-instrument · Game audio",
+      "fr": "Multi-instruments · Audio jeu"
+    },
+    "summary": {
+      "en": "Guitar, piano, bass, harmony — also game sound design.",
+      "fr": "Guitare, piano, basse, harmonie — aussi design sonore de jeux."
+    },
+    "body": {
+      "en": [
+        "Multi-instrumentalist: guitar, piano, bass — strong in harmony.",
+        "Also a sound designer for video games. Day job: physics and video game design teacher."
+      ],
+      "fr": [
+        "Multi-instrumentiste : guitare, piano, basse — fort en harmonie.",
+        "Aussi designer sonore pour jeux vidéo. Au quotidien : enseignant en physique et design de jeux vidéo."
+      ]
+    },
+    "focus": {
+      "en": ["Guitar", "Piano", "Bass", "Harmony", "Game audio"],
+      "fr": ["Guitare", "Piano", "Basse", "Harmonie", "Audio jeu"]
+    }
+  },
+  {
+    "slug": "ahmed",
+    "name": "Ahmed",
+    "role": {
+      "en": "Video",
+      "fr": "Vidéo"
+    },
+    "summary": {
+      "en": "Clips and video — credits include work with Soolking.",
+      "fr": "Clips et vidéo — notamment avec Soolking."
+    },
+    "body": {
+      "en": [
+        "Video and music-clip production for EclipseTone.",
+        "Has worked with Soolking — picture that matches the weight of the track."
+      ],
+      "fr": [
+        "Production vidéo et clips pour EclipseTone.",
+        "A travaillé avec Soolking — une image à la hauteur du morceau."
+      ]
+    },
+    "focus": {
+      "en": ["Video", "Clips"],
+      "fr": ["Vidéo", "Clips"]
+    }
+  },
+  {
+    "slug": "kashia",
+    "name": "Kashia",
+    "role": {
+      "en": "Photography",
+      "fr": "Photo"
+    },
+    "summary": {
+      "en": "The eye behind the stills.",
+      "fr": "L’œil derrière les images."
+    },
+    "body": {
+      "en": [
+        "Photographer for the EclipseTone world.",
+        "Captures stills for the brand, artists, and the stories around the music."
+      ],
+      "fr": [
+        "Photographe de l’univers EclipseTone.",
+        "Capture les images pour la marque, les artistes, et les histoires autour de la musique."
+      ]
+    },
+    "focus": {
+      "en": ["Photography"],
+      "fr": ["Photo"]
+    }
+  }
+]
