@@ -250,10 +250,24 @@
 
   function initNavMenu() {
     const checkbox = document.querySelector('.nav-checkbox')
-    if (!checkbox) return
+    const toggle = document.querySelector('.nav-toggle')
+    if (!checkbox || !toggle) return
+
+    toggle.addEventListener('click', (event) => {
+      event.preventDefault()
+      checkbox.checked = !checkbox.checked
+      toggle.setAttribute('aria-expanded', checkbox.checked ? 'true' : 'false')
+    })
+    toggle.setAttribute('aria-expanded', 'false')
+    toggle.setAttribute('aria-controls', 'site-nav-links')
+
+    const links = document.querySelector('.nav-links')
+    if (links && !links.id) links.id = 'site-nav-links'
+
     document.querySelectorAll('.nav-links a').forEach((link) => {
       link.addEventListener('click', () => {
         checkbox.checked = false
+        toggle.setAttribute('aria-expanded', 'false')
       })
     })
   }

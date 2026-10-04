@@ -269,7 +269,7 @@ html[lang="fr"] .lang-only-en {
     margin-top: 0.65rem;
   }
 
-  /* Checkbox lives inside .nav-actions; :has opens the menu reliably */
+  .nav-checkbox:checked ~ .nav-links,
   .nav:has(.nav-checkbox:checked) .nav-links {
     display: flex;
   }
