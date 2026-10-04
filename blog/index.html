@@ -21,33 +21,23 @@
           <img src="../eclipsetone-logo.jpg" alt="" width="40" height="40" />
           <span>Eclipse<span class="tone">Tone</span></span>
         </a>
-
         <div class="nav-actions">
           <div class="lang-switch" role="group" aria-label="Language">
             <button type="button" data-lang-btn="en" aria-pressed="true">EN</button>
             <button type="button" data-lang-btn="fr" aria-pressed="false">FR</button>
           </div>
+          <input id="nav-menu" class="nav-checkbox" type="checkbox" />
+          <label class="nav-toggle" for="nav-menu" aria-label="Menu"><span></span></label>
         </div>
-
-        <input id="nav-menu" class="nav-checkbox" type="checkbox" />
-        <label class="nav-toggle" for="nav-menu" aria-label="Menu"><span></span></label>
-
         <nav class="nav-links" aria-label="Primary">
-          <a href="../story.html"><span data-lang="en">Story</span><span data-lang="fr">Histoire</span></a>
-          <a href="../services.html"><span data-lang="en">Services</span><span data-lang="fr">Services</span></a>
-          <a href="../challenge.html"><span data-lang="en">Challenge</span><span data-lang="fr">Défi</span></a>
-          <a href="../people/index.html"><span data-lang="en">People</span><span data-lang="fr">Équipe</span></a>
-          <a href="index.html" aria-current="page"><span data-lang="en">Blog</span><span data-lang="fr">Blog</span></a>
-          <a class="nav-cta" href="../contact.html"><span data-lang="en">Book</span><span data-lang="fr">Réserver</span></a>
+          <a href="../index.html#story"><span data-lang="en">Story</span><span data-lang="fr">Histoire</span></a>
+          <a href="../index.html#challenge"><span data-lang="en">Challenge</span><span data-lang="fr">Défi</span></a>
+          <a href="index.html" aria-current="page">Blog</a>
+          <a class="nav-cta" href="../index.html#booking"><span data-lang="en">Book</span><span data-lang="fr">Réserver</span></a>
         </nav>
       </header>
 
-      <main>
-        <a class="hub-back" href="../index.html">
-          <span data-lang="en">← Back to explore</span>
-          <span data-lang="fr">← Retour à l’exploration</span>
-        </a>
-        <section class="section blog page-section">
+      <main class="section blog" style="padding-top: calc(var(--nav-h) + 3rem)">
         <div class="section-inner">
           <p class="section-label">Blog</p>
           <h1 class="section-title">
@@ -70,19 +60,6 @@
             </div>
           </article>
         </div>
-        </section>
-        <nav class="explore-more" aria-label="More paths">
-          <p class="explore-more-label">
-            <span data-lang="en">Explore more</span><span data-lang="fr">Explorer plus</span>
-          </p>
-          <div class="explore-more-links">
-            <a href="../challenge.html"><span data-lang="en">Challenge</span><span data-lang="fr">Défi</span></a>
-            <a href="../story.html"><span data-lang="en">Story</span><span data-lang="fr">Histoire</span></a>
-            <a href="../people/index.html"><span data-lang="en">People</span><span data-lang="fr">Équipe</span></a>
-            <a href="../contact.html"><span data-lang="en">Book</span><span data-lang="fr">Réserver</span></a>
-            <a href="../index.html"><span data-lang="en">All paths</span><span data-lang="fr">Toutes les voies</span></a>
-          </div>
-        </nav>
       </main>
 
       <footer class="footer">
