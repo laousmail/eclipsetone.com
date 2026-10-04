@@ -1,0 +1,193 @@
+{
+  "artist": {
+    "name": "laousmail",
+    "spotifyId": "60GjJwhvGe1eVg98jFPgMp",
+    "spotifyUrl": "https://open.spotify.com/artist/60GjJwhvGe1eVg98jFPgMp",
+    "imageUrl": "https://image-cdn-ak.spotifycdn.com/image/ab676161000051742ef378ecf2de526dc3e0a399",
+    "label": "EclipseTone Productions"
+  },
+  "goal": 15,
+  "updatedAt": "2026-10-04",
+  "songs": [
+    {
+      "id": 1,
+      "status": "released",
+      "title": "Nnan-iyi",
+      "hint": "",
+      "link": "https://open.spotify.com/track/61hi8m9E2ltpqLtVHV5ktC",
+      "spotifyId": "61hi8m9E2ltpqLtVHV5ktC",
+      "albumUrl": "https://open.spotify.com/album/2HDdpbhPjxb6GCnBHR8XAb",
+      "releaseDate": "2026-01-11",
+      "year": "2026",
+      "isrc": "QZFZ72673037"
+    },
+    {
+      "id": 2,
+      "status": "released",
+      "title": "Asiwel",
+      "hint": "",
+      "link": "https://open.spotify.com/track/1cjaikZQ2PIXLMsn0gd6zV",
+      "spotifyId": "1cjaikZQ2PIXLMsn0gd6zV",
+      "albumUrl": "https://open.spotify.com/album/1z7aSxHgsjCeSavE6iNMtg",
+      "releaseDate": "2026-07-10",
+      "year": "2026",
+      "isrc": "QT6F32663394"
+    },
+    {
+      "id": 3,
+      "status": "released",
+      "title": "TAFAT",
+      "hint": "",
+      "link": "https://open.spotify.com/track/4kCgTs7P4qoW9mEQHAHdt7",
+      "spotifyId": "4kCgTs7P4qoW9mEQHAHdt7",
+      "albumUrl": "https://open.spotify.com/album/08p8hOP5bBNF3F165l4Xyr",
+      "releaseDate": "2026-09-20",
+      "year": "2026",
+      "isrc": "QT9XP2648425"
+    },
+    {
+      "id": 4,
+      "status": "mystery",
+      "title": "",
+      "hint": "",
+      "link": "",
+      "spotifyId": "",
+      "albumUrl": "",
+      "releaseDate": "",
+      "year": "",
+      "isrc": ""
+    },
+    {
+      "id": 5,
+      "status": "mystery",
+      "title": "",
+      "hint": "",
+      "link": "",
+      "spotifyId": "",
+      "albumUrl": "",
+      "releaseDate": "",
+      "year": "",
+      "isrc": ""
+    },
+    {
+      "id": 6,
+      "status": "mystery",
+      "title": "",
+      "hint": "",
+      "link": "",
+      "spotifyId": "",
+      "albumUrl": "",
+      "releaseDate": "",
+      "year": "",
+      "isrc": ""
+    },
+    {
+      "id": 7,
+      "status": "mystery",
+      "title": "",
+      "hint": "",
+      "link": "",
+      "spotifyId": "",
+      "albumUrl": "",
+      "releaseDate": "",
+      "year": "",
+      "isrc": ""
+    },
+    {
+      "id": 8,
+      "status": "mystery",
+      "title": "",
+      "hint": "",
+      "link": "",
+      "spotifyId": "",
+      "albumUrl": "",
+      "releaseDate": "",
+      "year": "",
+      "isrc": ""
+    },
+    {
+      "id": 9,
+      "status": "mystery",
+      "title": "",
+      "hint": "",
+      "link": "",
+      "spotifyId": "",
+      "albumUrl": "",
+      "releaseDate": "",
+      "year": "",
+      "isrc": ""
+    },
+    {
+      "id": 10,
+      "status": "mystery",
+      "title": "",
+      "hint": "",
+      "link": "",
+      "spotifyId": "",
+      "albumUrl": "",
+      "releaseDate": "",
+      "year": "",
+      "isrc": ""
+    },
+    {
+      "id": 11,
+      "status": "mystery",
+      "title": "",
+      "hint": "",
+      "link": "",
+      "spotifyId": "",
+      "albumUrl": "",
+      "releaseDate": "",
+      "year": "",
+      "isrc": ""
+    },
+    {
+      "id": 12,
+      "status": "mystery",
+      "title": "",
+      "hint": "",
+      "link": "",
+      "spotifyId": "",
+      "albumUrl": "",
+      "releaseDate": "",
+      "year": "",
+      "isrc": ""
+    },
+    {
+      "id": 13,
+      "status": "mystery",
+      "title": "",
+      "hint": "",
+      "link": "",
+      "spotifyId": "",
+      "albumUrl": "",
+      "releaseDate": "",
+      "year": "",
+      "isrc": ""
+    },
+    {
+      "id": 14,
+      "status": "mystery",
+      "title": "",
+      "hint": "",
+      "link": "",
+      "spotifyId": "",
+      "albumUrl": "",
+      "releaseDate": "",
+      "year": "",
+      "isrc": ""
+    },
+    {
+      "id": 15,
+      "status": "mystery",
+      "title": "",
+      "hint": "",
+      "link": "",
+      "spotifyId": "",
+      "albumUrl": "",
+      "releaseDate": "",
+      "year": "",
+      "isrc": ""
+    }
+  ]
+}
