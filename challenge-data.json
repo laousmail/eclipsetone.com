@@ -1,0 +1,146 @@
+{
+  "artist": {
+    "name": "laousmail",
+    "spotifyId": "60GjJwhvGe1eVg98jFPgMp",
+    "spotifyUrl": "https://open.spotify.com/artist/60GjJwhvGe1eVg98jFPgMp"
+  },
+  "goal": 15,
+  "updatedAt": "2026-10-04",
+  "songs": [
+    {
+      "id": 1,
+      "status": "released",
+      "title": "Nnan-iyi",
+      "hint": "",
+      "link": "https://open.spotify.com/track/61hi8m9E2ltpqLtVHV5ktC",
+      "spotifyId": "61hi8m9E2ltpqLtVHV5ktC",
+      "year": "2026"
+    },
+    {
+      "id": 2,
+      "status": "released",
+      "title": "Asiwel",
+      "hint": "",
+      "link": "https://open.spotify.com/track/1cjaikZQ2PIXLMsn0gd6zV",
+      "spotifyId": "1cjaikZQ2PIXLMsn0gd6zV",
+      "year": "2026"
+    },
+    {
+      "id": 3,
+      "status": "released",
+      "title": "TAFAT",
+      "hint": "",
+      "link": "https://open.spotify.com/track/4kCgTs7P4qoW9mEQHAHdt7",
+      "spotifyId": "4kCgTs7P4qoW9mEQHAHdt7",
+      "year": "2026"
+    },
+    {
+      "id": 4,
+      "status": "mystery",
+      "title": "",
+      "hint": "",
+      "link": "",
+      "spotifyId": "",
+      "year": ""
+    },
+    {
+      "id": 5,
+      "status": "mystery",
+      "title": "",
+      "hint": "",
+      "link": "",
+      "spotifyId": "",
+      "year": ""
+    },
+    {
+      "id": 6,
+      "status": "mystery",
+      "title": "",
+      "hint": "",
+      "link": "",
+      "spotifyId": "",
+      "year": ""
+    },
+    {
+      "id": 7,
+      "status": "mystery",
+      "title": "",
+      "hint": "",
+      "link": "",
+      "spotifyId": "",
+      "year": ""
+    },
+    {
+      "id": 8,
+      "status": "mystery",
+      "title": "",
+      "hint": "",
+      "link": "",
+      "spotifyId": "",
+      "year": ""
+    },
+    {
+      "id": 9,
+      "status": "mystery",
+      "title": "",
+      "hint": "",
+      "link": "",
+      "spotifyId": "",
+      "year": ""
+    },
+    {
+      "id": 10,
+      "status": "mystery",
+      "title": "",
+      "hint": "",
+      "link": "",
+      "spotifyId": "",
+      "year": ""
+    },
+    {
+      "id": 11,
+      "status": "mystery",
+      "title": "",
+      "hint": "",
+      "link": "",
+      "spotifyId": "",
+      "year": ""
+    },
+    {
+      "id": 12,
+      "status": "mystery",
+      "title": "",
+      "hint": "",
+      "link": "",
+      "spotifyId": "",
+      "year": ""
+    },
+    {
+      "id": 13,
+      "status": "mystery",
+      "title": "",
+      "hint": "",
+      "link": "",
+      "spotifyId": "",
+      "year": ""
+    },
+    {
+      "id": 14,
+      "status": "mystery",
+      "title": "",
+      "hint": "",
+      "link": "",
+      "spotifyId": "",
+      "year": ""
+    },
+    {
+      "id": 15,
+      "status": "mystery",
+      "title": "",
+      "hint": "",
+      "link": "",
+      "spotifyId": "",
+      "year": ""
+    }
+  ]
+}

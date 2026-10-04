@@ -22,11 +22,24 @@ node people/generate.mjs
 npx --yes serve .
 ```
 
-## Challenge admin
+## 15-song challenge + Spotify
+
+Shared tracker data: `challenge-data.json`  
+Artist: [laousmail on Spotify](https://open.spotify.com/artist/60GjJwhvGe1eVg98jFPgMp)
+
+Sync new releases into mystery slots:
+
+```bash
+node scripts/sync-spotify-challenge.mjs
+```
+
+GitHub Action `.github/workflows/spotify-challenge.yml` runs daily and commits updates when new tracks appear.
+
+### Challenge admin (browser override)
 
 1. Open the site → footer **Admin** (or `#admin`)
 2. Passphrase default: `eclipsetone-admin` (change in `main.js`)
-3. Add title + listen link per slot — data stores in **this browser’s** `localStorage` (Pages has no backend)
+3. Saves to **this browser’s** `localStorage` only — for everyone else, update `challenge-data.json`
 
 ## Brand brief
 
