@@ -1,0 +1,58 @@
+name: Deploy GitHub Pages
+
+# Publishes a filtered artifact so private/ and tooling stay off the live site.
+# Repo Settings → Pages → Source must be "GitHub Actions" (not branch root).
+
+on:
+  push:
+    branches:
+      - cursor/eclipsetone-website-e2df
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build public dist (exclude private internals)
+        run: |
+          mkdir -p dist
+          rsync -a \
+            --exclude '.git/' \
+            --exclude '.github/' \
+            --exclude 'private/' \
+            --exclude 'node_modules/' \
+            --exclude 'dist/' \
+            --exclude '.cursor/' \
+            --exclude '*.md' \
+            ./ dist/
+          # Keep a minimal public README pointer optional — omit internal markdown.
+          # Re-add root README as optional later if desired.
+          test ! -e dist/private
+          test ! -e dist/docs
+          ls -la dist | head
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

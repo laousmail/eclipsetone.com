@@ -2,34 +2,133 @@ name: Sync Spotify challenge
 
 on:
   schedule:
-    # Every day at 15:00 UTC
     - cron: "0 15 * * *"
   workflow_dispatch:
+    inputs:
+      mode:
+        description: "sync = Spotify Web API; set-slot = write one slot manually"
+        required: true
+        default: sync
+        type: choice
+        options:
+          - sync
+          - set-slot
+      slot:
+        description: "Slot number (1–15) for set-slot"
+        required: false
+        type: string
+      status:
+        description: "Slot status for set-slot"
+        required: false
+        default: released
+        type: choice
+        options:
+          - released
+          - mystery
+      title:
+        description: "Title for set-slot (released)"
+        required: false
+        type: string
+      link:
+        description: "https listen URL for set-slot (released)"
+        required: false
+        type: string
+      hint:
+        description: "Optional mystery/teaser hint for set-slot"
+        required: false
+        type: string
+
+concurrency:
+  group: spotify-sync
+  cancel-in-progress: false
 
 jobs:
   sync:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+      issues: write
     steps:
-      # Pages publishes this branch. Scheduled runs start from main, then
-      # commit the updated tracker back onto the live branch.
+      # Pages currently deploys this branch (repo Settings → Pages).
       - uses: actions/checkout@v4
         with:
           ref: cursor/eclipsetone-website-e2df
+
       - uses: actions/setup-node@v4
         with:
           node-version: "22"
-      - name: Sync Laousmail releases into challenge-data.json
+
+      - name: Unit tests (slot assignment)
+        run: node --test scripts/lib/challenge-sync.test.mjs
+
+      - name: Sync from Spotify Web API
+        if: ${{ github.event_name != 'workflow_dispatch' || inputs.mode == 'sync' }}
+        env:
+          SPOTIFY_CLIENT_ID: ${{ secrets.SPOTIFY_CLIENT_ID }}
+          SPOTIFY_CLIENT_SECRET: ${{ secrets.SPOTIFY_CLIENT_SECRET }}
         run: node scripts/sync-spotify-challenge.mjs
+
+      - name: Set one challenge slot
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.mode == 'set-slot' }}
+        env:
+          SLOT: ${{ inputs.slot }}
+          STATUS: ${{ inputs.status }}
+          TITLE: ${{ inputs.title }}
+          LINK: ${{ inputs.link }}
+          HINT: ${{ inputs.hint }}
+        run: |
+          node scripts/set-challenge-slot.mjs \
+            --slot="$SLOT" \
+            --status="$STATUS" \
+            --title="$TITLE" \
+            --link="$LINK" \
+            --hint="$HINT"
+
+      - name: Validate + render homepage tracker
+        run: |
+          node scripts/validate-challenge.mjs
+          node scripts/render-challenge-html.mjs
+
       - name: Commit if changed
         run: |
-          if git diff --quiet challenge-data.json; then
-            echo "No challenge-data changes."
+          git pull --rebase origin cursor/eclipsetone-website-e2df || true
+          if git diff --quiet challenge-data.json index.html; then
+            echo "No challenge changes." >> "$GITHUB_STEP_SUMMARY"
             exit 0
           fi
           git config user.name "eclipse-tone-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add challenge-data.json
-          git commit -m "chore: sync new Laousmail Spotify releases into challenge"
+          git add challenge-data.json index.html
+          git commit -m "chore: sync challenge tracker data"
           git push origin HEAD:cursor/eclipsetone-website-e2df
+
+      - name: Open issue on failure
+        if: failure()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const title = 'Spotify challenge sync failed'
+            const body = `Automated sync failed on \`${context.sha}\`.\n\nSee run: ${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`
+            const issues = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              labels: 'sync-failure'
+            })
+            const existing = issues.data.find(i => i.title === title)
+            if (existing) {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: existing.number,
+                body
+              })
+            } else {
+              await github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title,
+                body,
+                labels: ['sync-failure']
+              })
+            }

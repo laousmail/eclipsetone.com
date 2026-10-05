@@ -1,27 +1,62 @@
 (() => {
-  const STORAGE_KEY = 'eclipsetone-challenge-v1'
   const LANG_KEY = 'eclipsetone-lang'
-  // Change this passphrase anytime — only you should know it.
-  const ADMIN_PASS = 'eclipsetone-admin'
-  const DATA_URL = new URL('challenge-data.json', window.location.href).href
+  const THEME_KEY = 'eclipsetone-theme'
+  // Resolve against our site CSS (not Google Fonts), so nested pages still hit repo-root JSON.
+  const siteStyle =
+    document.querySelector('link[rel="stylesheet"][href*="styles.css"]')?.href ||
+    window.location.href
+  const DATA_URL = new URL('challenge-data.json', siteStyle).href
 
   const GOAL = 15
   let songsCache = null
 
-  function emptySongs() {
-    return Array.from({ length: GOAL }, (_, i) => ({
-      id: i + 1,
-      status: 'mystery',
-      title: '',
-      hint: '',
-      link: '',
-      spotifyId: '',
-      year: '',
-    }))
+  function preferredTheme() {
+    try {
+      const saved = localStorage.getItem(THEME_KEY)
+      if (saved === 'light' || saved === 'dark') return saved
+    } catch {
+      /* private mode */
+    }
+    try {
+      return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'
+    } catch {
+      return 'dark'
+    }
+  }
+
+  function setTheme(theme) {
+    const next = theme === 'light' ? 'light' : 'dark'
+    document.documentElement.setAttribute('data-theme', next)
+    try {
+      localStorage.setItem(THEME_KEY, next)
+    } catch {
+      /* private mode */
+    }
+    document.querySelectorAll('[data-theme-toggle]').forEach((btn) => {
+      const label =
+        next === 'dark'
+          ? (document.documentElement.lang === 'fr' ? 'Passer en mode clair' : 'Switch to light mode')
+          : (document.documentElement.lang === 'fr' ? 'Passer en mode sombre' : 'Switch to dark mode')
+      btn.setAttribute('aria-label', label)
+      btn.setAttribute('aria-pressed', next === 'dark' ? 'true' : 'false')
+    })
+  }
+
+  function initTheme() {
+    setTheme(preferredTheme())
+    document.querySelectorAll('[data-theme-toggle]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const current = document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark'
+        setTheme(current === 'dark' ? 'light' : 'dark')
+      })
+    })
   }
 
   function normalizeSongs(songs) {
-    if (!Array.isArray(songs) || songs.length !== GOAL) return null
+    if (!Array.isArray(songs) || songs.length !== GOAL) {
+      console.warn('challenge-data: expected', GOAL, 'songs, got', Array.isArray(songs) ? songs.length : typeof songs)
+      return null
+    }
     return songs.map((song, i) => ({
       id: Number(song.id) || i + 1,
       status: song.status === 'released' ? 'released' : 'mystery',
@@ -33,13 +68,12 @@
     }))
   }
 
-  function loadLocalSongs() {
+  function isSafeHttps(url) {
     try {
-      const raw = localStorage.getItem(STORAGE_KEY)
-      if (!raw) return null
-      return normalizeSongs(JSON.parse(raw))
+      const parsed = new URL(url)
+      return parsed.protocol === 'https:'
     } catch {
-      return null
+      return false
     }
   }
 
@@ -48,30 +82,6 @@
     if (!res.ok) throw new Error(`challenge-data.json ${res.status}`)
     const data = await res.json()
     return normalizeSongs(data.songs)
-  }
-
-  async function ensureSongs() {
-    if (songsCache) return songsCache
-    const local = loadLocalSongs()
-    if (local) {
-      songsCache = local
-      return songsCache
-    }
-    try {
-      songsCache = (await loadRemoteSongs()) || emptySongs()
-    } catch {
-      songsCache = emptySongs()
-    }
-    return songsCache
-  }
-
-  function loadSongs() {
-    return songsCache || emptySongs()
-  }
-
-  function saveSongs(songs) {
-    songsCache = songs
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(songs))
   }
 
   function mysteryLabel(n, hint, lang) {
@@ -84,20 +94,27 @@
     return lang === 'fr' ? 'Sortie — titre bientôt' : 'Out — title soon'
   }
 
-  function renderChallenge() {
+  function escapeHtml(value) {
+    return String(value)
+      .replaceAll('&', '&amp;')
+      .replaceAll('<', '&lt;')
+      .replaceAll('>', '&gt;')
+      .replaceAll('"', '&quot;')
+  }
+
+  function renderChallenge(songs) {
     const grid = document.querySelector('[data-song-grid]')
     const countEl = document.querySelector('[data-challenge-count]')
     const bar = document.querySelector('[data-challenge-bar]')
-    if (!grid || !countEl || !bar) return
+    if (!grid || !countEl || !bar || !songs) return
 
     const lang = document.documentElement.lang || 'en'
-    const songs = loadSongs()
     const released = songs.filter((s) => s.status === 'released').length
 
     countEl.innerHTML =
       lang === 'fr'
-        ? `<span>${released}</span> / ${GOAL}`
-        : `<span>${released}</span> of ${GOAL}`
+        ? `<span data-challenge-released>${released}</span> / ${GOAL}`
+        : `<span data-challenge-released>${released}</span> of ${GOAL}`
 
     bar.style.width = `${Math.min(100, (released / GOAL) * 100)}%`
 
@@ -106,8 +123,10 @@
         if (song.status === 'released') {
           const title = releasedLabel(song, lang)
           const listen =
-            song.link
-              ? `<a href="${song.link}" target="_blank" rel="noreferrer">${lang === 'fr' ? 'Écouter' : 'Listen'}</a>`
+            song.link && isSafeHttps(song.link)
+              ? `<a href="${escapeHtml(song.link)}" target="_blank" rel="noreferrer">${
+                  lang === 'fr' ? 'Écouter' : 'Listen'
+                }</a>`
               : `<span>${lang === 'fr' ? 'Lien bientôt' : 'Link soon'}</span>`
           return `<article class="song-card released">
             <div class="song-num">${String(song.id).padStart(2, '0')}</div>
@@ -126,27 +145,43 @@
       .join('')
   }
 
-  function escapeHtml(value) {
-    return String(value)
-      .replaceAll('&', '&amp;')
-      .replaceAll('<', '&lt;')
-      .replaceAll('>', '&gt;')
-      .replaceAll('"', '&quot;')
+  async function enhanceChallenge() {
+    try {
+      const songs = await loadRemoteSongs()
+      if (!songs) return
+      songsCache = songs
+      renderChallenge(songs)
+    } catch (error) {
+      console.warn('challenge-data fetch failed; keeping server-rendered markup', error)
+    }
   }
 
   function setLang(lang) {
     const next = lang === 'fr' ? 'fr' : 'en'
     document.documentElement.lang = next
-    localStorage.setItem(LANG_KEY, next)
+    try {
+      localStorage.setItem(LANG_KEY, next)
+    } catch {
+      /* private mode */
+    }
     document.querySelectorAll('[data-lang-btn]').forEach((btn) => {
       btn.setAttribute('aria-pressed', btn.getAttribute('data-lang-btn') === next ? 'true' : 'false')
     })
-    renderChallenge()
+    // Refresh theme toggle labels for the active language.
+    setTheme(document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark')
+    // Only refresh challenge DOM when we have a successful fetch cache.
+    // Otherwise keep bilingual server-rendered markup (data-lang spans).
+    if (songsCache) renderChallenge(songsCache)
   }
 
   function initLang() {
-    const saved = localStorage.getItem(LANG_KEY)
-    const start = saved === 'fr' || saved === 'en' ? saved : 'en'
+    let start = 'en'
+    try {
+      const saved = localStorage.getItem(LANG_KEY)
+      if (saved === 'fr' || saved === 'en') start = saved
+    } catch {
+      /* private mode */
+    }
     setLang(start)
     document.querySelectorAll('[data-lang-btn]').forEach((btn) => {
       btn.addEventListener('click', () => setLang(btn.getAttribute('data-lang-btn')))
@@ -174,81 +209,33 @@
     nodes.forEach((node) => observer.observe(node))
   }
 
-  function fillSlotSelect() {
-    const select = document.querySelector('[data-admin-slot]')
-    if (!select) return
-    const songs = loadSongs()
-    select.innerHTML = songs
-      .map((song) => {
-        const label =
-          song.status === 'released'
-            ? `#${song.id} · released${song.title ? ` · ${song.title}` : ''}`
-            : `#${song.id} · mystery`
-        return `<option value="${song.id}">${escapeHtml(label)}</option>`
+  function initNavMenu() {
+    const checkbox = document.querySelector('.nav-checkbox')
+    const toggle = document.querySelector('.nav-toggle')
+    if (!checkbox || !toggle) return
+
+    toggle.addEventListener('click', (event) => {
+      event.preventDefault()
+      checkbox.checked = !checkbox.checked
+      toggle.setAttribute('aria-expanded', checkbox.checked ? 'true' : 'false')
+    })
+    toggle.setAttribute('aria-expanded', 'false')
+    toggle.setAttribute('aria-controls', 'site-nav-links')
+
+    const links = document.querySelector('.nav-links')
+    if (links && !links.id) links.id = 'site-nav-links'
+
+    document.querySelectorAll('.nav-links a').forEach((link) => {
+      link.addEventListener('click', () => {
+        checkbox.checked = false
+        toggle.setAttribute('aria-expanded', 'false')
       })
-      .join('')
+    })
   }
 
-  function openAdmin() {
-    const panel = document.querySelector('[data-admin-panel]')
-    if (!panel) return
-    const pass = window.prompt('Admin passphrase')
-    if (pass !== ADMIN_PASS) {
-      window.alert('Wrong passphrase.')
-      return
-    }
-    panel.classList.add('open')
-    fillSlotSelect()
-  }
-
-  function initAdmin() {
-    const openBtn = document.querySelector('[data-admin-open]')
-    const form = document.querySelector('[data-admin-form]')
-    const resetBtn = document.querySelector('[data-admin-reset]')
-    if (openBtn) openBtn.addEventListener('click', openAdmin)
-
-    if (form) {
-      form.addEventListener('submit', (event) => {
-        event.preventDefault()
-        const slot = Number(new FormData(form).get('slot'))
-        const title = String(new FormData(form).get('title') || '').trim()
-        const link = String(new FormData(form).get('link') || '').trim()
-        const hint = String(new FormData(form).get('hint') || '').trim()
-        const status = String(new FormData(form).get('status') || 'released')
-        const songs = loadSongs()
-        const idx = songs.findIndex((s) => s.id === slot)
-        if (idx < 0) return
-        songs[idx] = {
-          ...songs[idx],
-          status: status === 'mystery' ? 'mystery' : 'released',
-          title,
-          link,
-          hint,
-        }
-        saveSongs(songs)
-        fillSlotSelect()
-        renderChallenge()
-        window.alert('Saved on this browser. For the live site for everyone, update challenge-data.json (or wait for Spotify sync).')
-      })
-    }
-
-    if (resetBtn) {
-      resetBtn.addEventListener('click', () => {
-        if (!window.confirm('Clear this browser override and reload shared Spotify data?')) return
-        localStorage.removeItem(STORAGE_KEY)
-        songsCache = null
-        ensureSongs().then(() => {
-          fillSlotSelect()
-          renderChallenge()
-        })
-      })
-    }
-
-    if (window.location.hash === '#admin') openAdmin()
-  }
-
+  initTheme()
   initLang()
   initReveal()
-  initAdmin()
-  ensureSongs().then(renderChallenge)
+  initNavMenu()
+  enhanceChallenge()
 })()

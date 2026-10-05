@@ -24,9 +24,9 @@ function nav(activeSlug) {
             <button type="button" data-lang-btn="en" aria-pressed="true">EN</button>
             <button type="button" data-lang-btn="fr" aria-pressed="false">FR</button>
           </div>
-          <input id="nav-menu" class="nav-checkbox" type="checkbox" />
-          <label class="nav-toggle" for="nav-menu" aria-label="Menu"><span></span></label>
         </div>
+        <input id="nav-menu" class="nav-checkbox" type="checkbox" />
+        <label class="nav-toggle" for="nav-menu" aria-label="Menu"><span></span></label>
         <nav class="nav-links" aria-label="Primary">
           <a href="../index.html#team"><span data-lang="en">People</span><span data-lang="fr">Équipe</span></a>
           <a href="index.html"${activeSlug === 'index' ? ' aria-current="page"' : ''}><span data-lang="en">All profiles</span><span data-lang="fr">Tous les profils</span></a>
@@ -145,7 +145,7 @@ function profilePage(p, others) {
               </div>
               ${
                 p.instagram || p.tiktok
-                  ? `<p class="admin-note" style="margin-top:1rem">
+                  ? `<p class="muted-note" style="margin-top:1rem">
                   ${p.instagram ? `<a href="${esc(p.instagram)}" target="_blank" rel="noreferrer">Instagram</a>` : ''}
                   ${p.instagram && p.tiktok ? ' · ' : ''}
                   ${p.tiktok ? `<a href="${esc(p.tiktok)}" target="_blank" rel="noreferrer">TikTok</a>` : ''}

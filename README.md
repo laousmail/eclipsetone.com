@@ -6,7 +6,9 @@ Artist-first site for [Laousmail](https://instagram.com/laousmail) / EclipseTone
 
 ## Stack
 
-Static site (`index.html`, `styles.css`, `main.js`, `blog/`, `people/`). No build step. GitHub Pages serves the branch root.
+Static site (`index.html`, `styles.css`, `main.js`, `blog/`, `people/`). No build step.
+
+**Deploy:** `.github/workflows/pages.yml` uploads a filtered `dist/` (excludes `private/`). Set **Settings → Pages → Source → GitHub Actions** so internal notes are not public. Until that switch, avoid committing secrets or private bios into the branch root.
 
 ### People profiles
 
@@ -28,28 +30,59 @@ Verified socials note: `docs/team-socials.md`
 npx --yes serve .
 ```
 
-## 15-song challenge + Spotify
+## 15-song challenge
 
 Shared tracker data: `challenge-data.json`  
 Artist: [laousmail on Spotify](https://open.spotify.com/artist/60GjJwhvGe1eVg98jFPgMp)
 
-Sync new releases into mystery slots:
+The homepage embeds the current grid in HTML (works with JS disabled). `main.js` may refresh from `challenge-data.json` when the fetch succeeds; on failure it leaves the embedded markup alone.
+
+### Validate
 
 ```bash
-node scripts/sync-spotify-challenge.mjs
+node scripts/validate-challenge.mjs
 ```
 
-GitHub Action `.github/workflows/spotify-challenge.yml` runs daily, searches Laousmail’s Spotify releases, and commits new tracks onto the Pages branch so the live challenge grid updates.
+### Sync from Spotify (Web API)
 
-### Challenge admin (browser override)
+Create a Spotify app (Developer Dashboard) and add Actions secrets:
 
-1. Open the site → footer **Admin** (or `#admin`)
-2. Passphrase default: `eclipsetone-admin` (change in `main.js`)
-3. Saves to **this browser’s** `localStorage` only — for everyone else, update `challenge-data.json`
+- `SPOTIFY_CLIENT_ID`
+- `SPOTIFY_CLIENT_SECRET`
 
-## Brand brief
+Locally:
 
-Internal reference: `docs/brand-brief.md`
+```bash
+export SPOTIFY_CLIENT_ID=...
+export SPOTIFY_CLIENT_SECRET=...
+node scripts/sync-spotify-challenge.mjs
+node scripts/validate-challenge.mjs
+node scripts/render-challenge-html.mjs
+```
+
+Unit tests (no network):
+
+```bash
+node --test scripts/lib/challenge-sync.test.mjs
+```
+
+GitHub Action `.github/workflows/spotify-challenge.yml` runs daily on the Pages branch and supports **workflow_dispatch**:
+
+- `mode=sync` — Spotify Web API → ordered challenge-era slots (`challengeStart`, default `2026-01-01`)
+- `mode=set-slot` — set one slot with `slot`, `status`, `title`, `link`, `hint`
+
+After either path it validates JSON, re-renders the homepage grid, and commits. Locked slots (`"locked": true`) are never overwritten.
+
+### Manual JSON edit
+
+1. Edit `challenge-data.json` (use `hint` for mystery teasers; set `"locked": true` on a slot to protect it from sync later)
+2. `node scripts/validate-challenge.mjs`
+3. `node scripts/render-challenge-html.mjs`
+4. Commit both files
+
+## Internal notes
+
+Brand / research notes live in `private/` (not deployed). Do not publish personal data (e.g. collaborator birth dates) without approval. History purge needs an explicit owner request.
 
 ## Contact
 
