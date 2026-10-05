@@ -22,6 +22,8 @@ node people/generate.mjs
 
 - [Khaled Ouzzir](artists/khaled-ouzzir/) — singer page + Spotify releases (`artists/khaled-ouzzir/releases.json`)
 
+Verified socials note: `docs/team-socials.md`
+
 ## Local preview
 
 ```bash
