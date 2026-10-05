@@ -41,20 +41,35 @@ The homepage embeds the current grid in HTML (works with JS disabled). `main.js`
 node scripts/validate-challenge.mjs
 ```
 
-### Sync from Spotify
+### Sync from Spotify (Web API)
+
+Create a Spotify app (Developer Dashboard) and add Actions secrets:
+
+- `SPOTIFY_CLIENT_ID`
+- `SPOTIFY_CLIENT_SECRET`
+
+Locally:
 
 ```bash
+export SPOTIFY_CLIENT_ID=...
+export SPOTIFY_CLIENT_SECRET=...
 node scripts/sync-spotify-challenge.mjs
 node scripts/validate-challenge.mjs
 node scripts/render-challenge-html.mjs
 ```
 
-GitHub Action `.github/workflows/spotify-challenge.yml` runs daily on the Pages branch and also supports **workflow_dispatch**:
+Unit tests (no network):
 
-- `mode=sync` — pull new Laousmail releases into mystery slots
+```bash
+node --test scripts/lib/challenge-sync.test.mjs
+```
+
+GitHub Action `.github/workflows/spotify-challenge.yml` runs daily on the Pages branch and supports **workflow_dispatch**:
+
+- `mode=sync` — Spotify Web API → ordered challenge-era slots (`challengeStart`, default `2026-01-01`)
 - `mode=set-slot` — set one slot with `slot`, `status`, `title`, `link`, `hint`
 
-After either path it validates JSON, re-renders the homepage grid, and commits.
+After either path it validates JSON, re-renders the homepage grid, and commits. Locked slots (`"locked": true`) are never overwritten.
 
 ### Manual JSON edit
 
