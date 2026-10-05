@@ -7,6 +7,7 @@ on:
   push:
     branches:
       - cursor/eclipsetone-website-e2df
+      - cursor/claude-redesign-home-e2df
       - main
   workflow_dispatch:
 

@@ -3,6 +3,7 @@
   const THEME_KEY = 'eclipsetone-theme'
   // Resolve against our site CSS (not Google Fonts), so nested pages still hit repo-root JSON.
   const siteStyle =
+    document.querySelector('link[rel="stylesheet"][href*="home.css"]')?.href ||
     document.querySelector('link[rel="stylesheet"][href*="styles.css"]')?.href ||
     window.location.href
   const DATA_URL = new URL('challenge-data.json', siteStyle).href
@@ -117,6 +118,7 @@
         : `<span data-challenge-released>${released}</span> of ${GOAL}`
 
     bar.style.width = `${Math.min(100, (released / GOAL) * 100)}%`
+    document.documentElement.style.setProperty('--p', released / GOAL)
 
     grid.innerHTML = songs
       .map((song) => {

@@ -54,21 +54,16 @@ const cards = data.songs
   })
   .join('\n          ')
 
-const block = `              <div class="challenge-count reveal" data-challenge-count>
-                <span data-lang="en"><span data-challenge-released>${released}</span> of ${goal}</span>
-                <span data-lang="fr"><span data-challenge-released>${released}</span> / ${goal}</span>
-              </div>
-            </div>
-
-            <div class="challenge-bar" aria-hidden="true"><i data-challenge-bar style="width: ${pct}%"></i></div>
-            <div class="song-grid" data-song-grid>
-          ${cards}
-            </div>
+const block = `<div class="count" data-challenge-count><span data-lang="en"><span data-challenge-released>${released}</span> of ${goal}</span><span data-lang="fr"><span data-challenge-released>${released}</span> / ${goal}</span></div>
+<div class="bar" aria-hidden="true"><i data-challenge-bar style="width:${pct}%"></i></div>
+<div class="song-grid" data-song-grid>
+          ${cards}</div>
 `
 
 const html = readFileSync(indexPath, 'utf8')
+// Grid closes as </article></div> immediately before the challenge CTA.
 const pattern =
-  /              <div class="challenge-count reveal" data-challenge-count>[\s\S]*?<div class="song-grid" data-song-grid>[\s\S]*?<\/div>\s*(?=\n\s*<div class="cta-row")/
+  /<div class="count" data-challenge-count>[\s\S]*?<\/article><\/div>(?=\n<div class="cta">)/
 
 if (!pattern.test(html)) {
   console.error('Could not find challenge block in index.html')
