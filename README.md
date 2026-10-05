@@ -41,11 +41,14 @@ node scripts/sync-spotify-challenge.mjs
 
 GitHub Action `.github/workflows/spotify-challenge.yml` runs daily, searches Laousmail’s Spotify releases, and commits new tracks onto the Pages branch so the live challenge grid updates.
 
-### Challenge admin (browser override)
+### Updating the challenge tracker
 
-1. Open the site → footer **Admin** (or `#admin`)
-2. Passphrase default: `eclipsetone-admin` (change in `main.js`)
-3. Saves to **this browser’s** `localStorage` only — for everyone else, update `challenge-data.json`
+Shared truth is `challenge-data.json` only (no frontend password, no browser admin).
+
+- Prefer: run the Spotify sync script / wait for the daily GitHub Action
+- Or edit `challenge-data.json` and commit
+
+There is no secure admin login on this static site — anything in the browser is public.
 
 ## Brand brief
 
