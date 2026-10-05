@@ -3,41 +3,74 @@
   const LANG_KEY = 'eclipsetone-lang'
   // Change this passphrase anytime — only you should know it.
   const ADMIN_PASS = 'eclipsetone-admin'
+  const DATA_URL = new URL('challenge-data.json', window.location.href).href
 
   const GOAL = 15
-  const defaultSongs = Array.from({ length: GOAL }, (_, i) => {
-    const n = i + 1
-    if (n <= 3) {
-      return {
-        id: n,
-        status: 'released',
-        title: '',
-        hint: '',
-        link: '',
-      }
-    }
-    return {
-      id: n,
+  let songsCache = null
+
+  function emptySongs() {
+    return Array.from({ length: GOAL }, (_, i) => ({
+      id: i + 1,
       status: 'mystery',
       title: '',
       hint: '',
       link: '',
-    }
-  })
+      spotifyId: '',
+      year: '',
+    }))
+  }
 
-  function loadSongs() {
+  function normalizeSongs(songs) {
+    if (!Array.isArray(songs) || songs.length !== GOAL) return null
+    return songs.map((song, i) => ({
+      id: Number(song.id) || i + 1,
+      status: song.status === 'released' ? 'released' : 'mystery',
+      title: song.title || '',
+      hint: song.hint || '',
+      link: song.link || '',
+      spotifyId: song.spotifyId || '',
+      year: song.year || '',
+    }))
+  }
+
+  function loadLocalSongs() {
     try {
       const raw = localStorage.getItem(STORAGE_KEY)
-      if (!raw) return structuredClone(defaultSongs)
-      const parsed = JSON.parse(raw)
-      if (!Array.isArray(parsed) || parsed.length !== GOAL) return structuredClone(defaultSongs)
-      return parsed
+      if (!raw) return null
+      return normalizeSongs(JSON.parse(raw))
     } catch {
-      return structuredClone(defaultSongs)
+      return null
     }
   }
 
+  async function loadRemoteSongs() {
+    const res = await fetch(DATA_URL, { cache: 'no-cache' })
+    if (!res.ok) throw new Error(`challenge-data.json ${res.status}`)
+    const data = await res.json()
+    return normalizeSongs(data.songs)
+  }
+
+  async function ensureSongs() {
+    if (songsCache) return songsCache
+    const local = loadLocalSongs()
+    if (local) {
+      songsCache = local
+      return songsCache
+    }
+    try {
+      songsCache = (await loadRemoteSongs()) || emptySongs()
+    } catch {
+      songsCache = emptySongs()
+    }
+    return songsCache
+  }
+
+  function loadSongs() {
+    return songsCache || emptySongs()
+  }
+
   function saveSongs(songs) {
+    songsCache = songs
     localStorage.setItem(STORAGE_KEY, JSON.stringify(songs))
   }
 
@@ -195,16 +228,19 @@
         saveSongs(songs)
         fillSlotSelect()
         renderChallenge()
-        window.alert('Saved on this browser.')
+        window.alert('Saved on this browser. For the live site for everyone, update challenge-data.json (or wait for Spotify sync).')
       })
     }
 
     if (resetBtn) {
       resetBtn.addEventListener('click', () => {
-        if (!window.confirm('Reset challenge data on this browser?')) return
+        if (!window.confirm('Clear this browser override and reload shared Spotify data?')) return
         localStorage.removeItem(STORAGE_KEY)
-        fillSlotSelect()
-        renderChallenge()
+        songsCache = null
+        ensureSongs().then(() => {
+          fillSlotSelect()
+          renderChallenge()
+        })
       })
     }
 
@@ -213,6 +249,6 @@
 
   initLang()
   initReveal()
-  renderChallenge()
   initAdmin()
+  ensureSongs().then(renderChallenge)
 })()
