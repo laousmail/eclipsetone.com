@@ -145,7 +145,7 @@ function profilePage(p, others) {
               </div>
               ${
                 p.instagram || p.tiktok
-                  ? `<p class="admin-note" style="margin-top:1rem">
+                  ? `<p class="muted-note" style="margin-top:1rem">
                   ${p.instagram ? `<a href="${esc(p.instagram)}" target="_blank" rel="noreferrer">Instagram</a>` : ''}
                   ${p.instagram && p.tiktok ? ' · ' : ''}
                   ${p.tiktok ? `<a href="${esc(p.tiktok)}" target="_blank" rel="noreferrer">TikTok</a>` : ''}

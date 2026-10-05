@@ -790,55 +790,7 @@ html[lang="fr"] .lang-only-en {
   text-transform: uppercase;
 }
 
-.admin-panel {
-  display: none;
-  margin-top: 2rem;
-  padding: 1.5rem;
-  border: 1px solid var(--line);
-  background: rgba(10, 17, 31, 0.85);
-}
-
-.admin-panel.open {
-  display: block;
-}
-
-.admin-panel h3 {
-  margin: 0 0 1rem;
-  font-family: var(--font-display);
-  font-size: 1.5rem;
-}
-
-.admin-form {
-  display: grid;
-  gap: 0.85rem;
-  max-width: 28rem;
-}
-
-.admin-form label {
-  display: grid;
-  gap: 0.35rem;
-  font-size: 0.8rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--text-muted);
-}
-
-.admin-form input,
-.admin-form select {
-  min-height: 2.75rem;
-  padding: 0.65rem 0.8rem;
-  border: 1px solid var(--line-cool);
-  background: #050505;
-}
-
-.admin-tools {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-  margin-top: 1rem;
-}
-
-.admin-note {
+.muted-note {
   margin: 1rem 0 0;
   color: var(--text-muted);
   font-size: 0.9rem;
@@ -1328,21 +1280,6 @@ html[lang="fr"] .lang-only-en {
 .footer strong .tone {
   color: var(--silver);
   font-weight: 500;
-}
-
-.footer-admin {
-  background: none;
-  border: 0;
-  color: var(--cool);
-  cursor: pointer;
-  font-size: 0.75rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  padding: 0;
-}
-
-.footer-admin:hover {
-  color: var(--orange);
 }
 
 @keyframes rise-in {

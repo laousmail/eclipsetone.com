@@ -5,6 +5,43 @@ on:
     # Every day at 15:00 UTC
     - cron: "0 15 * * *"
   workflow_dispatch:
+    inputs:
+      mode:
+        description: "sync = pull Spotify; set-slot = write one slot manually"
+        required: true
+        default: sync
+        type: choice
+        options:
+          - sync
+          - set-slot
+      slot:
+        description: "Slot number (1–15) for set-slot"
+        required: false
+        type: string
+      status:
+        description: "Slot status for set-slot"
+        required: false
+        default: released
+        type: choice
+        options:
+          - released
+          - mystery
+      title:
+        description: "Title for set-slot (released)"
+        required: false
+        type: string
+      link:
+        description: "https listen URL for set-slot (released)"
+        required: false
+        type: string
+      hint:
+        description: "Optional mystery/teaser hint for set-slot"
+        required: false
+        type: string
+
+concurrency:
+  group: spotify-sync
+  cancel-in-progress: false
 
 jobs:
   sync:
@@ -12,24 +49,50 @@ jobs:
     permissions:
       contents: write
     steps:
-      # Pages publishes this branch. Scheduled runs start from main, then
-      # commit the updated tracker back onto the live branch.
+      # Pages currently deploys this branch (repo Settings → Pages).
       - uses: actions/checkout@v4
         with:
           ref: cursor/eclipsetone-website-e2df
+
       - uses: actions/setup-node@v4
         with:
           node-version: "22"
-      - name: Sync Laousmail releases into challenge-data.json
+
+      - name: Sync from Spotify
+        if: ${{ github.event_name != 'workflow_dispatch' || inputs.mode == 'sync' }}
         run: node scripts/sync-spotify-challenge.mjs
+
+      - name: Set one challenge slot
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.mode == 'set-slot' }}
+        env:
+          SLOT: ${{ inputs.slot }}
+          STATUS: ${{ inputs.status }}
+          TITLE: ${{ inputs.title }}
+          LINK: ${{ inputs.link }}
+          HINT: ${{ inputs.hint }}
+        run: |
+          node scripts/set-challenge-slot.mjs \
+            --slot="$SLOT" \
+            --status="$STATUS" \
+            --title="$TITLE" \
+            --link="$LINK" \
+            --hint="$HINT"
+
+      - name: Validate challenge-data.json
+        run: node scripts/validate-challenge.mjs
+
+      - name: Render tracker into index.html
+        run: node scripts/render-challenge-html.mjs
+
       - name: Commit if changed
         run: |
-          if git diff --quiet challenge-data.json; then
-            echo "No challenge-data changes."
+          git pull --rebase origin cursor/eclipsetone-website-e2df || true
+          if git diff --quiet challenge-data.json index.html; then
+            echo "No challenge changes."
             exit 0
           fi
           git config user.name "eclipse-tone-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add challenge-data.json
-          git commit -m "chore: sync new Laousmail Spotify releases into challenge"
+          git add challenge-data.json index.html
+          git commit -m "chore: sync challenge tracker data"
           git push origin HEAD:cursor/eclipsetone-website-e2df

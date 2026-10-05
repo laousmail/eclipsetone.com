@@ -1,6 +1,5 @@
 (() => {
   const LANG_KEY = 'eclipsetone-lang'
-  const LEGACY_OVERRIDE_KEY = 'eclipsetone-challenge-v1'
   // Resolve against our site CSS (not Google Fonts), so nested pages still hit repo-root JSON.
   const siteStyle =
     document.querySelector('link[rel="stylesheet"][href*="styles.css"]')?.href ||
@@ -10,27 +9,11 @@
   const GOAL = 15
   let songsCache = null
 
-  // Clear old browser-only overrides so everyone sees shared challenge-data.json
-  try {
-    localStorage.removeItem(LEGACY_OVERRIDE_KEY)
-  } catch {
-    /* ignore */
-  }
-
-  function emptySongs() {
-    return Array.from({ length: GOAL }, (_, i) => ({
-      id: i + 1,
-      status: 'mystery',
-      title: '',
-      hint: '',
-      link: '',
-      spotifyId: '',
-      year: '',
-    }))
-  }
-
   function normalizeSongs(songs) {
-    if (!Array.isArray(songs) || songs.length !== GOAL) return null
+    if (!Array.isArray(songs) || songs.length !== GOAL) {
+      console.warn('challenge-data: expected', GOAL, 'songs, got', Array.isArray(songs) ? songs.length : typeof songs)
+      return null
+    }
     return songs.map((song, i) => ({
       id: Number(song.id) || i + 1,
       status: song.status === 'released' ? 'released' : 'mystery',
@@ -42,25 +25,20 @@
     }))
   }
 
+  function isSafeHttps(url) {
+    try {
+      const parsed = new URL(url)
+      return parsed.protocol === 'https:'
+    } catch {
+      return false
+    }
+  }
+
   async function loadRemoteSongs() {
     const res = await fetch(DATA_URL, { cache: 'no-cache' })
     if (!res.ok) throw new Error(`challenge-data.json ${res.status}`)
     const data = await res.json()
     return normalizeSongs(data.songs)
-  }
-
-  async function ensureSongs() {
-    if (songsCache) return songsCache
-    try {
-      songsCache = (await loadRemoteSongs()) || emptySongs()
-    } catch {
-      songsCache = emptySongs()
-    }
-    return songsCache
-  }
-
-  function loadSongs() {
-    return songsCache || emptySongs()
   }
 
   function mysteryLabel(n, hint, lang) {
@@ -81,20 +59,19 @@
       .replaceAll('"', '&quot;')
   }
 
-  function renderChallenge() {
+  function renderChallenge(songs) {
     const grid = document.querySelector('[data-song-grid]')
     const countEl = document.querySelector('[data-challenge-count]')
     const bar = document.querySelector('[data-challenge-bar]')
-    if (!grid || !countEl || !bar) return
+    if (!grid || !countEl || !bar || !songs) return
 
     const lang = document.documentElement.lang || 'en'
-    const songs = loadSongs()
     const released = songs.filter((s) => s.status === 'released').length
 
     countEl.innerHTML =
       lang === 'fr'
-        ? `<span>${released}</span> / ${GOAL}`
-        : `<span>${released}</span> of ${GOAL}`
+        ? `<span data-challenge-released>${released}</span> / ${GOAL}`
+        : `<span data-challenge-released>${released}</span> of ${GOAL}`
 
     bar.style.width = `${Math.min(100, (released / GOAL) * 100)}%`
 
@@ -102,11 +79,12 @@
       .map((song) => {
         if (song.status === 'released') {
           const title = releasedLabel(song, lang)
-          const listen = song.link
-            ? `<a href="${escapeHtml(song.link)}" target="_blank" rel="noreferrer">${
-                lang === 'fr' ? 'Écouter' : 'Listen'
-              }</a>`
-            : `<span>${lang === 'fr' ? 'Lien bientôt' : 'Link soon'}</span>`
+          const listen =
+            song.link && isSafeHttps(song.link)
+              ? `<a href="${escapeHtml(song.link)}" target="_blank" rel="noreferrer">${
+                  lang === 'fr' ? 'Écouter' : 'Listen'
+                }</a>`
+              : `<span>${lang === 'fr' ? 'Lien bientôt' : 'Link soon'}</span>`
           return `<article class="song-card released">
             <div class="song-num">${String(song.id).padStart(2, '0')}</div>
             <h3 class="song-title">${escapeHtml(title)}</h3>
@@ -124,19 +102,41 @@
       .join('')
   }
 
+  async function enhanceChallenge() {
+    try {
+      const songs = await loadRemoteSongs()
+      if (!songs) return
+      songsCache = songs
+      renderChallenge(songs)
+    } catch (error) {
+      console.warn('challenge-data fetch failed; keeping server-rendered markup', error)
+    }
+  }
+
   function setLang(lang) {
     const next = lang === 'fr' ? 'fr' : 'en'
     document.documentElement.lang = next
-    localStorage.setItem(LANG_KEY, next)
+    try {
+      localStorage.setItem(LANG_KEY, next)
+    } catch {
+      /* private mode */
+    }
     document.querySelectorAll('[data-lang-btn]').forEach((btn) => {
       btn.setAttribute('aria-pressed', btn.getAttribute('data-lang-btn') === next ? 'true' : 'false')
     })
-    renderChallenge()
+    // Only refresh challenge DOM when we have a successful fetch cache.
+    // Otherwise keep bilingual server-rendered markup (data-lang spans).
+    if (songsCache) renderChallenge(songsCache)
   }
 
   function initLang() {
-    const saved = localStorage.getItem(LANG_KEY)
-    const start = saved === 'fr' || saved === 'en' ? saved : 'en'
+    let start = 'en'
+    try {
+      const saved = localStorage.getItem(LANG_KEY)
+      if (saved === 'fr' || saved === 'en') start = saved
+    } catch {
+      /* private mode */
+    }
     setLang(start)
     document.querySelectorAll('[data-lang-btn]').forEach((btn) => {
       btn.addEventListener('click', () => setLang(btn.getAttribute('data-lang-btn')))
@@ -191,5 +191,5 @@
   initLang()
   initReveal()
   initNavMenu()
-  ensureSongs().then(renderChallenge)
+  enhanceChallenge()
 })()
