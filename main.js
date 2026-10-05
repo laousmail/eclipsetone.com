@@ -1,5 +1,6 @@
 (() => {
   const LANG_KEY = 'eclipsetone-lang'
+  const THEME_KEY = 'eclipsetone-theme'
   // Resolve against our site CSS (not Google Fonts), so nested pages still hit repo-root JSON.
   const siteStyle =
     document.querySelector('link[rel="stylesheet"][href*="styles.css"]')?.href ||
@@ -8,6 +9,48 @@
 
   const GOAL = 15
   let songsCache = null
+
+  function preferredTheme() {
+    try {
+      const saved = localStorage.getItem(THEME_KEY)
+      if (saved === 'light' || saved === 'dark') return saved
+    } catch {
+      /* private mode */
+    }
+    try {
+      return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'
+    } catch {
+      return 'dark'
+    }
+  }
+
+  function setTheme(theme) {
+    const next = theme === 'light' ? 'light' : 'dark'
+    document.documentElement.setAttribute('data-theme', next)
+    try {
+      localStorage.setItem(THEME_KEY, next)
+    } catch {
+      /* private mode */
+    }
+    document.querySelectorAll('[data-theme-toggle]').forEach((btn) => {
+      const label =
+        next === 'dark'
+          ? (document.documentElement.lang === 'fr' ? 'Passer en mode clair' : 'Switch to light mode')
+          : (document.documentElement.lang === 'fr' ? 'Passer en mode sombre' : 'Switch to dark mode')
+      btn.setAttribute('aria-label', label)
+      btn.setAttribute('aria-pressed', next === 'dark' ? 'true' : 'false')
+    })
+  }
+
+  function initTheme() {
+    setTheme(preferredTheme())
+    document.querySelectorAll('[data-theme-toggle]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const current = document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark'
+        setTheme(current === 'dark' ? 'light' : 'dark')
+      })
+    })
+  }
 
   function normalizeSongs(songs) {
     if (!Array.isArray(songs) || songs.length !== GOAL) {
@@ -124,6 +167,8 @@
     document.querySelectorAll('[data-lang-btn]').forEach((btn) => {
       btn.setAttribute('aria-pressed', btn.getAttribute('data-lang-btn') === next ? 'true' : 'false')
     })
+    // Refresh theme toggle labels for the active language.
+    setTheme(document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark')
     // Only refresh challenge DOM when we have a successful fetch cache.
     // Otherwise keep bilingual server-rendered markup (data-lang spans).
     if (songsCache) renderChallenge(songsCache)
@@ -188,6 +233,7 @@
     })
   }
 
+  initTheme()
   initLang()
   initReveal()
   initNavMenu()
