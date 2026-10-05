@@ -1,8 +1,11 @@
 (() => {
   const LANG_KEY = 'eclipsetone-lang'
   const LEGACY_OVERRIDE_KEY = 'eclipsetone-challenge-v1'
-  const styleHref = document.querySelector('link[rel="stylesheet"]')?.href
-  const DATA_URL = new URL('challenge-data.json', styleHref || window.location.href).href
+  // Resolve against our site CSS (not Google Fonts), so nested pages still hit repo-root JSON.
+  const siteStyle =
+    document.querySelector('link[rel="stylesheet"][href*="styles.css"]')?.href ||
+    window.location.href
+  const DATA_URL = new URL('challenge-data.json', siteStyle).href
 
   const GOAL = 15
   let songsCache = null
