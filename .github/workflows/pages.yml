@@ -33,6 +33,7 @@ jobs:
             --exclude '.git/' \
             --exclude '.github/' \
             --exclude 'private/' \
+            --exclude 'docs/' \
             --exclude 'node_modules/' \
             --exclude 'dist/' \
             --exclude '.cursor/' \
