@@ -6,7 +6,7 @@ Artist-first site for [Laousmail](https://instagram.com/laousmail) / EclipseTone
 
 ## Stack
 
-Static site (`index.html`, `styles.css`, `main.js`, `blog/`, `people/`). No build step.
+Static site (`index.html`, `home.css` for the homepage, `styles.css` for people/blog, `main.js`). No build step.
 
 **Deploy:** `.github/workflows/pages.yml` uploads a filtered `dist/` (excludes `private/`). Set **Settings → Pages → Source → GitHub Actions** so internal notes are not public. Until that switch, avoid committing secrets or private bios into the branch root.
 

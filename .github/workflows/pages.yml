@@ -7,6 +7,7 @@ on:
   push:
     branches:
       - cursor/eclipsetone-website-e2df
+      - cursor/claude-redesign-home-e2df
       - main
   workflow_dispatch:
 
@@ -32,6 +33,7 @@ jobs:
             --exclude '.git/' \
             --exclude '.github/' \
             --exclude 'private/' \
+            --exclude 'docs/' \
             --exclude 'node_modules/' \
             --exclude 'dist/' \
             --exclude '.cursor/' \
