@@ -6,7 +6,9 @@ Artist-first site for [Laousmail](https://instagram.com/laousmail) / EclipseTone
 
 ## Stack
 
-Static site (`index.html`, `styles.css`, `main.js`, `blog/`, `people/`). No build step. GitHub Pages serves the branch root (currently `cursor/eclipsetone-website-e2df`).
+Static site (`index.html`, `styles.css`, `main.js`, `blog/`, `people/`). No build step.
+
+**Deploy:** `.github/workflows/pages.yml` uploads a filtered `dist/` (excludes `private/`). Set **Settings → Pages → Source → GitHub Actions** so internal notes are not public. Until that switch, avoid committing secrets or private bios into the branch root.
 
 ### People profiles
 
@@ -60,6 +62,10 @@ After either path it validates JSON, re-renders the homepage grid, and commits.
 2. `node scripts/validate-challenge.mjs`
 3. `node scripts/render-challenge-html.mjs`
 4. Commit both files
+
+## Internal notes
+
+Brand / research notes live in `private/` (not deployed). Do not publish personal data (e.g. collaborator birth dates) without approval. History purge needs an explicit owner request.
 
 ## Contact
 
