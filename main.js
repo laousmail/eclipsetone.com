@@ -92,7 +92,7 @@
 
   function releasedLabel(song, lang) {
     if (song.title) return song.title
-    return lang === 'fr' ? 'Sortie — titre bientôt' : 'Out — title soon'
+    return lang === 'fr' ? 'Sortie: titre bientôt' : 'Out: title soon'
   }
 
   function escapeHtml(value) {

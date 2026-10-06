@@ -166,7 +166,7 @@ function profilePage(p, others) {
       </main>`
 
   return shell({
-    title: `${p.name} — EclipseTone`,
+    title: `${p.name} · EclipseTone`,
     description: `${p.name} · ${p.role.en} · EclipseTone Productions · Montréal`,
     body,
     activeSlug: p.slug,
@@ -214,8 +214,8 @@ function indexPage() {
       </main>`
 
   return shell({
-    title: 'People — EclipseTone',
-    description: 'EclipseTone crew profiles — Laousmail and collaborators in Montréal.',
+    title: 'People · EclipseTone',
+    description: 'EclipseTone crew profiles: Laousmail and collaborators in Montréal.',
     body,
     activeSlug: 'index',
   })

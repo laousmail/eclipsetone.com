@@ -26,7 +26,7 @@ const cards = data.songs
   .map((song) => {
     const n = String(song.id).padStart(2, '0')
     if (song.status === 'released') {
-      const title = esc(song.title || 'Out — title soon')
+      const title = esc(song.title || 'Out: title soon')
       const listen =
         typeof song.link === 'string' && song.link.startsWith('https://')
           ? `<a href="${esc(song.link)}" target="_blank" rel="noreferrer">
