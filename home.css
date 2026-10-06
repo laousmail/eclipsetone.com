@@ -11,13 +11,13 @@
 html{scroll-behavior:smooth}
 body{
   background:var(--bg);color:var(--ink);
-  font:400 1.0625rem/1.65 "Instrument Sans",system-ui,sans-serif;
+  font:400 1.0625rem/1.65 "Outfit",system-ui,sans-serif;
   padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom);
   -webkit-font-smoothing:antialiased;overflow-x:hidden;
 }
 h1,h2,h3,.brand,.price{
-  font-family:Syne,"Instrument Sans",sans-serif;font-weight:800;
-  line-height:1.08;letter-spacing:-.015em;
+  font-family:"Cormorant Garamond",Georgia,serif;font-weight:700;
+  line-height:1.12;letter-spacing:0;
 }
 a{color:inherit}img{display:block}
 :focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:4px}
@@ -33,7 +33,7 @@ html[lang=en] [data-lang=fr],html[lang=fr] [data-lang=en]{display:none}
   background:color-mix(in srgb,var(--bg) 86%,transparent);
   backdrop-filter:blur(10px);border-bottom:1px solid var(--line);
 }
-.brand{display:flex;align-items:center;gap:.6rem;text-decoration:none;font-size:1.05rem;flex:0 0 auto}
+.brand{display:flex;align-items:center;gap:.6rem;text-decoration:none;font-family:Outfit,system-ui,sans-serif;font-weight:600;font-size:1.05rem;letter-spacing:0;flex:0 0 auto}
 .brand img{border-radius:50%;width:36px;height:36px}
 .nav-links{display:flex;flex-wrap:wrap;align-items:center;gap:1.15rem;margin-left:.75rem;font-size:.95rem}
 .nav-links a{text-decoration:none;color:var(--mute);white-space:nowrap}
@@ -93,7 +93,7 @@ html[lang=en] [data-lang=fr],html[lang=fr] [data-lang=en]{display:none}
 h1{
   font-size:clamp(2.4rem,6.2vw,5.4rem);
   margin-bottom:1.25rem;
-  letter-spacing:-0.005em;
+  letter-spacing:0;
   text-wrap:balance;
   text-shadow:0 2px 24px var(--bg);
 }
@@ -108,7 +108,7 @@ h1{
 h2{font-size:clamp(2rem,5vw,3.4rem);margin-bottom:1rem;max-width:18ch;text-wrap:balance}
 .sub{color:var(--mute);max-width:36rem;margin-bottom:2.5rem}
 blockquote{
-  font:800 clamp(1.6rem,4.2vw,2.8rem)/1.15 Syne,sans-serif;
+  font:600 clamp(1.6rem,4.2vw,2.8rem)/1.15 "Cormorant Garamond",Georgia,serif;
   max-width:22ch;margin-bottom:3rem;color:var(--gold);text-wrap:balance;
 }
 :root[data-theme=light] blockquote{color:var(--hot)}
@@ -128,12 +128,12 @@ blockquote{
 .offer h3{font-size:1.3rem}
 .price{font-size:clamp(2.4rem,4.5vw,3.6rem);color:var(--gold);line-height:1}
 :root[data-theme=light] .price{color:var(--hot)}
-.price small{display:inline-block;font:500 .95rem/1.2 "Instrument Sans",sans-serif;color:var(--mute);margin-left:.45rem;vertical-align:middle}
+.price small{display:inline-block;font:500 .95rem/1.2 "Outfit",sans-serif;color:var(--mute);margin-left:.45rem;vertical-align:middle}
 .tags{color:var(--mute);font-size:.95rem}
 .offer > p:not(.price):not(.tags){flex:1}
 .offer .btn{align-self:start;margin-top:auto}
 
-.count{font:800 clamp(3rem,10vw,7rem)/1 Syne,sans-serif;margin-bottom:1rem}
+.count{font:600 clamp(3rem,10vw,7rem)/1 "Cormorant Garamond",Georgia,serif;margin-bottom:1rem}
 .count span{color:var(--hot)}
 .bar{height:6px;background:var(--dim);border-radius:9px;overflow:hidden;margin-bottom:2rem}
 .bar i{display:block;height:100%;background:linear-gradient(90deg,var(--hot),var(--gold));transition:width .8s}
@@ -148,7 +148,7 @@ blockquote{
 }
 .song-card.mystery{opacity:.55;border-style:dashed}
 .song-num{font-weight:600;color:var(--mute);font-size:.85rem}
-.song-title{font:700 1.05rem/1.2 Syne,sans-serif}
+.song-title{font:600 1.1rem/1.25 "Cormorant Garamond",Georgia,serif}
 .song-card a,.song-card>span{font-size:.9rem;font-weight:600;color:var(--gold)}
 .song-card.mystery>span{color:var(--mute);font-weight:400}
 :root[data-theme=light] .song-card a{color:var(--hot)}
