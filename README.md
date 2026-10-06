@@ -8,7 +8,9 @@ Artist-first site for [Laousmail](https://instagram.com/laousmail) / EclipseTone
 
 Static site (`index.html`, `home.css` for homepage + services, `styles.css` for people/blog, `main.js`). No build step. Production services live at `services/`.
 
-**Deploy:** `.github/workflows/pages.yml` uploads a filtered `dist/` (excludes `private/`). Set **Settings → Pages → Source → GitHub Actions** so internal notes are not public. Until that switch, avoid committing secrets or private bios into the branch root.
+**Source of truth:** `main`.
+
+**Deploy today:** GitHub Pages is still **legacy** from `cursor/eclipsetone-website-e2df` (kept as a mirror of `main`). Preferred: **Settings → Pages → Source → GitHub Actions** (or legacy source → `main`), then that mirror branch can be deleted. `.github/workflows/pages.yml` builds a filtered `dist/` (excludes `private/` / `docs/`).
 
 ### People profiles
 
@@ -21,8 +23,6 @@ node people/generate.mjs
 ### Artist microsites
 
 - [Khaled Ouzzir](artists/khaled-ouzzir/) — singer page + Spotify releases (`artists/khaled-ouzzir/releases.json`)
-
-Verified socials note: `docs/team-socials.md`
 
 ## Local preview
 
