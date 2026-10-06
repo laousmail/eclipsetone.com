@@ -6,9 +6,9 @@ name: Deploy GitHub Pages
 on:
   push:
     branches:
-      - cursor/eclipsetone-website-e2df
-      - cursor/claude-redesign-home-e2df
       - main
+      # Legacy Pages still publishes this mirror until Settings → Pages → Source is main / Actions.
+      - cursor/eclipsetone-website-e2df
   workflow_dispatch:
 
 permissions:
