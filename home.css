@@ -25,7 +25,7 @@ html[lang=en] [data-lang=fr],html[lang=fr] [data-lang=en]{display:none}
 .skip{position:absolute;left:-999px}
 .skip:focus{left:1rem;top:1rem;z-index:99;background:var(--ink);color:var(--bg);padding:.5rem 1rem}
 
-/* ——— Nav: brand + links together, tools flush right ——— */
+/* --- Nav: brand + links together, tools flush right --- */
 .nav{
   position:sticky;top:0;z-index:50;display:flex;align-items:center;gap:1rem;
   min-height:var(--nav-h);
@@ -56,7 +56,7 @@ html[lang=en] [data-lang=fr],html[lang=fr] [data-lang=en]{display:none}
 .nav-toggle span,.nav-toggle span::before{display:block;width:20px;height:2px;background:var(--ink);position:relative}
 .nav-toggle span::before{content:"";top:-6px;position:absolute}
 
-/* ——— Hero: two columns so copy never sits under the disc ——— */
+/* --- Hero: two columns so copy never sits under the disc --- */
 .hero{
   position:relative;
   min-height:calc(100svh - var(--nav-h));

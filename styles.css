@@ -150,7 +150,7 @@ textarea {
 }
 
 
-/* ——— Theme toggle ——— */
+/* --- Theme toggle --- */
 .theme-toggle {
   display: inline-grid;
   place-items: center;
@@ -195,7 +195,7 @@ html[data-theme="light"] .theme-toggle .icon-moon { display: none; }
   border-radius: var(--radius);
 }
 
-/* ——— Lang ——— */
+/* --- Lang --- */
 [data-lang] {
   display: none;
 }
@@ -215,7 +215,7 @@ html[lang="fr"] .lang-only-en {
   display: none;
 }
 
-/* ——— Nav ——— */
+/* --- Nav --- */
 .nav {
   position: fixed;
   inset: 0 0 auto;
@@ -399,7 +399,7 @@ html[lang="fr"] .lang-only-en {
   }
 }
 
-/* ——— Hero ——— */
+/* --- Hero --- */
 .hero {
   position: relative;
   min-height: 100svh;
@@ -626,7 +626,7 @@ html[lang="fr"] .lang-only-en {
   color: var(--orange);
 }
 
-/* ——— Sections ——— */
+/* --- Sections --- */
 .section {
   position: relative;
   padding: clamp(4.5rem, 10vh, 7.5rem) clamp(1.25rem, 4vw, 3rem);
