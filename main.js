@@ -122,8 +122,12 @@
 
     grid.innerHTML = songs
       .map((song) => {
+        const n = String(song.id).padStart(2, '0')
         if (song.status === 'released') {
           const title = releasedLabel(song, lang)
+          const cover = isSafeHttps(song.coverUrl)
+            ? `<img class="song-cover" src="${escapeHtml(song.coverUrl)}" alt="" width="640" height="640" loading="lazy" decoding="async" />`
+            : `<div class="song-cover song-cover-fallback" aria-hidden="true"></div>`
           const listen =
             song.link && isSafeHttps(song.link)
               ? `<a href="${escapeHtml(song.link)}" target="_blank" rel="noreferrer">${
@@ -131,17 +135,22 @@
                 }</a>`
               : `<span>${lang === 'fr' ? 'Lien bientôt' : 'Link soon'}</span>`
           return `<article class="song-card released">
-            <div class="song-num">${String(song.id).padStart(2, '0')}</div>
-            <h3 class="song-title">${escapeHtml(title)}</h3>
-            ${listen}
+            ${cover}
+            <div class="song-body">
+              <div class="song-num">${n}</div>
+              <h3 class="song-title">${escapeHtml(title)}</h3>
+              ${listen}
+            </div>
           </article>`
         }
 
         const title = mysteryLabel(song.id, song.hint, lang)
         return `<article class="song-card mystery">
-          <div class="song-num">${String(song.id).padStart(2, '0')}</div>
-          <h3 class="song-title">${escapeHtml(title)}</h3>
-          <span>${lang === 'fr' ? 'Bientôt' : 'Coming'}</span>
+          <div class="song-body">
+            <div class="song-num">${n}</div>
+            <h3 class="song-title">${escapeHtml(title)}</h3>
+            <span>${lang === 'fr' ? 'Bientôt' : 'Coming'}</span>
+          </div>
         </article>`
       })
       .join('')

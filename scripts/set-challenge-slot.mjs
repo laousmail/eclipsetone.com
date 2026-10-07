@@ -3,7 +3,7 @@
  * Manually set one challenge slot in challenge-data.json.
  *
  * Usage:
- *   node scripts/set-challenge-slot.mjs --slot=4 --status=released --title="Song" --link=https://...
+ *   node scripts/set-challenge-slot.mjs --slot=4 --status=released --title="Song" --link=https://... [--cover=https://...]
  *   node scripts/set-challenge-slot.mjs --slot=4 --status=mystery --hint="Teaser"
  */
 import { readFileSync, writeFileSync } from 'node:fs'
@@ -24,6 +24,7 @@ const status = arg('status') || 'released'
 const title = arg('title').trim()
 const link = arg('link').trim()
 const hint = arg('hint').trim()
+const coverUrl = arg('cover').trim() || arg('coverUrl').trim()
 
 if (!Number.isInteger(slot) || slot < 1) {
   console.error('Usage: --slot=N --status=released|mystery [--title=] [--link=] [--hint=]')
@@ -62,6 +63,15 @@ song.status = status
 song.title = status === 'released' ? title : ''
 song.link = status === 'released' ? link : ''
 song.hint = hint
+if (status === 'released' && coverUrl) {
+  if (!HTTPS.test(coverUrl)) {
+    console.error('cover must be https://...')
+    process.exit(1)
+  }
+  song.coverUrl = coverUrl
+} else if (status === 'mystery') {
+  song.coverUrl = ''
+}
 if (status === 'mystery') {
   // Keep spotify metadata empty for pure mystery; do not invent ids.
   song.spotifyId = song.spotifyId || ''

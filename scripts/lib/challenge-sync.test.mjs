@@ -20,6 +20,7 @@ function baseData() {
       link: '',
       spotifyId: '',
       albumUrl: '',
+      coverUrl: '',
       releaseDate: '',
       year: '',
       isrc: '',
@@ -76,6 +77,7 @@ test('assignTracksToSlots fills mystery slots in release order', () => {
       releaseDate: '2026-01-11',
       year: '2026',
       albumUrl: 'https://open.spotify.com/album/1',
+      coverUrl: 'https://image-cdn.spotifycdn.com/image/cover1',
       isrc: 'AAA',
     },
     {
@@ -85,6 +87,7 @@ test('assignTracksToSlots fills mystery slots in release order', () => {
       releaseDate: '2026-07-10',
       year: '2026',
       albumUrl: 'https://open.spotify.com/album/2',
+      coverUrl: 'https://image-cdn.spotifycdn.com/image/cover2',
       isrc: 'BBB',
     },
   ]
@@ -93,6 +96,7 @@ test('assignTracksToSlots fills mystery slots in release order', () => {
   assert.equal(next.songs[0].title, 'One')
   assert.equal(next.songs[1].title, 'Two')
   assert.equal(next.songs[0].isrc, 'AAA')
+  assert.equal(next.songs[0].coverUrl, 'https://image-cdn.spotifycdn.com/image/cover1')
 })
 
 test('assignTracksToSlots is idempotent and respects locked slots', () => {
