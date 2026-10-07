@@ -147,8 +147,10 @@
 
         const title = mysteryLabel(song.id, song.hint, lang)
         return `<article class="song-card mystery" aria-label="${escapeHtml(title)}">
+          <div class="song-cover song-cover-fallback" aria-hidden="true"></div>
           <div class="song-body">
             <div class="song-num">${n}</div>
+            <h3 class="song-title">${escapeHtml(title)}</h3>
             <span>${lang === 'fr' ? 'Bientôt' : 'Coming'}</span>
           </div>
         </article>`
