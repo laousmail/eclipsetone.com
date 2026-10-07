@@ -65,6 +65,11 @@ export async function listArtistTracks(artistId, token, fetchImpl = fetchWithRet
     while (trackUrl) {
       const res = await fetchImpl(trackUrl, { headers })
       const json = await res.json()
+      const coverUrl =
+        album.images?.find((img) => img.width === 640)?.url ||
+        album.images?.[0]?.url ||
+        album.images?.[1]?.url ||
+        ''
       for (const item of json.items || []) {
         const primary = item.artists?.[0]
         tracks.push({
@@ -72,6 +77,7 @@ export async function listArtistTracks(artistId, token, fetchImpl = fetchWithRet
           title: item.name,
           link: `https://open.spotify.com/track/${item.id}`,
           albumUrl: album.external_urls?.spotify || `https://open.spotify.com/album/${album.id}`,
+          coverUrl,
           releaseDate: album.release_date || '',
           year: String(album.release_date || '').slice(0, 4),
           isrc: item.external_ids?.isrc || '',

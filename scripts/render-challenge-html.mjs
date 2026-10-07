@@ -18,6 +18,10 @@ function esc(value) {
     .replaceAll('"', '&quot;')
 }
 
+function isHttps(value) {
+  return typeof value === 'string' && value.startsWith('https://')
+}
+
 const goal = data.goal
 const released = data.songs.filter((s) => s.status === 'released').length
 const pct = Math.min(100, Math.round((released / goal) * 100))
@@ -27,18 +31,23 @@ const cards = data.songs
     const n = String(song.id).padStart(2, '0')
     if (song.status === 'released') {
       const title = esc(song.title || 'Out: title soon')
-      const listen =
-        typeof song.link === 'string' && song.link.startsWith('https://')
-          ? `<a href="${esc(song.link)}" target="_blank" rel="noreferrer">
+      const cover = isHttps(song.coverUrl)
+        ? `<img class="song-cover" src="${esc(song.coverUrl)}" alt="" width="640" height="640" loading="lazy" decoding="async" />`
+        : `<div class="song-cover song-cover-fallback" aria-hidden="true"></div>`
+      const listen = isHttps(song.link)
+        ? `<a href="${esc(song.link)}" target="_blank" rel="noreferrer">
               <span data-lang="en">Listen</span><span data-lang="fr">Écouter</span>
             </a>`
-          : `<span>
+        : `<span>
               <span data-lang="en">Link soon</span><span data-lang="fr">Lien bientôt</span>
             </span>`
       return `<article class="song-card released">
-            <div class="song-num">${n}</div>
-            <h3 class="song-title">${title}</h3>
-            ${listen}
+            ${cover}
+            <div class="song-body">
+              <div class="song-num">${n}</div>
+              <h3 class="song-title">${title}</h3>
+              ${listen}
+            </div>
           </article>`
     }
 
@@ -47,9 +56,11 @@ const cards = data.songs
       ? esc(hint)
       : `<span data-lang="en">Mystery ${n}</span><span data-lang="fr">Mystère ${n}</span>`
     return `<article class="song-card mystery">
-            <div class="song-num">${n}</div>
-            <h3 class="song-title">${title}</h3>
-            <span><span data-lang="en">Coming</span><span data-lang="fr">Bientôt</span></span>
+            <div class="song-body">
+              <div class="song-num">${n}</div>
+              <h3 class="song-title">${title}</h3>
+              <span><span data-lang="en">Coming</span><span data-lang="fr">Bientôt</span></span>
+            </div>
           </article>`
   })
   .join('\n          ')
@@ -63,7 +74,7 @@ const block = `<div class="count" data-challenge-count><span data-lang="en"><spa
 const html = readFileSync(indexPath, 'utf8')
 // Grid closes as </article></div> immediately before the challenge CTA.
 const pattern =
-  /<div class="count" data-challenge-count>[\s\S]*?<\/article><\/div>(?=\n<div class="cta">)/
+  /<div class="count" data-challenge-count>[\s\S]*?<\/article><\/div>(?=\n*<div class="cta">)/
 
 if (!pattern.test(html)) {
   console.error('Could not find challenge block in index.html')
