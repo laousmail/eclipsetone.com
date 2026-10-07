@@ -41,6 +41,7 @@ jobs:
             ./ dist/
           # Keep a minimal public README pointer optional — omit internal markdown.
           # Re-add root README as optional later if desired.
+          test -f dist/CNAME
           test ! -e dist/private
           test ! -e dist/docs
           ls -la dist | head
