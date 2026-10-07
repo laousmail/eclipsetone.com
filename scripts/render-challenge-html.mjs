@@ -52,13 +52,12 @@ const cards = data.songs
     }
 
     const hint = String(song.hint || '').trim()
-    const title = hint
+    const label = hint
       ? esc(hint)
-      : `<span data-lang="en">Mystery ${n}</span><span data-lang="fr">Mystère ${n}</span>`
-    return `<article class="song-card mystery">
+      : `Mystery ${n}`
+    return `<article class="song-card mystery" aria-label="${label}">
             <div class="song-body">
               <div class="song-num">${n}</div>
-              <h3 class="song-title">${title}</h3>
               <span><span data-lang="en">Coming</span><span data-lang="fr">Bientôt</span></span>
             </div>
           </article>`
