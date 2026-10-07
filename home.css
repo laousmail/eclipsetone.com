@@ -88,16 +88,25 @@ html[lang=en] [data-lang=fr],html[lang=fr] [data-lang=en]{display:none}
   animation:haze-drift 14s ease-in-out infinite alternate;
   pointer-events:none;
 }
-.corona{
+.corona,.corona-shimmer{
   position:absolute;inset:0;border-radius:50%;
-  background:conic-gradient(from -90deg,var(--hot),var(--gold) calc(var(--p)*360deg),var(--dim) 0);
   -webkit-mask:radial-gradient(circle,transparent 0 63%,#000 63.4% 72%,transparent 72.4%),repeating-conic-gradient(from -90deg,#000 0 21deg,transparent 21deg 24deg);
   -webkit-mask-composite:source-in;
   mask:radial-gradient(circle,transparent 0 63%,#000 63.4% 72%,transparent 72.4%),repeating-conic-gradient(from -90deg,#000 0 21deg,transparent 21deg 24deg);
   mask-composite:intersect;
-  animation:corona-spin 48s linear infinite;
+}
+.corona{
+  /* Progress stays fixed so segments map to the challenge; only the shimmer layer spins. */
+  background:conic-gradient(from -90deg,var(--hot),var(--gold) calc(var(--p)*360deg),var(--dim) 0);
   transition:--p 1.8s cubic-bezier(.22,1,.36,1);
+}
+.corona-shimmer{
+  background:conic-gradient(from 0deg,transparent 0 68%,color-mix(in srgb,var(--gold) 55%,transparent) 78%,transparent 90% 100%);
+  mix-blend-mode:screen;
+  opacity:.55;
+  animation:corona-spin 28s linear infinite;
   will-change:transform;
+  pointer-events:none;
 }
 .moon{
   position:absolute;inset:14%;border-radius:50%;
