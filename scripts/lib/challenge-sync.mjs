@@ -54,6 +54,7 @@ export function assignTracksToSlots(data, sortedTracks) {
     slot.link = track.link
     slot.spotifyId = track.spotifyId
     slot.albumUrl = track.albumUrl || ''
+    slot.coverUrl = track.coverUrl || ''
     slot.releaseDate = track.releaseDate || ''
     slot.year = track.year || String(track.releaseDate || '').slice(0, 4)
     slot.isrc = track.isrc || ''

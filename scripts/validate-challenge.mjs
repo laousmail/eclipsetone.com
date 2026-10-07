@@ -42,6 +42,10 @@ for (const song of data.songs) {
   if (song.link && !HTTPS.test(String(song.link))) {
     fail(`song ${id}: link must be https:// when present`)
   }
+
+  if (song.coverUrl && !HTTPS.test(String(song.coverUrl))) {
+    fail(`song ${id}: coverUrl must be https:// when present`)
+  }
 }
 
 for (let i = 1; i <= goal; i += 1) {
