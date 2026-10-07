@@ -66,6 +66,7 @@
       link: song.link || '',
       spotifyId: song.spotifyId || '',
       year: song.year || '',
+      coverUrl: song.coverUrl || '',
     }))
   }
 
