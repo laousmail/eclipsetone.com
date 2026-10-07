@@ -9,11 +9,8 @@
     } catch {
       /* private mode */
     }
-    try {
-      return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'
-    } catch {
-      return 'dark'
-    }
+    // Artist hub defaults to eclipse dark; light remains available via toggle.
+    return 'dark'
   }
 
   function setTheme(theme) {
