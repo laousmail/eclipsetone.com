@@ -4,10 +4,33 @@
 
 import { sleep } from './challenge-sync.mjs'
 
-export async function fetchWithRetry(url, options = {}, { retries = 3 } = {}) {
+/**
+ * Fetch with exponential backoff.
+ * Retries: network-level throws (DNS blip, connection reset, etc.), HTTP 429, and 5xx.
+ * Does not retry non-retryable HTTP statuses (e.g. 401/403/404).
+ *
+ * @param {string} url
+ * @param {RequestInit} [options]
+ * @param {{ retries?: number, fetchFn?: typeof fetch, sleepFn?: (ms: number) => Promise<void> }} [config]
+ */
+export async function fetchWithRetry(
+  url,
+  options = {},
+  { retries = 3, fetchFn = fetch, sleepFn = sleep } = {},
+) {
   let lastError
   for (let attempt = 0; attempt < retries; attempt += 1) {
-    const res = await fetch(url, options)
+    let res
+    try {
+      res = await fetchFn(url, options)
+    } catch (err) {
+      // Network / transport failures (TypeError from undici, ECONNRESET, etc.)
+      lastError = err instanceof Error ? err : new Error(String(err))
+      if (attempt === retries - 1) throw lastError
+      await sleepFn(500 * 2 ** attempt)
+      continue
+    }
+
     if (res.ok) return res
 
     const retryable = res.status === 429 || res.status >= 500
@@ -18,7 +41,7 @@ export async function fetchWithRetry(url, options = {}, { retries = 3 } = {}) {
 
     const retryAfter = Number(res.headers.get('retry-after'))
     const waitMs = Number.isFinite(retryAfter) && retryAfter > 0 ? retryAfter * 1000 : 500 * 2 ** attempt
-    await sleep(waitMs)
+    await sleepFn(waitMs)
     lastError = new Error(`${url} → ${res.status}`)
   }
   throw lastError
