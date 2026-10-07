@@ -22,7 +22,7 @@ node people/generate.mjs
 
 ### Artist microsites
 
-- [SMA!L · Laousmail](artists/laousmail/) — full artist hub (music, story, Ceux qui écoutent, moments)
+- [SMA!L · Laousmail](https://laousmail.com/) — artist hub (`artists/laousmail/`, domain deploy via `.github/workflows/deploy-laousmail-com.yml`)
 - [Khaled Ouzzir](artists/khaled-ouzzir/) — singer page + Spotify releases (`artists/khaled-ouzzir/releases.json`)
 
 ## Local preview

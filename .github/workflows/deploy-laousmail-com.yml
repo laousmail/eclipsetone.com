@@ -1,0 +1,49 @@
+name: Deploy laousmail.com
+
+# Syncs artists/laousmail → laousmail/laousmail.com (GitHub Pages).
+# Requires repo secret LAOUSMAIL_SITE_TOKEN: a classic PAT or fine-grained token
+# with Contents: Read and write on laousmail/laousmail.com.
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "artists/laousmail/**"
+      - ".github/workflows/deploy-laousmail-com.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-laousmail-com
+  cancel-in-progress: true
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Require deploy token
+        env:
+          TOKEN: ${{ secrets.LAOUSMAIL_SITE_TOKEN }}
+        run: |
+          if [ -z "$TOKEN" ]; then
+            echo "::error::Missing secret LAOUSMAIL_SITE_TOKEN. Add a PAT with write access to laousmail/laousmail.com, then re-run."
+            exit 1
+          fi
+
+      - name: Publish artist hub to laousmail/laousmail.com
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          personal_token: ${{ secrets.LAOUSMAIL_SITE_TOKEN }}
+          external_repository: laousmail/laousmail.com
+          publish_branch: main
+          publish_dir: artists/laousmail
+          force_orphan: true
+          enable_jekyll: false
+          user_name: github-actions[bot]
+          user_email: github-actions[bot]@users.noreply.github.com
+          commit_message: "Deploy SMA!L artist hub from eclipsetone.com"
