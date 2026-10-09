@@ -55,7 +55,9 @@ const cards = data.songs
     const title = hint
       ? esc(hint)
       : `<span data-lang="en">Mystery ${n}</span><span data-lang="fr">Mystère ${n}</span>`
-    return `<article class="song-card mystery">
+    const label = hint ? esc(hint) : `Mystery ${n}`
+    return `<article class="song-card mystery" aria-label="${label}">
+            <div class="song-cover song-cover-fallback" aria-hidden="true"></div>
             <div class="song-body">
               <div class="song-num">${n}</div>
               <h3 class="song-title">${title}</h3>
