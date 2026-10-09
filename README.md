@@ -2,7 +2,21 @@
 
 Artist-first site for [Laousmail](https://instagram.com/laousmail) / EclipseTone — Montréal.
 
-**Live:** https://laousmail.github.io/eclipsetone.com/
+**Live:** https://eclipsetone.com/ (GitHub Pages; fallback https://laousmail.github.io/eclipsetone.com/)
+
+## Custom domain (GoDaddy → GitHub Pages)
+
+`CNAME` in the repo root publishes `eclipsetone.com`. In GoDaddy DNS for **eclipsetone.com**, set:
+
+| Type | Name | Value |
+|------|------|--------|
+| A | `@` | `185.199.108.153` |
+| A | `@` | `185.199.109.153` |
+| A | `@` | `185.199.110.153` |
+| A | `@` | `185.199.111.153` |
+| CNAME | `www` | `laousmail.github.io` |
+
+Remove GoDaddy parking / forwarding A records (`15.197.x` / `3.33.x`) first. Then in the repo: **Settings → Pages → Custom domain** → `eclipsetone.com` → check DNS → **Enforce HTTPS**.
 
 ## Stack
 
@@ -10,7 +24,7 @@ Static site (`index.html`, `home.css` for homepage + services, `styles.css` for 
 
 **Source of truth:** `main`.
 
-**Deploy today:** GitHub Pages is still **legacy** from `cursor/eclipsetone-website-e2df` (kept as a mirror of `main`). Preferred: **Settings → Pages → Source → GitHub Actions** (or legacy source → `main`), then that mirror branch can be deleted. `.github/workflows/pages.yml` builds a filtered `dist/` (excludes `private/` / `docs/`).
+**Deploy today:** GitHub Pages is still **legacy** from `cursor/eclipsetone-website-e2df` (kept as a mirror of `main`). Preferred: **Settings → Pages → Source → GitHub Actions** (or legacy source → `main`), then that mirror branch can be deleted. `.github/workflows/pages.yml` builds a filtered `dist/` (excludes `private/` / `docs/`). The `CNAME` file must stay in the published root (included in `dist/` via rsync).
 
 ### People profiles
 
