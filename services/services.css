@@ -156,31 +156,39 @@
 .faq details[open] summary::after{content:"–"}
 .faq details p{color:var(--mute);padding:0 0 1.1rem;max-width:40rem}
 
-.inquiry{
-  display:grid;
-  gap:1rem;
-  max-width:40rem;
+.booking-shell{
   margin-top:1.5rem;
+  max-width:52rem;
+  display:grid;
+  gap:1.25rem;
 }
-.inquiry .row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
-.field{display:grid;gap:.4rem}
-.field label{font-size:.88rem;font-weight:600;color:var(--mute)}
-.field input,.field select,.field textarea{
-  width:100%;
-  background:var(--bg);
-  color:var(--ink);
+.calendly-inline-widget{
   border:1px solid var(--line);
-  border-radius:.75rem;
-  padding:.75rem .9rem;
-  font:inherit;
+  border-radius:1rem;
+  overflow:hidden;
+  background:var(--bg2);
+  min-height:720px;
 }
-.field textarea{min-height:7rem;resize:vertical}
-.field input:focus,.field select:focus,.field textarea:focus{
-  outline:2px solid var(--gold);
-  outline-offset:1px;
+.calendly-missing{
+  margin:0;
+  padding:1.25rem 1.35rem;
+  border:1px dashed var(--line);
+  border-radius:1rem;
+  background:var(--bg2);
+  color:var(--mute);
+  font-size:.95rem;
 }
-.inquiry .actions{display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;margin-top:.25rem}
-.inquiry .hint{color:var(--mute);font-size:.88rem}
+.calendly-missing code{
+  font-size:.85em;
+  color:var(--ink);
+}
+.booking-alt{
+  display:flex;
+  flex-wrap:wrap;
+  gap:.85rem 1.25rem;
+  align-items:center;
+}
+.booking-alt .hint{margin:0;color:var(--mute);font-size:.88rem}
 
 .book.final{padding-bottom:clamp(5rem,12vw,8rem)}
 
@@ -193,6 +201,6 @@
   .pkg.featured{order:-1}
 }
 @media(max-width:640px){
-  .inquiry .row{grid-template-columns:1fr}
+  .calendly-inline-widget{min-height:640px}
   .page-hero{min-height:auto;padding-top:2.5rem;padding-bottom:3rem}
 }
