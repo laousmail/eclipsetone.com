@@ -1,0 +1,48 @@
+{
+  "source": "Senja export · Eclipsetone V1",
+  "updatedAt": "2026-10-07",
+  "testimonials": [
+    {
+      "name": "Ferhat Asma",
+      "lang": "fr",
+      "rating": 5,
+      "avatar": "https://senja-io.s3.us-west-1.amazonaws.com/public/avatar/158c1df7-9532-408f-a85b-1c4035e8f116_inbound8745229806503113678.jpg",
+      "text": "J’ai fait au moins une quinzaine de chansons chez Eclipse Tone. C’est un studio professionnel et très accueillant. Super service rapport qualité et prix."
+    },
+    {
+      "name": "Elias",
+      "lang": "en",
+      "rating": 5,
+      "avatar": "",
+      "text": "What I like most about Eclipse Tone Studio is the professionalism, attention to detail, and the creative atmosphere. The team really listens to your vision and helps you bring out the best version of your sound."
+    },
+    {
+      "name": "Khaled Ouzzir",
+      "lang": "fr",
+      "rating": 5,
+      "avatar": "https://senja-io.s3.us-west-1.amazonaws.com/public/avatar/3ab21ff8-91b2-4e94-805b-fe4c862de24c_inbound6045906645953205765.png",
+      "text": "Eclipse Tone vraiment est un studio sérieux, créatif et flexible, et le travail se fait de manière fluide jusqu’à obtenir exactement le son voulu."
+    },
+    {
+      "name": "Ahmed Belgrine",
+      "lang": "en",
+      "rating": 5,
+      "avatar": "",
+      "text": "An amazing mastering sound engineer with knowledge of various genres of music — making it easier for artists to let themselves go."
+    },
+    {
+      "name": "Nordine Aïnouche",
+      "lang": "fr",
+      "rating": 5,
+      "avatar": "https://senja-io.s3.us-west-1.amazonaws.com/public/avatar/91161afc-0ea0-4845-a4be-1af0f3603e10_1000044387.jpg",
+      "text": "Travailler avec Smail est un pur plaisir : sympathique, professionnel, méticuleux, avec de super bonnes idées et conseils pour un rendu à la hauteur."
+    },
+    {
+      "name": "Red",
+      "lang": "fr",
+      "rating": 5,
+      "avatar": "",
+      "text": "Le producteur a pris en charge instruments, arrangements, mix et mastering. Son oreille et son talent pour les arrangements sont bluffants — le résultat dépasse mes attentes."
+    }
+  ]
+}

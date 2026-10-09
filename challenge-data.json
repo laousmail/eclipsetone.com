@@ -19,7 +19,8 @@
       "albumUrl": "https://open.spotify.com/album/2HDdpbhPjxb6GCnBHR8XAb",
       "releaseDate": "2026-01-11",
       "year": "2026",
-      "isrc": "QZFZ72673037"
+      "isrc": "QZFZ72673037",
+      "coverUrl": "https://image-cdn-fa.spotifycdn.com/image/ab67616d0000b2736f57f75ecb6ffb76d9250c95"
     },
     {
       "id": 2,
@@ -31,7 +32,8 @@
       "albumUrl": "https://open.spotify.com/album/1z7aSxHgsjCeSavE6iNMtg",
       "releaseDate": "2026-07-10",
       "year": "2026",
-      "isrc": "QT6F32663394"
+      "isrc": "QT6F32663394",
+      "coverUrl": "https://image-cdn-ak.spotifycdn.com/image/ab67616d0000b2732d4d2421d9cef972e0366735"
     },
     {
       "id": 3,
@@ -43,7 +45,8 @@
       "albumUrl": "https://open.spotify.com/album/08p8hOP5bBNF3F165l4Xyr",
       "releaseDate": "2026-09-20",
       "year": "2026",
-      "isrc": "QT9XP2648425"
+      "isrc": "QT9XP2648425",
+      "coverUrl": "https://image-cdn-fa.spotifycdn.com/image/ab67616d0000b273abe852294a3e13bd9a29c2dc"
     },
     {
       "id": 4,
@@ -55,7 +58,8 @@
       "albumUrl": "",
       "releaseDate": "",
       "year": "",
-      "isrc": ""
+      "isrc": "",
+      "coverUrl": ""
     },
     {
       "id": 5,
@@ -67,7 +71,8 @@
       "albumUrl": "",
       "releaseDate": "",
       "year": "",
-      "isrc": ""
+      "isrc": "",
+      "coverUrl": ""
     },
     {
       "id": 6,
@@ -79,7 +84,8 @@
       "albumUrl": "",
       "releaseDate": "",
       "year": "",
-      "isrc": ""
+      "isrc": "",
+      "coverUrl": ""
     },
     {
       "id": 7,
@@ -91,7 +97,8 @@
       "albumUrl": "",
       "releaseDate": "",
       "year": "",
-      "isrc": ""
+      "isrc": "",
+      "coverUrl": ""
     },
     {
       "id": 8,
@@ -103,7 +110,8 @@
       "albumUrl": "",
       "releaseDate": "",
       "year": "",
-      "isrc": ""
+      "isrc": "",
+      "coverUrl": ""
     },
     {
       "id": 9,
@@ -115,7 +123,8 @@
       "albumUrl": "",
       "releaseDate": "",
       "year": "",
-      "isrc": ""
+      "isrc": "",
+      "coverUrl": ""
     },
     {
       "id": 10,
@@ -127,7 +136,8 @@
       "albumUrl": "",
       "releaseDate": "",
       "year": "",
-      "isrc": ""
+      "isrc": "",
+      "coverUrl": ""
     },
     {
       "id": 11,
@@ -139,7 +149,8 @@
       "albumUrl": "",
       "releaseDate": "",
       "year": "",
-      "isrc": ""
+      "isrc": "",
+      "coverUrl": ""
     },
     {
       "id": 12,
@@ -151,7 +162,8 @@
       "albumUrl": "",
       "releaseDate": "",
       "year": "",
-      "isrc": ""
+      "isrc": "",
+      "coverUrl": ""
     },
     {
       "id": 13,
@@ -163,7 +175,8 @@
       "albumUrl": "",
       "releaseDate": "",
       "year": "",
-      "isrc": ""
+      "isrc": "",
+      "coverUrl": ""
     },
     {
       "id": 14,
@@ -175,7 +188,8 @@
       "albumUrl": "",
       "releaseDate": "",
       "year": "",
-      "isrc": ""
+      "isrc": "",
+      "coverUrl": ""
     },
     {
       "id": 15,
@@ -187,7 +201,8 @@
       "albumUrl": "",
       "releaseDate": "",
       "year": "",
-      "isrc": ""
+      "isrc": "",
+      "coverUrl": ""
     }
   ],
   "challengeStart": "2026-01-01"

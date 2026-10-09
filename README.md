@@ -22,6 +22,7 @@ node people/generate.mjs
 
 ### Artist microsites
 
+- [SMA!L · Laousmail](https://laousmail.com/) — artist site in a **separate repo**: [laousmail/laousmail.com](https://github.com/laousmail/laousmail.com)
 - [Khaled Ouzzir](artists/khaled-ouzzir/) — singer page + Spotify releases (`artists/khaled-ouzzir/releases.json`)
 
 ## Local preview

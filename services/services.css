@@ -174,25 +174,38 @@
 .player-wave i:nth-child(8){height:40%}
 .player-note{font-size:.75rem;color:var(--mute);white-space:nowrap}
 
-.voices{display:grid;grid-template-columns:repeat(auto-fit,minmax(16rem,1fr));gap:1rem}
+.voices{display:grid;grid-template-columns:repeat(auto-fit,minmax(17rem,1fr));gap:1rem}
 .voice{
   margin:0;
-  padding:1.5rem 1.35rem 1.35rem;
+  padding:1.35rem 1.25rem 1.25rem;
   border-top:2px solid var(--hot);
-  background:color-mix(in srgb,var(--bg2) 85%,transparent);
+  background:color-mix(in srgb,var(--bg2) 88%,transparent);
+  display:grid;gap:.85rem;align-content:start;
 }
-.voice-empty{opacity:.72}
+.voice-stars{
+  margin:0;font-size:.78rem;letter-spacing:.08em;color:var(--hot);line-height:1;
+}
 .voice-quote{
-  margin:0 0 1.1rem;
-  font:500 1.15rem/1.45 "Cormorant Garamond",Georgia,serif;
+  margin:0;
+  font:500 1.12rem/1.45 "Cormorant Garamond",Georgia,serif;
   color:var(--ink);
-  max-width:28ch;
+  text-wrap:pretty;
 }
-.voice-empty .voice-quote{color:var(--mute);font-style:italic}
-.voice-by{display:grid;gap:.2rem}
+.voice-by{
+  display:grid;grid-template-columns:auto 1fr;gap:.55rem .7rem;align-items:center;
+  margin-top:auto;padding-top:.15rem;
+}
+.voice-avatar{
+  width:2.25rem;height:2.25rem;border-radius:50%;object-fit:cover;
+  background:var(--dim);border:1px solid var(--line);
+}
+.voice-avatar-fallback{
+  display:grid;place-items:center;
+  font:600 .85rem/1 "Outfit",sans-serif;color:var(--on);
+  background:linear-gradient(135deg,var(--hot),var(--gold));
+  border:0;
+}
 .voice-name{font:600 .9rem/1.2 "Outfit",sans-serif;color:var(--ink)}
-.voice-empty .voice-name{color:var(--mute)}
-.voice-place{font-size:.85rem;color:var(--mute)}
 
 .faq{display:grid;gap:.65rem;max-width:44rem}
 .faq details{

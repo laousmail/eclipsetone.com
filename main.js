@@ -66,6 +66,7 @@
       link: song.link || '',
       spotifyId: song.spotifyId || '',
       year: song.year || '',
+      coverUrl: song.coverUrl || '',
     }))
   }
 
@@ -118,12 +119,16 @@
         : `<span data-challenge-released>${released}</span> of ${GOAL}`
 
     bar.style.width = `${Math.min(100, (released / GOAL) * 100)}%`
-    document.documentElement.style.setProperty('--p', released / GOAL)
+    setDiscProgress(released / GOAL, { animate: true })
 
     grid.innerHTML = songs
       .map((song) => {
+        const n = String(song.id).padStart(2, '0')
         if (song.status === 'released') {
           const title = releasedLabel(song, lang)
+          const cover = isSafeHttps(song.coverUrl)
+            ? `<img class="song-cover" src="${escapeHtml(song.coverUrl)}" alt="" width="640" height="640" loading="lazy" decoding="async" />`
+            : `<div class="song-cover song-cover-fallback" aria-hidden="true"></div>`
           const listen =
             song.link && isSafeHttps(song.link)
               ? `<a href="${escapeHtml(song.link)}" target="_blank" rel="noreferrer">${
@@ -131,17 +136,23 @@
                 }</a>`
               : `<span>${lang === 'fr' ? 'Lien bientôt' : 'Link soon'}</span>`
           return `<article class="song-card released">
-            <div class="song-num">${String(song.id).padStart(2, '0')}</div>
-            <h3 class="song-title">${escapeHtml(title)}</h3>
-            ${listen}
+            ${cover}
+            <div class="song-body">
+              <div class="song-num">${n}</div>
+              <h3 class="song-title">${escapeHtml(title)}</h3>
+              ${listen}
+            </div>
           </article>`
         }
 
         const title = mysteryLabel(song.id, song.hint, lang)
-        return `<article class="song-card mystery">
-          <div class="song-num">${String(song.id).padStart(2, '0')}</div>
-          <h3 class="song-title">${escapeHtml(title)}</h3>
-          <span>${lang === 'fr' ? 'Bientôt' : 'Coming'}</span>
+        return `<article class="song-card mystery" aria-label="${escapeHtml(title)}">
+          <div class="song-cover song-cover-fallback" aria-hidden="true"></div>
+          <div class="song-body">
+            <div class="song-num">${n}</div>
+            <h3 class="song-title">${escapeHtml(title)}</h3>
+            <span>${lang === 'fr' ? 'Bientôt' : 'Coming'}</span>
+          </div>
         </article>`
       })
       .join('')
@@ -188,6 +199,32 @@
     document.querySelectorAll('[data-lang-btn]').forEach((btn) => {
       btn.addEventListener('click', () => setLang(btn.getAttribute('data-lang-btn')))
     })
+  }
+
+  function setDiscProgress(progress, { animate = true } = {}) {
+    const root = document.documentElement
+    const disc = document.querySelector('[data-eclipse-disc]')
+    const value = Math.min(1, Math.max(0, Number(progress) || 0))
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    const alreadyLive = disc?.classList.contains('is-live')
+    if (!animate || reduceMotion || alreadyLive) {
+      root.style.setProperty('--p', String(value))
+    } else {
+      root.style.setProperty('--p', '0')
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          root.style.setProperty('--p', String(value))
+        })
+      })
+    }
+    disc?.classList.add('is-live')
+  }
+
+  function initDiscFromMarkup() {
+    const releasedEl = document.querySelector('[data-challenge-released]')
+    const released = Number(releasedEl?.textContent?.trim())
+    // Fallback matches embedded homepage challenge count when markup is missing.
+    setDiscProgress(Number.isFinite(released) ? released / GOAL : 3 / GOAL, { animate: true })
   }
 
   function initReveal() {
@@ -239,5 +276,6 @@
   initLang()
   initReveal()
   initNavMenu()
+  initDiscFromMarkup()
   enhanceChallenge()
 })()

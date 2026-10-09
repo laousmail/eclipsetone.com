@@ -25,7 +25,10 @@
     "focus": {
       "en": ["Artist", "Production", "Guitar", "Direction"],
       "fr": ["Artiste", "Production", "Guitare", "Direction"]
-    }
+    },
+    "artistSite": "https://laousmail.com/",
+    "spotifyUrl": "https://open.spotify.com/artist/60GjJwhvGe1eVg98jFPgMp",
+    "instagram": "https://instagram.com/laousmail"
   },
   {
     "slug": "raouf",
