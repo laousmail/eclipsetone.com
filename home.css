@@ -67,26 +67,88 @@ html[lang=en] [data-lang=fr],html[lang=fr] [data-lang=en]{display:none}
   padding:clamp(2.5rem,6vw,4rem) clamp(1rem,5vw,4rem) 4.5rem;
   overflow:hidden;
 }
+@property --p{
+  syntax:"<number>";
+  inherits:true;
+  initial-value:0;
+}
 .disc{
   position:relative;z-index:0;grid-column:2;grid-row:1;
   width:min(100%,42rem);aspect-ratio:1;
   justify-self:end;align-self:center;
   margin-right:clamp(-4rem,-8vw,-1.5rem);
+  animation:disc-rise 1.35s cubic-bezier(.22,1,.36,1) both;
 }
-.corona{
+.disc-haze{
+  position:absolute;inset:6%;border-radius:50%;
+  background:
+    radial-gradient(circle at 42% 38%,color-mix(in srgb,var(--gold) 28%,transparent),transparent 42%),
+    radial-gradient(circle at 62% 58%,color-mix(in srgb,var(--cool) 22%,transparent),transparent 48%);
+  filter:blur(2.5vmin);
+  animation:haze-drift 14s ease-in-out infinite alternate;
+  pointer-events:none;
+}
+.corona,.corona-shimmer{
   position:absolute;inset:0;border-radius:50%;
-  background:conic-gradient(from -90deg,var(--hot),var(--gold) calc(var(--p,.2)*360deg),var(--dim) 0);
   -webkit-mask:radial-gradient(circle,transparent 0 63%,#000 63.4% 72%,transparent 72.4%),repeating-conic-gradient(from -90deg,#000 0 21deg,transparent 21deg 24deg);
   -webkit-mask-composite:source-in;
   mask:radial-gradient(circle,transparent 0 63%,#000 63.4% 72%,transparent 72.4%),repeating-conic-gradient(from -90deg,#000 0 21deg,transparent 21deg 24deg);
   mask-composite:intersect;
 }
+.corona{
+  /* Progress stays fixed so segments map to the challenge; only the shimmer layer spins. */
+  background:conic-gradient(from -90deg,var(--hot),var(--gold) calc(var(--p)*360deg),var(--dim) 0);
+  transition:--p 1.8s cubic-bezier(.22,1,.36,1);
+}
+.corona-shimmer{
+  background:conic-gradient(from 0deg,transparent 0 68%,color-mix(in srgb,var(--gold) 55%,transparent) 78%,transparent 90% 100%);
+  mix-blend-mode:screen;
+  opacity:.55;
+  animation:corona-spin 28s linear infinite;
+  will-change:transform;
+  pointer-events:none;
+}
 .moon{
   position:absolute;inset:14%;border-radius:50%;
-  background:radial-gradient(circle at 50% 50%,#000 66%,#0c0a08 100%);
-  box-shadow:0 0 6vmin 1vmin color-mix(in srgb,var(--hot) 55%,transparent),inset 0 0 4vmin color-mix(in srgb,var(--cool) 35%,transparent);
+  background:
+    radial-gradient(circle at 34% 32%,color-mix(in srgb,var(--cool) 18%,transparent),transparent 42%),
+    radial-gradient(circle at 50% 50%,#000 66%,#0c0a08 100%);
+  box-shadow:
+    0 0 6vmin 1vmin color-mix(in srgb,var(--hot) 55%,transparent),
+    0 0 14vmin 2vmin color-mix(in srgb,var(--gold) 18%,transparent),
+    inset 0 0 4vmin color-mix(in srgb,var(--cool) 35%,transparent);
+  animation:moon-breathe 7.5s ease-in-out infinite alternate;
 }
-:root[data-theme=light] .moon{background:#17120e}
+.moon-rim{
+  position:absolute;inset:13.2%;border-radius:50%;
+  border:1px solid color-mix(in srgb,var(--gold) 28%,transparent);
+  box-shadow:0 0 2.5vmin color-mix(in srgb,var(--hot) 35%,transparent);
+  animation:rim-pulse 7.5s ease-in-out infinite alternate;
+  pointer-events:none;
+}
+:root[data-theme=light] .moon{
+  background:
+    radial-gradient(circle at 34% 32%,color-mix(in srgb,var(--cool) 12%,transparent),transparent 42%),
+    #17120e;
+}
+:root[data-theme=light] .moon-rim{border-color:color-mix(in srgb,var(--hot) 35%,transparent)}
+@keyframes disc-rise{
+  from{opacity:0;transform:scale(.92) translateY(1.25rem)}
+  to{opacity:1;transform:scale(1) translateY(0)}
+}
+@keyframes corona-spin{to{transform:rotate(360deg)}}
+@keyframes moon-breathe{
+  from{box-shadow:0 0 5vmin .6vmin color-mix(in srgb,var(--hot) 42%,transparent),0 0 10vmin 1vmin color-mix(in srgb,var(--gold) 12%,transparent),inset 0 0 3.5vmin color-mix(in srgb,var(--cool) 28%,transparent);transform:scale(1)}
+  to{box-shadow:0 0 8vmin 1.4vmin color-mix(in srgb,var(--hot) 62%,transparent),0 0 18vmin 3vmin color-mix(in srgb,var(--gold) 22%,transparent),inset 0 0 5vmin color-mix(in srgb,var(--cool) 40%,transparent);transform:scale(1.015)}
+}
+@keyframes rim-pulse{
+  from{opacity:.35;transform:scale(1)}
+  to{opacity:.85;transform:scale(1.012)}
+}
+@keyframes haze-drift{
+  from{transform:translate(-1.5%,-1%) scale(1);opacity:.7}
+  to{transform:translate(2%,1.5%) scale(1.06);opacity:1}
+}
 .hero-copy{position:relative;z-index:1;grid-column:1;grid-row:1;max-width:34rem;min-width:0}
 .kicker{color:var(--gold);font-weight:500;margin-bottom:1rem}
 :root[data-theme=light] .kicker{color:var(--hot)}
@@ -260,6 +322,8 @@ blockquote{
 }
 
 @media(prefers-reduced-motion:reduce){
-  *{transition:none!important;scroll-behavior:auto}
+  *{transition:none!important;scroll-behavior:auto;animation:none!important}
   .js .reveal{opacity:1;transform:none}
+  .disc,.corona,.moon,.moon-rim,.disc-haze{animation:none!important;opacity:1;transform:none}
+  .corona{transition:none}
 }
