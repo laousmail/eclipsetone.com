@@ -68,7 +68,7 @@
 <h1><span data-lang="en">Your record, built by a team that does this every day.</span><span data-lang="fr">Ton disque, bâti par une équipe qui fait ça tous les jours.</span></h1>
 <p class="lede"><span data-lang="en">EclipseTone is a Montreal production house for artists worldwide. You bring the vision. Our team of producers, writers, and engineers delivers a release-ready record, online, start to finish.</span><span data-lang="fr">EclipseTone est une maison de production montréalaise pour les artistes du monde entier. Tu amènes la vision. Notre équipe de producteurs, auteurs et ingénieurs livre un disque prêt à sortir, en ligne, du début à la fin.</span></p>
 <div class="cta">
-<a class="btn" href="#book"><span data-lang="en">Book a free onboarding call</span><span data-lang="fr">Réserver un appel d’accueil gratuit</span></a>
+<a class="btn" href="https://calendly.com/eclipsetonereservation/free-onboarding-call" target="_blank" rel="noopener"><span data-lang="en">Book a free onboarding call</span><span data-lang="fr">Réserver un appel d’accueil gratuit</span></a>
 <a class="btn ghost" href="#voices"><span data-lang="en">Hear from artists</span><span data-lang="fr">Écouter les artistes</span></a>
 </div>
 </div>
@@ -225,86 +225,79 @@
 </section>
 
 <section id="book" class="sec book final">
+<div class="book-heading">
+<img class="book-logo" src="../eclipsetone-logo.jpg" alt="EclipseTone" width="48" height="48" />
 <h2><span data-lang="en">Let’s make your record.</span><span data-lang="fr">Faisons ton disque.</span></h2>
-<p class="sub"><span data-lang="en">Book a free onboarding call. Pick a time below — it syncs to my calendar through Calendly. No pressure, no obligation.</span><span data-lang="fr">Réserve un appel d’accueil gratuit. Choisis un créneau ci-dessous — ça se synchronise à mon calendrier via Calendly. Sans pression, sans obligation.</span></p>
-
-<div class="booking-shell">
-  <div
-    id="calendly-embed"
-    class="calendly-inline-widget"
-    data-url=""
-    style="min-width:320px;height:720px"
-    data-package-param="a1"
-  ></div>
-  <p id="calendly-missing" class="calendly-missing" hidden>
-    <span data-lang="en">Calendly link not set yet. Add your event URL in <code>services/booking-config.js</code>.</span>
-    <span data-lang="fr">Lien Calendly pas encore défini. Ajoute l’URL de l’événement dans <code>services/booking-config.js</code>.</span>
-  </p>
-  <div class="booking-alt">
-    <a class="btn ghost" href="https://wa.me/14384668971">WhatsApp</a>
-    <p class="hint"><span data-lang="en">Prefer chat first? WhatsApp still works.</span><span data-lang="fr">Tu préfères écrire d’abord ? WhatsApp marche encore.</span></p>
-  </div>
 </div>
+<p class="sub"><span data-lang="en">Book a free onboarding call. We’ll map your project, answer everything, and give you a fixed quote. No pressure, no obligation.</span><span data-lang="fr">Réserve un appel d’accueil gratuit. On cartographie ton projet, on répond à tout, et on te donne un devis fixe. Sans pression, sans obligation.</span></p>
+<!-- Calendly inline widget begin -->
+<div class="calendly-inline-widget" data-url="https://calendly.com/eclipsetonereservation/free-onboarding-call" style="min-width:320px;height:700px;"></div>
+<script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+<!-- Calendly inline widget end -->
+<form class="inquiry" id="inquiry-form" novalidate>
+<div class="row">
+<div class="field"><label for="name"><span data-lang="en">Name</span><span data-lang="fr">Nom</span></label><input id="name" name="name" autocomplete="name" required /></div>
+<div class="field"><label for="email"><span data-lang="en">Email</span><span data-lang="fr">Courriel</span></label><input id="email" name="email" type="email" autocomplete="email" required /></div>
+</div>
+<div class="row">
+<div class="field"><label for="artist"><span data-lang="en">Artist name</span><span data-lang="fr">Nom d’artiste</span></label><input id="artist" name="artist" /></div>
+<div class="field"><label for="package"><span data-lang="en">Package interest</span><span data-lang="fr">Forfait souhaité</span></label>
+<select id="package" name="package">
+<option value="Signature">Signature</option>
+<option value="Campaign">Campaign</option>
+<option value="Production">Production</option>
+<option value="Mix & Vocal Production">Mix &amp; Vocal Production</option>
+<option value="Not sure">Not sure yet / Pas sûr·e encore</option>
+</select>
+</div>
+</div>
+<div class="row">
+<div class="field"><label for="deadline"><span data-lang="en">Deadline</span><span data-lang="fr">Échéance</span></label><input id="deadline" name="deadline" placeholder="YYYY-MM-DD" /></div>
+<div class="field"><label for="budget"><span data-lang="en">Budget range</span><span data-lang="fr">Fourchette budgétaire</span></label><input id="budget" name="budget" /></div>
+</div>
+<div class="field"><label for="refs"><span data-lang="en">References (links)</span><span data-lang="fr">Références (liens)</span></label><textarea id="refs" name="refs" rows="2"></textarea></div>
+<div class="field"><label for="message"><span data-lang="en">Message</span><span data-lang="fr">Message</span></label><textarea id="message" name="message" rows="4"></textarea></div>
+<div class="actions">
+<button class="btn big" type="submit"><span data-lang="en">Book your onboarding call</span><span data-lang="fr">Réserver ton appel d’accueil</span></button>
+<a class="btn ghost" href="https://wa.me/14384668971">WhatsApp</a>
+</div>
+<p class="hint"><span data-lang="en">Opens WhatsApp with your details filled in. Fastest reply path.</span><span data-lang="fr">Ouvre WhatsApp avec tes infos déjà remplies. Le chemin le plus rapide.</span></p>
+</form>
 </section>
 </main>
 
 <footer class="foot"><span>© 2026 EclipseTone Productions</span><a href="../index.html"><span data-lang="en">Home</span><span data-lang="fr">Accueil</span></a></footer>
 <script src="../main.js" defer></script>
-<script src="booking-config.js"></script>
-<script src="https://assets.calendly.com/assets/external/widget.js" async></script>
 <script>
 (() => {
-  const embed = document.getElementById('calendly-embed')
-  const missing = document.getElementById('calendly-missing')
-  if (!embed) return
-
-  const baseUrl = (window.ECLIPSETONE_CALENDLY_URL || '').trim()
-  if (!baseUrl || !/^https:\/\/calendly\.com\//i.test(baseUrl)) {
-    embed.hidden = true
-    if (missing) missing.hidden = false
-    return
-  }
-
-  const paramKey = embed.getAttribute('data-package-param') || 'a1'
-  let packageInterest = ''
-
-  function buildUrl() {
-    const url = new URL(baseUrl)
-    if (packageInterest) url.searchParams.set(paramKey, packageInterest)
-    return url.toString()
-  }
-
-  function refreshEmbed() {
-    embed.setAttribute('data-url', buildUrl())
-    if (window.Calendly && typeof window.Calendly.initInlineWidget === 'function') {
-      embed.innerHTML = ''
-      window.Calendly.initInlineWidget({
-        url: buildUrl(),
-        parentElement: embed,
-        resize: true,
-      })
-    }
-  }
+  const form = document.getElementById('inquiry-form')
+  const packageSelect = document.getElementById('package')
+  if (!form || !packageSelect) return
 
   document.querySelectorAll('[data-package]').forEach((btn) => {
     btn.addEventListener('click', () => {
-      packageInterest = btn.getAttribute('data-package') || ''
-      refreshEmbed()
+      const value = btn.getAttribute('data-package')
+      if (value) packageSelect.value = value
     })
   })
 
-  // Initial URL for the async widget.js bootstrap (reads data-url).
-  embed.setAttribute('data-url', buildUrl())
-
-  // If widget.js already loaded, init explicitly; otherwise it auto-boots from data-url.
-  if (window.Calendly) refreshEmbed()
-  else {
-    const prev = window.onCalendlyLoaded
-    window.addEventListener('load', () => {
-      if (window.Calendly) refreshEmbed()
-    })
-    void prev
-  }
+  form.addEventListener('submit', (event) => {
+    event.preventDefault()
+    const data = new FormData(form)
+    const lines = [
+      'EclipseTone onboarding request',
+      `Name: ${data.get('name') || ''}`,
+      `Email: ${data.get('email') || ''}`,
+      `Artist: ${data.get('artist') || ''}`,
+      `Package: ${data.get('package') || ''}`,
+      `Deadline: ${data.get('deadline') || ''}`,
+      `Budget: ${data.get('budget') || ''}`,
+      `References: ${data.get('refs') || ''}`,
+      `Message: ${data.get('message') || ''}`,
+    ]
+    const text = lines.join('\n')
+    window.open(`https://wa.me/14384668971?text=${encodeURIComponent(text)}`, '_blank', 'noopener,noreferrer')
+  })
 })()
 </script>
 </body>
