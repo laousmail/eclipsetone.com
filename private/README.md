@@ -1,5 +1,7 @@
-# Internal notes (not in git)
+# Internal notes (not deployed)
 
-Brand brief and team-social research notes are kept offline / in a private vault.
+Brand brief, team research, DNS, deploy, and challenge-sync runbooks stay in this folder locally (gitignored) or in a private vault.
 
-Do not commit internal docs into the Pages branch. The deploy workflow also excludes `private/`.
+`private/MAINTAINERS.md` is the local maintainer runbook — never commit credentials, tokens, or personal phone numbers into the public README.
+
+The deploy workflow excludes `private/` from the published site.
