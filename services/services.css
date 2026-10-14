@@ -71,6 +71,22 @@
 .pkg .btn{align-self:start;margin-top:auto}
 .pkg-note{color:var(--mute);font-size:.9rem;margin-top:1.25rem;max-width:48rem}
 
+.addon{
+  max-width:44rem;
+  padding:1.75rem 1.5rem 1.5rem;
+  border-top:2px solid var(--hot);
+  background:color-mix(in srgb,var(--bg2) 88%,transparent);
+  display:grid;
+  gap:1.1rem;
+}
+.addon-copy{display:grid;gap:.55rem}
+.addon h3{font-size:clamp(1.35rem,2.4vw,1.75rem);margin:0}
+.addon .price{font-size:clamp(1.9rem,3.6vw,2.75rem);margin:0}
+.addon .price small{display:inline;font:500 .85rem "Outfit",sans-serif;color:var(--mute);margin-left:.35rem}
+.addon-included{color:var(--mute);font-size:.95rem;max-width:38rem;margin:0}
+.addon-faq{max-width:none}
+.addon .btn{justify-self:start}
+
 .steps{list-style:none;padding:0;display:grid;gap:1.5rem;max-width:42rem;counter-reset:step}
 .steps li{
   counter-increment:step;
