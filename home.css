@@ -200,6 +200,8 @@ blockquote{
 .tags{color:var(--mute);font-size:.95rem}
 .offer > p:not(.price):not(.tags){flex:1}
 .offer .btn{align-self:start;margin-top:auto}
+.offers-note{color:var(--mute);font-size:.9rem;margin-top:1.25rem;max-width:48rem}
+.offers-note a{color:var(--gold);text-decoration:underline;text-underline-offset:.15em}
 
 .count{font:600 clamp(3rem,10vw,7rem)/1 "Cormorant Garamond",Georgia,serif;margin-bottom:1rem}
 .count span{color:var(--hot)}
