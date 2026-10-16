@@ -203,3 +203,21 @@
   .compare thead th{padding-top:.8rem}
   .compare tfoot .btn{padding:.45rem .8rem}
 }
+
+/* Beyond the record */
+.beyond-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.15rem;align-items:stretch}
+.beyond-card{
+  position:relative;display:flex;flex-direction:column;gap:1rem;min-width:0;scroll-margin-top:6rem;
+  padding:1.7rem 1.6rem;border-radius:1.5rem;border:1px solid var(--line);
+  background:linear-gradient(180deg,var(--surface-hi),transparent 35%),var(--bg2);box-shadow:var(--shadow-deep);
+}
+.beyond-card h3{font-size:1.7rem}
+.beyond-lede{color:var(--mute)}
+.beyond-card .opts{margin-top:0}
+.svc{list-style:none;padding:0;display:grid;gap:.9rem}
+.svc li{display:grid;gap:.2rem;padding-left:1.1rem;border-left:2px solid color-mix(in srgb,var(--hot) 60%,var(--line))}
+.svc b{font-weight:600}
+.svc span{color:var(--mute);font-size:.93rem}
+.quote-tag{margin-top:auto;font-size:.82rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--mute)}
+.beyond-card .btn{align-self:flex-start}
+@media(max-width:860px){.beyond-grid{grid-template-columns:1fr}}

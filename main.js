@@ -303,6 +303,8 @@
       e.preventDefault()
     })
     pick('record', false)
+    // the guide sets a best fit without scrolling the page
+    document.addEventListener('et:pick', (e) => { if (e.detail) pick(e.detail, false) })
 
     const viewBtns = root.querySelectorAll('[data-view]')
     viewBtns.forEach((b) =>
@@ -313,6 +315,16 @@
         })
       }),
     )
+  }
+
+  // Buttons with data-need tick that option in the Apply form's checklist.
+  function initNeeds() {
+    document.querySelectorAll('[data-need]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const box = document.querySelector(`[data-needs] input[value="${CSS.escape(btn.dataset.need)}"]`)
+        if (box) box.checked = true
+      })
+    })
   }
 
   const WHATSAPP = 'https://wa.me/14384668971'
@@ -351,7 +363,8 @@
           `Vocals/demo: ${data.get('link') || ''}`,
           `Release date: ${data.get('deadline') || ''}`,
           `References: ${data.get('refs') || ''}`,
-          `About the song: ${data.get('message') || ''}`,
+          `Needs: ${data.getAll('needs').join(', ') || ''}`,
+          `About the project: ${data.get('message') || ''}`,
         ]
         window.open(`${WHATSAPP}?text=${encodeURIComponent(lines.join('\n'))}`, '_blank', 'noopener,noreferrer')
       })
@@ -474,6 +487,7 @@
   initTilt()
   initPricing()
   initPackageButtons()
+  initNeeds()
   initApplyForms()
   initCapture()
   initBeforeAfter()
