@@ -363,7 +363,8 @@ button.btn{border:0;cursor:pointer;font:inherit;font-weight:600}
   .brand{font-size:.98rem;gap:.45rem}
   .brand img{width:30px;height:30px}
   .tools{gap:.35rem}
-  .mode{display:none}
+  .mode{width:30px;height:30px}
+  .mode svg{width:15px;height:15px}
   .pill{padding:.4rem .8rem;font-size:.85rem}
   .lang button{padding:.35rem .5rem}
   .disc{width:100%;opacity:.9}
@@ -576,8 +577,20 @@ input,select,textarea{box-shadow:inset 0 2px 6px rgba(0,0,0,.18),0 1px 0 var(--s
 .disc.is-3d>i{display:none}
 .disc.is-3d{width:min(100%,46rem);margin-right:clamp(-6rem,-9vw,-2rem)}
 .eclipse-canvas{position:absolute;inset:-12%;width:124%;height:124%;display:block}
-@media(max-width:980px){.disc.is-3d{width:min(96vw,30rem);margin:-1rem auto -3rem}}
-@media(max-width:640px){.disc.is-3d{width:118%;margin-left:-9%;margin-right:-9%}}
+/* Tablet and phone: the eclipse sits beside the headline, no block of its own */
+@media(max-width:980px){
+  .hero{padding-bottom:2.5rem}
+  .hero h1{max-width:8.5ch}
+  .disc,.disc.is-3d{
+    position:absolute;grid-row:auto;grid-column:auto;z-index:0;margin:0;opacity:1;
+    top:clamp(4.5rem,9vw,6rem);right:-14vw;width:min(62vw,26rem);
+  }
+  .hero-copy{position:relative;z-index:1}
+}
+@media(max-width:640px){
+  .disc,.disc.is-3d{top:4.6rem;right:-20vw;width:72vw}
+  .hero h1{font-size:clamp(2.5rem,12.5vw,3.3rem)}
+}
 
 /* Tilting cards: smooth return, depth layers inside */
 .tilt{transform-style:preserve-3d;transition:transform .6s var(--ease-out),box-shadow .45s var(--ease-out),border-color .3s;will-change:transform}
@@ -598,3 +611,13 @@ input,select,textarea{box-shadow:inset 0 2px 6px rgba(0,0,0,.18),0 1px 0 var(--s
 .tilt .price,.tilt .rp,.tilt .n{filter:none}
 .tilt:hover{box-shadow:var(--shadow-deep),0 50px 90px -40px color-mix(in srgb,var(--hot) 40%,transparent)}
 @media(prefers-reduced-motion:reduce){.tilt,.tilt>*{transform:none!important;translate:none!important}}
+/* Phone header: logo, menu, language, theme and Apply all fit on one row */
+@media(max-width:420px){
+  .brand{font-size:.92rem}
+  .tools{gap:.3rem}
+  .lang button{padding:.32rem .42rem;font-size:.74rem}
+  .pill{padding:.38rem .7rem;font-size:.8rem}
+  .nav-toggle{width:34px}
+}
+.hero h1 .nw{white-space:nowrap}
+@media(max-width:980px){.hero h1{text-wrap:wrap}}
