@@ -282,46 +282,24 @@
 <p class="note info"><b><span data-lang="en">No payment now:</span><span data-lang="fr">Aucun paiement maintenant :</span></b> <span data-lang="en">this is free. You only pay once you approve your price.</span><span data-lang="fr">c’est gratuit. Tu paies seulement quand tu approuves ton prix.</span></p>
 <form class="apply-form" data-apply-form novalidate>
 <div class="row">
-<div class="field"><label for="a-name"><span data-lang="en">Name</span><span data-lang="fr">Nom</span></label><input id="a-name" name="name" autocomplete="name" required /></div>
+<div class="field"><label for="a-name"><span data-lang="en">Your name</span><span data-lang="fr">Ton nom</span></label><input id="a-name" name="name" autocomplete="name" required /></div>
 <div class="field"><label for="a-email"><span data-lang="en">Email</span><span data-lang="fr">Courriel</span></label><input id="a-email" name="email" type="email" autocomplete="email" required /></div>
 </div>
-<div class="row">
-<div class="field"><label for="a-handle"><span data-lang="en">Instagram or TikTok</span><span data-lang="fr">Instagram ou TikTok</span></label><input id="a-handle" name="handle" placeholder="@yourname" /></div>
-<div class="field"><label for="a-package"><span data-lang="en">Package</span><span data-lang="fr">Forfait</span></label>
+<div class="field"><label for="a-package"><span data-lang="en">What are you interested in?</span><span data-lang="fr">Ça t’intéresse pour quoi ?</span></label>
 <select id="a-package" name="package" data-package-select>
+<option value="Not sure">Not sure yet / Pas sûr·e</option>
 <option value="The Record">The Record · $599</option>
 <option value="The Signature Record">The Signature Record · $997</option>
 <option value="The Release">The Release · $2,000</option>
 <option value="The EP">The EP · $1,597</option>
 <option value="The Mix">The Mix · from $150</option>
 <option value="The Vocal Session">The Vocal Session · $350 (in person)</option>
-<option value="Not sure">Not sure yet / Pas sûr·e</option>
+
 </select></div>
-</div>
-<fieldset class="needs" data-needs>
-<legend><span data-lang="en">What do you need?</span><span data-lang="fr">De quoi as-tu besoin ?</span></legend>
-<div class="needs-grid">
-<label><input type="checkbox" name="needs" value="Music production" checked /><span><span data-lang="en">Music production</span><span data-lang="fr">Production musicale</span></span></label>
-<label><input type="checkbox" name="needs" value="Physical products (CD, vinyl, cassette, USB-C)" /><span><span data-lang="en">CD, vinyl, cassette, USB‑C</span><span data-lang="fr">CD, vinyle, cassette, USB‑C</span></span></label>
-<label><input type="checkbox" name="needs" value="Release plan and launch support" /><span><span data-lang="en">Release plan and launch</span><span data-lang="fr">Plan de sortie et lancement</span></span></label>
-<label><input type="checkbox" name="needs" value="Social media setup" /><span><span data-lang="en">Social media setup</span><span data-lang="fr">Réseaux sociaux</span></span></label>
-<label><input type="checkbox" name="needs" value="Artist management" /><span><span data-lang="en">Artist management</span><span data-lang="fr">Gestion d’artiste</span></span></label>
-<label><input type="checkbox" name="needs" value="Website design" /><span><span data-lang="en">Website (from $500)</span><span data-lang="fr">Site web (dès 500 $)</span></span></label>
-<label><input type="checkbox" name="needs" value="Photo and video" /><span><span data-lang="en">Photo and video</span><span data-lang="fr">Photo et vidéo</span></span></label>
-</div>
-</fieldset>
-<p class="note warn"><b><span data-lang="en">Before you send a link:</span><span data-lang="fr">Avant d’envoyer un lien :</span></b> <span data-lang="en">set sharing to “Anyone with the link can view”, or we won’t be able to open it.</span><span data-lang="fr">règle le partage sur « Toute personne disposant du lien », sinon on ne pourra pas l’ouvrir.</span></p>
-<div class="field"><label for="a-link"><span data-lang="en">Link to your vocals, demo or lyrics</span><span data-lang="fr">Lien vers tes voix, ta démo ou tes paroles</span></label><input id="a-link" name="link" placeholder="Drive, Dropbox, WeTransfer, SoundCloud…" /></div>
-<div class="row">
-<div class="field"><label for="a-deadline"><span data-lang="en">Release date (if you have one)</span><span data-lang="fr">Date de sortie (si tu en as une)</span></label><input id="a-deadline" name="deadline" /></div>
-<div class="field"><label for="a-refs"><span data-lang="en">Reference songs</span><span data-lang="fr">Chansons de référence</span></label><input id="a-refs" name="refs" /></div>
-</div>
-<div class="field"><label for="a-msg"><span data-lang="en">Tell us about your project</span><span data-lang="fr">Parle-nous de ton projet</span></label><textarea id="a-msg" name="message" rows="3"></textarea></div>
-<p class="form-error" data-form-error hidden><span data-lang="en">Add your name and a valid email.</span><span data-lang="fr">Ajoute ton nom et un courriel valide.</span></p>
-<div class="actions">
-<button class="btn big" type="submit"><span data-lang="en">Get my price</span><span data-lang="fr">Obtenir mon prix</span></button>
-</div>
-<p class="hint"><span data-lang="en">This opens WhatsApp with your answers filled in. Prefer a call?</span><span data-lang="fr">Ça ouvre WhatsApp avec tes réponses déjà remplies. Tu préfères un appel ?</span> <a href="https://calendly.com/eclipsetonereservation/free-onboarding-call" target="_blank" rel="noopener"><span data-lang="en">Book 15 minutes</span><span data-lang="fr">Réserve 15 minutes</span></a></p>
+<div class="field"><label for="a-msg"><span data-lang="en">Anything to add? (optional)</span><span data-lang="fr">Quelque chose à ajouter ? (optionnel)</span></label><textarea id="a-msg" name="message" rows="2" placeholder="Demo link, release date, extras you want…"></textarea></div>
+<p class="note err" data-form-error hidden><b><span data-lang="en">Missing info:</span><span data-lang="fr">Info manquante :</span></b> <span data-lang="en">add your name and a valid email.</span><span data-lang="fr">ajoute ton nom et un courriel valide.</span></p>
+<div class="actions"><button class="btn big" type="submit"><span data-lang="en">Get my price</span><span data-lang="fr">Obtenir mon prix</span></button></div>
+<p class="hint"><span data-lang="en">Opens WhatsApp with your answers filled in. Prefer a call?</span><span data-lang="fr">Ouvre WhatsApp avec tes réponses déjà remplies. Tu préfères un appel ?</span> <a href="https://calendly.com/eclipsetonereservation/free-onboarding-call" target="_blank" rel="noopener"><span data-lang="en">Book 15 minutes</span><span data-lang="fr">Réserve 15 minutes</span></a></p>
 </form>
 </section>
 </main>

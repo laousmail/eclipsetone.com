@@ -27,6 +27,7 @@
     { id: 'social', need: 'Social media setup', icon: 'phone', name: ['Social media setup', 'Réseaux sociaux'], what: ['Profiles, visuals and a content plan.', 'Profils, visuels et plan de contenu.'] },
     { id: 'website', need: 'Website design', icon: 'globe', name: ['Artist website', 'Site d’artiste'], what: ['One page from $500. A full site that updates itself from $1,500.', 'Une page dès 500 $. Un site complet qui se met à jour seul dès 1 500 $.'] },
     { id: 'media', need: 'Photo and video', icon: 'camera', name: ['Photo and video', 'Photo et vidéo'], what: ['Press photos, cover shoot, clips for social.', 'Photos de presse, pochette, extraits pour les réseaux.'] },
+    { id: 'ddp', need: 'DDP file', icon: 'file', price: 99, name: ['DDP file for CD pressing', 'Fichier DDP pour pressage CD'], what: ['$99 per 12 songs. Only needed if you make CDs.', '99 $ par 12 chansons. Seulement si tu fais des CD.'] },
     { id: 'management', need: 'Artist management', icon: 'compass', name: ['Artist management', 'Gestion d’artiste'], what: ['Planning, releases, opportunities.', 'Planification, sorties, opportunités.'] },
   ]
   const FORMATS = [
@@ -42,6 +43,7 @@
     globe: '<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 2.5 15.3 0 18M12 3c-2.5 2.7-2.5 15.3 0 18"/>',
     camera: '<rect x="3" y="7" width="18" height="13" rx="2.5"/><circle cx="12" cy="13.5" r="3.5"/><path d="M8 7l1.5-3h5L16 7"/>',
     compass: '<circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/>',
+    file: '<path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4"/><circle cx="12.5" cy="14" r="2.5"/>',
   }
   const icon = (k) => `<svg viewBox="0 0 24 24" aria-hidden="true">${ICONS[k]}</svg>`
   const STEPS = [
@@ -75,8 +77,9 @@
   const webPrice = () => (hasWeb() ? WEB[s.web === 'site' ? 'site' : 'page'].price : 0)
   const isFrom = () => (hasWeb() && s.web === 'site') || !!pack()?.from
   const albumQuote = () => s.pack && s.pack !== 'none' && s.pack !== 'session' && s.qty >= 8
-  const grandTotal = () => (albumQuote() ? 0 : musicTotal()) + webPrice()
-  const hasQuoted = () => s.extras.some((x) => x !== 'website') || albumQuote()
+  const ddpPrice = () => (s.extras.includes('ddp') ? 99 * Math.max(1, Math.ceil((s.pack && s.pack !== 'none' ? s.qty : 1) / 12)) : 0)
+  const grandTotal = () => (albumQuote() ? 0 : musicTotal()) + webPrice() + ddpPrice()
+  const hasQuoted = () => s.extras.some((x) => x !== 'website' && x !== 'ddp') || albumQuote()
   const launchIncluded = () => s.pack === 'release'
   const stepsFor = () => (s.pack === 'none' ? [0, 2, 3] : [0, 1, 2, 3])
 
@@ -202,12 +205,8 @@
       <p class="note ok"><b>${L('No payment now.', 'Aucun paiement maintenant.')}</b> ${L('We confirm your quote first. You only pay half once you say yes.', 'On confirme ton devis d’abord. Tu paies la moitié seulement quand tu dis oui.')}</p>
       <form class="cfg-form" data-send-form novalidate>
         <div class="cfg-row">
-          <label><span>${L('Name', 'Nom')}</span><input name="name" autocomplete="name" value="${esc(s.name)}" required /></label>
+          <label><span>${L('Your name', 'Ton nom')}</span><input name="name" autocomplete="name" value="${esc(s.name)}" required /></label>
           <label><span>${L('Email', 'Courriel')}</span><input name="email" type="email" autocomplete="email" value="${esc(s.email)}" required /></label>
-        </div>
-        <div class="cfg-row">
-          <label><span>${L('Instagram or TikTok', 'Instagram ou TikTok')}</span><input name="handle" placeholder="@yourname" value="${esc(s.handle)}" /></label>
-          <label><span>${L('Link to vocals or demo (optional)', 'Lien voix ou démo (optionnel)')}</span><input name="link" placeholder="Drive, Dropbox…" value="${esc(s.link)}" /></label>
         </div>
         <p class="note err" data-err hidden><b>${L('Missing info:', 'Info manquante :')}</b> ${L('Add your name and a valid email so we can reply.', 'Ajoute ton nom et un courriel valide pour qu’on te réponde.')}</p>
       </form>`
@@ -233,6 +232,10 @@
     s.extras.forEach((id) => {
       const e = EXTRAS.find((x) => x.id === id)
       if (!e) return
+      if (id === 'ddp') {
+        rows.push(`<li><div><b>${L(...e.name)}</b><small>${L('Add-on', 'Option')}</small></div><span class="cfg-amt">${money(ddpPrice())}</span></li>`)
+        return
+      }
       if (id === 'website') {
         const w = WEB[s.web === 'site' ? 'site' : 'page']
         rows.push(`<li><div><b>${L(...w.name)}</b><small>${L('Artist website', 'Site d’artiste')}</small></div><span class="cfg-amt">${w.from ? `<small class="from">${L('from', 'dès')}</small> ` : ''}${money(w.price)}</span></li>`)
@@ -370,6 +373,7 @@
     s.extras.forEach((id) => {
       const e = EXTRAS.find((x) => x.id === id)
       let line = `Extra: ${e.name[0]}`
+      if (id === 'ddp') line = `Extra: DDP file (${money(ddpPrice())})`
       if (id === 'website') { const w = WEB[s.web === 'site' ? 'site' : 'page']; line = `Website: ${w.name[0]} (${w.from ? 'from ' : ''}${money(w.price)})` }
       if (id === 'physical' && s.formats.length) line += ` (${FORMATS.filter((f) => s.formats.includes(f.id)).map((f) => f.name[0]).join(', ')})`
       lines.push(line)

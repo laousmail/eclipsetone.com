@@ -367,17 +367,12 @@
         }
         if (error) error.hidden = true
         const lines = [
-          'EclipseTone application',
+          'EclipseTone: price request',
           `Name: ${name}`,
           `Email: ${email}`,
-          `IG/TikTok: ${data.get('handle') || ''}`,
-          `Package: ${data.get('package') || ''}`,
-          `Vocals/demo: ${data.get('link') || ''}`,
-          `Release date: ${data.get('deadline') || ''}`,
-          `References: ${data.get('refs') || ''}`,
-          `Needs: ${data.getAll('needs').join(', ') || ''}`,
-          `About the project: ${data.get('message') || ''}`,
-        ]
+          `Interested in: ${data.get('package') || 'Not sure'}`,
+          data.get('message') ? `Note: ${data.get('message')}` : '',
+        ].filter(Boolean)
         window.open(`${WHATSAPP}?text=${encodeURIComponent(lines.join('\n'))}`, '_blank', 'noopener,noreferrer')
       })
     })
