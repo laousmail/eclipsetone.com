@@ -1,7 +1,7 @@
-/* Services page: extends home.css tokens */
+/* Packages page: extends home.css tokens and components */
 .page-hero{
   position:relative;
-  min-height:min(88svh,52rem);
+  min-height:min(70svh,40rem);
   display:grid;
   align-content:center;
   padding:clamp(3rem,8vw,6rem) clamp(1rem,5vw,4rem);
@@ -11,238 +11,85 @@
     radial-gradient(ellipse 50% 40% at 0% 100%,color-mix(in srgb,var(--cool) 18%,transparent),transparent 50%),
     var(--bg);
 }
-.page-hero::after{
-  content:"";
-  position:absolute;
-  inset:auto -10% -40% 40%;
-  height:70%;
-  background:radial-gradient(circle,color-mix(in srgb,var(--gold) 16%,transparent),transparent 65%);
-  pointer-events:none;
-}
-.page-hero .hero-copy{position:relative;z-index:1;max-width:40rem}
-.page-hero h1{font-size:clamp(2.2rem,5.5vw,4.2rem);max-width:16ch;text-wrap:balance}
-.page-hero .lede{max-width:34rem}
-.page-hero .hero-copy{max-width:min(40rem,100%)}
+.page-hero .hero-copy{position:relative;z-index:1;max-width:min(42rem,100%)}
+.page-hero h1{font-size:clamp(2.6rem,6vw,4.8rem);max-width:16ch}
 
 .packages{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1rem;align-items:stretch}
 .pkg{
-  background:var(--bg2);
-  border:1px solid var(--line);
-  border-radius:1.5rem;
-  padding:1.75rem 1.35rem 1.5rem;
-  display:flex;
-  flex-direction:column;
-  gap:.85rem;
-  position:relative;
-  min-width:0;
-  transition:transform .35s var(--ease,cubic-bezier(.22,1,.36,1)),border-color .35s ease;
+  background:var(--bg2);border:1px solid var(--line);border-radius:1.5rem;
+  padding:1.75rem 1.35rem 1.5rem;display:flex;flex-direction:column;gap:.85rem;
+  position:relative;min-width:0;scroll-margin-top:6rem;
 }
 .pkg.featured{
   border-color:color-mix(in srgb,var(--hot) 55%,var(--line));
   background:linear-gradient(165deg,color-mix(in srgb,var(--hot) 18%,var(--bg2)),var(--bg2));
-  box-shadow:
-    0 0 0 1px color-mix(in srgb,var(--hot) 28%,transparent),
-    0 18px 40px color-mix(in srgb,var(--hot) 12%,transparent);
-  transform:translateY(-.35rem) scale(1.02);
-  z-index:1;
+  box-shadow:0 0 0 1px color-mix(in srgb,var(--hot) 28%,transparent),0 18px 40px color-mix(in srgb,var(--hot) 12%,transparent);
+  transform:translateY(-.35rem) scale(1.02);z-index:1;
 }
 .pkg-campaign{
   border-color:color-mix(in srgb,var(--cool) 35%,var(--line));
   background:linear-gradient(165deg,color-mix(in srgb,var(--cool) 12%,var(--bg2)),var(--bg2));
 }
 .pkg-badge{
-  position:absolute;
-  top:1rem;right:1rem;
-  font:600 .72rem/1 "Outfit",sans-serif;
-  letter-spacing:.04em;
-  text-transform:uppercase;
-  color:var(--on);
-  background:linear-gradient(100deg,var(--hot),var(--gold));
-  padding:.35rem .65rem;
-  border-radius:99px;
+  position:absolute;top:-.7rem;left:1.35rem;
+  font:600 .72rem/1 "Outfit",sans-serif;letter-spacing:.04em;text-transform:uppercase;
+  color:#1a0a02;background:linear-gradient(100deg,var(--hot),var(--gold));
+  padding:.35rem .65rem;border-radius:99px;
 }
-.pkg h3{font-size:1.25rem;padding-right:5.5rem}
-.pkg .price{font-size:clamp(1.9rem,3.6vw,2.75rem);margin:.2rem 0}
-.pkg .price small{display:inline;font:500 .85rem "Outfit",sans-serif;color:var(--mute);margin-left:.35rem}
-.pkg .tagline{color:var(--mute);font-size:.92rem}
-.pkg ul{list-style:none;padding:0;margin:.25rem 0 0;display:grid;gap:.55rem;flex:1}
-.pkg li{position:relative;padding-left:1.15rem;color:var(--ink);font-size:.9rem}
+.pkg h3{font-size:1.35rem}
+.pkg .btn{white-space:nowrap;font-size:.92rem;padding:.65rem 1.15rem}
+.pkg .price{font-size:clamp(2rem,3.6vw,2.8rem);margin:.1rem 0}
+.pkg .price small{display:block;margin:.35rem 0 0;font-size:.82rem}
+.pkg .tagline{color:var(--mute);font-size:.94rem}
+.pkg ul{list-style:none;padding:0;margin:.25rem 0 0;display:grid;gap:.55rem;flex:1;align-content:start}
+.pkg li{position:relative;padding-left:1.15rem;font-size:.92rem}
 .pkg li::before{content:"";position:absolute;left:0;top:.55rem;width:.45rem;height:.45rem;border-radius:50%;background:var(--hot)}
 .pkg .btn{align-self:start;margin-top:auto}
+
+.ep{
+  margin-top:1.25rem;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1rem 2rem;
+  padding:1.4rem 1.6rem;border-radius:1.5rem;text-decoration:none;scroll-margin-top:6rem;
+  border:1px dashed color-mix(in srgb,var(--gold) 50%,var(--line));
+  background:color-mix(in srgb,var(--bg2) 85%,transparent);
+}
+.ep h3{font-size:1.5rem;display:flex;align-items:baseline;gap:.75rem}
+.ep p{color:var(--mute)}
+.ep:hover{border-style:solid}
 .pkg-note{color:var(--mute);font-size:.9rem;margin-top:1.25rem;max-width:48rem}
 
-.addon{
-  max-width:44rem;
-  padding:1.75rem 1.5rem 1.5rem;
-  border-top:2px solid var(--hot);
-  background:color-mix(in srgb,var(--bg2) 88%,transparent);
-  display:grid;
-  gap:1.1rem;
-}
-.addon-copy{display:grid;gap:.55rem}
-.addon h3{font-size:clamp(1.35rem,2.4vw,1.75rem);margin:0}
-.addon .price{font-size:clamp(1.9rem,3.6vw,2.75rem);margin:0}
-.addon .price small{display:inline;font:500 .85rem "Outfit",sans-serif;color:var(--mute);margin-left:.35rem}
-.addon-included{color:var(--mute);font-size:.95rem;max-width:38rem;margin:0}
-.addon-faq{max-width:none}
-.addon-actions{display:flex;flex-wrap:wrap;gap:.8rem;align-items:center}
-.addon-form{
-  margin:0;
-  padding-top:1rem;
-  border-top:1px solid var(--line);
-  max-width:none;
-  scroll-margin-top:5.5rem;
-}
-.addon-form-label{
-  margin:0;
-  font:600 1.05rem/1.3 "Cormorant Garamond",Georgia,serif;
-  color:var(--ink);
-}
-.addon .btn{justify-self:start}
-
-.steps{list-style:none;padding:0;display:grid;gap:1.5rem;max-width:42rem;counter-reset:step}
+.steps{list-style:none;padding:0;display:grid;gap:1rem;max-width:44rem;counter-reset:step}
 .steps li{
-  counter-increment:step;
-  position:relative;
-  padding:1.35rem 1.35rem 1.35rem 4.5rem;
-  background:var(--bg2);
-  border-radius:1.25rem;
-  border:1px solid var(--line);
+  counter-increment:step;position:relative;padding:1.3rem 1.35rem 1.3rem 4.5rem;
+  background:var(--bg2);border-radius:1.25rem;border:1px solid var(--line);
 }
 .steps li::before{
-  content:counter(step,decimal-leading-zero);
-  position:absolute;
-  left:1.1rem;top:1.25rem;
-  font:600 1.35rem/1 "Cormorant Garamond",Georgia,serif;
-  color:var(--hot);
+  content:counter(step,decimal-leading-zero);position:absolute;left:1.15rem;top:1.2rem;
+  font:700 1.5rem/1 "Cormorant Garamond",Georgia,serif;color:var(--hot);
 }
-.steps h3{font-size:1.15rem;margin-bottom:.4rem}
+.steps h3{font-size:1.2rem;margin-bottom:.35rem}
 .steps p{color:var(--mute);font-size:.98rem}
-.fine{color:var(--mute);font-size:.9rem;margin-top:1.5rem;max-width:40rem}
 
-.reasons{list-style:none;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(16rem,1fr));gap:1rem}
-.reasons li{
-  padding:1.4rem 1.35rem;
-  border-top:2px solid var(--hot);
-  background:color-mix(in srgb,var(--bg2) 80%,transparent);
-}
-.reasons strong{display:block;font:600 1.05rem/1.25 "Cormorant Garamond",Georgia,serif;margin-bottom:.45rem}
-.reasons span{color:var(--mute);font-size:.95rem}
+.q6{grid-template-columns:repeat(3,minmax(0,1fr))}
 
-.voices{display:grid;grid-template-columns:repeat(auto-fit,minmax(17rem,1fr));gap:1rem}
-.voice{
-  margin:0;
-  padding:1.35rem 1.25rem 1.25rem;
-  border-top:2px solid var(--hot);
-  background:color-mix(in srgb,var(--bg2) 88%,transparent);
-  display:grid;gap:.85rem;align-content:start;
+.addon{
+  max-width:46rem;padding:1.75rem 1.5rem 1.5rem;border-top:2px solid var(--hot);
+  background:color-mix(in srgb,var(--bg2) 88%,transparent);border-radius:0 0 1.25rem 1.25rem;
+  display:grid;gap:1.1rem;
 }
-.voice-stars{
-  margin:0;font-size:.78rem;letter-spacing:.08em;color:var(--hot);line-height:1;
-}
-.voice-quote{
-  margin:0;
-  font:500 1.12rem/1.45 "Cormorant Garamond",Georgia,serif;
-  color:var(--ink);
-  text-wrap:pretty;
-}
-.voice-by{
-  display:grid;grid-template-columns:auto 1fr;gap:.55rem .7rem;align-items:center;
-  margin-top:auto;padding-top:.15rem;
-}
-.voice-avatar{
-  width:2.25rem;height:2.25rem;border-radius:50%;object-fit:cover;
-  background:var(--dim);border:1px solid var(--line);
-}
-.voice-avatar-fallback{
-  display:grid;place-items:center;
-  font:600 .85rem/1 "Outfit",sans-serif;color:var(--on);
-  background:linear-gradient(135deg,var(--hot),var(--gold));
-  border:0;
-}
-.voice-name{font:600 .9rem/1.2 "Outfit",sans-serif;color:var(--ink)}
-
-.faq{display:grid;gap:.65rem;max-width:44rem}
-.faq details{
-  border:1px solid var(--line);
-  border-radius:1rem;
-  background:var(--bg2);
-  padding:.2rem 1.1rem;
-}
-.faq summary{
-  cursor:pointer;
-  list-style:none;
-  font:600 1.05rem/1.35 "Cormorant Garamond",Georgia,serif;
-  padding:1rem 0;
-}
-.faq summary::-webkit-details-marker{display:none}
-.faq summary::after{
-  content:"+";
-  float:right;
-  color:var(--hot);
-  font-weight:800;
-}
-.faq details[open] summary::after{content:"–"}
-.faq details p{color:var(--mute);padding:0 0 1.1rem;max-width:40rem}
-
-.book-heading{
-  display:flex;
-  align-items:center;
-  gap:.85rem;
-  flex-wrap:wrap;
-}
-.book-heading h2{margin:0}
-.book-logo{
-  width:3rem;height:3rem;border-radius:50%;object-fit:cover;
-  border:1px solid var(--line);
-  box-shadow:0 6px 18px color-mix(in srgb,var(--on) 14%,transparent);
-}
-.calendly-inline-widget{
-  margin:1.25rem 0 1.75rem;
-  border:1px solid var(--line);
-  border-radius:1rem;
-  overflow:hidden;
-  background:var(--bg2);
-  min-height:700px;
-}
-.inquiry{
-  display:grid;
-  gap:1rem;
-  max-width:40rem;
-  margin-top:.5rem;
-}
-.inquiry .row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
-.field{display:grid;gap:.4rem}
-.field label{font-size:.88rem;font-weight:600;color:var(--mute)}
-.field input,.field select,.field textarea{
-  width:100%;
-  background:var(--bg);
-  color:var(--ink);
-  border:1px solid var(--line);
-  border-radius:.75rem;
-  padding:.75rem .9rem;
-  font:inherit;
-}
-.field textarea{min-height:7rem;resize:vertical}
-.field input:focus,.field select:focus,.field textarea:focus{
-  outline:2px solid var(--gold);
-  outline-offset:1px;
-}
-.inquiry .actions{display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;margin-top:.25rem}
-.inquiry .hint{color:var(--mute);font-size:.88rem}
-
-.book.final{padding-bottom:clamp(5rem,12vw,8rem)}
+.addon h3{font-size:clamp(1.35rem,2.4vw,1.75rem)}
+.addon .price{font-size:clamp(2rem,3.6vw,2.8rem)}
+.addon-form{padding-top:1rem;border-top:1px solid var(--line);max-width:none}
+.addon-form-label{font:700 1.15rem/1.3 "Cormorant Garamond",Georgia,serif}
 
 @media(max-width:1180px){
   .packages{grid-template-columns:repeat(2,minmax(0,1fr));gap:1.15rem}
   .pkg.featured{transform:none}
 }
+@media(max-width:980px){
+  .q6{grid-template-columns:1fr}
+}
 @media(max-width:720px){
   .packages{grid-template-columns:1fr}
   .pkg.featured{order:-1}
-}
-@media(max-width:640px){
-  .inquiry .row{grid-template-columns:1fr}
-  .calendly-inline-widget{min-height:640px}
   .page-hero{min-height:auto;padding-top:2.5rem;padding-bottom:3rem}
 }

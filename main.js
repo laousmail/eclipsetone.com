@@ -221,10 +221,116 @@
   }
 
   function initDiscFromMarkup() {
+    if (!document.querySelector('[data-eclipse-disc]')) return
     const releasedEl = document.querySelector('[data-challenge-released]')
     const released = Number(releasedEl?.textContent?.trim())
-    // Fallback matches embedded homepage challenge count when markup is missing.
-    setDiscProgress(Number.isFinite(released) ? released / GOAL : 3 / GOAL, { animate: true })
+    // No challenge on the page: the eclipse ring is shown complete.
+    setDiscProgress(releasedEl && Number.isFinite(released) ? released / GOAL : 1, { animate: true })
+  }
+
+  const WHATSAPP = 'https://wa.me/14384668971'
+  const siteRoot = new URL('./', siteStyle).href
+
+  function initPackageButtons() {
+    const select = document.querySelector('[data-package-select]')
+    if (!select) return
+    document.querySelectorAll('[data-package]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const value = btn.getAttribute('data-package')
+        if (value && [...select.options].some((o) => o.value === value)) select.value = value
+      })
+    })
+  }
+
+  function initApplyForms() {
+    document.querySelectorAll('[data-apply-form]').forEach((form) => {
+      const error = form.querySelector('[data-form-error]')
+      form.addEventListener('submit', (event) => {
+        event.preventDefault()
+        const data = new FormData(form)
+        const name = String(data.get('name') || '').trim()
+        const email = String(data.get('email') || '').trim()
+        if (!name || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
+          if (error) error.hidden = false
+          return
+        }
+        if (error) error.hidden = true
+        const lines = [
+          'EclipseTone application',
+          `Name: ${name}`,
+          `Email: ${email}`,
+          `IG/TikTok: ${data.get('handle') || ''}`,
+          `Package: ${data.get('package') || ''}`,
+          `Vocals/demo: ${data.get('link') || ''}`,
+          `Release date: ${data.get('deadline') || ''}`,
+          `References: ${data.get('refs') || ''}`,
+          `About the song: ${data.get('message') || ''}`,
+        ]
+        window.open(`${WHATSAPP}?text=${encodeURIComponent(lines.join('\n'))}`, '_blank', 'noopener,noreferrer')
+      })
+    })
+
+    const ddpForm = document.getElementById('ddp-form')
+    if (ddpForm) {
+      ddpForm.addEventListener('submit', (event) => {
+        event.preventDefault()
+        const data = new FormData(ddpForm)
+        const lines = [
+          'EclipseTone DDP request ($99 / 12 songs)',
+          `Name: ${data.get('name') || ''}`,
+          `Email: ${data.get('email') || ''}`,
+          `Artist: ${data.get('artist') || ''}`,
+          `Songs: ${data.get('tracks') || ''}`,
+          `Master links: ${data.get('links') || ''}`,
+          `Message: ${data.get('message') || ''}`,
+        ]
+        window.open(`${WHATSAPP}?text=${encodeURIComponent(lines.join('\n'))}`, '_blank', 'noopener,noreferrer')
+      })
+    }
+  }
+
+  // Email capture stays hidden until a MailerLite form action URL is pasted into data-ml-action.
+  function initCapture() {
+    document.querySelectorAll('[data-ml-form]').forEach((form) => {
+      const action = (form.getAttribute('data-ml-action') || '').trim()
+      if (!isSafeHttps(action)) return
+      form.setAttribute('action', action)
+      const section = form.closest('[data-capture]')
+      if (section) section.hidden = false
+    })
+  }
+
+  // Before/after pairs live in proof/pairs.json. The section stays hidden while the list is empty.
+  async function initBeforeAfter() {
+    const section = document.querySelector('[data-ab]')
+    const list = section?.querySelector('[data-ab-list]')
+    if (!section || !list) return
+    try {
+      const res = await fetch(new URL('proof/pairs.json', siteRoot).href, { cache: 'no-cache' })
+      if (!res.ok) return
+      const data = await res.json()
+      const pairs = (Array.isArray(data.pairs) ? data.pairs : []).filter(
+        (p) => p && p.before && p.after,
+      )
+      if (!pairs.length) return
+      const src = (path) => escapeHtml(new URL(path, siteRoot).href)
+      list.innerHTML = pairs
+        .map(
+          (p) => `<article class="ab-pair">
+            ${p.title ? `<h3>${escapeHtml(p.title)}</h3>` : ''}
+            <div class="ab-side"><p><span data-lang="en">Before</span><span data-lang="fr">Avant</span></p><audio controls preload="none" src="${src(p.before)}"></audio></div>
+            <div class="ab-side after"><p><span data-lang="en">After</span><span data-lang="fr">Après</span></p><audio controls preload="none" src="${src(p.after)}"></audio></div>
+          </article>`,
+        )
+        .join('')
+      section.hidden = false
+      // Only one track plays at a time.
+      list.addEventListener('play', (e) => {
+        list.querySelectorAll('audio').forEach((a) => { if (a !== e.target) a.pause() })
+      }, true)
+    } catch (error) {
+      console.warn('before/after pairs unavailable', error)
+    }
   }
 
   function initReveal() {
@@ -277,5 +383,9 @@
   initReveal()
   initNavMenu()
   initDiscFromMarkup()
-  enhanceChallenge()
+  initPackageButtons()
+  initApplyForms()
+  initCapture()
+  initBeforeAfter()
+  if (document.querySelector('[data-song-grid]')) enhanceChallenge()
 })()

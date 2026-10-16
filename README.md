@@ -1,6 +1,6 @@
 # EclipseTone Productions
 
-Artist-first site for [Laousmail](https://instagram.com/laousmail) / EclipseTone — Montréal.
+EclipseTone Productions: online song production for independent artists. Montréal, worldwide.
 
 **Live:** https://eclipsetone.com/
 
@@ -34,7 +34,7 @@ npx --yes serve .
 Shared tracker data: `challenge-data.json`  
 Artist: [laousmail on Spotify](https://open.spotify.com/artist/60GjJwhvGe1eVg98jFPgMp)
 
-The homepage embeds the current grid in HTML (works with JS disabled). `main.js` may refresh from `challenge-data.json` when the fetch succeeds; on failure it leaves the embedded markup alone.
+The tracker no longer appears on eclipsetone.com; it lives on [laousmail.com](https://laousmail.com/). The data file and scripts stay here because the artist site may read them. `main.js` only renders the grid on pages that include `[data-song-grid]`.
 
 Validate locally:
 
@@ -43,6 +43,12 @@ node scripts/validate-challenge.mjs
 ```
 
 Maintainers: challenge sync, deploy, and DNS notes stay offline in `private/` (not published). Never commit API credentials or personal contact numbers into this repo.
+
+## Homepage switches
+
+- **Before/after player:** add pairs to `proof/pairs.json` (MP3s in `proof/`). The section stays hidden while the list is empty.
+- **Email capture:** paste the MailerLite form action URL into `data-ml-action` on the capture form in `index.html`. Hidden until set.
+- **Monthly spots:** set the number and remove `hidden` on the `.spots` line in `index.html` and `services/index.html`.
 
 ## Contact
 
