@@ -1143,3 +1143,78 @@ body::before{animation:none!important;opacity:.6}
   .hero h1{font-size:clamp(2.2rem,10.4vw,3rem)}
   .disc{top:5.4rem;right:-26vw;width:50vw}
 }
+
+/* =========================================================
+   NO BLUE + DEPTH
+   Guidance buttons are outlined, selections are solid ink.
+   Every card sits on its own lifted surface.
+   ========================================================= */
+:root,:root[data-theme=dark]{
+  --bg:#0b0907;
+  --bg2:#1b1713;           /* card surface, clearly lighter than the page */
+  --bg3:#231e19;           /* raised surface inside cards */
+  --line:#352d25;
+  --info:#d9cbb8;
+  --lift:0 1px 0 rgba(255,255,255,.06) inset,0 2px 4px rgba(0,0,0,.35),0 14px 34px -14px rgba(0,0,0,.85);
+  --lift-hi:0 1px 0 rgba(255,255,255,.08) inset,0 4px 10px rgba(0,0,0,.4),0 26px 56px -20px rgba(0,0,0,.9);
+}
+:root[data-theme=light]{
+  --bg:#f3ece2;
+  --bg2:#fffdf9;
+  --bg3:#f8f2ea;
+  --line:#e2d5c3;
+  --info:#4a3f35;
+  --lift:0 1px 2px rgba(70,40,15,.08),0 10px 28px -14px rgba(70,40,15,.28);
+  --lift-hi:0 2px 6px rgba(70,40,15,.1),0 22px 48px -20px rgba(70,40,15,.35);
+}
+body{background:var(--bg)}
+body::before{opacity:.35}
+
+/* buttons: help = outlined, never blue */
+.btn.help{background:transparent;color:var(--ink);border:1.5px solid var(--line-strong);box-shadow:none}
+.btn.help:hover{background:color-mix(in srgb,var(--ink) 6%,transparent);border-color:var(--ink)}
+.pricing .seg button[aria-checked=true],.seg button[aria-checked=true]{background:var(--ink);color:var(--bg)}
+.note::before{color:var(--bg)}
+
+/* depth on every card-like element */
+.steps3 li,.rung,.quote,.pkg,.pillar,.scatter,.web,.web-tier,.beyond-card,.addon,.capture-in,
+.compare-wrap,.ep,.session,.flag,.cfg-pack-in,.cfg-extra,.cfg-review,.cfg-noextras,.cfg-qty,.proofbar ul,.faq-list{
+  background:var(--bg2);
+  border:1px solid var(--line);
+  box-shadow:var(--lift);
+}
+.flag{padding:1.4rem;border-radius:1.25rem;border-top:3px solid var(--accent)}
+.faq-list{border-radius:1.25rem;padding:.4rem 1.4rem}
+.faq-list details:last-child{border-bottom:0}
+.proofbar{background:transparent;border:0;padding-block:1.2rem}
+.proofbar ul{border-radius:1.25rem;padding:1.2rem 1.6rem}
+.record-card,.pricing .pkg.is-fit,.web-tier.is-best,.cfg-pack input:checked+.cfg-pack-in{box-shadow:var(--lift-hi)}
+.rung:hover,.pillar:hover,.quote:hover,.steps3 li:hover,.pkg:hover,.beyond-card:hover{box-shadow:var(--lift-hi);transform:translateY(-2px)}
+.web-tier{background:var(--bg3)}
+.bonuses li,.fmt,.cfg-webs button,.cfg-formats button,.cfg-presets button,.needs label>span{background:var(--bg3)}
+input,select,textarea{background:var(--bg2);box-shadow:inset 0 1px 3px rgba(0,0,0,.18)}
+.nav{background:color-mix(in srgb,var(--bg) 88%,transparent);box-shadow:0 1px 0 var(--line),0 8px 24px -16px rgba(0,0,0,.6)}
+.cfg-cart{background:var(--bg2)}
+
+/* pricing: an odd last card spans the row */
+.cfg-packs .cfg-pack:last-child:nth-child(odd){grid-column:1/-1}
+
+/* The Vocal Session (in person) */
+.session{
+  margin-top:1.15rem;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:1.25rem 2rem;align-items:start;
+  padding:1.7rem 1.6rem;border-radius:1.5rem;scroll-margin-top:6rem;
+  border-left:4px solid var(--accent);
+}
+.session-tag{display:inline-block;font-size:.74rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin-bottom:.4rem}
+.session h3{font-size:1.8rem;margin-bottom:.2rem}
+.session .price{font-size:clamp(2rem,3.6vw,2.6rem);margin:.2rem 0 .6rem}
+.session .price small{font-size:.85rem}
+.session-lede{color:var(--mute);font-size:1.02rem;max-width:34rem}
+.session-side{display:grid;gap:.9rem}
+.session-side .note{margin:0}
+.session-side .btn{justify-self:start}
+.rung-session em{font-style:normal;font-size:.7rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--accent);margin-left:.4rem;padding:.15rem .45rem;border:1px solid color-mix(in srgb,var(--accent) 50%,var(--line));border-radius:99px;vertical-align:middle}
+@media(max-width:860px){.session{grid-template-columns:1fr}}
+:root,:root[data-theme=dark]{--bg2:#211c17;--bg3:#2a241e;--line:#3b3229}
+.pricing .packages .pkg:not(.is-fit) .btn{background:var(--primary);color:var(--on-primary);border:0;box-shadow:0 8px 20px -12px color-mix(in srgb,var(--primary) 80%,transparent)}
+.pricing .packages .pkg:not(.is-fit) .btn:hover{background:var(--primary-hover)}

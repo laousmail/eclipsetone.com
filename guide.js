@@ -15,7 +15,8 @@
   const onServices = !!document.querySelector('[data-pricing]')
 
   const PACKS = [
-    { id: 'mix', name: 'The Mix', price: 350, for: ['You have a finished beat', 'Tu as une prod finie'], what: ['We mix and master your beat and vocals.', 'On mixe et masterise ta prod et tes voix.'] },
+    { id: 'mix', name: 'The Mix', price: 150, from: true, for: ['Your song is already recorded', 'Ta chanson est déjà enregistrée'], what: ['Send your recorded tracks. We mix them. Price depends on how many tracks.', 'Envoie tes pistes enregistrées. On les mixe. Le prix dépend du nombre de pistes.'] },
+    { id: 'session', name: 'The Vocal Session', price: 350, unit: ['per 2-hour session', 'par session de 2 h'], tag: ['In person · Montréal', 'En personne · Montréal'], for: ['You want to record in the studio', 'Tu veux enregistrer au studio'], what: ['2 hours in the studio with Smail. He’s a singer too and knows how to get your best take.', '2 h au studio avec Smail. Il est chanteur et sait aller chercher ta meilleure prise.'] },
     { id: 'record', name: 'The Record', price: 599, tag: ['Start here', 'Commence ici'], for: ['You have vocals or lyrics', 'Tu as des voix ou des paroles'], what: ['We make the music, mix and master. First version in 7 days.', 'On fait la musique, le mix et le master. Première version en 7 jours.'] },
     { id: 'signature', name: 'The Signature Record', price: 997, for: ['You have just an idea', 'Tu as juste une idée'], what: ['We write the song with you, then make it. Faster delivery.', 'On écrit la chanson avec toi, puis on la fait. Livraison plus rapide.'] },
     { id: 'release', name: 'The Release', price: 2000, for: ['You want the song and the launch', 'Tu veux la chanson et le lancement'], what: ['Everything in Signature, plus help launching your song.', 'Tout Signature, plus de l’aide pour lancer ta chanson.'] },
@@ -72,8 +73,8 @@
   }
   const hasWeb = () => s.extras.includes('website')
   const webPrice = () => (hasWeb() ? WEB[s.web === 'site' ? 'site' : 'page'].price : 0)
-  const isFrom = () => hasWeb() && s.web === 'site'
-  const albumQuote = () => s.pack && s.pack !== 'none' && s.qty >= 8
+  const isFrom = () => (hasWeb() && s.web === 'site') || !!pack()?.from
+  const albumQuote = () => s.pack && s.pack !== 'none' && s.pack !== 'session' && s.qty >= 8
   const grandTotal = () => (albumQuote() ? 0 : musicTotal()) + webPrice()
   const hasQuoted = () => s.extras.some((x) => x !== 'website') || albumQuote()
   const launchIncluded = () => s.pack === 'release'
@@ -128,7 +129,7 @@
               <span class="cfg-for">${L(...p.for)}</span>
               <b class="cfg-name">${p.name}</b>
               <span class="cfg-what">${L(...p.what)}</span>
-              <span class="cfg-price">${money(p.price)} <small>${L('per song', 'par chanson')}</small></span>
+              <span class="cfg-price">${p.from ? `<small>${L('from', 'dès')}</small> ` : ''}${money(p.price)} <small>${p.unit ? L(...p.unit) : L('per song', 'par chanson')}</small></span>
               <span class="cfg-radio" aria-hidden="true"></span>
             </span>
           </label>`).join('')}
@@ -144,18 +145,20 @@
     const p = pack()
     let line = ''
     if (isEP()) line = `<p class="note ok"><b>${L('Saved:', 'Économie :')}</b> ${L('EP price applied: $1,597 for 3 songs. You save $200.', 'Prix EP appliqué : 1 597 $ pour 3 chansons. Tu économises 200 $.')}</p>`
+    else if (s.pack === 'session') line = ''
     else if (s.qty >= 8) line = `<p class="note warn"><b>${L('Heads up:', 'Attention :')}</b> ${L('Album pricing is confirmed on your quote.', 'Le prix album est confirmé sur ton devis.')}</p>`
     else if (s.qty > 1 && s.pack === 'record') line = `<p class="note info"><b>${L('Tip:', 'Astuce :')}</b> ${L('3 Records is an EP at $1,597.', '3 Records, c’est un EP à 1 597 $.')} <button type="button" class="cfg-inline" data-qty-set="3">${L('Make it 3', 'Passer à 3')}</button></p>`
     else if (s.qty > 1) line = `<p class="note info"><b>${L('Good to know:', 'Bon à savoir :')}</b> ${L('Multi-song pricing is confirmed on your quote.', 'Le prix multi-chansons est confirmé sur ton devis.')}</p>`
     return `<p class="cfg-k">${L('Step 2', 'Étape 2')}</p>
-      <h2 id="cfg-title">${L('How many songs?', 'Combien de chansons ?')}</h2>
-      <p class="cfg-sub">${p ? `${p.name} · ${money(p.price)} ${L('per song', 'par chanson')}` : ''}</p>
+      <h2 id="cfg-title">${s.pack === 'session' ? L('How many sessions?', 'Combien de sessions ?') : L('How many songs?', 'Combien de chansons ?')}</h2>
+      <p class="cfg-sub">${p ? `${p.name} · ${p.from ? L('from ', 'dès ') : ''}${money(p.price)} ${p.unit ? L(...p.unit) : L('per song', 'par chanson')}` : ''}</p>
+      ${s.pack === 'session' ? `<p class="note warn"><b>${L('In person only:', 'En personne seulement :')}</b> ${L('sessions happen at our studio in Montréal. Most singers record one song per session.', 'les sessions ont lieu à notre studio à Montréal. La plupart des chanteurs enregistrent une chanson par session.')}</p>` : ''}
       <div class="cfg-qty">
         <button type="button" class="cfg-qbtn" data-qty="-1" aria-label="One less" ${s.qty <= 1 ? 'disabled' : ''}>−</button>
         <output class="cfg-qnum" aria-live="polite">${s.qty}</output>
         <button type="button" class="cfg-qbtn" data-qty="1" aria-label="One more" ${s.qty >= 20 ? 'disabled' : ''}>+</button>
       </div>
-      <div class="cfg-presets">
+      <div class="cfg-presets" ${s.pack === 'session' ? 'hidden' : ''}>
         <button type="button" data-qty-set="1" aria-pressed="${s.qty === 1}">${L('Single', 'Single')}<small>1</small></button>
         <button type="button" data-qty-set="3" aria-pressed="${s.qty === 3}">EP<small>3</small></button>
         <button type="button" data-qty-set="8" aria-pressed="${s.qty === 8}">Album<small>8+</small></button>
@@ -220,8 +223,9 @@
     const rows = []
     if (p) {
       const label = isEP() ? 'The EP' : p.name
-      const sub = isEP() ? L('3 Records, one sound', '3 Records, un seul son') : s.qty > 1 ? `${s.qty} × ${money(p.price)}` : L('1 song', '1 chanson')
-      rows.push(`<li><div><b>${label}</b><small>${sub}</small></div><span class="cfg-amt">${s.qty >= 8 ? L('Quoted', 'Sur devis') : money(musicTotal())}</span></li>`)
+      const one = s.pack === 'session' ? L('1 session · in person', '1 session · en personne') : L('1 song', '1 chanson')
+      const sub = isEP() ? L('3 Records, one sound', '3 Records, un seul son') : s.qty > 1 ? `${s.qty} × ${p.from ? L('from ', 'dès ') : ''}${money(p.price)}` : one
+      rows.push(`<li><div><b>${label}</b><small>${sub}</small></div><span class="cfg-amt">${albumQuote() ? L('Quoted', 'Sur devis') : (p.from ? `<small class="from">${L('from', 'dès')}</small> ` : '') + money(musicTotal())}</span></li>`)
       if (launchIncluded()) rows.push(`<li class="is-sub"><div><b>${L('Release plan and launch', 'Plan de sortie et lancement')}</b></div><span class="cfg-amt">${L('Included', 'Inclus')}</span></li>`)
     } else if (s.pack === 'none') {
       rows.push(`<li class="is-sub"><div><b>${L('Your music', 'Ta musique')}</b><small>${L('Already finished', 'Déjà finie')}</small></div><span class="cfg-amt">–</span></li>`)
@@ -360,7 +364,7 @@
   function message() {
     const p = pack()
     const lines = ['EclipseTone plan']
-    if (p) lines.push(`Music: ${isEP() ? 'The EP (3 Records)' : `${p.name} × ${s.qty}`}${s.qty >= 8 ? ' (album, quote)' : ` = ${money(musicTotal())}`}`)
+    if (p) lines.push(`Music: ${isEP() ? 'The EP (3 Records)' : `${p.name} × ${s.qty}`}${albumQuote() ? ' (album, quote)' : ` = ${p.from ? 'from ' : ''}${money(musicTotal())}`}${s.pack === 'session' ? ' (in person, Montréal)' : ''}`)
     if (s.pack === 'none') lines.push('Music: already finished')
     if (launchIncluded()) lines.push('Release plan and launch: included')
     s.extras.forEach((id) => {
