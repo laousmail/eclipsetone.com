@@ -339,6 +339,22 @@
     })
   }
 
+  // Prices page: highlight the jump-bar link for the section on screen.
+  function initJumpbar() {
+    const links = [...document.querySelectorAll('.jumpbar a')]
+    if (!links.length || !('IntersectionObserver' in window)) return
+    const map = new Map(links.map((a) => [a.getAttribute('href').slice(1), a]))
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (!e.isIntersecting) return
+        links.forEach((a) => a.classList.remove('on'))
+        const a = map.get(e.target.id)
+        if (a) { a.classList.add('on'); a.scrollIntoView({ block: 'nearest', inline: 'nearest' }) }
+      })
+    }, { rootMargin: '-35% 0px -55% 0px' })
+    map.forEach((_, id) => { const el = document.getElementById(id); if (el) io.observe(el) })
+  }
+
   const WHATSAPP = 'https://wa.me/14384668971'
   const siteRoot = new URL('./', siteStyle).href
 
@@ -491,6 +507,7 @@
   initNavMenu()
   initDiscFromMarkup()
   initPricing()
+  initJumpbar()
   initPackageButtons()
   initNeeds()
   initApplyForms()
