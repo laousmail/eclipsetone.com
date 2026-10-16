@@ -99,7 +99,7 @@
       </header>
       <div class="cfg-main">
         <section class="cfg-stage" data-stage aria-live="polite"></section>
-        <aside class="cfg-cart" data-cart aria-label="Your plan"></aside>
+        <aside class="cfg-cart" data-cart aria-label="Your selection"></aside>
       </div>
       <footer class="cfg-bar" data-bar></footer>
     </div>`
@@ -113,7 +113,7 @@
   const fab = document.createElement('button')
   fab.type = 'button'
   fab.className = 'plan-fab'
-  fab.innerHTML = `<span class="plan-dot"></span>${L('Your plan', 'Ton plan')} <b data-fab-total></b>`
+  fab.innerHTML = `<span class="plan-dot"></span>${L('Your selection', 'Ta sélection')} <b data-fab-total></b>`
   fab.hidden = !s.pack
   document.body.appendChild(fab)
   fab.addEventListener('click', () => open(3))
@@ -141,7 +141,7 @@
         <input type="radio" name="pack" value="none" ${s.pack === 'none' ? 'checked' : ''} />
         <span>${L('My music is already finished. I only need the rest.', 'Ma musique est déjà finie. J’ai besoin du reste seulement.')}</span>
       </label>
-      <p class="note info"><b>${L('No pressure:', 'Sans pression :')}</b> ${L('you can change any choice later. Nothing is final until you send your plan.', 'tu peux changer chaque choix plus tard. Rien n’est final avant l’envoi de ton plan.')}</p>`
+      <p class="note info"><b>${L('No pressure:', 'Sans pression :')}</b> ${L('you can change any choice later. Nothing is final until you send your request.', 'tu peux changer chaque choix plus tard. Rien n’est final avant l’envoi de ton plan.')}</p>`
   }
 
   function viewSongs() {
@@ -176,7 +176,7 @@
       <p class="cfg-sub">${L('Add what you need. Fixed prices are shown, the rest is quoted for your project.', 'Ajoute ce qu’il te faut. Les prix fixes sont affichés, le reste est chiffré pour ton projet.')}</p>
       <button type="button" class="cfg-noextras ${none ? 'is-on' : ''}" data-noextras>
         <span class="cfg-check" aria-hidden="true"></span>
-        <span><b>${L('No thanks, just the music', 'Non merci, juste la musique')}</b><small>${L('Go straight to your plan.', 'Va directement à ton plan.')}</small></span>
+        <span><b>${L('No thanks, just the music', 'Non merci, juste la musique')}</b><small>${L('Go straight to your selection.', 'Va directement à ta sélection.')}</small></span>
         <span class="cfg-arrow" aria-hidden="true">→</span>
       </button>
       ${s.extras.includes('physical') ? `<p class="note warn"><b>${L('Plan ahead:', 'Prévois :')}</b> ${L('manufacturing physical copies adds time before your release date. Tell us your date and we plan backwards.', 'la fabrication des copies physiques ajoute du temps avant ta date de sortie. Donne-nous ta date et on planifie à rebours.')}</p>` : ''}
@@ -199,11 +199,11 @@
 
   function viewReview() {
     return `<p class="cfg-k">${L('Step 4', 'Étape 4')}</p>
-      <h2 id="cfg-title">${L('Here’s your plan.', 'Voici ton plan.')}</h2>
+      <h2 id="cfg-title">${L('Here’s your selection.', 'Voici ta sélection.')}</h2>
       <p class="cfg-sub">${L('Send it and we’ll reply within 24 hours with your final price.', 'Envoie-le et on te répond en moins de 24 h avec ton prix final.')}</p>
       <div class="cfg-review">${cartLines(true)}</div>
       <p class="note ok"><b>${L('No payment now.', 'Aucun paiement maintenant.')}</b> ${L('We confirm your quote first. You only pay half once you say yes.', 'On confirme ton devis d’abord. Tu paies la moitié seulement quand tu dis oui.')}</p>
-      <p class="note info">${L('Next: tell us where to send your price. It takes 20 seconds.', 'Ensuite : dis-nous où envoyer ton prix. Ça prend 20 secondes.')}</p>`
+      <p class="note info">${L('Next: tell us how to reach you. It takes 30 seconds.', 'Ensuite : dis-nous comment te joindre. Ça prend 30 secondes.')}</p>`
   }
 
   function esc(v) {
@@ -239,7 +239,7 @@
       rows.push(`<li><div><b>${L(...e.name)}</b>${fm ? `<small>${fm}</small>` : ''}</div><span class="cfg-amt q">${L('Quoted', 'Sur devis')}</span></li>`)
     })
     if (!rows.length) {
-      return `<p class="cfg-empty">${L('Pick what you need. Your plan builds here.', 'Choisis ce qu’il te faut. Ton plan se construit ici.')}</p>`
+      return `<p class="cfg-empty">${L('Pick what you need. Your selection shows up here.', 'Choisis ce qu’il te faut. Ta sélection s’affiche ici.')}</p>`
     }
     const total = grandTotal()
     return `<ul class="cfg-lines ${big ? 'big' : ''}">${rows.join('')}</ul>
@@ -257,7 +257,7 @@
 
   function primary() {
     if (step === 3) return `<button type="button" class="btn cfg-go" data-handoff>${L('Continue to send', 'Continuer pour envoyer')}</button>`
-    const label = step === 2 ? L('See my plan', 'Voir mon plan') : L('Continue', 'Continuer')
+    const label = step === 2 ? L('See my selection', 'Voir ma sélection') : L('Continue', 'Continuer')
     return `<button type="button" class="btn cfg-go" data-next ${canContinue() ? '' : 'disabled'}>${label}</button>`
   }
 
@@ -273,10 +273,10 @@
     const html = step === 0 ? viewMusic() : step === 1 ? viewSongs() : step === 2 ? viewExtras() : viewReview()
     stage.innerHTML = `<div class="cfg-pane ${dir ? 'in-' + dir : ''}">${html}</div>`
     const back = order.indexOf(step) > 0 ? `<button type="button" class="cfg-back" data-back>${L('Back', 'Retour')}</button>` : ''
-    cart.innerHTML = `<p class="cfg-cart-k">${L('Your plan', 'Ton plan')}</p>${cartLines(false)}<div class="cfg-cart-cta">${primary()}${back}</div>`
+    cart.innerHTML = `<p class="cfg-cart-k">${L('Your selection', 'Ta sélection')}</p>${cartLines(false)}<div class="cfg-cart-cta">${primary()}${back}</div>`
     const total = grandTotal()
     bar.innerHTML = `<button type="button" class="cfg-bar-sum" data-sheet>
-        <small>${L('Your plan', 'Ton plan')}</small>
+        <small>${L('Your selection', 'Ta sélection')}</small>
         <b>${s.pack ? (total ? (isFrom() ? '<em>' + L('from', 'dès') + '</em> ' : '') + money(total) : L('On quote', 'Sur devis')) : '–'}${total && hasQuoted() ? ' <em>+</em>' : ''}</b>
       </button>
       ${back}${primary()}`
@@ -345,7 +345,7 @@
 
   function message() {
     const p = pack()
-    const lines = ['EclipseTone plan']
+    const lines = ['EclipseTone selection']
     if (p) lines.push(`Music: ${isEP() ? '3-Song EP (3 Full Songs)' : `${p.name} × ${s.qty}`}${albumQuote() ? ' (album, quote)' : ` = ${p.from ? 'from ' : ''}${cad(musicTotal())}`}${s.pack === 'session' ? ' (in person, Montréal)' : ''}`)
     if (s.pack === 'none') lines.push('Music: already finished')
     if (launchIncluded()) lines.push('Release plan and launch: included')

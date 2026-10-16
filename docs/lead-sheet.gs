@@ -1,7 +1,7 @@
 /**
  * EclipseTone leads: Google Apps Script that writes website price requests into a Google Sheet.
  *
- * Every visitor who types a valid email in the "Get your price" form gets a row, even if they
+ * Every visitor who types a valid email or WhatsApp number in the "Get your price" form gets a row, even if they
  * never press Send in WhatsApp. When they do send, the same row flips to "Sent".
  * Rows still marked "Started" after a day are the people to follow up with.
  *
@@ -9,26 +9,26 @@
  */
 
 const SHEET_NAME = 'Leads'
-const HEADERS = ['Updated', 'Status', 'Interested in', 'Their answer', 'Name', 'Email', 'Note', 'Plan from Get started', 'Page', 'Language', 'First seen', 'Lead ID']
+const HEADERS = ['Updated', 'Status', 'Interested in', 'Their answer', 'Name', 'Email', 'WhatsApp', 'Contact by', '15-min call', 'Note', 'Their selection', 'Page', 'Language', 'First seen', 'Lead ID']
 
 function doPost(e) {
   const lock = LockService.getScriptLock()
   lock.waitLock(10000)
   try {
     const d = JSON.parse(e.postData.contents || '{}')
-    if (!d.id || !d.email) return out({ ok: false })
+    if (!d.id || !(d.email || d.phone)) return out({ ok: false })
     const sheet = getSheet()
     const now = new Date()
-    const ids = sheet.getRange(2, 12, Math.max(sheet.getLastRow() - 1, 1), 1).getValues().flat()
+    const ids = sheet.getRange(2, HEADERS.length, Math.max(sheet.getLastRow() - 1, 1), 1).getValues().flat()
     const at = ids.indexOf(String(d.id))
     const status = d.status === 'sent' ? 'Sent' : 'Started'
-    const row = [now, status, clip(d.pick), clip(d.answer), clip(d.name), clip(d.email), clip(d.note, 1000), clip(d.plan, 1000), clip(d.page), clip(d.lang), now, String(d.id)]
+    const row = [now, status, clip(d.pick), clip(d.answer), clip(d.name), clip(d.email), clip(d.phone), clip(d.contact), clip(d.call), clip(d.note, 1000), clip(d.selection, 1000), clip(d.page), clip(d.lang), now, String(d.id)]
     if (at === -1) {
       sheet.appendRow(row)
     } else {
       const r = at + 2
       const prev = sheet.getRange(r, 1, 1, HEADERS.length).getValues()[0]
-      row[10] = prev[10] || now
+      row[13] = prev[13] || now
       if (prev[1] === 'Sent' && status !== 'Sent') row[1] = 'Sent' // never downgrade
       sheet.getRange(r, 1, 1, HEADERS.length).setValues([row])
     }

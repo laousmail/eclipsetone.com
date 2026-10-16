@@ -3,6 +3,9 @@
 // The form adapts to the choice (question, tips, what happens next) and sends through WhatsApp.
 ;(() => {
   const WA = 'https://wa.me/14384668971'
+  const CALENDLY = 'https://calendly.com/eclipsetonereservation/free-onboarding-call'
+  // Bigger projects get a 15-minute call to talk it through. Simple orders don't need one.
+  const CALL_PICKS = ['Full Song', 'Song + Songwriting', 'Song + Launch', '3-Song EP', 'Not sure']
   const BASE = (document.currentScript?.src || '').replace(/smartform\.js.*$/, '')
   const ME_KEY = 'eclipsetone-me'
   const LAST_KEY = 'eclipsetone-last'
@@ -130,6 +133,11 @@
           <div class="field"><label for="sf-name" data-t="Name"></label><input id="sf-name" name="name" autocomplete="name" required /></div>
           <div class="field"><label for="sf-email" data-t="Email"></label><input id="sf-email" name="email" type="email" autocomplete="email" inputmode="email" required /></div>
         </div>
+        <div class="field"><label for="sf-phone" data-t="Phone"></label><input id="sf-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required /><small class="sf-help" data-t="PhoneHelp"></small></div>
+        <div class="sf-contact"><p class="sf-contact-t" data-t="ContactQ"></p><div class="sf-answers" role="radiogroup" data-contact>
+          <button type="button" class="sf-ans" role="radio" aria-checked="true" data-pref="text"></button>
+          <button type="button" class="sf-ans" role="radio" aria-checked="false" data-pref="call"></button>
+        </div></div>
         <p class="sf-consent" data-t="Consent"></p>
         <button type="button" class="sf-add" data-addnote aria-expanded="false"></button>
         <div class="field" data-notefield hidden><label for="sf-msg" data-t="NoteL"></label><textarea id="sf-msg" name="message" rows="3"></textarea></div>
@@ -143,17 +151,21 @@
     form.after(done)
 
     const $ = (s) => form.querySelector(s)
-    const name = $('#sf-name'), email = $('#sf-email'), msg = $('#sf-msg')
+    const name = $('#sf-name'), email = $('#sf-email'), msg = $('#sf-msg'), phone = $('#sf-phone')
+    let pref = 'text'
     const T = {
       Step1: ['What do you need?', 'De quoi as-tu besoin ?'],
       Next: ['What happens next', 'La suite'],
-      Step3: ['Where should we send your price?', 'Où t’envoyer ton prix ?'],
+      Step3: ['How do we reach you?', 'Comment te joindre ?'],
+      Phone: ['Your WhatsApp number', 'Ton numéro WhatsApp'],
+      PhoneHelp: ['With your country code, like +1 514 555 0123. We contact you here after we review your request.', 'Avec l’indicatif du pays, par ex. +1 514 555 0123. On te contacte ici après avoir lu ta demande.'],
+      ContactQ: ['How do you prefer we contact you?', 'Tu préfères qu’on te contacte comment ?'],
       Name: ['Your name', 'Ton nom'],
       Email: ['Your email', 'Ton courriel'],
       NoteL: ['Your note (optional)', 'Ta note (optionnel)'],
       Consent: [`We save what you type here so we can reply, even if you don’t finish. <a href="${BASE}privacy/">Privacy policy</a>`, `On garde ce que tu écris ici pour pouvoir te répondre, même si tu ne finis pas. <a href="${BASE}privacy/">Politique de confidentialité</a>`],
       Add: ['+ Add a note, a link or a release date (optional)', '+ Ajouter une note, un lien ou une date (optionnel)'],
-      Hint: ['Tapping the button opens WhatsApp with everything filled in. Prefer a call? <a href="https://calendly.com/eclipsetonereservation/free-onboarding-call" target="_blank" rel="noopener">Book 15 minutes</a>.', 'Le bouton ouvre WhatsApp avec tout déjà rempli. Tu préfères un appel ? <a href="https://calendly.com/eclipsetonereservation/free-onboarding-call" target="_blank" rel="noopener">Réserve 15 minutes</a>.'],
+      Hint: ['No payment now. We read every request ourselves.', 'Aucun paiement maintenant. On lit chaque demande nous-mêmes.'],
     }
 
     function paintStatic() {
@@ -165,6 +177,9 @@
         b.querySelector('small').textContent = L(...p.hint)
       })
       $('[data-addnote]').textContent = L(...T.Add)
+      $('[data-pref="text"]').textContent = L('Text me on WhatsApp', 'Écris-moi sur WhatsApp')
+      $('[data-pref="call"]').textContent = L('Call me', 'Appelle-moi')
+      form.querySelectorAll('[data-pref]').forEach((b) => b.setAttribute('aria-checked', String(b.dataset.pref === pref)))
       msg.placeholder = L('Demo link, release date, anything we should know', 'Lien de démo, date de sortie, ce qu’on devrait savoir')
     }
 
@@ -189,7 +204,7 @@
       const t = p.tip && p.tip[st.answer]
       if (t) tips.push(note(t[0], L(t[2], t[3]), t[1]))
       $('[data-tips]').innerHTML = tips.join('')
-      $('[data-next]').innerHTML = p.next.map(([en, f]) => `<li>${esc(L(en, f))}</li>`).join('')
+      $('[data-next]').innerHTML = steps().map(([en, f]) => `<li>${esc(L(en, f))}</li>`).join('')
       b2.classList.toggle('is-done', !!st.answer)
       $('[data-cta]').textContent = st.pick === 'Not sure' || st.pick === 'Physical copies' || st.pick === 'Studio Recording'
         ? L(...p.cta)
@@ -197,11 +212,16 @@
       check()
     }
 
+    const wantsCall = () => CALL_PICKS.includes(st.pick)
+    function steps() {
+      const p = PICKS[st.pick]
+      return wantsCall() ? [['You book a free 15-minute call about your project', 'Tu réserves un appel gratuit de 15 minutes sur ton projet'], ...p.next] : p.next
+    }
     let sent = false, timer = 0
     function snapshot(status) {
       const p = PICKS[st.pick]
       const ans = p && p.a.find(([id]) => id === st.answer)
-      return { status, pick: st.pick, answer: ans ? ans[1] : '', name: name.value.trim(), email: email.value.trim(), note: msg.value.trim(), plan: (window.EclipsePlan?.lines?.() || []).join(' | ') }
+      return { status, pick: st.pick, answer: ans ? ans[1] : '', name: name.value.trim(), email: email.value.trim(), phone: phone.value.trim(), contact: pref === 'call' ? 'Call' : 'Text (WhatsApp)', call: wantsCall() ? 'Offered 15-min call' : '', note: msg.value.trim(), selection: (window.EclipsePlan?.lines?.() || []).join(' | ') }
     }
     function track() {
       if (sent || !valid()) return
@@ -209,10 +229,15 @@
       timer = setTimeout(() => logLead(snapshot('started')), 1200)
     }
     window.addEventListener('pagehide', () => { if (!sent && valid()) logLead(snapshot('started')) })
-    function valid() { return name.value.trim() && /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email.value.trim()) }
+    const phoneOk = () => phone.value.replace(/\D/g, '').length >= 8
+    const emailOk = () => /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email.value.trim())
+    // A lead is worth saving as soon as we can reach them one way or another.
+    function valid() { return name.value.trim() && (emailOk() || phoneOk()) }
+    function complete() { return name.value.trim() && emailOk() && phoneOk() }
     function check() {
-      const ok = !!valid()
+      const ok = !!complete()
       $('[data-b="3"]').classList.toggle('is-done', ok)
+      phone.classList.toggle('is-ok', phoneOk())
       name.classList.toggle('is-ok', !!name.value.trim())
       email.classList.toggle('is-ok', /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email.value.trim()))
     }
@@ -231,13 +256,13 @@
       if (!lines.length) { box.hidden = true; return [] }
       box.hidden = false
       const rich = window.EclipsePlan?.html?.() || ''
-      box.innerHTML = `<p class="sf-plan-t">${L('The plan you built', 'Le plan que tu as bâti')}</p>${rich || `<ul>${lines.map((l) => `<li>${esc(l)}</li>`).join('')}</ul>`}<p class="sf-plan-f">${L('We’ll send it with your request.', 'On l’envoie avec ta demande.')} <button type="button" class="sf-switch" data-editplan>${L('Change my plan', 'Changer mon plan')}</button></p>`
+      box.innerHTML = `<p class="sf-plan-t">${L('Your selection', 'Ta sélection')}</p>${rich || `<ul>${lines.map((l) => `<li>${esc(l)}</li>`).join('')}</ul>`}<p class="sf-plan-f">${L('We’ll send it with your request.', 'On l’envoie avec ta demande.')} <button type="button" class="sf-switch" data-editplan>${L('Change my selection', 'Modifier ma sélection')}</button></p>`
       return lines
     }
 
     function welcome() {
       const me = read(ME_KEY), last = read(LAST_KEY)
-      if (me) { if (!name.value) name.value = me.name || ''; if (!email.value) email.value = me.email || '' }
+      if (me) { if (!name.value) name.value = me.name || ''; if (!email.value) email.value = me.email || ''; if (!phone.value) phone.value = me.phone || ''; if (me.pref) pref = me.pref }
       const w = $('[data-sf-welcome]')
       if (me && me.name) {
         const first = esc(me.name.split(' ')[0])
@@ -248,24 +273,44 @@
     }
 
     function showDone(href) {
-      const p = PICKS[st.pick]
       const first = esc(name.value.trim().split(' ')[0])
+      const tel = esc(phone.value.trim())
+      const viaSheet = !!(window.ET_CONFIG || {}).leadSheetUrl
+      const reach = pref === 'call'
+        ? L(`We’ll review your request and call you at <b>${tel}</b>, usually within 24 hours.`, `On lit ta demande et on t’appelle au <b>${tel}</b>, en général en moins de 24 h.`)
+        : L(`We’ll review your request and message you on WhatsApp at <b>${tel}</b>, usually within 24 hours.`, `On lit ta demande et on t’écrit sur WhatsApp au <b>${tel}</b>, en général en moins de 24 h.`)
+      const cal = new URL(CALENDLY)
+      cal.searchParams.set('name', name.value.trim())
+      cal.searchParams.set('email', email.value.trim())
+      cal.searchParams.set('a1', `${st.pick} · WhatsApp ${phone.value.trim()}`)
+      const calInline = new URL(cal)
+      calInline.searchParams.set('embed_type', 'Inline')
+      calInline.searchParams.set('embed_domain', location.hostname || 'eclipsetone.com')
+      calInline.searchParams.set('hide_gdpr_banner', '1')
       done.innerHTML = `
         <p class="sf-done-badge">✓</p>
-        <h3>${L(`Almost done, ${first}.`, `Presque fini, ${first}.`)}</h3>
-        <p class="note warn"><b>${L('One last tap:', 'Un dernier geste :')}</b> ${L('WhatsApp opened with your message. Press <b>Send</b> there so we get it.', 'WhatsApp s’est ouvert avec ton message. Appuie sur <b>Envoyer</b> pour qu’on le reçoive.')}</p>
-        <div class="sf-next"><p class="sf-next-t">${L('What happens next', 'La suite')}</p><ol>${p.next.map(([en, f]) => `<li>${esc(L(en, f))}</li>`).join('')}</ol></div>
-        <div class="actions"><a class="btn" href="${href}" target="_blank" rel="noopener">${L('WhatsApp didn’t open? Tap here', 'WhatsApp ne s’est pas ouvert ? Touche ici')}</a><button type="button" class="btn ghost" data-sf-edit>${L('Change my request', 'Modifier ma demande')}</button></div>
-        <p class="hint">${L('No WhatsApp? Call us at <a href="tel:+14384668971">438 466 8971</a> or', 'Pas de WhatsApp ? Appelle-nous au <a href="tel:+14384668971">438 466 8971</a> ou')} <a href="https://calendly.com/eclipsetonereservation/free-onboarding-call" target="_blank" rel="noopener">${L('book a free 15‑minute call', 'réserve un appel gratuit de 15 minutes')}</a>.</p>`
+        <h3>${viaSheet ? L(`Got it, ${first}.`, `C’est reçu, ${first}.`) : L(`Almost done, ${first}.`, `Presque fini, ${first}.`)}</h3>
+        ${viaSheet ? '' : `<p class="note warn"><b>${L('One last tap:', 'Un dernier geste :')}</b> ${L('WhatsApp opened with your request. Press <b>Send</b> there so we get it.', 'WhatsApp s’est ouvert avec ta demande. Appuie sur <b>Envoyer</b> pour qu’on la reçoive.')} <a href="${href}" target="_blank" rel="noopener">${L('Didn’t open? Tap here', 'Rien ne s’ouvre ? Touche ici')}</a></p>`}
+        ${wantsCall() ? `
+        <div class="sf-call">
+          <p class="sf-call-t">${L('Last step: pick a time to talk', 'Dernière étape : choisis un moment pour parler')}</p>
+          <p class="sf-call-s">${L('A free 15-minute call about your project. We listen to your idea, answer your questions and confirm your price.', 'Un appel gratuit de 15 minutes sur ton projet. On écoute ton idée, on répond à tes questions et on confirme ton prix.')}</p>
+          <iframe class="sf-cal" title="${L('Book a 15-minute call', 'Réserver un appel de 15 minutes')}" src="${esc(calInline.href)}" loading="lazy"></iframe>
+          <p class="hint">${L('Calendar not loading?', 'Le calendrier ne charge pas ?')} <a href="${esc(cal.href)}" target="_blank" rel="noopener">${L('Open it in a new tab', 'Ouvre-le dans un nouvel onglet')}</a>. ${L('Rather skip the call? No problem.', 'Tu préfères sauter l’appel ? Aucun souci.')} ${reach}</p>
+        </div>` : `<p class="note ok">${reach}</p>`}
+        <div class="sf-next"><p class="sf-next-t">${L('What happens next', 'La suite')}</p><ol>${steps().map(([en, f]) => `<li>${esc(L(en, f))}</li>`).join('')}</ol></div>
+        <div class="actions"><button type="button" class="btn ghost" data-sf-edit>${L('Change my request', 'Modifier ma demande')}</button></div>`
       form.hidden = true
       done.hidden = false
-      done.scrollIntoView({ behavior: 'smooth', block: 'center' })
+      done.scrollIntoView({ behavior: 'smooth', block: 'start' })
       done.querySelector('[data-sf-edit]').addEventListener('click', () => { done.hidden = true; form.hidden = false; form.scrollIntoView({ behavior: 'smooth', block: 'start' }) })
     }
 
     form.addEventListener('click', (e) => {
       const pk = e.target.closest('[data-pick]')
       if (pk) { track_('price-form-pick-' + pk.dataset.pick); return choose(pk.dataset.pick, true) }
+      const pr = e.target.closest('[data-pref]')
+      if (pr) { pref = pr.dataset.pref; paint(); track(); return }
       const an = e.target.closest('[data-ans]')
       if (an) { st.answer = an.dataset.ans; paint(); track(); return }
       const sw = e.target.closest('[data-switch]')
@@ -278,10 +323,13 @@
     form.addEventListener('submit', (e) => {
       e.preventDefault()
       const err = $('[data-form-error]')
-      if (!valid()) {
-        err.innerHTML = `<b>${L('Almost:', 'Presque :')}</b> ${!name.value.trim() ? L('add your name.', 'ajoute ton nom.') : L('check your email, it looks incomplete.', 'vérifie ton courriel, il semble incomplet.')}`
+      if (!complete()) {
+        const miss = !name.value.trim() ? [L('add your name.', 'ajoute ton nom.'), name]
+          : !emailOk() ? [L('check your email, it looks incomplete.', 'vérifie ton courriel, il semble incomplet.'), email]
+          : [L('add your WhatsApp number with the country code.', 'ajoute ton numéro WhatsApp avec l’indicatif du pays.'), phone]
+        err.innerHTML = `<b>${L('Almost:', 'Presque :')}</b> ${miss[0]}`
         err.hidden = false
-        ;(!name.value.trim() ? name : email).focus()
+        miss[1].focus()
         return
       }
       err.hidden = true
@@ -291,18 +339,22 @@
         'EclipseTone: price request',
         `Interested in: ${st.pick}`,
         ans ? `${p.q[0]} ${ans[1]}` : '',
-        ...plan().map((l) => `Plan: ${l}`),
+        ...plan().map((l) => `Selection: ${l}`),
         `Name: ${name.value.trim()}`,
         `Email: ${email.value.trim()}`,
+        `WhatsApp: ${phone.value.trim()}`,
+        `Contact me by: ${pref === 'call' ? 'phone call' : 'WhatsApp text'}`,
+        wantsCall() ? 'Booking a 15-min call next' : '',
         msg.value.trim() ? `Note: ${msg.value.trim()}` : '',
       ].filter(Boolean)
       const href = `${WA}?text=${encodeURIComponent(lines.join('\n'))}`
       sent = true
       clearTimeout(timer)
       logLead(snapshot('sent'))
-      write(ME_KEY, { name: name.value.trim(), email: email.value.trim() })
+      write(ME_KEY, { name: name.value.trim(), email: email.value.trim(), phone: phone.value.trim(), pref })
       write(LAST_KEY, { pick: st.pick, at: Date.now() })
-      window.open(href, '_blank', 'noopener,noreferrer')
+      // With the lead sheet connected, the request is saved directly. Without it, WhatsApp carries it.
+      if (!(window.ET_CONFIG || {}).leadSheetUrl) window.open(href, '_blank', 'noopener,noreferrer')
       showDone(href)
     })
 
