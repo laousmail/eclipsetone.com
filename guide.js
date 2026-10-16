@@ -15,14 +15,14 @@
   const onServices = !!document.querySelector('[data-pricing]')
 
   const PACKS = [
-    { id: 'mix', name: 'The Mix', price: 350, for: ['You have a finished beat', 'Tu as une prod finie'], what: ['Mix, vocal production and master.', 'Mix, production vocale et master.'] },
-    { id: 'record', name: 'The Record', price: 599, tag: ['Start here', 'Commence ici'], for: ['You have vocals or lyrics', 'Tu as des voix ou des paroles'], what: ['Full production by real players, mix and master. First draft in 7 days.', 'Production complète par de vrais musiciens, mix et master. Première version en 7 jours.'] },
-    { id: 'signature', name: 'The Signature Record', price: 997, for: ['You have just an idea', 'Tu as juste une idée'], what: ['A 2-hour writing session, then the whole record. Priority turnaround.', 'Session d’écriture de 2 h, puis tout le disque. Délai prioritaire.'] },
-    { id: 'release', name: 'The Release', price: 2000, for: ['You want the song and the launch', 'Tu veux la chanson et le lancement'], what: ['Everything in Signature, plus release plan, promo pack and launch-week support.', 'Tout Signature, plus plan de sortie, kit promo et support de lancement.'] },
+    { id: 'mix', name: 'The Mix', price: 350, for: ['You have a finished beat', 'Tu as une prod finie'], what: ['We mix and master your beat and vocals.', 'On mixe et masterise ta prod et tes voix.'] },
+    { id: 'record', name: 'The Record', price: 599, tag: ['Start here', 'Commence ici'], for: ['You have vocals or lyrics', 'Tu as des voix ou des paroles'], what: ['We make the music, mix and master. First version in 7 days.', 'On fait la musique, le mix et le master. Première version en 7 jours.'] },
+    { id: 'signature', name: 'The Signature Record', price: 997, for: ['You have just an idea', 'Tu as juste une idée'], what: ['We write the song with you, then make it. Faster delivery.', 'On écrit la chanson avec toi, puis on la fait. Livraison plus rapide.'] },
+    { id: 'release', name: 'The Release', price: 2000, for: ['You want the song and the launch', 'Tu veux la chanson et le lancement'], what: ['Everything in Signature, plus help launching your song.', 'Tout Signature, plus de l’aide pour lancer ta chanson.'] },
   ]
   const EXTRAS = [
     { id: 'physical', need: 'Physical products (CD, vinyl, cassette, USB-C)', icon: 'disc', name: ['Physical copies', 'Copies physiques'], what: ['Designed, manufactured and delivered.', 'Conçues, fabriquées et livrées.'] },
-    { id: 'launch', need: 'Release plan and launch support', icon: 'rocket', name: ['Release plan and launch', 'Plan de sortie et lancement'], what: ['Timeline, hooks, promo pack, launch-week support.', 'Calendrier, hooks, kit promo, support de lancement.'] },
+    { id: 'launch', need: 'Release plan and launch support', icon: 'rocket', name: ['Release plan and launch', 'Plan de sortie et lancement'], what: ['A plan, promo content and help on release week.', 'Un plan, du contenu promo et de l’aide la semaine de sortie.'] },
     { id: 'social', need: 'Social media setup', icon: 'phone', name: ['Social media setup', 'Réseaux sociaux'], what: ['Profiles, visuals and a content plan.', 'Profils, visuels et plan de contenu.'] },
     { id: 'website', need: 'Website design', icon: 'globe', name: ['Artist website', 'Site d’artiste'], what: ['One page from $500. A full site that updates itself from $1,500.', 'Une page dès 500 $. Un site complet qui se met à jour seul dès 1 500 $.'] },
     { id: 'media', need: 'Photo and video', icon: 'camera', name: ['Photo and video', 'Photo et vidéo'], what: ['Press photos, cover shoot, clips for social.', 'Photos de presse, pochette, extraits pour les réseaux.'] },
@@ -86,7 +86,7 @@
   dlg.innerHTML = `
     <div class="cfg-shell">
       <header class="cfg-top">
-        <p class="cfg-brand">${L('Build your release', 'Bâtis ta sortie')}</p>
+        <p class="cfg-brand">${L('Get started', 'Commencer')}</p>
         <nav class="cfg-steps" aria-label="Steps" data-steps></nav>
         <div class="cfg-top-r">
           <button type="button" class="cfg-link" data-browse>${L('Browse everything', 'Tout voir')}</button>
@@ -117,8 +117,8 @@
   // ---------- steps ----------
   function viewMusic() {
     return `<p class="cfg-k">${L('Step 1', 'Étape 1')}</p>
-      <h2 id="cfg-title">${L('What do you want us to make?', 'Qu’est-ce qu’on fait pour toi ?')}</h2>
-      <p class="cfg-sub">${L('Pick the one that matches what you have right now.', 'Choisis celui qui correspond à ce que tu as maintenant.')}</p>
+      <h2 id="cfg-title">${L('What do you have right now?', 'Qu’est-ce que tu as en ce moment ?')}</h2>
+      <p class="cfg-sub">${L('Pick one. You’ll see the price right away.', 'Choisis-en un. Tu vois le prix tout de suite.')}</p>
       <div class="cfg-packs" role="radiogroup">
         ${PACKS.map((p) => `
           <label class="cfg-pack">
@@ -166,11 +166,11 @@
   function viewExtras() {
     const none = s.extras.length === 0
     return `<p class="cfg-k">${L('Step 3', 'Étape 3')}</p>
-      <h2 id="cfg-title">${L('Anything else for this release?', 'Autre chose pour cette sortie ?')}</h2>
+      <h2 id="cfg-title">${L('Anything else?', 'Autre chose ?')}</h2>
       <p class="cfg-sub">${L('Add what you need. Fixed prices are shown, the rest is quoted for your project.', 'Ajoute ce qu’il te faut. Les prix fixes sont affichés, le reste est chiffré pour ton projet.')}</p>
       <button type="button" class="cfg-noextras ${none ? 'is-on' : ''}" data-noextras>
         <span class="cfg-check" aria-hidden="true"></span>
-        <span><b>${L('No extras, that’s it', 'Pas d’extras, c’est tout')}</b><small>${L('Just the music. Take me to my plan.', 'Juste la musique. Montre-moi mon plan.')}</small></span>
+        <span><b>${L('No thanks, just the music', 'Non merci, juste la musique')}</b><small>${L('Go straight to your plan.', 'Va directement à ton plan.')}</small></span>
         <span class="cfg-arrow" aria-hidden="true">→</span>
       </button>
       ${s.extras.includes('physical') ? `<p class="note warn"><b>${L('Plan ahead:', 'Prévois :')}</b> ${L('manufacturing physical copies adds time before your release date. Tell us your date and we plan backwards.', 'la fabrication des copies physiques ajoute du temps avant ta date de sortie. Donne-nous ta date et on planifie à rebours.')}</p>` : ''}
@@ -193,8 +193,8 @@
 
   function viewReview() {
     return `<p class="cfg-k">${L('Step 4', 'Étape 4')}</p>
-      <h2 id="cfg-title">${L('Your plan is ready.', 'Ton plan est prêt.')}</h2>
-      <p class="cfg-sub">${L('Send it and we reply within 24 hours with your quote and next steps. No payment now.', 'Envoie-le et on te répond en moins de 24 h avec ton devis et la suite. Aucun paiement maintenant.')}</p>
+      <h2 id="cfg-title">${L('Here’s your plan.', 'Voici ton plan.')}</h2>
+      <p class="cfg-sub">${L('Send it and we’ll reply within 24 hours with your final price.', 'Envoie-le et on te répond en moins de 24 h avec ton prix final.')}</p>
       <div class="cfg-review">${cartLines(true)}</div>
       <p class="note ok"><b>${L('No payment now.', 'Aucun paiement maintenant.')}</b> ${L('We confirm your quote first. You only pay half once you say yes.', 'On confirme ton devis d’abord. Tu paies la moitié seulement quand tu dis oui.')}</p>
       <form class="cfg-form" data-send-form novalidate>
@@ -255,8 +255,8 @@
   }
 
   function primary() {
-    if (step === 3) return `<a class="btn cfg-go" data-send href="#" target="_blank" rel="noopener">${L('Send my plan', 'Envoyer mon plan')}</a>`
-    const label = step === 2 ? L('Review my plan', 'Voir mon plan') : L('Continue', 'Continuer')
+    if (step === 3) return `<a class="btn cfg-go" data-send href="#" target="_blank" rel="noopener">${L('Get my price', 'Obtenir mon prix')}</a>`
+    const label = step === 2 ? L('See my plan', 'Voir mon plan') : L('Continue', 'Continuer')
     return `<button type="button" class="btn cfg-go" data-next ${canContinue() ? '' : 'disabled'}>${label}</button>`
   }
 

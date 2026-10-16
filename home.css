@@ -1130,3 +1130,16 @@ body::before{animation:none!important;opacity:.6}
 .cfg-step.done i{background:var(--primary);border-color:var(--primary)}
 .cfg-step.now i{border-color:var(--primary);box-shadow:0 0 0 3px color-mix(in srgb,var(--primary) 25%,transparent)}
 .pricing .pkg-fit,.web-tier .pkg-badge,.pricing .pkg-badge{background:var(--primary);color:var(--on-primary);box-shadow:none}
+
+/* Landing: plain promise checklist + "how it works" call to action */
+.hero-checks{list-style:none;padding:0;margin:1.4rem 0 0;display:grid;grid-template-columns:repeat(2,minmax(0,max-content));gap:.55rem 1.5rem}
+.hero-checks li{display:flex;align-items:center;gap:.5rem;font-size:.95rem;color:var(--ink)}
+.hero-checks svg{width:1.05rem;height:1.05rem;color:var(--ok);flex:0 0 auto}
+.how-cta{display:flex;flex-wrap:wrap;align-items:center;gap:.8rem 1.2rem;margin-top:2rem}
+.how-cta span{color:var(--mute);font-size:.92rem}
+.steps3 .n{font-size:2rem}
+@media(max-width:640px){.hero-checks{grid-template-columns:1fr}.hero .cta .btn{flex:1 1 100%;text-align:center}}
+@media(max-width:640px){
+  .hero h1{font-size:clamp(2.2rem,10.4vw,3rem)}
+  .disc{top:5.4rem;right:-26vw;width:50vw}
+}
