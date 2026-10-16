@@ -221,3 +221,27 @@
 .quote-tag{margin-top:auto;font-size:.82rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--mute)}
 .beyond-card .btn{align-self:flex-start}
 @media(max-width:860px){.beyond-grid{grid-template-columns:1fr}}
+
+/* Artist website pricing */
+.web{
+  margin-top:1.15rem;padding:1.7rem 1.6rem;border-radius:1.5rem;border:1px solid var(--line);scroll-margin-top:6rem;
+  background:linear-gradient(180deg,var(--surface-hi),transparent 30%),var(--bg2);box-shadow:var(--shadow-deep);
+  display:grid;gap:1.3rem;
+}
+.web-head h3{font-size:1.7rem;margin-bottom:.4rem}
+.web-head p{color:var(--mute);max-width:42rem}
+.web-tiers{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}
+.web-tier{position:relative;display:flex;flex-direction:column;gap:.7rem;padding:1.4rem 1.3rem;border-radius:1.2rem;border:1.5px solid var(--line);background:var(--bg)}
+.web-tier.is-best{border-color:color-mix(in srgb,var(--hot) 60%,var(--line));background:linear-gradient(165deg,color-mix(in srgb,var(--hot) 10%,var(--bg)),var(--bg));box-shadow:0 26px 60px -34px color-mix(in srgb,var(--hot) 70%,transparent)}
+.web-tier .pkg-badge{position:absolute;top:-.75rem;left:1.2rem;right:auto}
+.web-name{font:700 1.35rem/1.1 "Cormorant Garamond",Georgia,serif}
+.web-tier .price{font-size:clamp(2rem,3.6vw,2.6rem)}
+.web-tier .price small{font-size:.85rem}
+.web-for{color:var(--mute);font-size:.95rem}
+.web-note{font-size:.84rem;color:var(--mute);padding-top:.7rem;border-top:1px solid var(--line);margin-top:auto}
+.web-tier .btn{align-self:flex-start}
+.web-care{display:flex;flex-wrap:wrap;gap:.3rem 1rem;align-items:baseline;padding:.9rem 1.1rem;border-radius:1rem;border:1px dashed var(--line)}
+.web-care span{color:var(--mute);font-size:.92rem}
+.web-jump{color:var(--gold);font-weight:600;white-space:nowrap}
+:root[data-theme=light] .web-jump{color:var(--hot)}
+@media(max-width:860px){.web-tiers{grid-template-columns:1fr}.web{padding:1.3rem 1.1rem}}

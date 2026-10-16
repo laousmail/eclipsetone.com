@@ -24,7 +24,7 @@
     { id: 'physical', need: 'Physical products (CD, vinyl, cassette, USB-C)', icon: 'disc', name: ['Physical copies', 'Copies physiques'], what: ['Designed, manufactured and delivered.', 'Conçues, fabriquées et livrées.'] },
     { id: 'launch', need: 'Release plan and launch support', icon: 'rocket', name: ['Release plan and launch', 'Plan de sortie et lancement'], what: ['Timeline, hooks, promo pack, launch-week support.', 'Calendrier, hooks, kit promo, support de lancement.'] },
     { id: 'social', need: 'Social media setup', icon: 'phone', name: ['Social media setup', 'Réseaux sociaux'], what: ['Profiles, visuals and a content plan.', 'Profils, visuels et plan de contenu.'] },
-    { id: 'website', need: 'Website design', icon: 'globe', name: ['Artist website', 'Site d’artiste'], what: ['Music, shows, merch and a fan email list.', 'Musique, spectacles, merch et liste de fans.'] },
+    { id: 'website', need: 'Website design', icon: 'globe', name: ['Artist website', 'Site d’artiste'], what: ['One page from $500. A full site that updates itself from $1,500.', 'Une page dès 500 $. Un site complet qui se met à jour seul dès 1 500 $.'] },
     { id: 'media', need: 'Photo and video', icon: 'camera', name: ['Photo and video', 'Photo et vidéo'], what: ['Press photos, cover shoot, clips for social.', 'Photos de presse, pochette, extraits pour les réseaux.'] },
     { id: 'management', need: 'Artist management', icon: 'compass', name: ['Artist management', 'Gestion d’artiste'], what: ['Planning, releases, opportunities.', 'Planification, sorties, opportunités.'] },
   ]
@@ -50,7 +50,7 @@
     ['Review', 'Résumé'],
   ]
 
-  const blank = () => ({ pack: null, qty: 1, extras: [], formats: [], name: '', email: '', handle: '', link: '' })
+  const blank = () => ({ pack: null, qty: 1, extras: [], formats: [], web: 'page', name: '', email: '', handle: '', link: '' })
   let s = blank()
   let step = 0
   try {
@@ -66,7 +66,16 @@
     if (!p) return 0
     return isEP() ? 1597 : p.price * s.qty
   }
-  const hasQuoted = () => s.extras.length > 0 || (s.pack && s.qty >= 8)
+  const WEB = {
+    page: { name: ['Artist Page', 'Page d’artiste'], price: 500, from: false, what: ['One page: music, bio, links, booking, fan sign-up.', 'Une page : musique, bio, liens, booking, inscription fans.'] },
+    site: { name: ['Artist Site', 'Site d’artiste complet'], price: 1500, from: true, what: ['Full site: releases and shows sync on their own.', 'Site complet : sorties et spectacles synchronisés seuls.'] },
+  }
+  const hasWeb = () => s.extras.includes('website')
+  const webPrice = () => (hasWeb() ? WEB[s.web === 'site' ? 'site' : 'page'].price : 0)
+  const isFrom = () => hasWeb() && s.web === 'site'
+  const albumQuote = () => s.pack && s.pack !== 'none' && s.qty >= 8
+  const grandTotal = () => (albumQuote() ? 0 : musicTotal()) + webPrice()
+  const hasQuoted = () => s.extras.some((x) => x !== 'website') || albumQuote()
   const launchIncluded = () => s.pack === 'release'
   const stepsFor = () => (s.pack === 'none' ? [0, 2, 3] : [0, 1, 2, 3])
 
@@ -157,7 +166,7 @@
     const none = s.extras.length === 0
     return `<p class="cfg-k">${L('Step 3', 'Étape 3')}</p>
       <h2 id="cfg-title">${L('Anything else for this release?', 'Autre chose pour cette sortie ?')}</h2>
-      <p class="cfg-sub">${L('Add what you need. Each extra is quoted for your project.', 'Ajoute ce qu’il te faut. Chaque extra est chiffré pour ton projet.')}</p>
+      <p class="cfg-sub">${L('Add what you need. Fixed prices are shown, the rest is quoted for your project.', 'Ajoute ce qu’il te faut. Les prix fixes sont affichés, le reste est chiffré pour ton projet.')}</p>
       <button type="button" class="cfg-noextras ${none ? 'is-on' : ''}" data-noextras>
         <span class="cfg-check" aria-hidden="true"></span>
         <span><b>${L('No extras, that’s it', 'Pas d’extras, c’est tout')}</b><small>${L('Just the music. Take me to my plan.', 'Juste la musique. Montre-moi mon plan.')}</small></span>
@@ -173,6 +182,7 @@
             ${included
               ? `<span class="cfg-incl">${L('Included', 'Inclus')}</span>`
               : `<button type="button" class="cfg-add" data-extra="${e.id}" aria-pressed="${on}">${on ? L('Added', 'Ajouté') : L('Add', 'Ajouter')}</button>`}
+            ${e.id === 'website' && on ? `<div class="cfg-webs">${Object.entries(WEB).map(([k, w]) => `<button type="button" data-web="${k}" aria-pressed="${(s.web === 'site' ? 'site' : 'page') === k}"><b class="wn">${L(...w.name)}</b><span class="wp">${w.from ? L('from ', 'dès ') : ''}${money(w.price)}</span><small class="ww">${L(...w.what)}</small></button>`).join('')}</div>` : ''}
             ${e.id === 'physical' && on ? `<div class="cfg-formats">${FORMATS.map((f) => `<button type="button" data-format="${f.id}" aria-pressed="${s.formats.includes(f.id)}">${L(...f.name)}</button>`).join('')}</div>` : ''}
           </div>`
         }).join('')}
@@ -216,19 +226,24 @@
     s.extras.forEach((id) => {
       const e = EXTRAS.find((x) => x.id === id)
       if (!e) return
+      if (id === 'website') {
+        const w = WEB[s.web === 'site' ? 'site' : 'page']
+        rows.push(`<li><div><b>${L(...w.name)}</b><small>${L('Artist website', 'Site d’artiste')}</small></div><span class="cfg-amt">${w.from ? `<small class="from">${L('from', 'dès')}</small> ` : ''}${money(w.price)}</span></li>`)
+        return
+      }
       const fm = id === 'physical' && s.formats.length ? FORMATS.filter((f) => s.formats.includes(f.id)).map((f) => f.name[lang() === 'fr' ? 1 : 0]).join(', ') : ''
       rows.push(`<li><div><b>${L(...e.name)}</b>${fm ? `<small>${fm}</small>` : ''}</div><span class="cfg-amt q">${L('Quoted', 'Sur devis')}</span></li>`)
     })
     if (!rows.length) {
       return `<p class="cfg-empty">${L('Pick what you need. Your plan builds here.', 'Choisis ce qu’il te faut. Ton plan se construit ici.')}</p>`
     }
-    const total = s.qty >= 8 ? 0 : musicTotal()
+    const total = grandTotal()
     return `<ul class="cfg-lines ${big ? 'big' : ''}">${rows.join('')}</ul>
       <div class="cfg-total">
-        <span>${total ? L('Music total', 'Total musique') : L('Total', 'Total')}</span>
-        <b data-total>${total ? money(total) : L('On quote', 'Sur devis')}</b>
+        <span>${isFrom() ? L('Starting total', 'Total de départ') : L('Total', 'Total')}</span>
+        <b data-total>${total ? (isFrom() ? `<small class="from">${L('from', 'dès')}</small> ` : '') + money(total) : L('On quote', 'Sur devis')}</b>
       </div>
-      ${total && hasQuoted() ? `<p class="cfg-plus">${L('+ quoted extras', '+ extras sur devis')}</p>` : ''}`
+      ${total && hasQuoted() ? `<p class="cfg-plus">${albumQuote() ? L('+ album pricing on your quote', '+ prix album sur devis') : L('+ quoted extras', '+ extras sur devis')}</p>` : ''}`
   }
 
   function canContinue() {
@@ -255,10 +270,10 @@
     stage.innerHTML = `<div class="cfg-pane ${dir ? 'in-' + dir : ''}">${html}</div>`
     const back = order.indexOf(step) > 0 ? `<button type="button" class="cfg-back" data-back>${L('Back', 'Retour')}</button>` : ''
     cart.innerHTML = `<p class="cfg-cart-k">${L('Your plan', 'Ton plan')}</p>${cartLines(false)}<div class="cfg-cart-cta">${primary()}${back}</div>`
-    const total = s.qty >= 8 ? 0 : musicTotal()
+    const total = grandTotal()
     bar.innerHTML = `<button type="button" class="cfg-bar-sum" data-sheet>
         <small>${L('Your plan', 'Ton plan')}</small>
-        <b>${s.pack ? (total ? money(total) : L('On quote', 'Sur devis')) : '–'}${total && hasQuoted() ? ' <em>+</em>' : ''}</b>
+        <b>${s.pack ? (total ? (isFrom() ? '<em>' + L('from', 'dès') + '</em> ' : '') + money(total) : L('On quote', 'Sur devis')) : '–'}${total && hasQuoted() ? ' <em>+</em>' : ''}</b>
       </button>
       ${back}${primary()}`
     updateSend()
@@ -310,6 +325,7 @@
       if (id === 'physical' && !s.extras.includes('physical')) s.formats = []
       save(); render()
     }
+    if (b.dataset.web && dlg.contains(b)) { s.web = b.dataset.web; save(); render() }
     if (b.dataset.format) {
       const f = b.dataset.format
       s.formats = s.formats.includes(f) ? s.formats.filter((x) => x !== f) : [...s.formats, f]
@@ -347,9 +363,11 @@
     s.extras.forEach((id) => {
       const e = EXTRAS.find((x) => x.id === id)
       let line = `Extra: ${e.name[0]}`
+      if (id === 'website') { const w = WEB[s.web === 'site' ? 'site' : 'page']; line = `Website: ${w.name[0]} (${w.from ? 'from ' : ''}${money(w.price)})` }
       if (id === 'physical' && s.formats.length) line += ` (${FORMATS.filter((f) => s.formats.includes(f.id)).map((f) => f.name[0]).join(', ')})`
       lines.push(line)
     })
+    if (grandTotal()) lines.push(`Total: ${isFrom() ? 'from ' : ''}${money(grandTotal())}${hasQuoted() ? ' + quoted items' : ''}`)
     lines.push(`Name: ${s.name}`, `Email: ${s.email}`)
     if (s.handle) lines.push(`IG/TikTok: ${s.handle}`)
     if (s.link) lines.push(`Vocals/demo: ${s.link}`)
@@ -398,5 +416,11 @@
     document.dispatchEvent(new CustomEvent('et:pick', { detail: s.pack }))
     applyToForm()
   }
+  document.querySelectorAll('a[data-web]').forEach((a) => a.addEventListener('click', () => {
+    s.web = a.dataset.web
+    if (!s.extras.includes('website')) s.extras = [...s.extras, 'website']
+    try { localStorage.setItem(KEY, JSON.stringify(s)) } catch { /* private mode */ }
+    render()
+  }))
   if (s.pack) { syncPage(); render() }
 })()
