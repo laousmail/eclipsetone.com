@@ -274,7 +274,7 @@
   function initPricing() {
     const root = document.querySelector('[data-pricing]')
     if (!root) return
-    const names = { mix: 'The Mix', record: 'The Record', signature: 'The Signature Record', release: 'The Release' }
+    const names = { mix: 'Mixing', record: 'Full Song', signature: 'Song + Songwriting', release: 'Song + Launch' }
     const select = document.querySelector('[data-package-select]')
     const pickBtns = root.querySelectorAll('[data-pick]')
     function pick(key, fromUser) {

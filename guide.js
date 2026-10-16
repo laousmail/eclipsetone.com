@@ -15,11 +15,11 @@
   const onServices = !!document.querySelector('[data-pricing]')
 
   const PACKS = [
-    { id: 'mix', name: 'The Mix', price: 150, from: true, for: ['Your song is already recorded', 'Ta chanson est déjà enregistrée'], what: ['Send your recorded tracks. We mix them. Price depends on how many tracks.', 'Envoie tes pistes enregistrées. On les mixe. Le prix dépend du nombre de pistes.'] },
-    { id: 'session', name: 'The Vocal Session', price: 350, unit: ['per 2-hour session', 'par session de 2 h'], tag: ['In person · Montréal', 'En personne · Montréal'], for: ['You want to record in the studio', 'Tu veux enregistrer au studio'], what: ['2 hours in the studio with Smail, a singer who gets your best take. Mix included. Extra hours $50.', '2 h au studio avec Smail, un chanteur qui va chercher ta meilleure prise. Mix inclus. Heure de plus : 50 $.'] },
-    { id: 'record', name: 'The Record', price: 599, tag: ['Start here', 'Commence ici'], for: ['You have vocals or lyrics', 'Tu as des voix ou des paroles'], what: ['We make the music, mix and master. First version in 7 days.', 'On fait la musique, le mix et le master. Première version en 7 jours.'] },
-    { id: 'signature', name: 'The Signature Record', price: 997, for: ['You have just an idea', 'Tu as juste une idée'], what: ['We write the song with you, then make it. Faster delivery.', 'On écrit la chanson avec toi, puis on la fait. Livraison plus rapide.'] },
-    { id: 'release', name: 'The Release', price: 2000, for: ['You want the song and the launch', 'Tu veux la chanson et le lancement'], what: ['Everything in Signature, plus help launching your song.', 'Tout Signature, plus de l’aide pour lancer ta chanson.'] },
+    { id: 'mix', name: 'Mixing', nameFr: 'Mixage', price: 150, from: true, for: ['Your song is already recorded', 'Ta chanson est déjà enregistrée'], what: ['Send your recorded tracks. We mix them. Price depends on how many tracks.', 'Envoie tes pistes enregistrées. On les mixe. Le prix dépend du nombre de pistes.'] },
+    { id: 'session', name: 'Studio Recording', nameFr: 'Enregistrement en studio', price: 350, unit: ['per 2-hour session', 'par session de 2 h'], tag: ['In person · Montréal', 'En personne · Montréal'], for: ['You want to record in the studio', 'Tu veux enregistrer au studio'], what: ['2 hours in the studio with Smail, a singer who gets your best take. Mix included. Extra hours $50.', '2 h au studio avec Smail, un chanteur qui va chercher ta meilleure prise. Mix inclus. Heure de plus : 50 $.'] },
+    { id: 'record', name: 'Full Song', nameFr: 'Chanson complète', price: 599, tag: ['Start here', 'Commence ici'], for: ['You have vocals or lyrics', 'Tu as des voix ou des paroles'], what: ['We make the music, mix and master. First version in 7 days.', 'On fait la musique, le mix et le master. Première version en 7 jours.'] },
+    { id: 'signature', name: 'Song + Songwriting', nameFr: 'Chanson + écriture', price: 997, for: ['You have just an idea', 'Tu as juste une idée'], what: ['We write the song with you, then make it. Faster delivery.', 'On écrit la chanson avec toi, puis on la fait. Livraison plus rapide.'] },
+    { id: 'release', name: 'Song + Launch', nameFr: 'Chanson + lancement', price: 2000, for: ['You want the song and the launch', 'Tu veux la chanson et le lancement'], what: ['Everything in Song + Songwriting, plus help launching your song.', 'Tout Chanson + écriture, plus de l’aide pour lancer ta chanson.'] },
   ]
   const EXTRAS = [
     { id: 'physical', need: 'Physical products (CD, vinyl, cassette, USB-C)', icon: 'disc', name: ['Physical copies', 'Copies physiques'], what: ['100 CDs for $399. 50 USB‑C cards for $549.', '100 CD pour 399 $. 50 cartes USB‑C pour 549 $.'] },
@@ -130,7 +130,7 @@
             <span class="cfg-pack-in">
               ${p.tag ? `<em class="cfg-tag">${L(...p.tag)}</em>` : ''}
               <span class="cfg-for">${L(...p.for)}</span>
-              <b class="cfg-name">${p.name}</b>
+              <b class="cfg-name">${L(p.name, p.nameFr)}</b>
               <span class="cfg-what">${L(...p.what)}</span>
               <span class="cfg-price">${p.from ? `<small>${L('from', 'dès')}</small> ` : ''}${money(p.price)} <small>${p.unit ? L(...p.unit) : L('per song', 'par chanson')}</small></span>
               <span class="cfg-radio" aria-hidden="true"></span>
@@ -154,7 +154,7 @@
     else if (s.qty > 1) line = `<p class="note info"><b>${L('Good to know:', 'Bon à savoir :')}</b> ${L('Multi-song pricing is confirmed on your quote.', 'Le prix multi-chansons est confirmé sur ton devis.')}</p>`
     return `<p class="cfg-k">${L('Step 2', 'Étape 2')}</p>
       <h2 id="cfg-title">${s.pack === 'session' ? L('How many sessions?', 'Combien de sessions ?') : L('How many songs?', 'Combien de chansons ?')}</h2>
-      <p class="cfg-sub">${p ? `${p.name} · ${p.from ? L('from ', 'dès ') : ''}${money(p.price)} ${p.unit ? L(...p.unit) : L('per song', 'par chanson')}` : ''}</p>
+      <p class="cfg-sub">${p ? `${L(p.name, p.nameFr)} · ${p.from ? L('from ', 'dès ') : ''}${money(p.price)} ${p.unit ? L(...p.unit) : L('per song', 'par chanson')}` : ''}</p>
       ${s.pack === 'session' ? `<p class="note warn"><b>${L('In person only:', 'En personne seulement :')}</b> ${L('sessions happen at our studio in Montréal. Most singers record one song per session.', 'les sessions ont lieu à notre studio à Montréal. La plupart des chanteurs enregistrent une chanson par session.')}</p>` : ''}
       <div class="cfg-qty">
         <button type="button" class="cfg-qbtn" data-qty="-1" aria-label="One less" ${s.qty <= 1 ? 'disabled' : ''}>−</button>
@@ -221,7 +221,7 @@
     const p = pack()
     const rows = []
     if (p) {
-      const label = isEP() ? 'The EP' : p.name
+      const label = isEP() ? L('3-Song EP', 'EP 3 chansons') : L(p.name, p.nameFr)
       const one = s.pack === 'session' ? L('1 session · in person', '1 session · en personne') : L('1 song', '1 chanson')
       const sub = isEP() ? L('3 Records, one sound', '3 Records, un seul son') : s.qty > 1 ? `${s.qty} × ${p.from ? L('from ', 'dès ') : ''}${money(p.price)}` : one
       rows.push(`<li><div><b>${label}</b><small>${sub}</small></div><span class="cfg-amt">${albumQuote() ? L('Quoted', 'Sur devis') : (p.from ? `<small class="from">${L('from', 'dès')}</small> ` : '') + money(musicTotal())}</span></li>`)
@@ -367,7 +367,7 @@
   function message() {
     const p = pack()
     const lines = ['EclipseTone plan']
-    if (p) lines.push(`Music: ${isEP() ? 'The EP (3 Records)' : `${p.name} × ${s.qty}`}${albumQuote() ? ' (album, quote)' : ` = ${p.from ? 'from ' : ''}${money(musicTotal())}`}${s.pack === 'session' ? ' (in person, Montréal)' : ''}`)
+    if (p) lines.push(`Music: ${isEP() ? '3-Song EP (3 Full Songs)' : `${p.name} × ${s.qty}`}${albumQuote() ? ' (album, quote)' : ` = ${p.from ? 'from ' : ''}${money(musicTotal())}`}${s.pack === 'session' ? ' (in person, Montréal)' : ''}`)
     if (s.pack === 'none') lines.push('Music: already finished')
     if (launchIncluded()) lines.push('Release plan and launch: included')
     s.extras.forEach((id) => {
@@ -410,14 +410,14 @@
   // ---------- carry the plan into the page ----------
   function applyToForm() {
     if (s.pack) {
-      const name = isEP() ? 'The EP' : s.pack === 'none' ? 'Not sure' : pack()?.name
+      const name = isEP() ? '3-Song EP' : s.pack === 'none' ? 'Not sure' : pack()?.name
       document.dispatchEvent(new CustomEvent('et:package', { detail: name }))
     }
     document.dispatchEvent(new CustomEvent('et:plan'))
   }
   // Lets the price form show and send the plan built here.
   window.EclipsePlan = {
-    pick: () => (s.pack ? (isEP() ? 'The EP' : s.pack === 'none' ? 'Not sure' : pack()?.name) : ''),
+    pick: () => (s.pack ? (isEP() ? '3-Song EP' : s.pack === 'none' ? 'Not sure' : pack()?.name) : ''),
     lines: () => (s.pack ? message().split('\n').slice(1).filter((l) => !/^(Name|Email|IG\/TikTok|Vocals\/demo):/.test(l)) : []),
   }
   function syncPage() {

@@ -20,21 +20,21 @@
 
   // Everything the form knows about each choice.
   const PICKS = {
-    'The Record': {
+    'Full Song': { label: ['Full Song', 'Chanson complète'],
       price: '$599', hint: ['You have vocals or lyrics', 'Tu as des voix ou des paroles'],
       q: ['What do you have right now?', 'Tu as quoi en ce moment ?'], a: HAVE,
-      tip: { idea: ['switch', 'The Signature Record', 'Just an idea? The Signature Record ($997) includes a writing session with you.', 'Juste une idée ? The Signature Record (997 $) inclut une session d’écriture avec toi.'] },
+      tip: { idea: ['switch', 'Song + Songwriting', 'Just an idea? Song + Songwriting ($997) adds a writing session with you.', 'Juste une idée ? Chanson + écriture (997 $) ajoute une session d’écriture avec toi.'] },
       next: [['We reply within 24 hours with your price', 'On répond en moins de 24 h avec ton prix'], ['You send your vocals or lyrics', 'Tu envoies tes voix ou tes paroles'], ['First version in 7 days', 'Première version en 7 jours'], ['Your finished song in 2 to 3 weeks', 'Ta chanson finie en 2 à 3 semaines']],
       cta: ['Get my price', 'Obtenir mon prix'],
     },
-    'The Signature Record': {
+    'Song + Songwriting': { label: ['Song + Songwriting', 'Chanson + écriture'],
       price: '$997', hint: ['You have just an idea', 'Tu as juste une idée'],
       q: ['What do you have right now?', 'Tu as quoi en ce moment ?'], a: HAVE,
-      tip: { vocals: ['switch', 'The Record', 'Already have vocals? The Record ($599) may be all you need.', 'Tu as déjà des voix ? The Record (599 $) suffit peut-être.'] },
+      tip: { vocals: ['switch', 'Full Song', 'Already have vocals? Full Song ($599) may be all you need.', 'Tu as déjà des voix ? Chanson complète (599 $) suffit peut-être.'] },
       next: [['We reply within 24 hours with your price', 'On répond en moins de 24 h avec ton prix'], ['We write the song with you (2 hours)', 'On écrit la chanson avec toi (2 h)'], ['First version in 7 days', 'Première version en 7 jours'], ['Your finished song in 2 to 3 weeks', 'Ta chanson finie en 2 à 3 semaines']],
       cta: ['Get my price', 'Obtenir mon prix'],
     },
-    'The Release': {
+    'Song + Launch': { label: ['Song + Launch', 'Chanson + lancement'],
       price: '$2,000', hint: ['Your song plus the launch', 'Ta chanson plus le lancement'],
       q: ['When do you want to release?', 'Tu veux sortir quand ?'],
       a: [['month', 'Within a month', 'D’ici un mois'], ['quarter', 'In 1 to 3 months', 'Dans 1 à 3 mois'], ['open', 'No date yet', 'Pas encore de date']],
@@ -42,14 +42,14 @@
       next: [['We reply within 24 hours with your price', 'On répond en moins de 24 h avec ton prix'], ['We write the song with you', 'On écrit la chanson avec toi'], ['Your finished song in 2 to 3 weeks', 'Ta chanson finie en 2 à 3 semaines'], ['We plan and run your launch with you', 'On planifie et lance ta sortie avec toi']],
       cta: ['Get my price', 'Obtenir mon prix'],
     },
-    'The EP': {
+    '3-Song EP': { label: ['3-Song EP', 'EP 3 chansons'],
       price: '$1,597', hint: ['3 songs, save $200', '3 chansons, économise 200 $'],
       q: ['What do you have right now?', 'Tu as quoi en ce moment ?'], a: HAVE,
       tip: { idea: ['info', '', 'No problem. We can add a writing session for each song. We’ll price it in your reply.', 'Pas de problème. On peut ajouter une session d’écriture par chanson. On l’inclut dans ton prix.'] },
       next: [['We reply within 24 hours with your price', 'On répond en moins de 24 h avec ton prix'], ['You send what you have for the 3 songs', 'Tu envoies ce que tu as pour les 3 chansons'], ['First versions, one song at a time', 'Premières versions, une chanson à la fois'], ['3 finished songs that sound like one project', '3 chansons finies qui sonnent comme un projet']],
       cta: ['Get my price', 'Obtenir mon prix'],
     },
-    'The Mix': {
+    'Mixing': { label: ['Mixing', 'Mixage'],
       price: '$150+', hint: ['Your song is recorded', 'Ta chanson est enregistrée'],
       q: ['How many tracks (stems) does your song have?', 'Combien de pistes a ta chanson ?'],
       a: [['s', 'Under 16', 'Moins de 16'], ['m', '16 to 40', '16 à 40'], ['l', 'Over 40', 'Plus de 40'], ['ns', 'Not sure', 'Je ne sais pas']],
@@ -57,11 +57,11 @@
       next: [['We reply within 24 hours with your exact price', 'On répond en moins de 24 h avec ton prix exact'], ['You send your tracks (WAV files)', 'Tu envoies tes pistes (fichiers WAV)'], ['First mix in a few days', 'Premier mix en quelques jours'], ['2 rounds of changes, then your final mix', '2 rondes de changements, puis ton mix final']],
       cta: ['Get my price', 'Obtenir mon prix'],
     },
-    'The Vocal Session': {
+    'Studio Recording': { label: ['Studio Recording', 'Enregistrement en studio'],
       price: '$350', hint: ['In person, Montréal', 'En personne, Montréal'],
       q: ['When do you want to come in?', 'Tu veux venir quand ?'],
       a: [['week', 'This week', 'Cette semaine'], ['two', 'In the next 2 weeks', 'Dans les 2 prochaines semaines'], ['flex', 'I’m flexible', 'Je suis flexible']],
-      always: ['warn', '', 'In person only, at our studio in Montréal. Not nearby? The Record works fully online.', 'En personne seulement, à notre studio à Montréal. Pas dans le coin ? The Record se fait 100 % en ligne.'],
+      always: ['warn', '', 'In person only, at our studio in Montréal. Not nearby? Full Song works 100% online.', 'En personne seulement, à notre studio à Montréal. Pas dans le coin ? Chanson complète se fait 100 % en ligne.'],
       next: [['We reply within 24 hours with open times', 'On répond en moins de 24 h avec les plages libres'], ['You pick a time that works', 'Tu choisis un moment qui te va'], ['2 hours in the studio with Smail', '2 heures au studio avec Smail'], ['You get your song, mixed', 'Tu reçois ta chanson, mixée']],
       cta: ['Ask for open times', 'Demander les disponibilités'],
     },
@@ -78,16 +78,17 @@
       q: ['What do you have right now?', 'Tu as quoi en ce moment ?'],
       a: [['song', 'A recorded song', 'Une chanson enregistrée'], ['vocals', 'Recorded vocals', 'Des voix enregistrées'], ['lyrics', 'Lyrics', 'Des paroles'], ['idea', 'Just an idea', 'Juste une idée']],
       tip: {
-        song: ['switch', 'The Mix', 'Sounds like The Mix (from $150) is for you.', 'On dirait que The Mix (dès 150 $) est pour toi.'],
-        vocals: ['switch', 'The Record', 'Sounds like The Record ($599) is for you.', 'On dirait que The Record (599 $) est pour toi.'],
-        lyrics: ['switch', 'The Record', 'Sounds like The Record ($599) is for you.', 'On dirait que The Record (599 $) est pour toi.'],
-        idea: ['switch', 'The Signature Record', 'Sounds like The Signature Record ($997) is for you.', 'On dirait que The Signature Record (997 $) est pour toi.'],
+        song: ['switch', 'Mixing', 'Mixing (from $150) is the one for you.', 'Mixage (dès 150 $) est fait pour toi.'],
+        vocals: ['switch', 'Full Song', 'Full Song ($599) is the one for you.', 'Chanson complète (599 $) est faite pour toi.'],
+        lyrics: ['switch', 'Full Song', 'Full Song ($599) is the one for you.', 'Chanson complète (599 $) est faite pour toi.'],
+        idea: ['switch', 'Song + Songwriting', 'Song + Songwriting ($997) is the one for you.', 'Chanson + écriture (997 $) est faite pour toi.'],
       },
       next: [['We reply within 24 hours', 'On répond en moins de 24 h'], ['We tell you what fits and the price', 'On te dit ce qui te convient et le prix'], ['You decide. No payment until you say yes.', 'Tu décides. Aucun paiement avant ton oui.']],
       cta: ['Help me choose', 'Aide-moi à choisir'],
     },
   }
-  const ORDER = ['The Record', 'The Signature Record', 'The Release', 'The EP', 'The Mix', 'The Vocal Session', 'Physical copies', 'Not sure']
+  const nm = (k) => (PICKS[k] && PICKS[k].label ? L(...PICKS[k].label) : k)
+  const ORDER = ['Full Song', 'Song + Songwriting', 'Song + Launch', '3-Song EP', 'Mixing', 'Studio Recording', 'Physical copies', 'Not sure']
 
   function build(form) {
     const st = { pick: '', answer: '' }
@@ -148,7 +149,7 @@
 
     function note(kind, html, sw) {
       const cls = kind === 'switch' ? 'ok' : kind
-      const btn = sw && sw !== st.pick ? ` <button type="button" class="sf-switch" data-switch="${esc(sw)}">${L('Switch to', 'Passer à')} ${esc(sw)}</button>` : ''
+      const btn = sw && sw !== st.pick ? ` <button type="button" class="sf-switch" data-switch="${esc(sw)}">${L('Switch to', 'Passer à')} ${esc(nm(sw))}</button>` : ''
       return `<p class="note ${cls}">${html}${btn}</p>`
     }
 
@@ -169,9 +170,9 @@
       $('[data-tips]').innerHTML = tips.join('')
       $('[data-next]').innerHTML = p.next.map(([en, f]) => `<li>${esc(L(en, f))}</li>`).join('')
       b2.classList.toggle('is-done', !!st.answer)
-      $('[data-cta]').textContent = st.pick === 'Not sure' || st.pick === 'Physical copies' || st.pick === 'The Vocal Session'
+      $('[data-cta]').textContent = st.pick === 'Not sure' || st.pick === 'Physical copies' || st.pick === 'Studio Recording'
         ? L(...p.cta)
-        : `${L(...p.cta)}${L(':', ' :')} ${st.pick}`
+        : `${L(...p.cta)}${L(':', ' :')} ${nm(st.pick)}`
       check()
     }
 
@@ -206,7 +207,7 @@
       const w = $('[data-sf-welcome]')
       if (me && me.name) {
         const first = esc(me.name.split(' ')[0])
-        const lastLine = last && last.pick ? ` ${L(`Last time you asked about ${esc(last.pick)}. Didn’t hear back? Send it again, it’s fine.`, `La dernière fois, tu as demandé ${esc(last.pick)}. Pas de réponse ? Renvoie-la, aucun souci.`)}` : ''
+        const lastLine = last && last.pick ? ` ${L(`Last time you asked about ${esc(nm(last.pick))}. Didn’t hear back? Send it again, it’s fine.`, `La dernière fois, tu as demandé ${esc(nm(last.pick))}. Pas de réponse ? Renvoie-la, aucun souci.`)}` : ''
         w.innerHTML = `<b>${L(`Welcome back, ${first}.`, `Content de te revoir, ${first}.`)}</b>${lastLine}`
         w.hidden = false
       }
@@ -280,7 +281,7 @@
     paint()
   }
 
-  // Buttons anywhere on the page: <a data-package="The Record">
+  // Buttons anywhere on the page: <a data-package="Full Song">
   document.querySelectorAll('[data-package]').forEach((b) => b.addEventListener('click', () => {
     document.dispatchEvent(new CustomEvent('et:package', { detail: b.getAttribute('data-package') }))
   }))
