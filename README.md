@@ -1,56 +1,48 @@
 # EclipseTone Productions
 
-EclipseTone Productions: online song production for independent artists. Montréal, worldwide.
+Online song production for independent artists. Montréal, worldwide.
 
-**Live:** https://eclipsetone.com/
+**Live:** https://eclipsetone.com/ · **Source of truth:** `main` (GitHub Pages)
 
 ## Stack
 
-Static site (`index.html`, `home.css`, `styles.css`, `main.js`). No build step. Production services live at `services/`.
+Static site, no build step for the main pages.
 
-**Source of truth:** `main` (GitHub Pages).
+| File | What it does |
+| --- | --- |
+| `index.html`, `home.css` | Homepage and the shared design |
+| `services/` | Prices page (`services.css` adds pricing styles) |
+| `config.js` | **Settings you edit:** lead sheet URL, analytics code, MailerLite form, backup exchange rates |
+| `main.js` | Theme, language, menu, pricing picker, physical copies picker |
+| `guide.js` | "Get started" plan builder (hands off to the price form) |
+| `smartform.js` | "Get your price" form: one step at a time, sends via WhatsApp, logs leads to the sheet |
+| `currency.js` | Prices are in CAD; visitors can view USD or EUR estimates |
+| `analytics.js` | GoatCounter visits and button events (off until `config.js` has a code) |
+| `people/`, `blog/`, `privacy/` | Built by `python3 docs/build_pages.py` from `docs/team.json`, `docs/blog.json`, `docs/privacy.html` |
+| `og-image.jpg` | Share preview for WhatsApp, Instagram, iMessage |
 
-### People profiles
+Setup steps for the lead sheet, analytics and MailerLite: [`docs/SETUP.md`](docs/SETUP.md). The `docs/` folder is not published.
 
-Bios live in `people/profiles.json`. Regenerate pages after edits:
+## Edit team, blog or privacy pages
+
+Edit `docs/team.json`, `docs/blog.json` or `docs/privacy.html`, then run:
 
 ```bash
-node people/generate.mjs
+python3 docs/build_pages.py
 ```
 
-### Artist microsites
+Header, menu and footer are copied from `index.html`, so change them there first.
 
-- [SMA!L · Laousmail](https://laousmail.com/) — [laousmail/laousmail.com](https://github.com/laousmail/laousmail.com)
-- [Khaled Ouzzir](artists/khaled-ouzzir/) — singer page + Spotify releases (`artists/khaled-ouzzir/releases.json`)
+## Homepage switches
+
+- **Before/after player:** add pairs to `proof/pairs.json` (MP3s in `proof/`). Hidden while the list is empty.
+- **Email capture:** set `mailerlite` in `config.js`. Hidden until set.
+- **Monthly spots:** set the number and remove `hidden` on the `.spots` line in `index.html` and `services/index.html`.
 
 ## Local preview
 
 ```bash
-npx --yes serve .
+python3 -m http.server 8765
 ```
 
-## 15-song challenge
-
-Shared tracker data: `challenge-data.json`  
-Artist: [laousmail on Spotify](https://open.spotify.com/artist/60GjJwhvGe1eVg98jFPgMp)
-
-The tracker no longer appears on eclipsetone.com; it lives on [laousmail.com](https://laousmail.com/). The data file and scripts stay here because the artist site may read them. `main.js` only renders the grid on pages that include `[data-song-grid]`.
-
-Validate locally:
-
-```bash
-node scripts/validate-challenge.mjs
-```
-
-Maintainers: challenge sync, deploy, and DNS notes stay offline in `private/` (not published). Never commit API credentials or personal contact numbers into this repo.
-
-## Homepage switches
-
-- **Before/after player:** add pairs to `proof/pairs.json` (MP3s in `proof/`). The section stays hidden while the list is empty.
-- **Email capture:** paste the MailerLite form action URL into `data-ml-action` on the capture form in `index.html`. Hidden until set.
-- **Monthly spots:** set the number and remove `hidden` on the `.spots` line in `index.html` and `services/index.html`.
-
-## Contact
-
-- Instagram: [@laousmail](https://instagram.com/laousmail) · [@eclipsetone](https://instagram.com/eclipsetone)
-- Booking and WhatsApp: [eclipsetone.com](https://eclipsetone.com/)
+Artist sites live in their own repos: [laousmail.com](https://github.com/laousmail/laousmail.com).

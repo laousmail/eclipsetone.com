@@ -3,10 +3,12 @@
 // The form adapts to the choice (question, tips, what happens next) and sends through WhatsApp.
 ;(() => {
   const WA = 'https://wa.me/14384668971'
+  const BASE = (document.currentScript?.src || '').replace(/smartform\.js.*$/, '')
   const ME_KEY = 'eclipsetone-me'
   const LAST_KEY = 'eclipsetone-last'
   const fr = () => document.documentElement.lang === 'fr'
   const L = (en, f) => (fr() ? f : en)
+  const P = (t) => (window.etPrices ? window.etPrices(t) : t)
   const esc = (t) => String(t).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c])
   const read = (k) => { try { return JSON.parse(localStorage.getItem(k) || 'null') } catch { return null } }
   const write = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)) } catch { /* private mode */ } }
@@ -90,6 +92,23 @@
   const nm = (k) => (PICKS[k] && PICKS[k].label ? L(...PICKS[k].label) : k)
   const ORDER = ['Full Song', 'Song + Songwriting', 'Song + Launch', '3-Song EP', 'Mixing', 'Studio Recording', 'Physical copies', 'Not sure']
 
+  // Lead log: every request with a valid email lands in the Google Sheet, sent or not.
+  function leadId() {
+    try {
+      let id = sessionStorage.getItem('eclipsetone-lead-id')
+      if (!id) { id = Date.now().toString(36) + Math.random().toString(36).slice(2, 7); sessionStorage.setItem('eclipsetone-lead-id', id) }
+      return id
+    } catch { return 'x' + Date.now().toString(36) }
+  }
+  const track_ = (n) => document.dispatchEvent(new CustomEvent('et:track', { detail: n }))
+  function logLead(data) {
+    if (data.status === 'sent' || (data.status === 'started' && !logLead.once)) { logLead.once = true; track_('price-form-' + data.status) }
+    const url = (window.ET_CONFIG || {}).leadSheetUrl
+    if (!url) return
+    const body = JSON.stringify(Object.assign({ id: leadId(), page: location.pathname, lang: document.documentElement.lang }, data))
+    try { fetch(url, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain' }, body, keepalive: true }).catch(() => {}) } catch { /* ignore */ }
+  }
+
   function build(form) {
     const st = { pick: '', answer: '' }
     form.innerHTML = `
@@ -111,6 +130,7 @@
           <div class="field"><label for="sf-name" data-t="Name"></label><input id="sf-name" name="name" autocomplete="name" required /></div>
           <div class="field"><label for="sf-email" data-t="Email"></label><input id="sf-email" name="email" type="email" autocomplete="email" inputmode="email" required /></div>
         </div>
+        <p class="sf-consent" data-t="Consent"></p>
         <button type="button" class="sf-add" data-addnote aria-expanded="false"></button>
         <div class="field" data-notefield hidden><label for="sf-msg" data-t="NoteL"></label><textarea id="sf-msg" name="message" rows="3"></textarea></div>
         <p class="note err" data-form-error hidden></p>
@@ -131,6 +151,7 @@
       Name: ['Your name', 'Ton nom'],
       Email: ['Your email', 'Ton courriel'],
       NoteL: ['Your note (optional)', 'Ta note (optionnel)'],
+      Consent: [`We save what you type here so we can reply, even if you don’t finish. <a href="${BASE}privacy/">Privacy policy</a>`, `On garde ce que tu écris ici pour pouvoir te répondre, même si tu ne finis pas. <a href="${BASE}privacy/">Politique de confidentialité</a>`],
       Add: ['+ Add a note, a link or a release date (optional)', '+ Ajouter une note, un lien ou une date (optionnel)'],
       Hint: ['Tapping the button opens WhatsApp with everything filled in. Prefer a call? <a href="https://calendly.com/eclipsetonereservation/free-onboarding-call" target="_blank" rel="noopener">Book 15 minutes</a>.', 'Le bouton ouvre WhatsApp avec tout déjà rempli. Tu préfères un appel ? <a href="https://calendly.com/eclipsetonereservation/free-onboarding-call" target="_blank" rel="noopener">Réserve 15 minutes</a>.'],
     }
@@ -140,7 +161,7 @@
       form.querySelectorAll('.sf-pick').forEach((b) => {
         const p = PICKS[b.dataset.pick]
         b.querySelector('b').textContent = p.label ? L(...p.label) : b.dataset.pick
-        b.querySelector('.sf-pp').textContent = b.dataset.pick === 'Physical copies' ? L('From $249', 'Dès 249 $') : p.price
+        b.querySelector('.sf-pp').textContent = P(b.dataset.pick === 'Physical copies' ? L('From $249', 'Dès 249 $') : p.price)
         b.querySelector('small').textContent = L(...p.hint)
       })
       $('[data-addnote]').textContent = L(...T.Add)
@@ -150,7 +171,7 @@
     function note(kind, html, sw) {
       const cls = kind === 'switch' ? 'ok' : kind
       const btn = sw && sw !== st.pick ? ` <button type="button" class="sf-switch" data-switch="${esc(sw)}">${L('Switch to', 'Passer à')} ${esc(nm(sw))}</button>` : ''
-      return `<p class="note ${cls}">${html}${btn}</p>`
+      return `<p class="note ${cls}">${P(html)}${btn}</p>`
     }
 
     function paint() {
@@ -176,6 +197,18 @@
       check()
     }
 
+    let sent = false, timer = 0
+    function snapshot(status) {
+      const p = PICKS[st.pick]
+      const ans = p && p.a.find(([id]) => id === st.answer)
+      return { status, pick: st.pick, answer: ans ? ans[1] : '', name: name.value.trim(), email: email.value.trim(), note: msg.value.trim(), plan: (window.EclipsePlan?.lines?.() || []).join(' | ') }
+    }
+    function track() {
+      if (sent || !valid()) return
+      clearTimeout(timer)
+      timer = setTimeout(() => logLead(snapshot('started')), 1200)
+    }
+    window.addEventListener('pagehide', () => { if (!sent && valid()) logLead(snapshot('started')) })
     function valid() { return name.value.trim() && /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email.value.trim()) }
     function check() {
       const ok = !!valid()
@@ -231,16 +264,16 @@
 
     form.addEventListener('click', (e) => {
       const pk = e.target.closest('[data-pick]')
-      if (pk) return choose(pk.dataset.pick, true)
+      if (pk) { track_('price-form-pick-' + pk.dataset.pick); return choose(pk.dataset.pick, true) }
       const an = e.target.closest('[data-ans]')
-      if (an) { st.answer = an.dataset.ans; paint(); return }
+      if (an) { st.answer = an.dataset.ans; paint(); track(); return }
       const sw = e.target.closest('[data-switch]')
       if (sw) { const keep = st.answer; choose(sw.dataset.switch); if (PICKS[st.pick].a.some(([id]) => id === keep)) { st.answer = keep; paint() } return }
       if (e.target.closest('[data-editplan]')) { document.querySelector('[data-guide-open]')?.click(); return }
       const add = e.target.closest('[data-addnote]')
       if (add) { const f = $('[data-notefield]'); f.hidden = !f.hidden; add.setAttribute('aria-expanded', String(!f.hidden)); if (!f.hidden) msg.focus() }
     })
-    form.addEventListener('input', check)
+    form.addEventListener('input', () => { check(); track() })
     form.addEventListener('submit', (e) => {
       e.preventDefault()
       const err = $('[data-form-error]')
@@ -263,6 +296,9 @@
         msg.value.trim() ? `Note: ${msg.value.trim()}` : '',
       ].filter(Boolean)
       const href = `${WA}?text=${encodeURIComponent(lines.join('\n'))}`
+      sent = true
+      clearTimeout(timer)
+      logLead(snapshot('sent'))
       write(ME_KEY, { name: name.value.trim(), email: email.value.trim() })
       write(LAST_KEY, { pick: st.pick, at: Date.now() })
       window.open(href, '_blank', 'noopener,noreferrer')
@@ -272,6 +308,7 @@
     // Other parts of the page (package buttons, the Get started guide) pick for us.
     document.addEventListener('et:package', (e) => { choose(e.detail); plan() })
     document.addEventListener('et:plan', () => plan())
+    document.addEventListener('et:currency', () => { paint(); plan() })
     new MutationObserver(() => paint()).observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] })
 
     welcome()

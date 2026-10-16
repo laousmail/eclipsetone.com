@@ -11,7 +11,6 @@
   const L = (en, fr) => `<span data-lang="en">${en}</span><span data-lang="fr">${fr}</span>`
   const lang = () => (document.documentElement.lang === 'fr' ? 'fr' : 'en')
   const KEY = 'eclipsetone-plan-v2'
-  const WHATSAPP = 'https://wa.me/14384668971'
   const onServices = !!document.querySelector('[data-pricing]')
 
   const PACKS = [
@@ -61,7 +60,8 @@
     if (saved && typeof saved === 'object') s = Object.assign(blank(), saved)
   } catch { /* nothing saved */ }
 
-  const money = (n) => '$' + n.toLocaleString('en-US')
+  const money = (n) => (window.etMoney ? window.etMoney(n) : '$' + n.toLocaleString('en-US'))
+  const cad = (n) => '$' + n.toLocaleString('en-US') + ' CAD'
   const pack = () => PACKS.find((p) => p.id === s.pack) || null
   const isEP = () => s.pack === 'record' && s.qty === 3
   function musicTotal() {
@@ -203,13 +203,7 @@
       <p class="cfg-sub">${L('Send it and we’ll reply within 24 hours with your final price.', 'Envoie-le et on te répond en moins de 24 h avec ton prix final.')}</p>
       <div class="cfg-review">${cartLines(true)}</div>
       <p class="note ok"><b>${L('No payment now.', 'Aucun paiement maintenant.')}</b> ${L('We confirm your quote first. You only pay half once you say yes.', 'On confirme ton devis d’abord. Tu paies la moitié seulement quand tu dis oui.')}</p>
-      <form class="cfg-form" data-send-form novalidate>
-        <div class="cfg-row">
-          <label><span>${L('Your name', 'Ton nom')}</span><input name="name" autocomplete="name" value="${esc(s.name)}" required /></label>
-          <label><span>${L('Email', 'Courriel')}</span><input name="email" type="email" autocomplete="email" value="${esc(s.email)}" required /></label>
-        </div>
-        <p class="note err" data-err hidden><b>${L('Missing info:', 'Info manquante :')}</b> ${L('Add your name and a valid email so we can reply.', 'Ajoute ton nom et un courriel valide pour qu’on te réponde.')}</p>
-      </form>`
+      <p class="note info">${L('Next: tell us where to send your price. It takes 20 seconds.', 'Ensuite : dis-nous où envoyer ton prix. Ça prend 20 secondes.')}</p>`
   }
 
   function esc(v) {
@@ -223,7 +217,7 @@
     if (p) {
       const label = isEP() ? L('3-Song EP', 'EP 3 chansons') : L(p.name, p.nameFr)
       const one = s.pack === 'session' ? L('1 session · in person', '1 session · en personne') : L('1 song', '1 chanson')
-      const sub = isEP() ? L('3 Records, one sound', '3 Records, un seul son') : s.qty > 1 ? `${s.qty} × ${p.from ? L('from ', 'dès ') : ''}${money(p.price)}` : one
+      const sub = isEP() ? L('3 full songs, one sound', '3 chansons, un seul son') : s.qty > 1 ? `${s.qty} × ${p.from ? L('from ', 'dès ') : ''}${money(p.price)}` : one
       rows.push(`<li><div><b>${label}</b><small>${sub}</small></div><span class="cfg-amt">${albumQuote() ? L('Quoted', 'Sur devis') : (p.from ? `<small class="from">${L('from', 'dès')}</small> ` : '') + money(musicTotal())}</span></li>`)
       if (launchIncluded()) rows.push(`<li class="is-sub"><div><b>${L('Release plan and launch', 'Plan de sortie et lancement')}</b></div><span class="cfg-amt">${L('Included', 'Inclus')}</span></li>`)
     } else if (s.pack === 'none') {
@@ -262,7 +256,7 @@
   }
 
   function primary() {
-    if (step === 3) return `<a class="btn cfg-go" data-send href="#" target="_blank" rel="noopener">${L('Get my price', 'Obtenir mon prix')}</a>`
+    if (step === 3) return `<button type="button" class="btn cfg-go" data-handoff>${L('Continue to send', 'Continuer pour envoyer')}</button>`
     const label = step === 2 ? L('See my plan', 'Voir mon plan') : L('Continue', 'Continuer')
     return `<button type="button" class="btn cfg-go" data-next ${canContinue() ? '' : 'disabled'}>${label}</button>`
   }
@@ -286,7 +280,6 @@
         <b>${s.pack ? (total ? (isFrom() ? '<em>' + L('from', 'dès') + '</em> ' : '') + money(total) : L('On quote', 'Sur devis')) : '–'}${total && hasQuoted() ? ' <em>+</em>' : ''}</b>
       </button>
       ${back}${primary()}`
-    updateSend()
     const fabTotal = document.querySelector('[data-fab-total]')
     if (fabTotal) fabTotal.textContent = total ? money(total) : ''
     fab.hidden = !s.pack
@@ -308,14 +301,6 @@
       s.pack = t.value
       if (s.pack === 'release') s.extras = s.extras.filter((x) => x !== 'launch')
       save(); render()
-    }
-  })
-  dlg.addEventListener('input', (e) => {
-    const t = e.target
-    if (t.closest('[data-send-form]') && t.name in s) {
-      s[t.name] = t.value; save(); updateSend()
-      const err = dlg.querySelector('[data-err]')
-      if (err && s.name.trim() && /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(s.email.trim())) err.hidden = true
     }
   })
   dlg.addEventListener('click', (e) => {
@@ -343,13 +328,7 @@
     }
     if (b.hasAttribute('data-noextras')) { s.extras = []; s.formats = []; save(); step = 3; render('fwd') }
     if (b.hasAttribute('data-sheet')) dlg.classList.toggle('sheet-open')
-    if (b.hasAttribute('data-send')) {
-      const ok = s.name.trim() && /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(s.email.trim())
-      const err = dlg.querySelector('[data-err]')
-      if (!ok) { e.preventDefault(); if (err) err.hidden = false; dlg.querySelector('[data-send-form] input:invalid, [data-send-form] input')?.focus(); return }
-      if (err) err.hidden = true
-      applyToForm()
-    }
+    if (b.hasAttribute('data-handoff')) handoff()
   })
   dlg.addEventListener('close', () => { document.documentElement.classList.remove('cfg-open'); dlg.classList.remove('sheet-open') })
 
@@ -367,26 +346,24 @@
   function message() {
     const p = pack()
     const lines = ['EclipseTone plan']
-    if (p) lines.push(`Music: ${isEP() ? '3-Song EP (3 Full Songs)' : `${p.name} × ${s.qty}`}${albumQuote() ? ' (album, quote)' : ` = ${p.from ? 'from ' : ''}${money(musicTotal())}`}${s.pack === 'session' ? ' (in person, Montréal)' : ''}`)
+    if (p) lines.push(`Music: ${isEP() ? '3-Song EP (3 Full Songs)' : `${p.name} × ${s.qty}`}${albumQuote() ? ' (album, quote)' : ` = ${p.from ? 'from ' : ''}${cad(musicTotal())}`}${s.pack === 'session' ? ' (in person, Montréal)' : ''}`)
     if (s.pack === 'none') lines.push('Music: already finished')
     if (launchIncluded()) lines.push('Release plan and launch: included')
     s.extras.forEach((id) => {
       const e = EXTRAS.find((x) => x.id === id)
       let line = `Extra: ${e.name[0]}`
-      if (id === 'ddp') line = `Extra: DDP file (${money(ddpPrice())})`
-      if (id === 'website') { const w = WEB[s.web === 'site' ? 'site' : 'page']; line = `Website: ${w.name[0]} (${w.from ? 'from ' : ''}${money(w.price)})` }
+      if (id === 'ddp') line = `Extra: DDP file (${cad(ddpPrice())})`
+      if (id === 'website') { const w = WEB[s.web === 'site' ? 'site' : 'page']; line = `Website: ${w.name[0]} (${w.from ? 'from ' : ''}${cad(w.price)})` }
       if (id === 'physical' && s.formats.length) line += ` (${FORMATS.filter((f) => s.formats.includes(f.id)).map((f) => f.name[0]).join(', ')})`
       lines.push(line)
     })
-    if (grandTotal()) lines.push(`Total: ${isFrom() ? 'from ' : ''}${money(grandTotal())}${hasQuoted() ? ' + quoted items' : ''}`)
+    if (grandTotal()) lines.push(`Total: ${isFrom() ? 'from ' : ''}${cad(grandTotal())}${hasQuoted() ? ' + quoted items' : ''}`)
     lines.push(`Name: ${s.name}`, `Email: ${s.email}`)
     if (s.handle) lines.push(`IG/TikTok: ${s.handle}`)
     if (s.link) lines.push(`Vocals/demo: ${s.link}`)
     return lines.join('\n')
   }
-  function updateSend() {
-    dlg.querySelectorAll('[data-send]').forEach((a) => { a.href = `${WHATSAPP}?text=${encodeURIComponent(message())}` })
-  }
+
 
   function browse() {
     const target = document.querySelector('#how') || document.querySelector('#packages')
@@ -408,6 +385,21 @@
   openers.forEach((b) => b.addEventListener('click', (e) => { e.preventDefault(); open(s.pack ? 0 : 0) }))
 
   // ---------- carry the plan into the page ----------
+  // One place to submit: the plan goes to the price form on the page.
+  function handoff() {
+    save()
+    close()
+    const form = document.querySelector('[data-smart-form]')
+    if (!form) {
+      const base = (document.querySelector('script[src*="guide.js"]')?.src || '').replace(/guide\.js.*$/, '')
+      location.href = base + 'index.html#booking'
+      return
+    }
+    applyToForm()
+    const name = form.querySelector('#sf-name')
+    ;(form.querySelector('[data-b="3"]') || form).scrollIntoView({ behavior: 'smooth', block: 'center' })
+    setTimeout(() => name && name.focus({ preventScroll: true }), 500)
+  }
   function applyToForm() {
     if (s.pack) {
       const name = isEP() ? '3-Song EP' : s.pack === 'none' ? 'Not sure' : pack()?.name
@@ -415,6 +407,7 @@
     }
     document.dispatchEvent(new CustomEvent('et:plan'))
   }
+  document.addEventListener('et:currency', () => render())
   // Lets the price form show and send the plan built here.
   window.EclipsePlan = {
     pick: () => (s.pack ? (isEP() ? '3-Song EP' : s.pack === 'none' ? 'Not sure' : pack()?.name) : ''),
