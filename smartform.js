@@ -7,7 +7,7 @@
   const ME_KEY = 'eclipsetone-me'
   const LAST_KEY = 'eclipsetone-last'
   const fr = () => document.documentElement.lang === 'fr'
-  const L = (en, f) => (fr() ? f : en)
+  const L = (en, f) => (fr() ? String(f).replace(/ ([?:!;»])/g, '\u00a0$1') : en)
   const P = (t) => (window.etPrices ? window.etPrices(t) : t)
   const esc = (t) => String(t).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c])
   const read = (k) => { try { return JSON.parse(localStorage.getItem(k) || 'null') } catch { return null } }
@@ -230,7 +230,8 @@
       const box = $('[data-sf-plan]')
       if (!lines.length) { box.hidden = true; return [] }
       box.hidden = false
-      box.innerHTML = `<p class="sf-plan-t">${L('Your plan from Get started', 'Ton plan de Commencer')}</p><ul>${lines.map((l) => `<li>${esc(l)}</li>`).join('')}</ul><p class="sf-plan-f">${L('We’ll send it with your request.', 'On l’envoie avec ta demande.')} <button type="button" class="sf-switch" data-editplan>${L('Change my plan', 'Changer mon plan')}</button></p>`
+      const rich = window.EclipsePlan?.html?.() || ''
+      box.innerHTML = `<p class="sf-plan-t">${L('The plan you built', 'Le plan que tu as bâti')}</p>${rich || `<ul>${lines.map((l) => `<li>${esc(l)}</li>`).join('')}</ul>`}<p class="sf-plan-f">${L('We’ll send it with your request.', 'On l’envoie avec ta demande.')} <button type="button" class="sf-switch" data-editplan>${L('Change my plan', 'Changer mon plan')}</button></p>`
       return lines
     }
 

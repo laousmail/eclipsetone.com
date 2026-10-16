@@ -309,7 +309,22 @@
     })
   }
 
+  // Questions button: hides while scrolling down, comes back when scrolling up or near the end.
+  function initHelpFab() {
+    const fab = document.querySelector('.help-fab')
+    if (!fab) return
+    let last = window.scrollY
+    window.addEventListener('scroll', () => {
+      const y = window.scrollY
+      const nearEnd = y + innerHeight > document.documentElement.scrollHeight - 200
+      if (Math.abs(y - last) < 8) return
+      fab.classList.toggle('is-away', y > last && y > 300 && !nearEnd)
+      last = y
+    }, { passive: true })
+  }
+
   initTheme()
+  initHelpFab()
   initLang()
   initReveal()
   initNavMenu()

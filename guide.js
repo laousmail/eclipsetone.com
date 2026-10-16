@@ -8,7 +8,7 @@
   const openers = document.querySelectorAll('[data-guide-open]')
   if (!openers.length) return
 
-  const L = (en, fr) => `<span data-lang="en">${en}</span><span data-lang="fr">${fr}</span>`
+  const L = (en, fr) => `<span data-lang="en">${en}</span><span data-lang="fr">${String(fr).replace(/ ([?:!;»])/g, '\u00a0$1')}</span>`
   const lang = () => (document.documentElement.lang === 'fr' ? 'fr' : 'en')
   const KEY = 'eclipsetone-plan-v2'
   const onServices = !!document.querySelector('[data-pricing]')
@@ -410,6 +410,7 @@
   document.addEventListener('et:currency', () => render())
   // Lets the price form show and send the plan built here.
   window.EclipsePlan = {
+    html: () => (s.pack ? cartLines(false) : ''),
     pick: () => (s.pack ? (isEP() ? '3-Song EP' : s.pack === 'none' ? 'Not sure' : pack()?.name) : ''),
     lines: () => (s.pack ? message().split('\n').slice(1).filter((l) => !/^(Name|Email|IG\/TikTok|Vocals\/demo):/.test(l)) : []),
   }

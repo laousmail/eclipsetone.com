@@ -16,6 +16,7 @@ VERSION = re.search(r'home\.css\?v=([\w.]+)', HOME).group(1)
 
 
 def bi(en, fr):
+    fr = re.sub(r' ([?:!;»])', '\u00a0\\1', fr)
     return f'<span data-lang="en">{en}</span><span data-lang="fr">{fr}</span>'
 
 
