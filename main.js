@@ -286,9 +286,19 @@
       })
       root.setAttribute('data-has-fit', '')
       if (select && fromUser) select.value = names[key]
-      if (fromUser && window.matchMedia('(max-width: 1180px)').matches) {
+      // Compare view: slide the table sideways to the chosen plan. The page itself doesn't move.
+      const scroller = root.querySelector('.compare-scroll')
+      const comparePanel = root.querySelector('[data-view-panel="compare"]')
+      if (scroller && comparePanel && !comparePanel.hidden) {
+        const col = scroller.querySelector(`thead th[data-plan="${key}"]`)
+        const pinned = scroller.querySelector('thead .corner')
+        if (col) {
+          const left = col.offsetLeft - (pinned ? pinned.offsetWidth : 0) - 8
+          scroller.scrollTo({ left: Math.max(0, left), behavior: fromUser ? 'smooth' : 'auto' })
+        }
+      } else if (fromUser && window.matchMedia('(max-width: 1180px)').matches) {
         const card = root.querySelector(`.pkg[data-plan="${key}"]`)
-        if (card && !root.querySelector('[data-view-panel="cards"]').hidden) card.scrollIntoView({ behavior: 'smooth', block: 'nearest' })
+        if (card) card.scrollIntoView({ behavior: 'smooth', block: 'nearest' })
       }
     }
     pickBtns.forEach((b) => b.addEventListener('click', () => pick(b.dataset.pick, true)))
@@ -313,6 +323,8 @@
         root.querySelectorAll('[data-view-panel]').forEach((panel) => {
           panel.hidden = panel.dataset.viewPanel !== b.dataset.view
         })
+        const current = root.querySelector('[data-pick][aria-checked="true"]')
+        if (current && b.dataset.view === 'compare') requestAnimationFrame(() => pick(current.dataset.pick, false))
       }),
     )
   }
