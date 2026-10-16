@@ -409,18 +409,16 @@
 
   // ---------- carry the plan into the page ----------
   function applyToForm() {
-    const select = document.querySelector('[data-package-select]')
-    if (select && s.pack) {
+    if (s.pack) {
       const name = isEP() ? 'The EP' : s.pack === 'none' ? 'Not sure' : pack()?.name
-      if ([...select.options].some((o) => o.value === name)) select.value = name
+      document.dispatchEvent(new CustomEvent('et:package', { detail: name }))
     }
-    const wanted = new Set(s.extras.map((id) => EXTRAS.find((e) => e.id === id)?.need))
-    if (launchIncluded()) wanted.add('Release plan and launch support')
-    document.querySelectorAll('[data-needs] input').forEach((b) => {
-      b.checked = b.value === 'Music production' ? !!(s.pack && s.pack !== 'none') : wanted.has(b.value)
-    })
-    const set = (sel, v) => { const el = document.querySelector(sel); if (el && v && !el.value) el.value = v }
-    set('#a-name', s.name); set('#a-email', s.email); set('#a-handle', s.handle); set('#a-link', s.link)
+    document.dispatchEvent(new CustomEvent('et:plan'))
+  }
+  // Lets the price form show and send the plan built here.
+  window.EclipsePlan = {
+    pick: () => (s.pack ? (isEP() ? 'The EP' : s.pack === 'none' ? 'Not sure' : pack()?.name) : ''),
+    lines: () => (s.pack ? message().split('\n').slice(1).filter((l) => !/^(Name|Email|IG\/TikTok|Vocals\/demo):/.test(l)) : []),
   }
   function syncPage() {
     if (!s.pack || s.pack === 'none') return
