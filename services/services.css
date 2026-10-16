@@ -93,3 +93,93 @@
   .pkg.featured{order:-1}
   .page-hero{min-height:auto;padding-top:2.5rem;padding-bottom:3rem}
 }
+
+/* =========================================================
+   PRICING: picker, view toggle, cards, compare table
+   ========================================================= */
+.pricing-controls{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:1rem 2rem;margin-bottom:2rem}
+.picker{display:grid;gap:.6rem;min-width:0}
+.picker-label{font-size:.82rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--mute)}
+.seg,.viewtoggle{
+  display:flex;flex-wrap:wrap;gap:.3rem;padding:.3rem;border-radius:99px;
+  background:color-mix(in srgb,var(--bg2) 80%,transparent);border:1px solid var(--line);
+  box-shadow:inset 0 2px 6px rgba(0,0,0,.18);
+}
+.seg button,.viewtoggle button{
+  font:500 .92rem "Outfit",system-ui,sans-serif;color:var(--mute);background:none;border:0;cursor:pointer;
+  padding:.6rem 1rem;border-radius:99px;transition:color .25s,background .35s var(--ease-out),box-shadow .35s;
+}
+.seg button:hover,.viewtoggle button:hover{color:var(--ink)}
+.seg button[aria-checked=true],.viewtoggle button[aria-selected=true]{
+  color:var(--btn-ink);background:linear-gradient(110deg,var(--hot),var(--gold));
+  box-shadow:0 6px 18px -6px color-mix(in srgb,var(--hot) 70%,transparent);
+}
+.viewtoggle button[aria-selected=true]{background:var(--ink);color:var(--bg);box-shadow:none}
+
+.pricing .packages{align-items:stretch}
+.pricing .pkg{gap:.7rem;transition:opacity .4s var(--ease-out),transform .45s var(--ease-out),box-shadow .45s,border-color .3s}
+.pricing .pkg .pkg-for{font-size:.8rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--mute)}
+.pricing .pkg h3{padding-right:0}
+.pkg-fit{
+  display:none;position:absolute;top:-.8rem;left:1.35rem;
+  font:600 .72rem/1 "Outfit",sans-serif;letter-spacing:.05em;text-transform:uppercase;
+  color:var(--btn-ink);background:linear-gradient(100deg,var(--hot),var(--gold));padding:.4rem .7rem;border-radius:99px;
+  box-shadow:0 6px 16px -6px color-mix(in srgb,var(--hot) 70%,transparent);
+}
+.pkg-list{list-style:none;padding:0;margin:0;display:grid;gap:.55rem}
+.pkg-list li{display:grid;grid-template-columns:1.1rem 1fr;gap:.55rem;align-items:start;font-size:.92rem;padding:0}
+.pkg-list li::before{display:none}
+.pkg-list svg{width:1.1rem;height:1.1rem;color:var(--hot);margin-top:.15rem}
+.pkg-more{border-top:1px solid var(--line);padding-top:.6rem}
+.pkg-more summary{cursor:pointer;list-style:none;font-size:.88rem;font-weight:600;color:var(--gold);display:flex;align-items:center;gap:.4rem}
+:root[data-theme=light] .pkg-more summary{color:var(--hot)}
+.pkg-more summary::-webkit-details-marker{display:none}
+.pkg-more summary::after{content:"";width:.45rem;height:.45rem;border:solid currentColor;border-width:0 2px 2px 0;transform:rotate(45deg) translateY(-2px);transition:transform .3s}
+.pkg-more[open] summary::after{transform:rotate(-135deg) translateY(-1px)}
+.pkg-more .pkg-list{margin-top:.7rem}
+.pricing .pkg .btn{align-self:stretch;text-align:center;margin-top:auto}
+.pricing .pkg:not(.is-fit) .btn{
+  background:linear-gradient(var(--bg2),var(--bg2)) padding-box,linear-gradient(120deg,color-mix(in srgb,var(--gold) 55%,var(--line)),var(--line) 50%,color-mix(in srgb,var(--cool) 45%,var(--line))) border-box;
+  border:1.5px solid transparent;color:var(--ink);box-shadow:none;text-shadow:none;
+}
+
+/* Best-fit card: lit, lifted, everything else steps back */
+.pricing .pkg.is-fit{
+  border:1.5px solid transparent;
+  background:
+    linear-gradient(180deg,var(--surface-hi),transparent 30%) padding-box,
+    linear-gradient(165deg,color-mix(in srgb,var(--hot) 16%,var(--bg2)),var(--bg2)) padding-box,
+    conic-gradient(from var(--ang),var(--hot),var(--gold),color-mix(in srgb,var(--hot) 25%,var(--line)) 35%,var(--line) 60%,color-mix(in srgb,var(--cool) 45%,var(--line)) 80%,var(--hot)) border-box;
+  animation:edge-spin 9s linear infinite;
+  box-shadow:var(--shadow-deep),0 40px 80px -40px color-mix(in srgb,var(--hot) 55%,transparent);
+}
+.pricing .pkg.is-fit .pkg-fit{display:block}
+.pricing[data-has-fit] .pkg:not(.is-fit){opacity:.85}
+.pricing[data-has-fit] .pkg:not(.is-fit):hover{opacity:1}
+
+/* Compare table */
+.compare-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:1.25rem;background:var(--bg2);box-shadow:var(--shadow-deep)}
+.compare{width:100%;min-width:640px;border-collapse:collapse;font-size:.92rem}
+.compare th,.compare td{padding:.85rem 1rem;text-align:center;border-bottom:1px solid var(--line)}
+.compare tbody th{text-align:left;font-weight:500;color:var(--ink)}
+.compare thead th{vertical-align:bottom;padding-top:1.2rem}
+.compare thead th b{display:block;font:700 1.15rem/1.2 "Cormorant Garamond",Georgia,serif;color:var(--ink)}
+.compare thead th span{display:block;font:700 1.35rem/1.2 "Cormorant Garamond",Georgia,serif;color:var(--gold)}
+:root[data-theme=light] .compare thead th span{color:var(--hot)}
+.compare td{color:var(--mute)}
+.compare .yes svg{width:1.2rem;height:1.2rem;color:var(--hot);vertical-align:middle}
+.compare .no{color:color-mix(in srgb,var(--mute) 50%,transparent)}
+.compare tfoot td,.compare tfoot th{border-bottom:0;padding-bottom:1.2rem}
+.compare tfoot .btn{padding:.55rem 1rem;font-size:.88rem}
+.compare .is-fit{background:color-mix(in srgb,var(--hot) 10%,transparent)}
+.compare tbody tr:hover th,.compare tbody tr:hover td{background:color-mix(in srgb,var(--gold) 6%,transparent)}
+
+@media(max-width:1180px){.pricing .pkg.is-fit{order:-1}}
+@media(max-width:720px){
+  .pricing-controls{flex-direction:column;align-items:stretch}
+  .seg{border-radius:1.1rem}
+  .seg button{flex:1 1 45%;padding:.65rem .5rem}
+  .viewtoggle{align-self:flex-start}
+  .pricing[data-has-fit] .pkg:not(.is-fit){opacity:1}
+}
+.pricing .pkg ul{flex:none}

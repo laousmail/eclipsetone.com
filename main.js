@@ -249,9 +249,9 @@
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
     const cards = document.querySelectorAll('.record-card, .pkg, .steps3 li, .quote, .rung, .ep')
     cards.forEach((el) => {
-      const strong = el.classList.contains('record-card') || el.classList.contains('featured')
+      const strong = el.classList.contains('record-card') || el.classList.contains('is-fit')
       const max = strong ? 7 : 9
-      const base = el.classList.contains('featured') && window.innerWidth > 1180 ? ' translateY(-.35rem) scale(1.02)' : ''
+      const base = ''
       let frame = 0
       el.classList.add('tilt')
       el.addEventListener('pointermove', (e) => {
@@ -268,6 +268,51 @@
         el.style.transform = ''
       })
     })
+  }
+
+  // Pricing: "What do you have?" picks the best-fit package; Cards/Compare switches view.
+  function initPricing() {
+    const root = document.querySelector('[data-pricing]')
+    if (!root) return
+    const names = { mix: 'The Mix', record: 'The Record', signature: 'The Signature Record', release: 'The Release' }
+    const select = document.querySelector('[data-package-select]')
+    const pickBtns = root.querySelectorAll('[data-pick]')
+    function pick(key, fromUser) {
+      pickBtns.forEach((b) => b.setAttribute('aria-checked', b.dataset.pick === key ? 'true' : 'false'))
+      root.querySelectorAll('[data-plan]').forEach((el) => el.classList.toggle('is-fit', el.dataset.plan === key))
+      root.querySelectorAll('.compare tbody tr, .compare tfoot tr').forEach((tr) => {
+        const idx = ['mix', 'record', 'signature', 'release'].indexOf(key) + 1
+        tr.querySelectorAll('td').forEach((td, i) => td.classList.toggle('is-fit', i + 1 === idx))
+      })
+      root.setAttribute('data-has-fit', '')
+      if (select && fromUser) select.value = names[key]
+      if (fromUser && window.matchMedia('(max-width: 1180px)').matches) {
+        const card = root.querySelector(`.pkg[data-plan="${key}"]`)
+        if (card && !root.querySelector('[data-view-panel="cards"]').hidden) card.scrollIntoView({ behavior: 'smooth', block: 'nearest' })
+      }
+    }
+    pickBtns.forEach((b) => b.addEventListener('click', () => pick(b.dataset.pick, true)))
+    // arrow keys move between options, like a native radio group
+    root.querySelector('[data-picker]')?.addEventListener('keydown', (e) => {
+      if (!['ArrowRight', 'ArrowLeft', 'ArrowDown', 'ArrowUp'].includes(e.key)) return
+      const list = [...pickBtns]
+      const i = list.findIndex((b) => b.getAttribute('aria-checked') === 'true')
+      const next = list[(i + (e.key === 'ArrowRight' || e.key === 'ArrowDown' ? 1 : list.length - 1)) % list.length]
+      next.focus()
+      pick(next.dataset.pick, true)
+      e.preventDefault()
+    })
+    pick('record', false)
+
+    const viewBtns = root.querySelectorAll('[data-view]')
+    viewBtns.forEach((b) =>
+      b.addEventListener('click', () => {
+        viewBtns.forEach((x) => x.setAttribute('aria-selected', x === b ? 'true' : 'false'))
+        root.querySelectorAll('[data-view-panel]').forEach((panel) => {
+          panel.hidden = panel.dataset.viewPanel !== b.dataset.view
+        })
+      }),
+    )
   }
 
   const WHATSAPP = 'https://wa.me/14384668971'
@@ -427,6 +472,7 @@
   initDiscFromMarkup()
   initSpotlight()
   initTilt()
+  initPricing()
   initPackageButtons()
   initApplyForms()
   initCapture()

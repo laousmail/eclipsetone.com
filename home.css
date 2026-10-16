@@ -1,11 +1,17 @@
 :root,:root[data-theme=dark]{
-  --bg:#070605;--bg2:#12100e;--ink:#efe6da;--mute:#a8a094;--line:#2a2520;
-  --hot:#ff6a13;--gold:#ffb347;--cool:#6f8fb8;--dim:#2b2622;--on:#120806;
+  /* Dark: warm black, bright warm ink, accents tuned for AA contrast on black */
+  --bg:#0a0807;--bg2:#16120f;--ink:#f4ece1;--mute:#bcb2a5;--line:#30281f;
+  --hot:#ff6a1a;--gold:#ffb54d;--cool:#86a5cf;--dim:#2c2520;--on:#120806;
+  --btn-ink:#1a0a02;
   --nav-h:3.9rem;
+  color-scheme:dark;
 }
 :root[data-theme=light]{
-  --bg:#f6f1ea;--bg2:#ece5db;--ink:#17120e;--mute:#5d544a;--line:#d6ccbe;
-  --hot:#d4480a;--gold:#c9760a;--cool:#3f6190;--dim:#d9cfc1;--on:#fff;
+  /* Light: paper cream, near-black ink, deeper burnt orange so text accents pass AA */
+  --bg:#f7f2ea;--bg2:#fffcf7;--ink:#1b140e;--mute:#584e45;--line:#e0d3c2;
+  --hot:#c2410c;--gold:#b45309;--cool:#2f5486;--dim:#e8ddcf;--on:#fff;
+  --btn-ink:#fff;
+  color-scheme:light;
 }
 *{box-sizing:border-box;margin:0}
 [hidden]{display:none!important}
@@ -621,3 +627,26 @@ input,select,textarea{box-shadow:inset 0 2px 6px rgba(0,0,0,.18),0 1px 0 var(--s
 }
 .hero h1 .nw{white-space:nowrap}
 @media(max-width:980px){.hero h1{text-wrap:wrap}}
+
+/* =========================================================
+   CONTRAST + THEME SWITCH
+   ========================================================= */
+.btn,.pill{color:var(--btn-ink)}
+.btn.ghost{color:var(--ink)}
+.badge,.pkg-badge{color:var(--btn-ink)}
+.checks li::after{border-color:var(--btn-ink)}
+:root[data-theme=light] .btn:not(.ghost),:root[data-theme=light] .pill{text-shadow:0 1px 0 rgba(0,0,0,.18)}
+:root[data-theme=light] .steps3 li,:root[data-theme=light] .rung,:root[data-theme=light] .quote,
+:root[data-theme=light] .pkg,:root[data-theme=light] .steps li,:root[data-theme=light] .ep,:root[data-theme=light] .addon,:root[data-theme=light] .capture-in{border-color:var(--line)}
+:root[data-theme=light] .bonuses li{background:color-mix(in srgb,var(--bg) 70%,#fff)}
+:root[data-theme=light] .lang button[aria-pressed=true]{background:var(--ink);color:var(--bg)}
+.kicker,.more a,.founder-line a,.hint a{color:var(--gold)}
+:root[data-theme=light] .kicker,:root[data-theme=light] .more a,:root[data-theme=light] .founder-line a,:root[data-theme=light] .hint a{color:var(--hot)}
+
+/* Theme switch shows where you'll go: sun in dark mode, moon in light mode */
+.mode{color:var(--ink);transition:transform .4s var(--ease-out),border-color .3s,background .3s}
+.mode:hover{border-color:var(--gold);transform:rotate(-18deg)}
+.mode svg{display:block}
+:root[data-theme=dark] .mode .i-moon,:root:not([data-theme]) .mode .i-moon{display:none}
+:root[data-theme=light] .mode .i-sun{display:none}
+:root[data-theme=dark] .mode{color:var(--gold)}
