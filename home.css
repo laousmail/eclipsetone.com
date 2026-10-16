@@ -568,3 +568,33 @@ input,select,textarea{box-shadow:inset 0 2px 6px rgba(0,0,0,.18),0 1px 0 var(--s
   .btn::after,.pill::after{display:none}
 }
 .flag{position:relative}
+
+/* =========================================================
+   3D LAYER
+   ========================================================= */
+/* Hero: WebGL eclipse replaces the CSS rings when available */
+.disc.is-3d>i{display:none}
+.disc.is-3d{width:min(100%,46rem);margin-right:clamp(-6rem,-9vw,-2rem)}
+.eclipse-canvas{position:absolute;inset:-12%;width:124%;height:124%;display:block}
+@media(max-width:980px){.disc.is-3d{width:min(96vw,30rem);margin:-1rem auto -3rem}}
+@media(max-width:640px){.disc.is-3d{width:118%;margin-left:-9%;margin-right:-9%}}
+
+/* Tilting cards: smooth return, depth layers inside */
+.tilt{transform-style:preserve-3d;transition:transform .6s var(--ease-out),box-shadow .45s var(--ease-out),border-color .3s;will-change:transform}
+.tilt:hover{transition:transform .12s linear,box-shadow .45s var(--ease-out),border-color .3s}
+.record-card.tilt>*{translate:0 0 18px}
+.record-card.tilt .price{translate:0 0 46px}
+.record-card.tilt h2{translate:0 0 34px}
+.record-card.tilt .badge{translate:0 0 40px}
+.record-card.tilt>.btn{translate:0 0 56px}
+.pkg.tilt .price{translate:0 0 34px}
+.pkg.tilt h3,.pkg.tilt .pkg-badge{translate:0 0 26px}
+.pkg.tilt .btn{translate:0 0 40px}
+.steps3 li.tilt .n{translate:0 0 36px}
+.steps3 li.tilt h3{translate:0 0 22px}
+.quote.tilt blockquote{translate:0 0 20px}
+.rung.tilt .rp{translate:0 0 28px}
+/* drop-shadow filter would flatten depth on prices inside tilting cards */
+.tilt .price,.tilt .rp,.tilt .n{filter:none}
+.tilt:hover{box-shadow:var(--shadow-deep),0 50px 90px -40px color-mix(in srgb,var(--hot) 40%,transparent)}
+@media(prefers-reduced-motion:reduce){.tilt,.tilt>*{transform:none!important;translate:none!important}}

@@ -243,6 +243,33 @@
       })
   }
 
+  // 3D tilt: cards lean toward the cursor; inner layers sit forward in depth.
+  function initTilt() {
+    if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    const cards = document.querySelectorAll('.record-card, .pkg, .steps3 li, .quote, .rung, .ep')
+    cards.forEach((el) => {
+      const strong = el.classList.contains('record-card') || el.classList.contains('featured')
+      const max = strong ? 7 : 9
+      const base = el.classList.contains('featured') && window.innerWidth > 1180 ? ' translateY(-.35rem) scale(1.02)' : ''
+      let frame = 0
+      el.classList.add('tilt')
+      el.addEventListener('pointermove', (e) => {
+        cancelAnimationFrame(frame)
+        frame = requestAnimationFrame(() => {
+          const r = el.getBoundingClientRect()
+          const x = (e.clientX - r.left) / r.width - 0.5
+          const y = (e.clientY - r.top) / r.height - 0.5
+          el.style.transform = `perspective(1100px) rotateX(${(-y * max).toFixed(2)}deg) rotateY(${(x * max).toFixed(2)}deg)${base} translateZ(0)`
+        })
+      })
+      el.addEventListener('pointerleave', () => {
+        cancelAnimationFrame(frame)
+        el.style.transform = ''
+      })
+    })
+  }
+
   const WHATSAPP = 'https://wa.me/14384668971'
   const siteRoot = new URL('./', siteStyle).href
 
@@ -399,6 +426,7 @@
   initNavMenu()
   initDiscFromMarkup()
   initSpotlight()
+  initTilt()
   initPackageButtons()
   initApplyForms()
   initCapture()
