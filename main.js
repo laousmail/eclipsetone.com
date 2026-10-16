@@ -339,6 +339,26 @@
     })
   }
 
+  // Prices page: physical copies quantity picker. Updates the total and the WhatsApp order link.
+  function initMerch() {
+    const money = (n) => '$' + Number(n).toLocaleString('en-US', { maximumFractionDigits: 2, minimumFractionDigits: n % 1 ? 2 : 0 })
+    document.querySelectorAll('[data-merch]').forEach((card) => {
+      const chips = [...card.querySelectorAll('.qty')]
+      const order = card.querySelector('[data-merch-order]')
+      const set = (chip) => {
+        chips.forEach((c) => c.setAttribute('aria-pressed', String(c === chip)))
+        const q = +chip.dataset.qty, t = +chip.dataset.total
+        card.querySelector('[data-merch-total]').textContent = money(t)
+        card.querySelector('[data-merch-each]').textContent = money(Math.round((t / q) * 100) / 100)
+        card.querySelectorAll('[data-merch-qty]').forEach((el) => { el.textContent = q })
+        const msg = `Hi EclipseTone, I'd like ${q} ${card.dataset.wa} (${money(t)}). My name: `
+        order.href = 'https://wa.me/14384668971?text=' + encodeURIComponent(msg)
+      }
+      chips.forEach((c) => c.addEventListener('click', () => set(c)))
+      set(chips.find((c) => c.getAttribute('aria-pressed') === 'true') || chips[0])
+    })
+  }
+
   // Prices page: highlight the jump-bar link for the section on screen.
   function initJumpbar() {
     const links = [...document.querySelectorAll('.jumpbar a')]
@@ -510,6 +530,7 @@
   initJumpbar()
   initPackageButtons()
   initNeeds()
+  initMerch()
   initApplyForms()
   initCapture()
   initBeforeAfter()
