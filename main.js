@@ -228,6 +228,21 @@
     setDiscProgress(releasedEl && Number.isFinite(released) ? released / GOAL : 1, { animate: true })
   }
 
+  // Soft light that follows the cursor across cards.
+  function initSpotlight() {
+    if (!window.matchMedia('(hover: hover)').matches) return
+    document
+      .querySelectorAll('.steps3 li, .rung, .quote, .pkg, .record-card, .ep, .flag, .capture-in')
+      .forEach((el) => {
+        el.setAttribute('data-spot', '')
+        el.addEventListener('pointermove', (e) => {
+          const r = el.getBoundingClientRect()
+          el.style.setProperty('--mx', `${e.clientX - r.left}px`)
+          el.style.setProperty('--my', `${e.clientY - r.top}px`)
+        })
+      })
+  }
+
   const WHATSAPP = 'https://wa.me/14384668971'
   const siteRoot = new URL('./', siteStyle).href
 
@@ -383,6 +398,7 @@
   initReveal()
   initNavMenu()
   initDiscFromMarkup()
+  initSpotlight()
   initPackageButtons()
   initApplyForms()
   initCapture()
