@@ -39,7 +39,7 @@ HEADER = part(r'<header class="nav">.*?</header>')
 FAB = part(r'<a class="help-fab".*?</a>')
 FOOTER = part(r'<footer class="foot">.*?</footer>')
 THEME = part(r'<script>\(function\(\)\{try\{var t=localStorage.*?</script>')
-FONTS = part(r'<link rel="preconnect" href="https://fonts.googleapis.com".*?rel="stylesheet" />')
+FONTS = '<link rel="preload" href="{pre}fonts/inter.woff" as="font" type="font/woff" crossorigin />\n<link rel="preload" href="{pre}fonts/fraunces.woff" as="font" type="font/woff" crossorigin />'
 
 
 def page(path, title, desc, main, current=None, lang='en', og_type='website'):
@@ -67,7 +67,7 @@ def page(path, title, desc, main, current=None, lang='en', og_type='website'):
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
 <meta name="twitter:card" content="summary_large_image" />
-{FONTS}
+{FONTS.format(pre=pre)}
 <link rel="stylesheet" href="{pre}home.css?v={VERSION}" />
 </head>
 <body class="subpage">
