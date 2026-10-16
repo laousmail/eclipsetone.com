@@ -136,16 +136,17 @@
       <label class="cfg-skip">
         <input type="radio" name="pack" value="none" ${s.pack === 'none' ? 'checked' : ''} />
         <span>${L('My music is already finished. I only need the rest.', 'Ma musique est déjà finie. J’ai besoin du reste seulement.')}</span>
-      </label>`
+      </label>
+      <p class="note info"><b>${L('No pressure:', 'Sans pression :')}</b> ${L('you can change any choice later. Nothing is final until you send your plan.', 'tu peux changer chaque choix plus tard. Rien n’est final avant l’envoi de ton plan.')}</p>`
   }
 
   function viewSongs() {
     const p = pack()
     let line = ''
-    if (isEP()) line = `<p class="cfg-deal">${L('EP price applied: $1,597 for 3 songs. You save $200.', 'Prix EP appliqué : 1 597 $ pour 3 chansons. Tu économises 200 $.')}</p>`
-    else if (s.qty >= 8) line = `<p class="cfg-note">${L('Album pricing is confirmed on your quote.', 'Le prix album est confirmé sur ton devis.')}</p>`
-    else if (s.qty > 1 && s.pack === 'record') line = `<p class="cfg-note">${L('Tip: 3 Records is an EP at $1,597.', 'Astuce : 3 Records, c’est un EP à 1 597 $.')} <button type="button" class="cfg-inline" data-qty-set="3">${L('Make it 3', 'Passer à 3')}</button></p>`
-    else if (s.qty > 1) line = `<p class="cfg-note">${L('Multi-song pricing is confirmed on your quote.', 'Le prix multi-chansons est confirmé sur ton devis.')}</p>`
+    if (isEP()) line = `<p class="note ok"><b>${L('Saved:', 'Économie :')}</b> ${L('EP price applied: $1,597 for 3 songs. You save $200.', 'Prix EP appliqué : 1 597 $ pour 3 chansons. Tu économises 200 $.')}</p>`
+    else if (s.qty >= 8) line = `<p class="note warn"><b>${L('Heads up:', 'Attention :')}</b> ${L('Album pricing is confirmed on your quote.', 'Le prix album est confirmé sur ton devis.')}</p>`
+    else if (s.qty > 1 && s.pack === 'record') line = `<p class="note info"><b>${L('Tip:', 'Astuce :')}</b> ${L('3 Records is an EP at $1,597.', '3 Records, c’est un EP à 1 597 $.')} <button type="button" class="cfg-inline" data-qty-set="3">${L('Make it 3', 'Passer à 3')}</button></p>`
+    else if (s.qty > 1) line = `<p class="note info"><b>${L('Good to know:', 'Bon à savoir :')}</b> ${L('Multi-song pricing is confirmed on your quote.', 'Le prix multi-chansons est confirmé sur ton devis.')}</p>`
     return `<p class="cfg-k">${L('Step 2', 'Étape 2')}</p>
       <h2 id="cfg-title">${L('How many songs?', 'Combien de chansons ?')}</h2>
       <p class="cfg-sub">${p ? `${p.name} · ${money(p.price)} ${L('per song', 'par chanson')}` : ''}</p>
@@ -172,6 +173,7 @@
         <span><b>${L('No extras, that’s it', 'Pas d’extras, c’est tout')}</b><small>${L('Just the music. Take me to my plan.', 'Juste la musique. Montre-moi mon plan.')}</small></span>
         <span class="cfg-arrow" aria-hidden="true">→</span>
       </button>
+      ${s.extras.includes('physical') ? `<p class="note warn"><b>${L('Plan ahead:', 'Prévois :')}</b> ${L('manufacturing physical copies adds time before your release date. Tell us your date and we plan backwards.', 'la fabrication des copies physiques ajoute du temps avant ta date de sortie. Donne-nous ta date et on planifie à rebours.')}</p>` : ''}
       <div class="cfg-extras">
         ${EXTRAS.map((e) => {
           const included = e.id === 'launch' && launchIncluded()
@@ -194,6 +196,7 @@
       <h2 id="cfg-title">${L('Your plan is ready.', 'Ton plan est prêt.')}</h2>
       <p class="cfg-sub">${L('Send it and we reply within 24 hours with your quote and next steps. No payment now.', 'Envoie-le et on te répond en moins de 24 h avec ton devis et la suite. Aucun paiement maintenant.')}</p>
       <div class="cfg-review">${cartLines(true)}</div>
+      <p class="note ok"><b>${L('No payment now.', 'Aucun paiement maintenant.')}</b> ${L('We confirm your quote first. You only pay half once you say yes.', 'On confirme ton devis d’abord. Tu paies la moitié seulement quand tu dis oui.')}</p>
       <form class="cfg-form" data-send-form novalidate>
         <div class="cfg-row">
           <label><span>${L('Name', 'Nom')}</span><input name="name" autocomplete="name" value="${esc(s.name)}" required /></label>
@@ -203,7 +206,7 @@
           <label><span>${L('Instagram or TikTok', 'Instagram ou TikTok')}</span><input name="handle" placeholder="@yourname" value="${esc(s.handle)}" /></label>
           <label><span>${L('Link to vocals or demo (optional)', 'Lien voix ou démo (optionnel)')}</span><input name="link" placeholder="Drive, Dropbox…" value="${esc(s.link)}" /></label>
         </div>
-        <p class="cfg-err" data-err hidden>${L('Add your name and a valid email so we can reply.', 'Ajoute ton nom et un courriel valide pour qu’on te réponde.')}</p>
+        <p class="note err" data-err hidden><b>${L('Missing info:', 'Info manquante :')}</b> ${L('Add your name and a valid email so we can reply.', 'Ajoute ton nom et un courriel valide pour qu’on te réponde.')}</p>
       </form>`
   }
 

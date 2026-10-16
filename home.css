@@ -719,11 +719,11 @@ input,select,textarea{box-shadow:inset 0 2px 6px rgba(0,0,0,.18),0 1px 0 var(--s
 .needs-grid{display:flex;flex-wrap:wrap;gap:.5rem}
 .needs label{position:relative;cursor:pointer}
 .needs input{position:absolute;opacity:0;width:1px;height:1px}
-.needs span{
+.needs label>span{
   display:inline-flex;align-items:center;gap:.45rem;padding:.55rem .9rem;border-radius:99px;font-size:.9rem;
   border:1px solid var(--line);background:var(--bg2);color:var(--ink);transition:background .25s,border-color .25s,color .25s;
 }
-.needs span::before{content:"+";font-weight:700;color:var(--hot);width:.8rem;text-align:center}
+.needs label>span::before{content:"+";font-weight:700;color:var(--hot);width:.8rem;text-align:center}
 .needs input:checked+span{border-color:transparent;background:linear-gradient(110deg,var(--hot),var(--gold));color:var(--btn-ink)}
 .needs input:checked+span::before{content:"✓";color:var(--btn-ink)}
 .needs input:focus-visible+span{outline:2px solid var(--gold);outline-offset:2px}
@@ -925,6 +925,7 @@ input,select,textarea{box-shadow:inset 0 2px 6px rgba(0,0,0,.18),0 1px 0 var(--s
 .cfg-cart-cta{display:grid;gap:.5rem;margin-top:auto;padding-top:1rem}
 .cfg-cart-cta .btn{text-align:center}
 .cfg-go[disabled]{opacity:.4;pointer-events:none}
+.cfg-pane .note+.note{margin-top:.6rem}
 .cfg-back{background:none;border:0;color:var(--mute);font:500 .9rem "Outfit",sans-serif;cursor:pointer;text-decoration:underline;text-underline-offset:.2em;padding:.4rem}
 .cfg-bar{display:none}
 
@@ -998,3 +999,112 @@ input,select,textarea{box-shadow:inset 0 2px 6px rgba(0,0,0,.18),0 1px 0 var(--s
   .cfg-bar .cfg-back{font-size:.85rem}
 }
 @media(max-width:380px){.cfg-bar .cfg-back{display:none}}
+
+/* =========================================================
+   SIMPLE MODE
+   Calm, flat, readable. Three button colors with one job each:
+     orange  = commit   (Apply, Choose, Continue, Send)
+     blue    = get help (Build your release, Compare, Get a quote)
+     outline = look around (Browse, Back, secondary links)
+   Four note colors guide people: info (blue), ok (green),
+   warn (amber), err (red).
+   ========================================================= */
+:root,:root[data-theme=dark]{
+  --primary:#ff7a2e;--primary-hover:#ff8f4f;--on-primary:#1a0a02;
+  --help:#4a7fd4;--help-hover:#5c8fe0;--on-help:#fff;
+  --info:#8fb4f2;--ok:#5fd39a;--warn:#f2b24c;--err:#ff7a6b;
+  --line-strong:#4a3f35;
+}
+:root[data-theme=light]{
+  --primary:#c2410c;--primary-hover:#a8380a;--on-primary:#fff;
+  --help:#2f5ea8;--help-hover:#264f8f;--on-help:#fff;
+  --info:#2f5ea8;--ok:#1f7a4d;--warn:#9a5b00;--err:#b42318;
+  --line-strong:#cbbba6;
+}
+
+/* Kill the heavy effects */
+body::after{display:none!important}
+body::before{animation:none!important;opacity:.6}
+.proofbar::before{display:none}
+.disc .corona-shimmer{display:none}
+.disc,.disc *{animation:none!important}
+.record-card,.pkg.featured,.pricing .pkg.is-fit{animation:none!important}
+.hero h1 [data-lang]{background:none;-webkit-background-clip:border-box;background-clip:border-box;color:var(--ink);filter:none}
+.price,.rp,.proofbar b,.steps3 .n{background:none!important;-webkit-background-clip:border-box!important;background-clip:border-box!important;color:var(--primary)!important;-webkit-text-fill-color:currentColor;filter:none!important}
+.price small{-webkit-text-fill-color:var(--mute);color:var(--mute)}
+[data-spot]::after{display:none}
+.steps3 li:hover,.quote:hover,.pkg:not(.featured):hover,.pillar:hover{transform:none}
+
+/* Surfaces: one clean border, one soft shadow */
+.record-card{border:1.5px solid color-mix(in srgb,var(--primary) 55%,var(--line));
+  background:linear-gradient(180deg,color-mix(in srgb,var(--primary) 8%,var(--bg2)),var(--bg2));
+  box-shadow:0 20px 50px -30px rgba(0,0,0,.6)}
+.pricing .pkg.is-fit{border:2px solid var(--primary);background:color-mix(in srgb,var(--primary) 7%,var(--bg2));box-shadow:0 20px 50px -30px rgba(0,0,0,.6)}
+
+/* ---------- Buttons ---------- */
+.btn,.pill{
+  background:var(--primary);color:var(--on-primary);border:0;text-shadow:none;
+  box-shadow:0 8px 20px -12px color-mix(in srgb,var(--primary) 80%,transparent);
+  background-size:auto;transition:transform .15s ease,background-color .2s ease,box-shadow .2s ease;
+}
+.btn::before,.btn::after,.pill::before,.pill::after{display:none!important}
+.btn:hover,.pill:hover{background:var(--primary-hover);transform:translateY(-1px);box-shadow:0 10px 24px -12px color-mix(in srgb,var(--primary) 90%,transparent)}
+.btn:active,.pill:active{transform:translateY(0)}
+.btn.help{background:var(--help);color:var(--on-help);box-shadow:0 8px 20px -12px color-mix(in srgb,var(--help) 80%,transparent)}
+.btn.help:hover{background:var(--help-hover)}
+.btn.ghost,.pricing .pkg:not(.is-fit) .btn.ghost{
+  background:transparent;color:var(--ink);border:1.5px solid var(--line-strong);box-shadow:none;
+}
+.btn.ghost:hover{background:color-mix(in srgb,var(--ink) 6%,transparent);border-color:var(--ink);transform:none}
+.pricing .pkg:not(.is-fit) .btn{background:var(--primary);color:var(--on-primary);border:0}
+:root[data-theme=light] .btn:not(.ghost),:root[data-theme=light] .pill{text-shadow:none}
+
+/* Selection controls use the guidance blue */
+.seg button[aria-checked=true]{background:var(--help);color:var(--on-help);box-shadow:none}
+.needs input:checked+span{background:var(--primary);color:var(--on-primary)}
+.needs input:checked+span::before{color:var(--on-primary)}
+.cfg-add[aria-pressed=true]{background:var(--primary);color:var(--on-primary)}
+.badge,.pkg-badge,.pkg-fit,.cfg-tag{background:var(--primary);color:var(--on-primary);box-shadow:none}
+.mode:hover{transform:none}
+
+/* ---------- Guide notes ---------- */
+.note{
+  --c:var(--info);
+  position:relative;display:block;max-width:44rem;margin:0 0 1rem;
+  padding:.75rem 1rem .75rem 2.6rem;border-radius:.8rem;font-size:.92rem;line-height:1.5;color:var(--ink);
+  background:color-mix(in srgb,var(--c) 11%,var(--bg2));
+  border:1px solid color-mix(in srgb,var(--c) 40%,var(--line));
+}
+.note::before{
+  content:"i";position:absolute;left:.85rem;top:.82rem;width:1.15rem;height:1.15rem;border-radius:50%;
+  display:grid;place-items:center;font:700 .72rem/1 "Outfit",sans-serif;color:var(--bg);background:var(--c);
+}
+.note b{color:var(--c);font-weight:600}
+.note.ok{--c:var(--ok)}.note.ok::before{content:"✓"}
+.note.warn{--c:var(--warn)}.note.warn::before{content:"!"}
+.note.err{--c:var(--err)}.note.err::before{content:"×";font-size:.9rem}
+.note[hidden]{display:none}
+.hero .note{margin-top:1.2rem;max-width:32rem}
+.record-card .note{margin:0}
+.apply .note{max-width:46rem}
+.web-warn{margin:auto 0 0;font-size:.84rem}
+.cfg-pane .note{margin-top:1.1rem;margin-bottom:0}
+.pricing>.note{margin-bottom:1.4rem}
+
+@media(prefers-reduced-motion:no-preference){
+  .note{animation:note-in .35s ease both}
+  @keyframes note-in{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+}
+
+.pricing .seg button[aria-checked=true]{background:var(--help);color:var(--on-help);box-shadow:none}
+.needs legend span{all:unset}
+/* nothing inside the configurator may scroll sideways */
+.cfg-shell{overflow:clip}
+.cfg{overflow:clip}
+/* phone/tablet: ring sits to the right of the headline, never on top of words */
+@media(max-width:980px){
+  .disc{top:clamp(4.5rem,9vw,6rem);right:-12vw;width:min(46vw,22rem)}
+}
+@media(max-width:640px){
+  .disc{top:5.2rem;right:-24vw;width:58vw;opacity:.95}
+}

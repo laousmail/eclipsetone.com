@@ -495,8 +495,6 @@
   initReveal()
   initNavMenu()
   initDiscFromMarkup()
-  initSpotlight()
-  initTilt()
   initPricing()
   initPackageButtons()
   initNeeds()
