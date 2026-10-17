@@ -1400,3 +1400,53 @@ h1,h2,h3,p,li,summary,label,.team-card-t,.row-t{overflow-wrap:break-word;hyphens
 .sf-pick[aria-checked=true] b::after{content:none}
 .sf-pick[aria-checked=true]::after{content:"✓";position:absolute;top:.55rem;right:.65rem;display:grid;place-items:center;width:1.35rem;height:1.35rem;border-radius:50%;background:linear-gradient(180deg,var(--red-1),var(--red-2));color:#fff;font-size:.78rem;font-weight:800}
 .sf-pick b{padding-right:1.4rem}
+
+/* =========================================================
+   ALLURING CTAs: the main buttons quietly ask to be clicked
+   ========================================================= */
+/* Arrow that leans toward the click */
+.btn.cta-go::after{
+  content:"→";display:inline-block!important;position:relative;z-index:1;margin-left:.5em;
+  inset:auto;width:auto;height:auto;background:none;opacity:1;filter:none;mix-blend-mode:normal;transform:none;
+  transition:transform .35s var(--press-ease);font-weight:600
+}
+.btn.cta-go:hover::after{transform:translateX(5px)}
+.btn.cta-go:active::after{transform:translateX(8px)}
+/* Light sweep that crosses the button every few seconds, and on hover */
+.btn.cta-go::before,.btn.cta-breathe::before,.pill.cta-shine::before{
+  content:"";display:block!important;position:absolute;inset:-2px;z-index:0;pointer-events:none;
+  background:linear-gradient(105deg,transparent 35%,rgba(255,255,255,.38) 50%,transparent 65%);
+  transform:translateX(-130%);animation:cta-sheen 6s ease-in-out 1.2s infinite
+}
+.btn.cta-go:hover::before,.pill.cta-shine:hover::before{animation:cta-sheen-fast .8s ease-out}
+@keyframes cta-sheen{0%,82%{transform:translateX(-130%)}96%,100%{transform:translateX(130%)}}
+@keyframes cta-sheen-fast{from{transform:translateX(-130%)}to{transform:translateX(130%)}}
+.btn.ghost.cta-go::before{background:linear-gradient(105deg,transparent 35%,color-mix(in srgb,var(--red-1) 22%,transparent) 50%,transparent 65%)}
+/* A slow breathing halo on the one button that matters most on screen */
+.btn.cta-breathe{animation:cta-breathe 3.2s ease-in-out infinite}
+.btn.cta-breathe:hover,.btn.cta-breathe:active,.btn.cta-breathe:focus-visible{animation:none}
+@keyframes cta-breathe{
+  0%,100%{box-shadow:inset 0 1px 0 rgba(255,255,255,.28),inset 0 -2px 6px rgba(0,0,0,.18),0 8px 22px -12px var(--red-glow),0 0 0 0 color-mix(in srgb,var(--red-1) 0%,transparent)}
+  50%{box-shadow:inset 0 1px 0 rgba(255,255,255,.3),inset 0 -2px 6px rgba(0,0,0,.16),0 12px 30px -12px var(--red-glow),0 0 0 7px color-mix(in srgb,var(--red-1) 16%,transparent)}
+}
+/* Magnetic pull on desktop (set by script) */
+.btn.cta-go{transform:translate(var(--mx,0px),var(--my,0px))}
+.btn.cta-go:hover{transform:translate(var(--mx,0px),calc(var(--my,0px) - 2px))}
+.btn.cta-go:active{transform:translate(var(--mx,0px),calc(var(--my,0px) + 1px)) scale(.975)}
+/* A one-time pop when a main button first comes into view */
+.cta-pop{animation:cta-pop .7s var(--press-ease) both}
+.btn.cta-breathe.cta-pop{animation:cta-pop .7s var(--press-ease) both,cta-breathe 3.2s ease-in-out .7s infinite}
+@keyframes cta-pop{0%{transform:scale(.92);opacity:.6}60%{transform:scale(1.04);opacity:1}100%{transform:scale(1)}}
+/* The form's send button starts breathing once everything is filled in */
+.sf-block.is-done .btn[data-cta]{animation:cta-breathe 3.2s ease-in-out infinite}
+.sf-block.is-done .btn[data-cta]:hover{animation:none}
+/* Reassurance right under the hero buttons */
+.cta-note{margin:.9rem 0 0;color:var(--mute);font-size:.88rem;letter-spacing:.01em}
+/* Phone bar: arrives with a little spring */
+@media(max-width:820px){.mbar{transition:transform .5s var(--press-ease)}}
+@media(prefers-reduced-motion:reduce){
+  .btn.cta-go::before,.btn.cta-breathe::before,.pill.cta-shine::before{animation:none;display:none!important}
+  .btn.cta-breathe,.cta-pop,.sf-block.is-done .btn[data-cta]{animation:none}
+  .btn.cta-go:hover::after{transform:none}
+}
+.pk .btn{display:flex;align-items:center;justify-content:center}

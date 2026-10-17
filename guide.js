@@ -256,9 +256,9 @@
   }
 
   function primary() {
-    if (step === 3) return `<button type="button" class="btn cfg-go" data-handoff>${L('Continue to send', 'Continuer pour envoyer')}</button>`
+    if (step === 3) return `<button type="button" class="btn cfg-go cta-go cta-breathe" data-handoff>${L('Continue to send', 'Continuer pour envoyer')}</button>`
     const label = step === 2 ? L('See my selection', 'Voir ma sélection') : L('Continue', 'Continuer')
-    return `<button type="button" class="btn cfg-go" data-next ${canContinue() ? '' : 'disabled'}>${label}</button>`
+    return `<button type="button" class="btn cfg-go cta-go" data-next ${canContinue() ? '' : 'disabled'}>${label}</button>`
   }
 
   function render(dir) {

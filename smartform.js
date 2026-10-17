@@ -142,7 +142,7 @@
         <button type="button" class="sf-add" data-addnote aria-expanded="false"></button>
         <div class="field" data-notefield hidden><label for="sf-msg" data-t="NoteL"></label><textarea id="sf-msg" name="message" rows="3"></textarea></div>
         <p class="note err" data-form-error hidden></p>
-        <div class="actions"><button class="btn big" type="submit" data-cta></button></div>
+        <div class="actions"><button class="btn big cta-go" type="submit" data-cta></button></div>
         <p class="hint" data-t="Hint"></p>
       </fieldset>`
     const done = document.createElement('div')

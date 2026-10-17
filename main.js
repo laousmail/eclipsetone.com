@@ -370,9 +370,38 @@
     }, { passive: true })
   }
 
+  // Main buttons: a small magnetic pull toward the cursor, and a pop when they first appear.
+  function initCtas() {
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches
+    if (reduce) return
+    if (matchMedia('(hover: hover) and (pointer: fine)').matches) {
+      document.addEventListener('pointermove', (e) => {
+        const btn = e.target.closest && e.target.closest('.btn.cta-go')
+        document.querySelectorAll('.btn.cta-go[data-mag]').forEach((b) => { if (b !== btn) { b.style.removeProperty('--mx'); b.style.removeProperty('--my'); b.removeAttribute('data-mag') } })
+        if (!btn) return
+        const r = btn.getBoundingClientRect()
+        const dx = (e.clientX - (r.left + r.width / 2)) / (r.width / 2)
+        const dy = (e.clientY - (r.top + r.height / 2)) / (r.height / 2)
+        btn.style.setProperty('--mx', `${(dx * 4).toFixed(1)}px`)
+        btn.style.setProperty('--my', `${(dy * 3).toFixed(1)}px`)
+        btn.setAttribute('data-mag', '')
+      }, { passive: true })
+    }
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver((entries) => entries.forEach((en) => {
+        if (!en.isIntersecting) return
+        en.target.classList.add('cta-pop')
+        io.unobserve(en.target)
+        setTimeout(() => en.target.classList.remove('cta-pop'), 800)
+      }), { threshold: 0.9 })
+      document.querySelectorAll('.btn.cta-breathe:not(.mbar-go), .pk .btn.cta-go').forEach((b) => io.observe(b))
+    }
+  }
+
   initTheme()
   initHelpFab()
   initPress()
+  initCtas()
   initListen()
   initMobileBar()
   initLang()
