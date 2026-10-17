@@ -350,8 +350,29 @@
     set()
   }
 
+  // Satisfying clicks: a ripple where you press, a tiny tap on phones for main buttons.
+  function initPress() {
+    const CHIPS = '.sf-pick,.sf-ans,.qty,.mo,.chip-links a,.team-card,.rows a,.sf-switch,.listen-btn,.cfg-pack-in,.cfg-extra,.mbar-q'
+    document.querySelectorAll(CHIPS).forEach((el) => el.classList.add('chipfx'))
+    new MutationObserver(() => document.querySelectorAll(CHIPS).forEach((el) => el.classList.add('chipfx'))).observe(document.body, { childList: true, subtree: true })
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    document.addEventListener('pointerdown', (e) => {
+      const el = e.target.closest('.btn,.pill,.mbar-go,.chipfx')
+      if (!el || el.disabled) return
+      const r = el.getBoundingClientRect()
+      const size = Math.max(r.width, r.height) * 2.2
+      const rip = document.createElement('span')
+      rip.className = 'rip'
+      rip.style.cssText = `width:${size}px;height:${size}px;left:${e.clientX - r.left - size / 2}px;top:${e.clientY - r.top - size / 2}px`
+      el.appendChild(rip)
+      setTimeout(() => rip.remove(), 650)
+      if (e.pointerType === 'touch' && el.matches('.btn:not(.ghost):not(.help),.pill,.mbar-go') && navigator.vibrate) navigator.vibrate(8)
+    }, { passive: true })
+  }
+
   initTheme()
   initHelpFab()
+  initPress()
   initListen()
   initMobileBar()
   initLang()

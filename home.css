@@ -1313,3 +1313,90 @@ h1,h2,h3,p,li,summary,label,.team-card-t,.row-t{overflow-wrap:break-word;hyphens
   .hero-anchor i{display:none}
   .hero-anchor>span{padding:.35rem .75rem;border-radius:99px;border:1px solid var(--line);background:var(--bg2);font-size:.9rem}
 }
+
+/* =========================================================
+   BUTTON SYSTEM (final word on buttons)
+   Crimson with a soft rose glow. Lifts on hover, sinks on press,
+   a ripple where you touch. All text passes WCAG AA contrast.
+   ========================================================= */
+:root{
+  --red-1:#DA2C43;--red-2:#BE1A33;          /* top / bottom of the red */
+  --red-1h:#E3384E;--red-2h:#C9203A;        /* hover */
+  --red-glow:rgba(218,44,67,.55);
+  --press-ease:cubic-bezier(.2,.9,.25,1.25);
+}
+:root[data-theme=light]{
+  --red-1:#C8203A;--red-2:#A80F2C;
+  --red-1h:#D0283F;--red-2h:#B3142F;
+  --red-glow:rgba(200,32,58,.42);
+}
+.btn,.pill,.mbar-go{
+  position:relative;overflow:hidden;isolation:isolate;
+  color:#fff!important;border:0;
+  background:linear-gradient(180deg,var(--red-1),var(--red-2));
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.28),inset 0 -2px 6px rgba(0,0,0,.18),0 8px 22px -12px var(--red-glow);
+  text-shadow:0 1px 1px rgba(80,0,10,.25);
+  transition:transform .35s var(--press-ease),box-shadow .35s ease,background .25s ease,filter .25s ease;
+  -webkit-tap-highlight-color:transparent;cursor:pointer;
+}
+.btn:hover,.pill:hover,.mbar-go:hover{
+  background:linear-gradient(180deg,var(--red-1h),var(--red-2h));
+  transform:translateY(-2px);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.32),inset 0 -2px 6px rgba(0,0,0,.16),0 16px 32px -14px var(--red-glow),0 0 0 4px color-mix(in srgb,var(--red-1) 14%,transparent);
+}
+.btn:active,.pill:active,.mbar-go:active{
+  transform:translateY(1px) scale(.975);
+  transition-duration:.08s;
+  box-shadow:inset 0 2px 8px rgba(0,0,0,.3),0 4px 12px -8px var(--red-glow);
+  filter:saturate(1.08);
+}
+.btn:focus-visible,.pill:focus-visible,.mbar-go:focus-visible{outline:none;box-shadow:inset 0 1px 0 rgba(255,255,255,.3),0 0 0 3px var(--bg),0 0 0 5px var(--red-1)}
+.btn[disabled],.btn:disabled{opacity:.5;cursor:not-allowed;transform:none;filter:grayscale(.3)}
+
+/* Ghost: quiet outline that warms up on hover */
+.btn.ghost{
+  background:transparent;color:var(--ink)!important;text-shadow:none;
+  box-shadow:inset 0 0 0 1.5px color-mix(in srgb,var(--ink) 28%,transparent);
+}
+.btn.ghost:hover{
+  background:color-mix(in srgb,var(--red-1) 8%,transparent);
+  box-shadow:inset 0 0 0 1.5px color-mix(in srgb,var(--red-1) 70%,transparent),0 10px 24px -16px var(--red-glow);
+}
+.btn.ghost:active{box-shadow:inset 0 0 0 1.5px var(--red-1),inset 0 2px 6px rgba(0,0,0,.12)}
+.btn.ghost:focus-visible{box-shadow:inset 0 0 0 1.5px var(--ink),0 0 0 3px var(--bg),0 0 0 5px var(--red-1)}
+.btn.help{background:transparent;color:var(--ink)!important;text-shadow:none;box-shadow:inset 0 0 0 1.5px color-mix(in srgb,var(--ink) 28%,transparent)}
+.btn.help:hover{background:color-mix(in srgb,var(--red-1) 8%,transparent);box-shadow:inset 0 0 0 1.5px color-mix(in srgb,var(--red-1) 70%,transparent)}
+
+/* Ripple where the finger or cursor lands */
+.rip{position:absolute;border-radius:50%;pointer-events:none;transform:scale(0);opacity:.45;background:radial-gradient(circle,rgba(255,255,255,.75),rgba(255,255,255,0) 70%);animation:rip .6s ease-out forwards;z-index:0}
+.btn.ghost .rip,.btn.help .rip,.chipfx .rip{background:radial-gradient(circle,color-mix(in srgb,var(--red-1) 45%,transparent),transparent 70%)}
+@keyframes rip{to{transform:scale(1);opacity:0}}
+.btn>*,.pill>*,.mbar-go>*{position:relative;z-index:1}
+
+/* Choice chips and cards: same physics, softer */
+.chipfx{position:relative;overflow:hidden;-webkit-tap-highlight-color:transparent;transition:transform .3s var(--press-ease),border-color .2s ease,background .2s ease,box-shadow .3s ease}
+.chipfx:hover{transform:translateY(-1px);box-shadow:0 10px 22px -16px var(--red-glow)}
+.chipfx:active{transform:scale(.97);transition-duration:.08s}
+.sf-pick[aria-checked=true],.sf-ans[aria-checked=true],.qty[aria-pressed=true]{border-color:var(--red-1)!important;background:color-mix(in srgb,var(--red-1) 12%,var(--bg2))!important;box-shadow:0 0 0 3px color-mix(in srgb,var(--red-1) 16%,transparent)}
+.sf-pick[aria-checked=true] b::after{color:var(--red-1)}
+.cur-btns button{transition:background .2s ease,color .2s ease,transform .25s var(--press-ease)}
+.cur-btns button:active{transform:scale(.94)}
+.mbar-go{display:inline-flex;align-items:center;gap:.3rem;border-radius:99px;font-weight:700;text-decoration:none}
+@media(prefers-reduced-motion:reduce){
+  .btn,.pill,.mbar-go,.chipfx{transition:none}
+  .btn:hover,.pill:hover,.mbar-go:hover,.chipfx:hover{transform:none}
+  .rip{display:none}
+}
+:root{--primary:#BE1A33;--primary-hover:#C9203A}
+:root[data-theme=light]{--primary:#A80F2C;--primary-hover:#B3142F}
+/* Text inside a button always takes the button's color */
+.btn span,.btn small,.btn b,.btn em,.pill span,.mbar-go span,.mbar-go small{color:inherit}
+/* Light mode orange a touch deeper so links and prices pass contrast */
+:root[data-theme=light]{--accent:#ad3a0b}
+/* Badges and avatars: white on crimson */
+.avatar{background:linear-gradient(180deg,var(--red-1),var(--red-2))}
+.cfg-tag,.row-badge,.pkg-badge,.pkg-fit,.pk-badge{background:linear-gradient(180deg,var(--red-1),var(--red-2))!important;color:#fff!important}
+:root[data-theme=light]{--hot:#ad3a0b}
+.sf-pick[aria-checked=true] b::after{content:none}
+.sf-pick[aria-checked=true]::after{content:"✓";position:absolute;top:.55rem;right:.65rem;display:grid;place-items:center;width:1.35rem;height:1.35rem;border-radius:50%;background:linear-gradient(180deg,var(--red-1),var(--red-2));color:#fff;font-size:.78rem;font-weight:800}
+.sf-pick b{padding-right:1.4rem}
