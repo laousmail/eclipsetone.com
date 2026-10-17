@@ -323,8 +323,37 @@
     }, { passive: true })
   }
 
+  // Hero "Hear one of our songs": loads YouTube only when tapped (privacy-friendly, fast).
+  function initListen() {
+    document.querySelectorAll('[data-listen-play]').forEach((btn) => btn.addEventListener('click', () => {
+      const id = btn.dataset.yt
+      const wrap = btn.closest('[data-listen]')
+      wrap.innerHTML = `<div class="listen-frame"><iframe src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0" title="EclipseTone song" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe></div>`
+      document.dispatchEvent(new CustomEvent('et:track', { detail: 'hero-listen' }))
+    }))
+  }
+
+  // Phone bar: shows after the hero, hides near the price form.
+  function initMobileBar() {
+    const bar = document.querySelector('[data-mbar]')
+    const hero = document.querySelector('.hero, .page-hero')
+    if (!bar) return
+    document.body.classList.add('has-mbar')
+    const form = document.querySelector('#booking, #book')
+    let pastHero = false, atForm = false
+    const set = () => { const on = pastHero && !atForm; bar.classList.toggle('is-on', on); bar.setAttribute('aria-hidden', String(!on)) }
+    if ('IntersectionObserver' in window) {
+      if (hero) new IntersectionObserver(([e]) => { pastHero = !e.isIntersecting; set() }).observe(hero)
+      else pastHero = true
+      if (form) new IntersectionObserver(([e]) => { atForm = e.isIntersecting; set() }, { rootMargin: '0px 0px -30% 0px' }).observe(form)
+    }
+    set()
+  }
+
   initTheme()
   initHelpFab()
+  initListen()
+  initMobileBar()
   initLang()
   initReveal()
   initNavMenu()
