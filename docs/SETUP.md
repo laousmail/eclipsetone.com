@@ -17,7 +17,11 @@ Every visitor who types a valid email or WhatsApp number in "Start your project"
 6. Copy the **Web app URL** (it ends in `/exec`).
 7. Paste it into `config.js`: `leadSheetUrl: 'https://script.google.com/macros/s/…/exec',`
 
-Test: open the site, pick a package, type a name and email, wait 2 seconds. A row appears in the sheet.
+8. Back in the script editor, pick **testAlert** in the function menu at the top and press **Run**. Allow access again. A test email arrives in your Gmail.
+
+Test: open the site, tap Start your project, type a name and email, wait 2 seconds. A row appears in the sheet. Press Send my project: the row turns to Sent and you get an email.
+
+Phone alerts: in the Gmail app, notifications on. Optional: make a Gmail filter for subject "New project:" with its own label and sound.
 
 If you ever change the script, use **Deploy → Manage deployments → Edit → New version** so the URL stays the same.
 
