@@ -1,6 +1,6 @@
 // Visitor stats with GoatCounter (free, no cookies, no banner needed).
 // Turns on when ET_CONFIG.goatcounter is set in config.js.
-// Counts page views plus the steps that matter: Get started, price form, WhatsApp, orders.
+// Counts page views plus the steps that matter: project panel, WhatsApp, orders.
 ;(() => {
   const code = (window.ET_CONFIG || {}).goatcounter
   const queue = []
@@ -21,12 +21,10 @@
   document.addEventListener('click', (e) => {
     const a = e.target.closest('a, button')
     if (!a) return
-    if (a.matches('[data-guide-open]')) return send('get-started-opened')
     if (a.matches('[data-merch-order]')) return send('order-' + (a.closest('[data-merch]')?.dataset.merch || 'merch'))
     if (a.matches('.help-fab, .nav-help')) return send('questions-whatsapp')
     if (a.matches('button[data-cur]')) return send('currency-' + a.dataset.cur)
     if (a.matches('[data-lang-btn]')) return send('language-' + a.dataset.langBtn)
-    if (a.matches('[data-package]')) return send('package-button-' + a.dataset.package)
     const href = a.getAttribute('href') || ''
     if (href.includes('calendly.com')) return send('call-booking')
     if (href.includes('wa.me')) return send('whatsapp-other')

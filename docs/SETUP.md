@@ -4,7 +4,7 @@ Each switch takes about 5 minutes. Sections 1 to 3 end with a value pasted into 
 
 ## 1. Lead sheet (Google Sheets)
 
-Every visitor who types a valid email or WhatsApp number in "Get your price" lands in the sheet, even if they never press Send in WhatsApp. Rows marked **Started** are the people to follow up with. Rows marked **Sent** pressed the button.
+Every visitor who types a valid email or WhatsApp number in "Start your project" lands in the sheet, even if they never press Send in WhatsApp. Rows marked **Started** are the people to follow up with. Rows marked **Sent** pressed the button.
 
 1. Go to sheets.google.com and create a blank sheet. Name it "EclipseTone leads".
 2. Menu **Extensions → Apps Script**.

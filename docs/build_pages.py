@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""Builds the secondary pages (team, blog, privacy) in the same design as the homepage.
+"""Builds the secondary pages (blog, privacy) in the same design as the homepage.
 
 Header, menu, help button and footer are copied from index.html, so a change there
 reaches every page the next time this runs:  python3 docs/build_pages.py
-Team member content comes from docs/team.json. Blog posts come from docs/blog.json.
+Blog posts come from docs/blog.json.
 """
 import html
 import json
@@ -39,6 +39,7 @@ def part(pattern):
 HEADER = part(r'<header class="nav">.*?</header>')
 FAB = part(r'<a class="help-fab".*?</a>')
 FOOTER = part(r'<footer class="foot">.*?</footer>')
+ICONS = (ROOT / 'docs/icons.html').read_text().strip()
 THEME = part(r'<script>\(function\(\)\{try\{var t=localStorage.*?</script>')
 FONTS = '<link rel="preload" href="{pre}fonts/inter.woff" as="font" type="font/woff" crossorigin />\n<link rel="preload" href="{pre}fonts/fraunces.woff" as="font" type="font/woff" crossorigin />'
 
@@ -72,6 +73,7 @@ def page(path, title, desc, main, current=None, lang='en', og_type='website'):
 <link rel="stylesheet" href="{pre}home.css?v={VERSION}" />
 </head>
 <body class="subpage">
+{ICONS}
 <a class="skip" href="#main">{bi('Skip to content', 'Aller au contenu')}</a>
 {header}
 <main id="main">
@@ -83,7 +85,7 @@ def page(path, title, desc, main, current=None, lang='en', og_type='website'):
 <script src="{pre}currency.js?v={VERSION}"></script>
 <script src="{pre}analytics.js?v={VERSION}"></script>
 <script src="{pre}main.js?v={VERSION}" defer></script>
-<script src="{pre}guide.js?v={VERSION}" defer></script>
+<script src="{pre}project.js?v={VERSION}" defer></script>
 </body>
 </html>
 '''
@@ -93,72 +95,6 @@ def page(path, title, desc, main, current=None, lang='en', og_type='website'):
     return out
 
 
-CTA = (f'<a class="btn" href="#" data-guide-open>{bi("Start your song", "Commence ta chanson")}</a>')
-
-
-# ---------------- team ----------------
-def releases(p):
-    if not p.get('releases'):
-        return ''
-    rows = ''.join(f'<a class="team-card" href="{r["href"]}" target="_blank" rel="noreferrer"><span class="team-card-t"><small>{r["date"]}</small><b>{r["title"]}</b></span><span class="row-p">{bi("Listen", "Écouter")}</span></a>' for r in p['releases'])
-    return f'<section class="sec"><p class="side-t">{bi("Releases", "Sorties")}</p><div class="team-grid">{rows}</div></section>'
-
-
-def build_team():
-    team = json.loads((ROOT / 'docs/team.json').read_text())
-    cards = []
-    for p in team:
-        cards.append(f'''<a class="team-card reveal" href="{p['slug']}.html">
-<span class="avatar" aria-hidden="true">{p['name'][0]}</span>
-<span class="team-card-t"><b>{p['name']}</b><span class="team-role">{bi(p['role_en'], p['role_fr'])}</span><small>{bi(p['summary_en'], p['summary_fr'])}</small></span>
-<span class="row-go" aria-hidden="true">›</span>
-</a>''')
-    main = f'''<section class="sec page-head">
-<p class="kicker">{bi('The team', 'L’équipe')}</p>
-<h1>{bi('The people on your record.', 'Les gens derrière ton disque.')}</h1>
-<p class="lede">{bi('Real musicians, each with a craft. The team grows as more artists come in.', 'De vrais musiciens, chacun avec son métier. L’équipe grandit avec les artistes.')}</p>
-</section>
-<section class="sec team-grid">
-{chr(10).join(cards)}
-</section>
-<section class="sec page-cta">
-<h2>{bi('Want this team on your song?', 'Tu veux cette équipe sur ta chanson ?')}</h2>
-<p class="sub">{bi('Tell us what you have. We reply within 24 hours with your price.', 'Dis-nous ce que tu as. On répond en moins de 24 h avec ton prix.')}</p>
-{CTA}
-</section>'''
-    page('people/index.html', 'The team · EclipseTone', 'The musicians, arrangers and engineers who make EclipseTone records. Human-made, never AI.', main, current='index.html#team')
-
-    for p in team:
-        others = [o for o in team if o['slug'] != p['slug']][:5]
-        focus_en = ''.join(f'<li>{f}</li>' for f in p['focus_en'])
-        focus_fr = ''.join(f'<li>{f}</li>' for f in p['focus_fr'])
-        links = ''.join(
-            f'<a class="btn ghost" href="{l["href"]}"{" target=\"_blank\" rel=\"noreferrer\"" if l["href"].startswith("http") else ""}>{bi(l["en"], l["fr"])}</a>'
-            for l in p.get('links', []))
-        bio_en = ''.join(f'<p>{x}</p>' for x in p['bio_en'])
-        bio_fr = ''.join(f'<p>{x}</p>' for x in p['bio_fr'])
-        main = f'''<section class="sec page-head profile-head">
-<a class="back" href="index.html">{bi('← The whole team', '← Toute l’équipe')}</a>
-<div class="profile-id">
-<span class="avatar big" aria-hidden="true">{p['name'][0]}</span>
-<div><h1>{p['name']}</h1><p class="role-line">{bi(p['role_en'], p['role_fr'])}</p></div>
-</div>
-<p class="lede">{bi(p['summary_en'], p['summary_fr'])}</p>
-</section>
-<section class="sec profile-body">
-<article class="card prose"><div data-lang="en">{bio_en}</div><div data-lang="fr">{bio_fr}</div></article>
-<aside class="card profile-side">
-<p class="side-t">{bi('What they do', 'Ce qu’il fait')}</p>
-<ul class="chips" data-lang="en">{focus_en}</ul><ul class="chips" data-lang="fr">{focus_fr}</ul>
-<div class="side-actions">{CTA}{links}</div>
-</aside>
-</section>
-{releases(p)}
-<section class="sec more-team">
-<p class="side-t">{bi('More from the team', 'Le reste de l’équipe')}</p>
-<div class="chip-links">{''.join(f'<a href="{o["slug"]}.html">{o["name"]}</a>' for o in others)}<a href="index.html">{bi('Everyone', 'Tout le monde')}</a></div>
-</section>'''
-        page(f'people/{p["slug"]}.html', f'{p["name"]}, {p["role_en"]} · EclipseTone', f'{p["name"]}: {p["summary_en"]}', main, current='index.html#team')
 
 
 # ---------------- blog ----------------
@@ -195,7 +131,6 @@ def build_privacy():
 
 
 if __name__ == '__main__':
-    build_team()
     build_blog()
     build_privacy()
     print('built')

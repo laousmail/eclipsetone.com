@@ -118,66 +118,6 @@
     setDiscProgress(1, { animate: true })
   }
 
-  // Pricing: "What do you have?" picks the best-fit package; Cards/Compare switches view.
-  function initPricing() {
-    const root = document.querySelector('[data-pricing]')
-    if (!root) return
-    const names = { mix: 'Mixing', record: 'Full Song', signature: 'Song + Songwriting', release: 'Song + Launch' }
-    const select = document.querySelector('[data-package-select]')
-    const pickBtns = root.querySelectorAll('[data-pick]')
-    function pick(key, fromUser) {
-      pickBtns.forEach((b) => b.setAttribute('aria-checked', b.dataset.pick === key ? 'true' : 'false'))
-      root.querySelectorAll('[data-plan]').forEach((el) => el.classList.toggle('is-fit', el.dataset.plan === key))
-      root.querySelectorAll('.compare tbody tr, .compare tfoot tr').forEach((tr) => {
-        const idx = ['mix', 'record', 'signature', 'release'].indexOf(key) + 1
-        tr.querySelectorAll('td').forEach((td, i) => td.classList.toggle('is-fit', i + 1 === idx))
-      })
-      root.setAttribute('data-has-fit', '')
-      if (select && fromUser) select.value = names[key]
-      // Compare view: slide the table sideways to the chosen plan. The page itself doesn't move.
-      const scroller = root.querySelector('.compare-scroll')
-      const comparePanel = root.querySelector('[data-view-panel="compare"]')
-      if (scroller && comparePanel && !comparePanel.hidden) {
-        const col = scroller.querySelector(`thead th[data-plan="${key}"]`)
-        const pinned = scroller.querySelector('thead .corner')
-        if (col) {
-          const left = col.offsetLeft - (pinned ? pinned.offsetWidth : 0) - 8
-          scroller.scrollTo({ left: Math.max(0, left), behavior: fromUser ? 'smooth' : 'auto' })
-        }
-      } else if (fromUser && window.matchMedia('(max-width: 1180px)').matches) {
-        const card = root.querySelector(`.pkg[data-plan="${key}"]`)
-        if (card) card.scrollIntoView({ behavior: 'smooth', block: 'nearest' })
-      }
-    }
-    pickBtns.forEach((b) => b.addEventListener('click', () => pick(b.dataset.pick, true)))
-    // arrow keys move between options, like a native radio group
-    root.querySelector('[data-picker]')?.addEventListener('keydown', (e) => {
-      if (!['ArrowRight', 'ArrowLeft', 'ArrowDown', 'ArrowUp'].includes(e.key)) return
-      const list = [...pickBtns]
-      const i = list.findIndex((b) => b.getAttribute('aria-checked') === 'true')
-      const next = list[(i + (e.key === 'ArrowRight' || e.key === 'ArrowDown' ? 1 : list.length - 1)) % list.length]
-      next.focus()
-      pick(next.dataset.pick, true)
-      e.preventDefault()
-    })
-    pick('record', false)
-    // the guide sets a best fit without scrolling the page
-    document.addEventListener('et:pick', (e) => { if (e.detail) pick(e.detail, false) })
-
-    const viewBtns = root.querySelectorAll('[data-view]')
-    viewBtns.forEach((b) =>
-      b.addEventListener('click', () => {
-        viewBtns.forEach((x) => x.setAttribute('aria-selected', x === b ? 'true' : 'false'))
-        root.querySelectorAll('[data-view-panel]').forEach((panel) => {
-          panel.hidden = panel.dataset.viewPanel !== b.dataset.view
-        })
-        const current = root.querySelector('[data-pick][aria-checked="true"]')
-        if (current && b.dataset.view === 'compare') requestAnimationFrame(() => pick(current.dataset.pick, false))
-      }),
-    )
-  }
-
-
   // Prices page: physical copies quantity picker. Updates the total and the WhatsApp order link.
   function initMerch() {
     const money = (n) => (window.etMoney ? window.etMoney(n) : '$' + n)
@@ -323,23 +263,13 @@
     }, { passive: true })
   }
 
-  // Hero "Hear one of our songs": loads YouTube only when tapped (privacy-friendly, fast).
-  function initListen() {
-    document.querySelectorAll('[data-listen-play]').forEach((btn) => btn.addEventListener('click', () => {
-      const id = btn.dataset.yt
-      const wrap = btn.closest('[data-listen]')
-      wrap.innerHTML = `<div class="listen-frame"><iframe src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0" title="EclipseTone song" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe></div>`
-      document.dispatchEvent(new CustomEvent('et:track', { detail: 'hero-listen' }))
-    }))
-  }
-
   // Phone bar: shows after the hero, hides near the price form.
   function initMobileBar() {
     const bar = document.querySelector('[data-mbar]')
-    const hero = document.querySelector('.hero, .page-hero')
+    const hero = document.querySelector('.ot-hero .cta, .hero, .page-hero')
     if (!bar) return
     document.body.classList.add('has-mbar')
-    const form = document.querySelector('#booking, #book')
+    const form = document.querySelector('#start')
     let pastHero = false, atForm = false
     const set = () => { const on = pastHero && !atForm; bar.classList.toggle('is-on', on); bar.setAttribute('aria-hidden', String(!on)) }
     if ('IntersectionObserver' in window) {
@@ -352,12 +282,12 @@
 
   // Satisfying clicks: a ripple where you press, a tiny tap on phones for main buttons.
   function initPress() {
-    const CHIPS = '.sf-pick,.sf-ans,.qty,.mo,.chip-links a,.team-card,.rows a,.sf-switch,.listen-btn,.cfg-pack-in,.cfg-extra,.mbar-q'
+    const CHIPS = '.svc-pick,.ans,.qty,.chip-links a,.team-card,.sf-switch,.mbar-q'
     document.querySelectorAll(CHIPS).forEach((el) => el.classList.add('chipfx'))
     new MutationObserver(() => document.querySelectorAll(CHIPS).forEach((el) => el.classList.add('chipfx'))).observe(document.body, { childList: true, subtree: true })
     if (matchMedia('(prefers-reduced-motion: reduce)').matches) return
     document.addEventListener('pointerdown', (e) => {
-      const el = e.target.closest('.btn,.pill,.mbar-go,.chipfx')
+      const el = e.target.closest('.btn,.pill,.mbar-go,.chipfx,.tile,.node .knob')
       if (!el || el.disabled) return
       const r = el.getBoundingClientRect()
       const size = Math.max(r.width, r.height) * 2.2
@@ -398,17 +328,42 @@
     }
   }
 
+  // Light depth: tiles lean toward the pointer, hero layers drift at different speeds on scroll.
+  // Mouse and trackpad only for the lean; everything off when reduced motion is on.
+  function initDepth() {
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    if (matchMedia('(hover: hover) and (pointer: fine)').matches) {
+      document.addEventListener('pointermove', (e) => {
+        const t = e.target.closest && e.target.closest('.tile')
+        if (initDepth.cur && initDepth.cur !== t) { initDepth.cur.style.removeProperty('--rx'); initDepth.cur.style.removeProperty('--ry') }
+        initDepth.cur = t
+        if (!t) return
+        const r = t.getBoundingClientRect()
+        t.style.setProperty('--ry', `${(((e.clientX - r.left) / r.width) - 0.5) * 7}deg`)
+        t.style.setProperty('--rx', `${(0.5 - ((e.clientY - r.top) / r.height)) * 7}deg`)
+      }, { passive: true })
+    }
+    const layers = [...document.querySelectorAll('[data-depth]')]
+    if (!layers.length) return
+    let ticking = false
+    const paint = () => {
+      ticking = false
+      const y = Math.min(window.scrollY, innerHeight)
+      layers.forEach((l) => { l.style.translate = `0 ${(y * parseFloat(l.dataset.depth)).toFixed(1)}px` })
+    }
+    window.addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(paint) } }, { passive: true })
+  }
+
   initTheme()
   initHelpFab()
   initPress()
   initCtas()
-  initListen()
   initMobileBar()
+  initDepth()
   initLang()
   initReveal()
   initNavMenu()
   initDiscFromMarkup()
-  initPricing()
   initJumpbar()
   initMerch()
   initCapture()

@@ -15,9 +15,9 @@
     if (cur !== 'CAD') n = decimals ? Math.round(n * 100) / 100 : Math.round(n)
     const num = n.toLocaleString(fr() ? 'fr-CA' : 'en-CA', { minimumFractionDigits: decimals, maximumFractionDigits: decimals })
     const approx = cur === 'CAD' ? '' : '≈ '
-    if (cur === 'EUR') return fr() ? `${approx}${num} €` : `${approx}€${num}`
-    if (cur === 'USD') return fr() ? `${approx}${num} $ US` : `${approx}US$${num}`
-    return fr() ? `${num} $` : `$${num}`
+    if (cur === 'EUR') return fr() ? `${approx}${num}\u00a0€` : `${approx}€${num}`
+    if (cur === 'USD') return fr() ? `${approx}${num}\u00a0$\u00a0US` : `${approx}US$${num}`
+    return fr() ? `${num}\u00a0$` : `$${num}`
   }
   window.etMoney = fmt
   window.etCurrency = () => cur
