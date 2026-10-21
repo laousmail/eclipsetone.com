@@ -1686,3 +1686,31 @@ html{scrollbar-gutter:stable}
   .svc-pick b{font-size:.93rem}
   .ans.rich{column-gap:.6rem;padding:.8rem .85rem}
 }
+
+/* Artist site: fixed side rail (desktop) */
+.side-artist{
+  position:fixed;z-index:45;right:0;top:50%;
+  transform:translate(calc(100% - 2.55rem),-50%);
+  display:flex;align-items:center;gap:.55rem;
+  writing-mode:vertical-rl;text-orientation:mixed;
+  padding:.9rem .55rem;
+  text-decoration:none;color:var(--ink);
+  background:color-mix(in srgb,var(--bg2) 92%,transparent);
+  border:1px solid var(--line);border-right:0;
+  border-radius:1rem 0 0 1rem;
+  backdrop-filter:blur(10px);
+  box-shadow:-10px 12px 28px -18px rgba(0,0,0,.45);
+  transition:transform .35s cubic-bezier(.22,1,.36,1),border-color .25s ease,color .25s ease;
+}
+.side-artist b{font:600 .95rem/1 "Fraunces",Georgia,serif;letter-spacing:.02em}
+.side-artist-k{font:600 .68rem/1 "Inter",system-ui,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:var(--mute)}
+.side-artist:hover,.side-artist:focus-visible{
+  transform:translate(0,-50%);
+  border-color:color-mix(in srgb,var(--gold) 55%,var(--line));
+  color:var(--gold);
+  outline:none;
+}
+.side-artist:hover .side-artist-k,.side-artist:focus-visible .side-artist-k{color:var(--ink)}
+html.sheet-open .side-artist{opacity:0;pointer-events:none}
+@media(max-width:980px){.side-artist{display:none}}
+@media(prefers-reduced-motion:reduce){.side-artist{transition:none}}
