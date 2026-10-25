@@ -28,3 +28,14 @@
 - [Prices](https://eclipsetone.com/services/): every package and add-on
 - [Blog](https://eclipsetone.com/blog/): notes from the studio
 - [Privacy policy](https://eclipsetone.com/privacy/)
+- [Song production](https://eclipsetone.com/song-production/)
+- [Mixing](https://eclipsetone.com/mixing/)
+- [Studio recording in Montréal](https://eclipsetone.com/studio-recording/)
+- [Music video](https://eclipsetone.com/music-video/)
+- [CDs and USB-C cards](https://eclipsetone.com/cds-usb-cards/)
+- [Artist website](https://eclipsetone.com/artist-website/)
+- [Social media](https://eclipsetone.com/social-media/)
+
+## En français
+
+Le site complet existe en français : [eclipsetone.com/fr/](https://eclipsetone.com/fr/)

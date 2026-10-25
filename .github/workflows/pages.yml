@@ -34,6 +34,7 @@ jobs:
             --exclude '.github/' \
             --exclude 'private/' \
             --exclude 'docs/' \
+            --exclude 'src/' \
             --exclude 'node_modules/' \
             --exclude 'dist/' \
             --exclude '.cursor/' \
@@ -44,6 +45,7 @@ jobs:
           test -f dist/CNAME
           test ! -e dist/private
           test ! -e dist/docs
+          test ! -e dist/src
           ls -la dist | head
 
       - uses: actions/upload-pages-artifact@v3

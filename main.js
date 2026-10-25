@@ -68,11 +68,6 @@
   function setLang(lang) {
     const next = lang === 'fr' ? 'fr' : 'en'
     document.documentElement.lang = next
-    try {
-      localStorage.setItem(LANG_KEY, next)
-    } catch {
-      /* private mode */
-    }
     document.querySelectorAll('[data-lang-btn]').forEach((btn) => {
       btn.setAttribute('aria-pressed', btn.getAttribute('data-lang-btn') === next ? 'true' : 'false')
     })
@@ -80,21 +75,29 @@
     setTheme(document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark')
   }
 
+  // Every page exists in English and in French at its own address. The footer link to the
+  // other language (a[hreflang]) is where the EN / FR buttons go.
   function initLang() {
-    // A page with its own language versions (hreflang) always shows its own language.
-    // Elsewhere: the saved choice, else French for French-speaking browsers.
-    const fixed = document.querySelector('link[hreflang]') ? document.documentElement.lang : ''
-    let start = /^fr\b/i.test(navigator.language || '') ? 'fr' : 'en'
-    try {
-      const saved = localStorage.getItem(LANG_KEY)
-      if (saved === 'fr' || saved === 'en') start = saved
-    } catch {
-      /* private mode */
+    const page = document.documentElement.lang === 'fr' ? 'fr' : 'en'
+    const other = document.querySelector('a[hreflang]:not([hreflang="' + page + '"])')
+    const keep = (lang) => { try { localStorage.setItem(LANG_KEY, lang) } catch { /* private mode */ } }
+    let want = ''
+    try { want = localStorage.getItem(LANG_KEY) || '' } catch { /* private mode */ }
+    // First visit from a French-speaking browser: French. After that, the visitor's own choice.
+    if (!want) want = /^fr\b/i.test(navigator.language || '') ? 'fr' : page
+    if (want !== page && other && other.getAttribute('hreflang') === want) {
+      location.replace(other.href + location.hash)
+      return
     }
-    if (fixed === 'fr' || fixed === 'en') start = fixed
-    setLang(start)
+    setLang(page)
     document.querySelectorAll('[data-lang-btn]').forEach((btn) => {
-      btn.addEventListener('click', () => setLang(btn.getAttribute('data-lang-btn')))
+      btn.addEventListener('click', () => {
+        const to = btn.getAttribute('data-lang-btn')
+        if (to === page) return
+        keep(to)
+        if (other) location.href = other.href + location.hash
+        else setLang(to)
+      })
     })
   }
 

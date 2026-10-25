@@ -1824,3 +1824,27 @@ body{font-size:1.0625rem;line-height:1.6}
 }
 @media(max-width:980px){.nav-links a{display:flex;align-items:flex-start;justify-content:center;min-height:44px}}
 @media(pointer:coarse){.brand{min-height:44px}}
+
+/* --- Service pages: one clear price, a short list, then the other services --- */
+.kicker{color:var(--mute);font-size:.875rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase}
+:root[data-theme=light] .kicker{color:var(--mute)}
+.svc-head h1{max-width:18ch}
+.svc-price{display:inline-block;margin:.4rem 0 1.6rem;padding:.55rem 1rem;border:1px solid var(--line);border-radius:.75rem;background:var(--bg2);font-weight:600}
+.svc-body{max-width:46rem}
+.svc-body h2{font-size:1.5rem;margin:0 0 .9rem}
+.svc-body h2:not(:first-child){margin-top:2rem}
+.svc-body ul,.svc-body ol{margin:0;padding-left:1.25rem;display:grid;gap:.55rem}
+.svc-body li{line-height:1.55}
+.svc-body li::marker{color:var(--mute)}
+.svc-more{margin-top:2rem!important;color:var(--mute)!important;font-size:.9375rem!important}
+.svc-others h2{font-size:clamp(1.5rem,3vw,2rem);margin-bottom:1.2rem}
+.svc-others .team-card b{font:600 1.05rem/1.3 "Inter",system-ui,sans-serif}
+
+/* --- Footer: services on their own row above the small links --- */
+.foot .foot-svc{flex-basis:100%;order:-1;display:flex;flex-wrap:wrap;gap:.25rem 1.5rem;padding-bottom:1rem;margin-bottom:.5rem;border-bottom:1px solid var(--line)}
+.foot .foot-svc a{color:var(--ink)}
+
+/* --- Hero headline: three lines on desktop, the promise in ink and the rest dimmed --- */
+.ot-hero h1{font-size:clamp(2.4rem,4.7vw,4.3rem);line-height:1.04}
+.ot-hero h1 .ln2{color:var(--mute);margin-top:.18em}
+.ot-copy{max-width:38rem}

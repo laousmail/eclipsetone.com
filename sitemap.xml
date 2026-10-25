@@ -1,17 +1,123 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
-  <url><loc>https://eclipsetone.com/</loc><lastmod>2026-10-24</lastmod></url>
-  <url><loc>https://eclipsetone.com/services/</loc><lastmod>2026-10-24</lastmod></url>
-  <url><loc>https://eclipsetone.com/blog/</loc><lastmod>2026-10-24</lastmod></url>
   <url>
-    <loc>https://eclipsetone.com/blog/15-songs-before-2026.html</loc><lastmod>2026-10-24</lastmod>
+    <loc>https://eclipsetone.com/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eclipsetone.com/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://eclipsetone.com/fr/" />
+  </url>
+  <url>
+    <loc>https://eclipsetone.com/fr/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eclipsetone.com/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://eclipsetone.com/fr/" />
+  </url>
+  <url>
+    <loc>https://eclipsetone.com/services/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eclipsetone.com/services/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://eclipsetone.com/fr/services/" />
+  </url>
+  <url>
+    <loc>https://eclipsetone.com/fr/services/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eclipsetone.com/services/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://eclipsetone.com/fr/services/" />
+  </url>
+  <url>
+    <loc>https://eclipsetone.com/blog/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eclipsetone.com/blog/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://eclipsetone.com/fr/blog/" />
+  </url>
+  <url>
+    <loc>https://eclipsetone.com/fr/blog/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eclipsetone.com/blog/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://eclipsetone.com/fr/blog/" />
+  </url>
+  <url>
+    <loc>https://eclipsetone.com/privacy/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eclipsetone.com/privacy/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://eclipsetone.com/fr/privacy/" />
+  </url>
+  <url>
+    <loc>https://eclipsetone.com/fr/privacy/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eclipsetone.com/privacy/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://eclipsetone.com/fr/privacy/" />
+  </url>
+  <url>
+    <loc>https://eclipsetone.com/song-production/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eclipsetone.com/song-production/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://eclipsetone.com/fr/production-chanson/" />
+  </url>
+  <url>
+    <loc>https://eclipsetone.com/fr/production-chanson/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eclipsetone.com/song-production/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://eclipsetone.com/fr/production-chanson/" />
+  </url>
+  <url>
+    <loc>https://eclipsetone.com/mixing/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eclipsetone.com/mixing/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://eclipsetone.com/fr/mixage/" />
+  </url>
+  <url>
+    <loc>https://eclipsetone.com/fr/mixage/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eclipsetone.com/mixing/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://eclipsetone.com/fr/mixage/" />
+  </url>
+  <url>
+    <loc>https://eclipsetone.com/studio-recording/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eclipsetone.com/studio-recording/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://eclipsetone.com/fr/enregistrement-studio/" />
+  </url>
+  <url>
+    <loc>https://eclipsetone.com/fr/enregistrement-studio/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eclipsetone.com/studio-recording/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://eclipsetone.com/fr/enregistrement-studio/" />
+  </url>
+  <url>
+    <loc>https://eclipsetone.com/music-video/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eclipsetone.com/music-video/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://eclipsetone.com/fr/clip/" />
+  </url>
+  <url>
+    <loc>https://eclipsetone.com/fr/clip/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eclipsetone.com/music-video/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://eclipsetone.com/fr/clip/" />
+  </url>
+  <url>
+    <loc>https://eclipsetone.com/cds-usb-cards/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eclipsetone.com/cds-usb-cards/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://eclipsetone.com/fr/cd-cartes-usb/" />
+  </url>
+  <url>
+    <loc>https://eclipsetone.com/fr/cd-cartes-usb/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eclipsetone.com/cds-usb-cards/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://eclipsetone.com/fr/cd-cartes-usb/" />
+  </url>
+  <url>
+    <loc>https://eclipsetone.com/artist-website/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eclipsetone.com/artist-website/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://eclipsetone.com/fr/site-artiste/" />
+  </url>
+  <url>
+    <loc>https://eclipsetone.com/fr/site-artiste/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eclipsetone.com/artist-website/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://eclipsetone.com/fr/site-artiste/" />
+  </url>
+  <url>
+    <loc>https://eclipsetone.com/social-media/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eclipsetone.com/social-media/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://eclipsetone.com/fr/reseaux-sociaux/" />
+  </url>
+  <url>
+    <loc>https://eclipsetone.com/fr/reseaux-sociaux/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eclipsetone.com/social-media/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://eclipsetone.com/fr/reseaux-sociaux/" />
+  </url>
+  <url>
+    <loc>https://eclipsetone.com/blog/15-songs-before-2026.html</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://eclipsetone.com/blog/15-songs-before-2026.html" />
     <xhtml:link rel="alternate" hreflang="fr" href="https://eclipsetone.com/blog/15-songs-before-2026.fr.html" />
   </url>
   <url>
-    <loc>https://eclipsetone.com/blog/15-songs-before-2026.fr.html</loc><lastmod>2026-10-24</lastmod>
+    <loc>https://eclipsetone.com/blog/15-songs-before-2026.fr.html</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://eclipsetone.com/blog/15-songs-before-2026.html" />
     <xhtml:link rel="alternate" hreflang="fr" href="https://eclipsetone.com/blog/15-songs-before-2026.fr.html" />
   </url>
-  <url><loc>https://eclipsetone.com/privacy/</loc><lastmod>2026-10-24</lastmod></url>
 </urlset>

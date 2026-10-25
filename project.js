@@ -143,7 +143,7 @@
     ContactQ: ['How should we reach you?', 'Comment on te joint ?'],
     NoteL: ['Your note (optional)', 'Ta note (optionnel)'],
     Add: ['+ Add a note, a link or a release date', '+ Ajouter une note, un lien ou une date'],
-    Consent: [`We keep what you type here so we can reply, even if you don’t finish. <a href="${BASE}privacy/">Privacy</a>`, `On garde ce que tu écris ici pour te répondre, même si tu ne finis pas. <a href="${BASE}privacy/">Confidentialité</a>`],
+    Consent: [`Nothing is sent until you press send. We only use it to reply with your price. <a href="${BASE}privacy/">Privacy</a>`, `Rien n’est envoyé avant que tu appuies sur Envoyer. On s’en sert seulement pour te répondre avec ton prix. <a href="${BASE}fr/privacy/">Confidentialité</a>`],
   }
 
   const emailOk = () => /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email.value.trim())
@@ -292,19 +292,16 @@
   })()
 
   // ---------- inside the panel ----------
-  let timer = 0, sent = false
+  let sent = false
   function snapshot(status) {
     const a = ansOf(st)
     return { status, pick: leadName(st), answer: a ? (st.pick === 'Song' ? 'Song package' : a[1]) : '', name: name.value.trim(), email: email.value.trim(), phone: phone.value.trim(), contact: st.pref === 'call' ? 'Call' : 'Text (WhatsApp)', call: wantsCall() ? 'Offered 15-min call' : '', note: msg.value.trim(), selection: '' }
   }
+  // Drafts stay on this device; nothing reaches us until the visitor presses send (Québec Law 25: clear consent)
   function keep() {
     st.note = msg.value
     save()
-    if (sent || !reachable()) return
-    clearTimeout(timer)
-    timer = setTimeout(() => logLead(snapshot('started')), 1200)
   }
-  window.addEventListener('pagehide', () => { if (!sent && reachable()) logLead(snapshot('started')) })
 
   dlg.addEventListener('click', (e) => {
     const pk = e.target.closest('[data-pick]')
@@ -364,7 +361,6 @@
     ].filter(Boolean)
     const href = `${WA}?text=${encodeURIComponent(lines.join('\n'))}`
     sent = true
-    clearTimeout(timer)
     logLead(snapshot('sent'))
     write(ME_KEY, { name: name.value.trim(), email: email.value.trim(), phone: phone.value.trim(), pref: st.pref })
     write(LAST_KEY, { pick: leadName(st), at: Date.now() })

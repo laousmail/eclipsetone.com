@@ -1,0 +1,206 @@
+[
+  {
+    "slug_en": "song-production", "slug_fr": "production-chanson", "start": "Song",
+    "nav_en": "Song production", "nav_fr": "Production de chanson",
+    "title_en": "Song production in Montréal from $599 · EclipseTone",
+    "title_fr": "Production de chanson à Montréal dès 599 $ · EclipseTone",
+    "desc_en": "Send a voice memo or lyrics. Real musicians in Montréal produce, mix and master your song. First version in 7 days, $599 per song, 100% yours. Never AI.",
+    "desc_fr": "Envoie un mémo vocal ou tes paroles. De vrais musiciens à Montréal produisent, mixent et masterisent ta chanson. Première version en 7 jours, 599 $ par chanson, 100 % à toi. Jamais d’IA.",
+    "h1_en": "Song production from your voice or lyrics.",
+    "h1_fr": "Production de chanson à partir de ta voix ou de tes paroles.",
+    "lede_en": "Send a voice memo or your lyrics. Real musicians in Montréal build the music around you, then we mix and master it into a song you release under your name.",
+    "lede_fr": "Envoie un mémo vocal ou tes paroles. De vrais musiciens à Montréal construisent la musique autour de toi, puis on la mixe et on la masterise pour que tu la sortes sous ton nom.",
+    "price_en": "Full Song: $599 per song · first version in 7 days",
+    "price_fr": "Chanson complète : 599 $ par chanson · première version en 7 jours",
+    "price": 599,
+    "items_en": [
+      "Music played by real musicians: guitar, violin, bass and arrangers",
+      "Vocal direction, mix and master",
+      "2 rounds of changes on the music and 2 on the mix",
+      "You get the song, the beat and your vocals, 100% yours",
+      "Free extras: clean, instrumental and a cappella versions, plus a 30-second TikTok cut",
+      "Just an idea? Song + Songwriting ($997) adds a 2-hour writing session"
+    ],
+    "items_fr": [
+      "Musique jouée par de vrais musiciens : guitare, violon, basse et arrangeurs",
+      "Direction vocale, mix et mastering",
+      "2 rondes de changements sur la musique et 2 sur le mix",
+      "Tu reçois la chanson, la prod et tes voix, 100 % à toi",
+      "Extras gratuits : versions clean, instrumentale et a cappella, plus un extrait TikTok de 30 secondes",
+      "Juste une idée ? Chanson + écriture (997 $) ajoute une séance d’écriture de 2 heures"
+    ],
+    "steps": true
+  },
+  {
+    "slug_en": "mixing", "slug_fr": "mixage", "start": "Mixing",
+    "nav_en": "Mixing", "nav_fr": "Mixage",
+    "title_en": "Online mixing from $150 per song · EclipseTone",
+    "title_fr": "Mixage en ligne dès 150 $ par chanson · EclipseTone",
+    "desc_en": "Already recorded your song? Send each track and we mix it into one clean, balanced song. From $150 per song, 2 rounds of changes, 100% yours.",
+    "desc_fr": "Ta chanson est déjà enregistrée ? Envoie chaque piste et on la mixe en une chanson propre et équilibrée. Dès 150 $ par chanson, 2 rondes de changements, 100 % à toi.",
+    "h1_en": "Mixing for songs you’ve already recorded.",
+    "h1_fr": "Mixage pour les chansons déjà enregistrées.",
+    "lede_en": "Send each instrument and vocal as its own file. We mix them into one clean, balanced song, ready to release.",
+    "lede_fr": "Envoie chaque instrument et chaque voix dans son propre fichier. On les mixe en une chanson propre et équilibrée, prête à sortir.",
+    "price_en": "From $150 per song · the price depends on how many tracks",
+    "price_fr": "Dès 150 $ par chanson · le prix dépend du nombre de pistes",
+    "price": 150,
+    "items_en": [
+      "Mixing of your recorded tracks",
+      "2 rounds of changes",
+      "100% yours, released under your name",
+      "Not recorded yet? Book a studio session in Montréal, or go with Full Song online"
+    ],
+    "items_fr": [
+      "Mixage de tes pistes enregistrées",
+      "2 rondes de changements",
+      "100 % à toi, sorti sous ton nom",
+      "Pas encore enregistré ? Réserve une séance en studio à Montréal, ou choisis la chanson complète en ligne"
+    ]
+  },
+  {
+    "slug_en": "studio-recording", "slug_fr": "enregistrement-studio", "start": "Studio Recording",
+    "nav_en": "Studio recording", "nav_fr": "Enregistrement en studio",
+    "title_en": "Vocal recording studio in Montréal, $350 · EclipseTone",
+    "title_fr": "Studio d’enregistrement de voix à Montréal, 350 $ · EclipseTone",
+    "desc_en": "Record your vocals in person in Montréal with a singer who coaches you to your best take. 2 hours, vocal production and the mix included, $350.",
+    "desc_fr": "Enregistre tes voix en personne à Montréal avec un chanteur qui te guide vers ta meilleure prise. 2 heures, production vocale et mix inclus, 350 $.",
+    "h1_en": "Vocal recording studio in Montréal.",
+    "h1_fr": "Studio d’enregistrement de voix à Montréal.",
+    "lede_en": "Record your vocals in person with Smail, a singer who knows how to get your best take: the right key, the right energy, the right words. You leave with a mixed song.",
+    "lede_fr": "Enregistre tes voix en personne avec Smail, un chanteur qui sait aller chercher ta meilleure prise : la bonne tonalité, la bonne énergie, les bons mots. Tu repars avec une chanson mixée.",
+    "price_en": "$350 per 2-hour session · $50 per extra hour",
+    "price_fr": "350 $ par séance de 2 heures · 50 $ par heure de plus",
+    "price": 350,
+    "items_en": [
+      "2 hours of studio time, with Smail the whole session",
+      "Coaching from a singer who knows singers",
+      "Vocal production: best takes, editing, tuning",
+      "The mix of your song",
+      "2 hours covers lead vocals, backs and harmonies on a typical 4-minute song, if you come rehearsed",
+      "Not in Montréal? Full Song works 100% online"
+    ],
+    "items_fr": [
+      "2 heures de studio, avec Smail toute la séance",
+      "Du coaching par un chanteur qui connaît les chanteurs",
+      "Production vocale : meilleures prises, montage, justesse",
+      "Le mix de ta chanson",
+      "2 heures suffisent pour la voix principale, les chœurs et les harmonies d’une chanson typique de 4 minutes, si tu arrives préparé·e",
+      "Pas à Montréal ? La chanson complète se fait 100 % en ligne"
+    ]
+  },
+  {
+    "slug_en": "music-video", "slug_fr": "clip", "start": "Music video",
+    "nav_en": "Music video", "nav_fr": "Clip",
+    "title_en": "Music videos for independent artists in Montréal · EclipseTone",
+    "title_fr": "Clips pour artistes indépendants à Montréal · EclipseTone",
+    "desc_en": "Music videos shot and edited for your song, plus press photos, cover shoots and short clips for social, by the team that made your song.",
+    "desc_fr": "Des clips tournés et montés pour ta chanson, plus photos de presse, séances pour ta pochette et courts extraits pour les réseaux, par l’équipe qui a fait ta chanson.",
+    "h1_en": "Music videos, shot and edited for your song.",
+    "h1_fr": "Des clips tournés et montés pour ta chanson.",
+    "lede_en": "The same team that made your song shoots and edits the video, plus press photos, cover shoots and short clips for social.",
+    "lede_fr": "La même équipe qui a fait ta chanson tourne et monte le clip, en plus des photos de presse, des séances pour ta pochette et des courts extraits pour les réseaux.",
+    "price_en": "Priced per project · tell us your idea and we reply within 24 hours with a price",
+    "price_fr": "Prix selon le projet · décris ton idée et on te répond en moins de 24 h avec un prix",
+    "items_en": [
+      "A music video shot and edited for your song",
+      "Press photos and cover shoots",
+      "Short clips for Instagram and TikTok",
+      "One team, so the video matches the song"
+    ],
+    "items_fr": [
+      "Un clip tourné et monté pour ta chanson",
+      "Photos de presse et séances pour ta pochette",
+      "Courts extraits pour Instagram et TikTok",
+      "Une seule équipe, donc le clip colle à la chanson"
+    ]
+  },
+  {
+    "slug_en": "cds-usb-cards", "slug_fr": "cd-cartes-usb", "start": "", "cta": "services/#physical",
+    "nav_en": "CDs and USB-C cards", "nav_fr": "CD et cartes USB-C",
+    "title_en": "CDs and USB-C music cards from $249 · EclipseTone",
+    "title_fr": "CD et cartes musicales USB-C dès 249 $ · EclipseTone",
+    "desc_en": "Printed CDs from $249 for 50 and USB-C music cards from $349 for 25. Artwork set up, a proof to approve, ready for your merch table in 2 to 3 weeks.",
+    "desc_fr": "CD imprimés dès 249 $ pour 50 et cartes musicales USB-C dès 349 $ pour 25. Pochette préparée, une épreuve à approuver, prêts pour ta table de merch en 2 à 3 semaines.",
+    "h1_en": "CDs and USB-C music cards for your merch table.",
+    "h1_fr": "CD et cartes musicales USB-C pour ta table de merch.",
+    "lede_en": "Something fans can hold. Pick a format and how many. The price you see is the price you pay, before shipping.",
+    "lede_fr": "Quelque chose que tes fans peuvent tenir. Choisis un format et une quantité. Le prix affiché est le prix payé, avant la livraison.",
+    "price_en": "CDs from $249 for 50 · USB-C cards from $349 for 25",
+    "price_fr": "CD dès 249 $ pour 50 · cartes USB-C dès 349 $ pour 25",
+    "price": 249,
+    "items_en": [
+      "CDs: full-color jacket and printed disc, shrink-wrapped, ready to sell",
+      "USB-C cards: credit-card size, your songs, cover and lyrics inside, locked so fans can’t erase them",
+      "Artwork set up from your cover, and a proof to approve before we make them",
+      "Cassettes: 100 for $649, with printed J-cards",
+      "No cover yet? We design it for $150",
+      "Ready about 2 to 3 weeks after you approve the proof. Shipping is extra"
+    ],
+    "items_fr": [
+      "CD : pochette couleur et disque imprimé, emballés sous film, prêts à vendre",
+      "Cartes USB-C : format carte de crédit, tes chansons, ta pochette et tes paroles dedans, verrouillées pour que tes fans ne puissent pas les effacer",
+      "Pochette préparée à partir de ta couverture, et une épreuve à approuver avant la fabrication",
+      "Cassettes : 100 pour 649 $, avec J-cards imprimées",
+      "Pas encore de pochette ? On la conçoit pour 150 $",
+      "Prêts environ 2 à 3 semaines après l’approbation de l’épreuve. Livraison en sus"
+    ]
+  },
+  {
+    "slug_en": "artist-website", "slug_fr": "site-artiste", "start": "Website",
+    "nav_en": "Artist website", "nav_fr": "Site d’artiste",
+    "title_en": "Artist websites from $500 · EclipseTone",
+    "title_fr": "Sites d’artiste dès 500 $ · EclipseTone",
+    "desc_en": "A website for your music that you own. One-page Artist Page from $500, or a full Artist Site from $1,500 that updates itself with new releases and shows.",
+    "desc_fr": "Un site pour ta musique qui t’appartient. Page d’artiste dès 500 $, ou un site d’artiste complet dès 1 500 $ qui se met à jour seul avec tes sorties et tes spectacles.",
+    "h1_en": "Artist websites you own.",
+    "h1_fr": "Des sites d’artiste qui t’appartiennent.",
+    "lede_en": "A home for your music that you own, not a profile on someone else’s app. Everything a fan, a promoter or a label needs to find you.",
+    "lede_fr": "Un chez-toi pour ta musique qui t’appartient, pas un profil sur l’appli de quelqu’un d’autre. Tout ce qu’un fan, un diffuseur ou une maison de disques doit trouver.",
+    "price_en": "Artist Page from $500 · Artist Site from $1,500",
+    "price_fr": "Page d’artiste dès 500 $ · site d’artiste dès 1 500 $",
+    "price": 500,
+    "items_en": [
+      "Custom one-page design in your brand",
+      "Your music, bio, photos and videos, with links to every platform and your socials",
+      "Contact and booking button, and a fan email sign-up",
+      "Built for phones first, fast to load",
+      "Domain and launch setup",
+      "Artist Site: new releases appear on their own from Spotify, shows sync automatically, and promoters get a press kit page"
+    ],
+    "items_fr": [
+      "Design sur mesure d’une page, à ton image",
+      "Ta musique, ta bio, tes photos et vidéos, avec des liens vers chaque plateforme et tes réseaux",
+      "Bouton de contact et de booking, et inscription courriel pour tes fans",
+      "Pensé d’abord pour le téléphone, rapide à charger",
+      "Nom de domaine et mise en ligne",
+      "Site d’artiste : tes nouvelles sorties apparaissent seules depuis Spotify, tes spectacles se synchronisent, et les diffuseurs ont une page de presse"
+    ]
+  },
+  {
+    "slug_en": "social-media", "slug_fr": "reseaux-sociaux", "start": "Social media",
+    "nav_en": "Social media", "nav_fr": "Réseaux sociaux",
+    "title_en": "Social media for musicians: setup and management · EclipseTone",
+    "title_fr": "Réseaux sociaux pour musiciens : configuration et gestion · EclipseTone",
+    "desc_en": "Profiles, bios, visuals and a content plan for Instagram and TikTok. We set it up, or run it with you, plus release-week help and artist management.",
+    "desc_fr": "Profils, bios, visuels et plan de contenu pour Instagram et TikTok. On les configure, ou on les gère avec toi, plus de l’aide pendant la semaine de sortie et de la gestion d’artiste.",
+    "h1_en": "Social media for artists: set up, planned, managed.",
+    "h1_fr": "Réseaux sociaux pour artistes : configurés, planifiés, gérés.",
+    "lede_en": "Profiles, bios, visuals and a content plan for Instagram and TikTok. We set it up, or run it with you.",
+    "lede_fr": "Profils, bios, visuels et plan de contenu pour Instagram et TikTok. On les configure, ou on les gère avec toi.",
+    "price_en": "Priced per project · tell us where you are and we reply within 24 hours with a price",
+    "price_fr": "Prix selon le projet · dis-nous où tu en es et on te répond en moins de 24 h avec un prix",
+    "items_en": [
+      "Profile and bio setup for Instagram and TikTok",
+      "Visual direction and a content plan",
+      "Help on Instagram and TikTok during release week (included in Song + Launch)",
+      "Artist management: release planning, calendar, opportunities and the people you need to meet"
+    ],
+    "items_fr": [
+      "Configuration des profils et des bios sur Instagram et TikTok",
+      "Direction visuelle et plan de contenu",
+      "De l’aide sur Instagram et TikTok pendant la semaine de sortie (inclus dans Chanson + lancement)",
+      "Gestion d’artiste : plan de sortie, calendrier, occasions et les gens à rencontrer"
+    ]
+  }
+]

@@ -38,6 +38,7 @@
     try { localStorage.setItem(KEY, c) } catch { /* private mode */ }
     paint()
     document.dispatchEvent(new CustomEvent('et:currency', { detail: c }))
+    if (c !== 'CAD') refreshRates()
   }
 
   document.addEventListener('click', (e) => {
@@ -48,11 +49,14 @@
   document.addEventListener('DOMContentLoaded', paint)
   paint()
 
-  // Fresh rates, at most once a day per visitor. The backup rates above are used if this fails.
-  try {
-    const saved = JSON.parse(localStorage.getItem(RATE_KEY) || 'null')
-    if (saved && Date.now() - saved.at < 864e5) { Object.assign(rates, saved.r); paint() }
-    else {
+  // Fresh rates, at most once a day, and only for visitors who view USD or EUR (CAD needs none).
+  // The backup rates above are used if this fails.
+  function refreshRates() {
+    try {
+      const saved = JSON.parse(localStorage.getItem(RATE_KEY) || 'null')
+      if (saved && Date.now() - saved.at < 864e5) { Object.assign(rates, saved.r); paint(); return }
+      if (refreshRates.busy) return
+      refreshRates.busy = true
       fetch('https://open.er-api.com/v6/latest/CAD').then((r) => r.json()).then((d) => {
         if (!d || !d.rates || !d.rates.USD) return
         const r = { USD: d.rates.USD, EUR: d.rates.EUR }
@@ -60,7 +64,8 @@
         localStorage.setItem(RATE_KEY, JSON.stringify({ at: Date.now(), r }))
         paint()
         document.dispatchEvent(new CustomEvent('et:currency', { detail: cur }))
-      }).catch(() => {})
-    }
-  } catch { /* offline or private mode */ }
+      }).catch(() => {}).finally(() => { refreshRates.busy = false })
+    } catch { /* offline or private mode */ }
+  }
+  if (cur !== 'CAD') refreshRates()
 })()
