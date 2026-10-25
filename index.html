@@ -19,21 +19,39 @@
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://eclipsetone.com/og-image.jpg" />
 <meta name="theme-color" content="#070605" />
-<link rel="preload" href="fonts/inter.woff" as="font" type="font/woff" crossorigin />
-<link rel="preload" href="fonts/fraunces.woff" as="font" type="font/woff" crossorigin />
-<link rel="stylesheet" href="home.css?v=t2" />
+<link rel="preload" href="fonts/inter.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="fonts/fraunces.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="stylesheet" href="home.css?v=t4" />
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
   "name": "EclipseTone Productions",
-  "description": "Online song production for independent artists worldwide. Send vocals or lyrics, get a finished, release-ready record. Human-made, private credits.",
+  "description": "Music production studio in Montréal for independent artists anywhere: your song, music video, CDs and USB-C cards, website and social media, made by real musicians. Never AI.",
   "url": "https://eclipsetone.com/",
   "image": "https://eclipsetone.com/logo-512.jpg",
+  "logo": "https://eclipsetone.com/logo-512.jpg",
+  "telephone": "+1-438-466-8971",
+  "priceRange": "$150–$2,000 CAD",
   "areaServed": "Worldwide",
+  "knowsLanguage": ["en", "fr"],
   "address": {"@type": "PostalAddress", "addressLocality": "Montréal", "addressRegion": "QC", "addressCountry": "CA"},
-  "sameAs": ["https://instagram.com/eclipsetone", "https://www.tiktok.com/@eclipsetone", "https://laousmail.com/"],
+  "sameAs": ["https://www.youtube.com/@eclipsetone", "https://instagram.com/eclipsetone", "https://www.tiktok.com/@eclipsetone", "https://laousmail.com/"],
   "offers": {"@type": "Offer", "name": "Full Song", "priceCurrency": "CAD", "price": "599", "description": "Full song production from your vocals or lyrics: production, vocal direction, mix and master. First draft in 7 days."}
+}
+</script>
+<!-- Same answers as the FAQ section below; change both together -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type": "Question", "name": "Who owns the song?", "acceptedAnswer": {"@type": "Answer", "text": "You do. It comes out under your name, and once it’s paid the song, the beat and your vocals are yours, in writing. We may share it on our channels, credited to the team of EclipseTone for the production."}},
+    {"@type": "Question", "name": "What do I need to send?", "acceptedAnswer": {"@type": "Answer", "text": "Your vocals (a phone memo is fine to start) or your lyrics, plus one or two songs you like the sound of. Just an idea? We write it with you."}},
+    {"@type": "Question", "name": "How fast is it?", "acceptedAnswer": {"@type": "Answer", "text": "First version in 7 days. Finished song in 2 to 3 weeks, depending on your changes. Changes are included."}},
+    {"@type": "Question", "name": "How does payment work?", "acceptedAnswer": {"@type": "Answer", "text": "Nothing to pay to start your project. Once you approve your price: half to start, half before you get the final files."}},
+    {"@type": "Question", "name": "Which currency? Are taxes included?", "acceptedAnswer": {"@type": "Answer", "text": "Prices are in Canadian dollars. The Prices page can show an estimate in US dollars or euros, and your bank converts when you pay. Clients in Canada pay GST and QST on top. Clients outside Canada don’t."}}
+  ]
 }
 </script>
 </head>
@@ -81,7 +99,7 @@
 <button type="button" class="sound-btn" data-sound hidden aria-pressed="false"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><use href="#i-sound"/></svg><span class="sr"><span data-lang="en">Turn on the sound</span><span data-lang="fr">Activer le son</span></span></button>
 <div class="lang" role="group" aria-label="Language"><button type="button" data-lang-btn="en" aria-pressed="true">EN</button><button type="button" data-lang-btn="fr" aria-pressed="false">FR</button></div>
 <button class="mode" type="button" data-theme-toggle aria-label="Switch theme"><svg class="i-sun" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M4.6 4.6l1.6 1.6M17.8 17.8l1.6 1.6M2.5 12h2.2M19.3 12h2.2M4.6 19.4l1.6-1.6M17.8 6.2l1.6-1.6"/></svg><svg class="i-moon" viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M21 13.5A9 9 0 1 1 10.5 3a7 7 0 0 0 10.5 10.5z"/></svg></button>
-<a class="pill cta-shine" href="#start" data-start><span data-lang="en">Start your project</span><span data-lang="fr">Lance ton projet</span></a>
+<a class="pill" href="#start" data-start><span data-lang="en">Start your project</span><span data-lang="fr">Lance ton projet</span></a>
 </div>
 </header>
 
@@ -93,7 +111,7 @@
 <h1><span data-lang="en"><span class="nw">Everything</span> <span class="nw">your music needs.</span> <span class="ln2">One team.</span></span><span data-lang="fr"><span class="nw">Tout ce dont</span> <span class="nw">ta musique a besoin.</span> <span class="ln2">Une seule équipe.</span></span></h1>
 <p class="lede"><span data-lang="en">Your song, your video, your CDs, your website and your socials. Made by real musicians in Montréal, for artists anywhere.</span><span data-lang="fr">Ta chanson, ton clip, tes CD, ton site et tes réseaux. Faits par de vrais musiciens à Montréal, pour des artistes partout.</span></p>
 <div class="cta">
-<a class="btn big cta-go cta-breathe" href="#start" data-start><span data-lang="en">Start your project</span><span data-lang="fr">Lance ton projet</span></a>
+<a class="btn big cta-go" href="#start" data-start><span data-lang="en">Start your project</span><span data-lang="fr">Lance ton projet</span></a>
 </div>
 <p class="ot-note"><span data-lang="en">Songs from <span class="money" data-cad="599">$599</span>. First version in 7 days. You only pay once you say yes.</span><span data-lang="fr">Chansons dès <span class="money" data-cad="599">599 $</span>. Première version en 7 jours. Tu paies seulement quand tu dis oui.</span></p>
 </div>
@@ -214,7 +232,7 @@
 <p class="sub"><span data-lang="en">Three quick steps. We reply within 24 hours with your price.</span><span data-lang="fr">Trois étapes rapides. On te répond en moins de 24 h avec ton prix.</span></p>
 <!-- Scarcity: set the real number and remove "hidden" -->
 <p class="spots" hidden><span data-lang="en"><b>3</b> spots open for November.</span><span data-lang="fr"><b>3</b> places ouvertes pour novembre.</span></p>
-<a class="btn big cta-go cta-breathe" href="https://wa.me/14384668971" data-start><span data-lang="en">Start your project</span><span data-lang="fr">Lance ton projet</span></a>
+<a class="btn big cta-go" href="https://wa.me/14384668971" data-start><span data-lang="en">Start your project</span><span data-lang="fr">Lance ton projet</span></a>
 <p class="ot-alt"><span data-lang="en">Rather just talk?</span><span data-lang="fr">Tu préfères juste parler&nbsp;?</span> <a href="https://wa.me/14384668971?text=Hi%20EclipseTone%2C%20I%20have%20a%20question%3A%20" target="_blank" rel="noopener"><span data-lang="en">Text us on WhatsApp</span><span data-lang="fr">Écris-nous sur WhatsApp</span></a></p>
 </div>
 </section>
@@ -224,7 +242,7 @@
 <a class="help-fab" href="https://wa.me/14384668971?text=Hi%20EclipseTone%2C%20I%20have%20a%20question%3A%20" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8.5 8.5 0 0 1-12.6 7.4L3 21l1.6-5.2A8.5 8.5 0 1 1 21 12z"/></svg><span data-lang="en">Questions?</span><span data-lang="fr">Questions&nbsp;?</span></a>
 <div class="mbar" data-mbar aria-hidden="true">
 <a class="mbar-q" href="https://wa.me/14384668971?text=Hi%20EclipseTone%2C%20I%20have%20a%20question%3A%20" target="_blank" rel="noopener" aria-label="Questions? WhatsApp"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8.5 8.5 0 0 1-12.6 7.4L3 21l1.6-5.2A8.5 8.5 0 1 1 21 12z"/></svg></a>
-<a class="btn mbar-go cta-breathe" href="#start" data-start><span data-lang="en">Start your project</span><span data-lang="fr">Lance ton projet</span></a>
+<a class="btn mbar-go" href="#start" data-start><span data-lang="en">Start your project</span><span data-lang="fr">Lance ton projet</span></a>
 </div>
 <footer class="foot">
 <span>© 2026 EclipseTone Productions · Montréal</span>
@@ -233,7 +251,7 @@
 <script src="config.js?v=t1"></script>
 <script src="currency.js?v=t1"></script>
 <script src="analytics.js?v=t1"></script>
-<script src="main.js?v=t1" defer></script>
+<script src="main.js?v=t4" defer></script>
 <script src="project.js?v=t1" defer></script>
 <script src="sound.js?v=t1" defer></script>
 </body>

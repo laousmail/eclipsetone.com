@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url><loc>https://eclipsetone.com/</loc><lastmod>2026-10-24</lastmod></url>
+  <url><loc>https://eclipsetone.com/services/</loc><lastmod>2026-10-24</lastmod></url>
+  <url><loc>https://eclipsetone.com/blog/</loc><lastmod>2026-10-24</lastmod></url>
+  <url>
+    <loc>https://eclipsetone.com/blog/15-songs-before-2026.html</loc><lastmod>2026-10-24</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eclipsetone.com/blog/15-songs-before-2026.html" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://eclipsetone.com/blog/15-songs-before-2026.fr.html" />
+  </url>
+  <url>
+    <loc>https://eclipsetone.com/blog/15-songs-before-2026.fr.html</loc><lastmod>2026-10-24</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eclipsetone.com/blog/15-songs-before-2026.html" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://eclipsetone.com/blog/15-songs-before-2026.fr.html" />
+  </url>
+  <url><loc>https://eclipsetone.com/privacy/</loc><lastmod>2026-10-24</lastmod></url>
+</urlset>

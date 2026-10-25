@@ -41,14 +41,18 @@ FAB = part(r'<a class="help-fab".*?</a>')
 FOOTER = part(r'<footer class="foot">.*?</footer>')
 ICONS = (ROOT / 'docs/icons.html').read_text().strip()
 THEME = part(r'<script>\(function\(\)\{try\{var t=localStorage.*?</script>')
-FONTS = '<link rel="preload" href="{pre}fonts/inter.woff" as="font" type="font/woff" crossorigin />\n<link rel="preload" href="{pre}fonts/fraunces.woff" as="font" type="font/woff" crossorigin />'
+FONTS = '<link rel="preload" href="{pre}fonts/inter.woff2" as="font" type="font/woff2" crossorigin />\n<link rel="preload" href="{pre}fonts/fraunces.woff2" as="font" type="font/woff2" crossorigin />'
 
 
-def page(path, title, desc, main, current=None, lang='en', og_type='website'):
+def page(path, title, desc, main, current=None, lang='en', og_type='website', alternates=None):
     depth = path.count('/')
     pre = '../' * depth
     url = 'https://eclipsetone.com/' + re.sub(r'index\.html$', '', path)
     header = rebase(HEADER, pre)
+    # alternates: {'en': 'blog/x.html', 'fr': 'blog/x.fr.html'}; every version lists all of them, itself included
+    hreflang = ''.join(f'<link rel="alternate" hreflang="{code}" href="https://eclipsetone.com/{alt}" />\n' for code, alt in (alternates or {}).items())
+    if alternates:
+        hreflang += f'<link rel="alternate" hreflang="x-default" href="https://eclipsetone.com/{alternates["en"]}" />\n'
     if current:
         header = header.replace(f'href="{pre}{current}"', f'href="{pre}{current}" aria-current="page"')
     doc = f'''<!doctype html>
@@ -61,7 +65,7 @@ def page(path, title, desc, main, current=None, lang='en', og_type='website'):
 <title>{html.escape(title)}</title>
 <meta name="description" content="{html.escape(desc)}" />
 <link rel="canonical" href="{url}" />
-<meta property="og:type" content="{og_type}" />
+{hreflang}<meta property="og:type" content="{og_type}" />
 <meta property="og:url" content="{url}" />
 <meta property="og:title" content="{html.escape(title)}" />
 <meta property="og:description" content="{html.escape(desc)}" />
@@ -121,7 +125,8 @@ def build_blog():
 <section class="sec"><article class="card prose post">{body}
 <p class="post-actions"><a class="btn ghost" href="{other}">{'Lire en français' if lang == 'en' else 'Read in English'}</a></p></article></section>'''
             name = f"{p['slug']}.html" if lang == 'en' else f"{p['slug']}.fr.html"
-            page(f'blog/{name}', p['title_' + lang] + ' · EclipseTone', p['teaser_' + lang], main, lang=lang, current='blog/index.html', og_type='article')
+            alts = {'en': f"blog/{p['slug']}.html", 'fr': f"blog/{p['slug']}.fr.html"}
+            page(f'blog/{name}', p['title_' + lang] + ' · EclipseTone', p['teaser_' + lang], main, lang=lang, current='blog/index.html', og_type='article', alternates=alts)
 
 
 # ---------------- privacy ----------------

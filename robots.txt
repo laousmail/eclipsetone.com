@@ -1,0 +1,5 @@
+# Everything on eclipsetone.com is public. Search engines and AI assistants are welcome.
+User-agent: *
+Allow: /
+
+Sitemap: https://eclipsetone.com/sitemap.xml

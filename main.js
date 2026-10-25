@@ -81,13 +81,17 @@
   }
 
   function initLang() {
-    let start = 'en'
+    // A page with its own language versions (hreflang) always shows its own language.
+    // Elsewhere: the saved choice, else French for French-speaking browsers.
+    const fixed = document.querySelector('link[hreflang]') ? document.documentElement.lang : ''
+    let start = /^fr\b/i.test(navigator.language || '') ? 'fr' : 'en'
     try {
       const saved = localStorage.getItem(LANG_KEY)
       if (saved === 'fr' || saved === 'en') start = saved
     } catch {
       /* private mode */
     }
+    if (fixed === 'fr' || fixed === 'en') start = fixed
     setLang(start)
     document.querySelectorAll('[data-lang-btn]').forEach((btn) => {
       btn.addEventListener('click', () => setLang(btn.getAttribute('data-lang-btn')))
@@ -247,9 +251,17 @@
         toggle.setAttribute('aria-expanded', 'false')
       })
     })
+
+    // Escape closes the menu and puts focus back on the Menu button
+    document.addEventListener('keydown', (e) => {
+      if (e.key !== 'Escape' || !checkbox.checked) return
+      checkbox.checked = false
+      toggle.setAttribute('aria-expanded', 'false')
+      toggle.focus()
+    })
   }
 
-  // Questions button: hides while scrolling down, comes back when scrolling up or near the end.
+  // Questions button: hides while scrolling down and near the end (the closing section has its own WhatsApp link).
   function initHelpFab() {
     const fab = document.querySelector('.help-fab')
     if (!fab) return
@@ -258,7 +270,7 @@
       const y = window.scrollY
       const nearEnd = y + innerHeight > document.documentElement.scrollHeight - 200
       if (Math.abs(y - last) < 8) return
-      fab.classList.toggle('is-away', y > last && y > 300 && !nearEnd)
+      fab.classList.toggle('is-away', nearEnd || (y > last && y > 300))
       last = y
     }, { passive: true })
   }
@@ -280,69 +292,20 @@
     set()
   }
 
-  // Satisfying clicks: a ripple where you press, a tiny tap on phones for main buttons.
+  // Choice chips get the shared press style; a tiny tap on phones for main buttons.
   function initPress() {
     const CHIPS = '.svc-pick,.ans,.qty,.chip-links a,.team-card,.sf-switch,.mbar-q'
     document.querySelectorAll(CHIPS).forEach((el) => el.classList.add('chipfx'))
     new MutationObserver(() => document.querySelectorAll(CHIPS).forEach((el) => el.classList.add('chipfx'))).observe(document.body, { childList: true, subtree: true })
-    if (matchMedia('(prefers-reduced-motion: reduce)').matches) return
     document.addEventListener('pointerdown', (e) => {
-      const el = e.target.closest('.btn,.pill,.mbar-go,.chipfx,.tile,.node .knob')
-      if (!el || el.disabled) return
-      const r = el.getBoundingClientRect()
-      const size = Math.max(r.width, r.height) * 2.2
-      const rip = document.createElement('span')
-      rip.className = 'rip'
-      rip.style.cssText = `width:${size}px;height:${size}px;left:${e.clientX - r.left - size / 2}px;top:${e.clientY - r.top - size / 2}px`
-      el.appendChild(rip)
-      setTimeout(() => rip.remove(), 650)
-      if (e.pointerType === 'touch' && el.matches('.btn:not(.ghost):not(.help),.pill,.mbar-go') && navigator.vibrate) navigator.vibrate(8)
+      const el = e.target.closest('.btn:not(.ghost):not(.help),.pill,.mbar-go')
+      if (el && !el.disabled && e.pointerType === 'touch' && navigator.vibrate) navigator.vibrate(8)
     }, { passive: true })
   }
 
-  // Main buttons: a small magnetic pull toward the cursor, and a pop when they first appear.
-  function initCtas() {
-    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches
-    if (reduce) return
-    if (matchMedia('(hover: hover) and (pointer: fine)').matches) {
-      document.addEventListener('pointermove', (e) => {
-        const btn = e.target.closest && e.target.closest('.btn.cta-go')
-        document.querySelectorAll('.btn.cta-go[data-mag]').forEach((b) => { if (b !== btn) { b.style.removeProperty('--mx'); b.style.removeProperty('--my'); b.removeAttribute('data-mag') } })
-        if (!btn) return
-        const r = btn.getBoundingClientRect()
-        const dx = (e.clientX - (r.left + r.width / 2)) / (r.width / 2)
-        const dy = (e.clientY - (r.top + r.height / 2)) / (r.height / 2)
-        btn.style.setProperty('--mx', `${(dx * 4).toFixed(1)}px`)
-        btn.style.setProperty('--my', `${(dy * 3).toFixed(1)}px`)
-        btn.setAttribute('data-mag', '')
-      }, { passive: true })
-    }
-    if ('IntersectionObserver' in window) {
-      const io = new IntersectionObserver((entries) => entries.forEach((en) => {
-        if (!en.isIntersecting) return
-        en.target.classList.add('cta-pop')
-        io.unobserve(en.target)
-        setTimeout(() => en.target.classList.remove('cta-pop'), 800)
-      }), { threshold: 0.9 })
-      document.querySelectorAll('.btn.cta-breathe:not(.mbar-go), .pk .btn.cta-go').forEach((b) => io.observe(b))
-    }
-  }
-
-  // Light depth: tiles lean toward the pointer, hero layers drift at different speeds on scroll.
-  // Mouse and trackpad only for the lean; everything off when reduced motion is on.
+  // Light depth: hero layers drift at different speeds on scroll. Off when reduced motion is on.
   function initDepth() {
     if (matchMedia('(prefers-reduced-motion: reduce)').matches) return
-    if (matchMedia('(hover: hover) and (pointer: fine)').matches) {
-      document.addEventListener('pointermove', (e) => {
-        const t = e.target.closest && e.target.closest('.tile')
-        if (initDepth.cur && initDepth.cur !== t) { initDepth.cur.style.removeProperty('--rx'); initDepth.cur.style.removeProperty('--ry') }
-        initDepth.cur = t
-        if (!t) return
-        const r = t.getBoundingClientRect()
-        t.style.setProperty('--ry', `${(((e.clientX - r.left) / r.width) - 0.5) * 7}deg`)
-        t.style.setProperty('--rx', `${(0.5 - ((e.clientY - r.top) / r.height)) * 7}deg`)
-      }, { passive: true })
-    }
     const layers = [...document.querySelectorAll('[data-depth]')]
     if (!layers.length) return
     let ticking = false
@@ -357,7 +320,6 @@
   initTheme()
   initHelpFab()
   initPress()
-  initCtas()
   initMobileBar()
   initDepth()
   initLang()
