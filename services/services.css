@@ -145,7 +145,7 @@
 :root[data-theme=light] .compare thead th span{color:var(--hot)}
 .compare td{color:var(--mute);min-width:6.4rem}
 .compare .yes svg{width:1.2rem;height:1.2rem;color:var(--hot);vertical-align:middle}
-.compare .no{color:color-mix(in srgb,var(--mute) 45%,transparent)}
+.compare .no{color:var(--mute)}  /* full strength: the mark carries meaning, so it needs 4.5:1 */
 .compare tfoot td,.compare tfoot th{border-bottom:0;padding-bottom:1.1rem}
 .compare tfoot .btn{padding:.5rem .95rem;font-size:.86rem;white-space:nowrap}
 .compare .is-fit{background:color-mix(in srgb,var(--hot) 11%,var(--bg2))}

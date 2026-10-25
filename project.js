@@ -148,7 +148,6 @@
 
   const emailOk = () => /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email.value.trim())
   const phoneOk = () => phone.value.replace(/\D/g, '').length >= 8
-  const reachable = () => name.value.trim() && (emailOk() || phoneOk())
   const complete = () => name.value.trim() && emailOk() && phoneOk()
   const svc = () => SERVICES[st.pick]
   const wantsCall = () => !!(svc() && svc().call)
@@ -326,6 +325,16 @@
   dlg.addEventListener('input', () => { paint(); keep() })
   $('[data-form]').addEventListener('submit', (e) => { e.preventDefault(); primary.click() })
   dlg.addEventListener('keydown', (e) => { if (e.key === 'Enter' && e.target.matches('input') && st.step === 3) { e.preventDefault(); primary.click() } })
+  // Choices are radio groups: arrow keys move between choices, Enter or Space picks one
+  // (picking moves on to the next step, so arrows only move focus)
+  dlg.addEventListener('keydown', (e) => {
+    const step = { ArrowDown: 1, ArrowRight: 1, ArrowUp: -1, ArrowLeft: -1 }[e.key]
+    const group = step && e.target.matches('[role="radio"]') && e.target.closest('[role="radiogroup"]')
+    if (!group) return
+    const radios = [...group.querySelectorAll('[role="radio"]')]
+    e.preventDefault()
+    radios[(radios.indexOf(e.target) + step + radios.length) % radios.length].focus()
+  })
 
   primary.addEventListener('click', () => {
     if (st.step === 1 && st.pick) return go(2)
@@ -377,14 +386,11 @@
     const reach = st.pref === 'call'
       ? L(`We’ll call you at <b>${tel}</b>, usually within 24 hours.`, `On t’appelle au <b>${tel}</b>, en général en moins de 24 h.`)
       : L(`We’ll message you on WhatsApp at <b>${tel}</b>, usually within 24 hours.`, `On t’écrit sur WhatsApp au <b>${tel}</b>, en général en moins de 24 h.`)
+    // Calendly is a third party with its own cookies: it only loads if the visitor chooses to book,
+    // in a new tab under Calendly's own privacy notice. We pass the name and email they gave us, nothing else.
     const cal = new URL(CALENDLY)
     cal.searchParams.set('name', name.value.trim())
     cal.searchParams.set('email', email.value.trim())
-    cal.searchParams.set('a1', `${leadName(st)} · WhatsApp ${phone.value.trim()}`)
-    const inline = new URL(cal)
-    inline.searchParams.set('embed_type', 'Inline')
-    inline.searchParams.set('embed_domain', location.hostname || 'eclipsetone.com')
-    inline.searchParams.set('hide_gdpr_banner', '1')
     const next = [
       [L('We read your project', 'On lit ton projet'), 'eye'],
       [L('You get your price', 'Tu reçois ton prix'), 'tag'],
@@ -399,8 +405,8 @@
       <div class="sf-call">
         <p class="sf-call-t">${L('Want to talk it through? Pick a time.', 'Tu veux en parler ? Choisis un moment.')}</p>
         <p class="sf-call-s">${L('A free 15-minute call. We listen to your idea and confirm your price. Optional.', 'Un appel gratuit de 15 minutes. On écoute ton idée et on confirme ton prix. Optionnel.')}</p>
-        <iframe class="sf-cal" title="${L('Book a 15-minute call', 'Réserver un appel de 15 minutes')}" src="${esc(inline.href)}" loading="lazy"></iframe>
-        <p class="hint">${L('Calendar not loading?', 'Le calendrier ne charge pas ?')} <a href="${esc(cal.href)}" target="_blank" rel="noopener">${L('Open it in a new tab', 'Ouvre-le dans un nouvel onglet')}</a></p>
+        <p><a class="btn ghost" href="${esc(cal.href)}" target="_blank" rel="noopener">${L('Book a 15-minute call', 'Réserver un appel de 15 minutes')}</a></p>
+        <p class="hint">${L('Opens Calendly, our booking tool, in a new tab.', 'Ouvre Calendly, notre outil de réservation, dans un nouvel onglet.')}</p>
       </div>` : ''}
       <p class="done-edit"><button type="button" class="sf-switch" data-edit>${L('Fix a detail', 'Corriger un détail')}</button></p>`
     st.step = 'done'
