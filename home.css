@@ -1848,3 +1848,6 @@ body{font-size:1.0625rem;line-height:1.6}
 .ot-hero h1{font-size:clamp(2.4rem,4.7vw,4.3rem);line-height:1.04}
 .ot-hero h1 .ln2{color:var(--mute);margin-top:.18em}
 .ot-copy{max-width:38rem}
+
+/* Bot trap in the project form: off-screen for people, still in the page for bots */
+.hp{position:absolute!important;left:-10000px;width:1px;height:1px;overflow:hidden}

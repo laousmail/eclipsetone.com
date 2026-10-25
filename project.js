@@ -115,6 +115,7 @@
         <section class="pane" data-pane="3" hidden>
           <p class="pane-for" data-for2></p>
           <h2 data-t="H3"></h2>
+          <div class="hp" aria-hidden="true"><label for="pj-website">Website</label><input id="pj-website" name="website" tabindex="-1" autocomplete="off" /></div>
           <div class="field"><label for="pj-name" data-t="Name"></label><input id="pj-name" name="name" autocomplete="name" /></div>
           <div class="field"><label for="pj-email" data-t="Email"></label><input id="pj-email" name="email" type="email" autocomplete="email" inputmode="email" /></div>
           <div class="field"><label for="pj-phone" data-t="Phone"></label><input id="pj-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="+1 514 555 0123" /><small class="sf-help" data-t="PhoneHelp"></small></div>
@@ -132,6 +133,9 @@
 
   const $ = (s) => dlg.querySelector(s)
   const name = $('#pj-name'), email = $('#pj-email'), phone = $('#pj-phone'), msg = $('#pj-msg')
+  // Bot trap: a field people never see; bots fill it. Plus how long the panel was open (bots send instantly).
+  const trap = $('#pj-website')
+  let openedAt = Date.now()
   const primary = $('[data-primary]')
   const T = {
     Back: ['Back', 'Retour'], Close: ['Close', 'Fermer'],
@@ -257,6 +261,7 @@
       document.documentElement.style.setProperty('--oy', `${Math.round(innerHeight / 2 - (m ? m.getBoundingClientRect().top : 0))}px`)
       document.documentElement.classList.add('sheet-open')
       dlg.showModal()
+      openedAt = Date.now()
       requestAnimationFrame(() => dlg.classList.add('is-in'))
       try { history.pushState({ etSheet: 1 }, ''); pushed = true } catch { pushed = false }
       track('project-open' + (pick ? '-' + pick : ''))
@@ -294,7 +299,7 @@
   let sent = false
   function snapshot(status) {
     const a = ansOf(st)
-    return { status, pick: leadName(st), answer: a ? (st.pick === 'Song' ? 'Song package' : a[1]) : '', name: name.value.trim(), email: email.value.trim(), phone: phone.value.trim(), contact: st.pref === 'call' ? 'Call' : 'Text (WhatsApp)', call: wantsCall() ? 'Offered 15-min call' : '', note: msg.value.trim(), selection: '' }
+    return { status, pick: leadName(st), answer: a ? (st.pick === 'Song' ? 'Song package' : a[1]) : '', name: name.value.trim(), email: email.value.trim(), phone: phone.value.trim(), contact: st.pref === 'call' ? 'Call' : 'Text (WhatsApp)', call: wantsCall() ? 'Offered 15-min call' : '', note: msg.value.trim(), selection: '', website: trap.value, t: Date.now() - openedAt }
   }
   // Drafts stay on this device; nothing reaches us until the visitor presses send (Québec Law 25: clear consent)
   function keep() {

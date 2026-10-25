@@ -14,6 +14,8 @@ their .fr.html address). Each version keeps only its own language, links to the 
 (hreflang), and its links point at pages in the same language. sitemap.xml is rebuilt too.
 Header, menu, help button and footer come from src/index.html.
 """
+import base64
+import hashlib
 import html
 import json
 import posixpath
@@ -175,7 +177,40 @@ def add_footer_links(doc, src):
     return doc.replace('<nav aria-label="Footer">', f'<nav class="foot-svc" aria-label="Services">{links}</nav>\n<nav aria-label="Footer">', 1)
 
 
+# ---------------- security ----------------
+# Content Security Policy: the browser runs only our own files, the inline scripts written by this build
+# (allowed by their exact hash), and the few outside services listed here. Anything injected or added
+# by someone else is blocked. Add a service here before using it, or the browser will refuse it.
+CSP = {
+    'default-src': ["'self'"],
+    'script-src': ["'self'", 'https://gc.zgo.at'],                       # GoatCounter, when switched on in config.js
+    'style-src': ["'self'", "'unsafe-inline'"],                          # style="--x:…" on the hero orbit
+    'img-src': ["'self'", 'data:', 'https://*.goatcounter.com'],
+    'font-src': ["'self'"],
+    'media-src': ["'self'"],
+    'connect-src': ["'self'", 'https://open.er-api.com', 'https://script.google.com',
+                    'https://script.googleusercontent.com', 'https://*.goatcounter.com'],
+    'form-action': ["'self'", 'https://*.mailerlite.com'],
+    'frame-src': ["'none'"],
+    'object-src': ["'none'"],
+    'base-uri': ["'self'"],
+    'upgrade-insecure-requests': [],
+}
+
+
+def add_csp(doc):
+    """Put the policy first in <head>, with a hash for every inline script on this page."""
+    inline = [body for attrs, body in re.findall(r'<script(?![^>]*\bsrc=)([^>]*)>(.*?)</script>', doc, re.S)
+              if 'application/ld+json' not in attrs]
+    hashes = [f"'sha256-{base64.b64encode(hashlib.sha256(body.encode()).digest()).decode()}'" for body in inline]
+    policy = {**CSP, 'script-src': CSP['script-src'] + hashes}
+    value = '; '.join(' '.join([k] + v) for k, v in policy.items())
+    doc = re.sub(r'<meta http-equiv="Content-Security-Policy" content="[^"]*" />\n', '', doc)
+    return doc.replace('<meta charset="UTF-8" />\n', f'<meta charset="UTF-8" />\n<meta http-equiv="Content-Security-Policy" content="{value}" />\n', 1)
+
+
 def write(path, doc):
+    doc = add_csp(doc) if path.endswith('.html') else doc
     out = ROOT / path
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(doc)
