@@ -1890,3 +1890,97 @@ h1,h2,h3{font-family:"Inter",system-ui,sans-serif;font-weight:700;letter-spacing
 .nav{border-bottom-color:transparent;background:transparent;backdrop-filter:none;transition:background-color .2s ease-out,border-color .2s ease-out}
 html.is-scrolled .nav{border-bottom-color:var(--line);background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(10px)}
 @media(max-width:980px){.nav-checkbox:checked~.nav-links{background:var(--bg)}}
+
+/* =========================================================
+   RED BUTTONS (final word): every button is glossy crimson.
+   A light streak sweeps across every few seconds, the main
+   calls to action breathe a soft red glow, hover brightens
+   and lifts, press sinks. White text stays above 4.5:1.
+   ========================================================= */
+:root,:root[data-theme=dark],:root[data-theme=light]{
+  --rb-top:#DE2340;--rb-mid:#C8102E;--rb-bot:#A50E26;
+  --rb-top-h:#E3243F;--rb-mid-h:#D0122F;--rb-bot-h:#AE0F28;
+  --rb-deep-top:#8E0C22;--rb-deep-bot:#5E0716;
+  --rb-glow:rgba(222,35,64,.55);
+  --pill-bg:var(--rb-mid);--pill-ink:#fff;
+}
+.btn,.pill,.mbar-go,.lp-cta{
+  position:relative;overflow:hidden;isolation:isolate;border:0;border-radius:99px;
+  color:#fff!important;text-shadow:0 1px 1px rgba(70,0,12,.35);
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.26) 0%,rgba(255,255,255,.06) 46%,rgba(255,255,255,0) 50%),
+    linear-gradient(180deg,var(--rb-top) 0%,var(--rb-mid) 55%,var(--rb-bot) 100%)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.4),inset 0 -2px 5px rgba(60,0,10,.35),0 10px 26px -12px var(--rb-glow);
+  transition:transform .3s cubic-bezier(.2,.9,.25,1.25),box-shadow .3s ease,filter .2s ease;
+}
+/* the moving streak of light */
+.btn::after,.pill::after,.mbar-go::after,.lp-cta::after{
+  content:"";display:block!important;position:absolute;inset:-20% auto -20% 0;width:45%;z-index:0;pointer-events:none;
+  background:linear-gradient(100deg,transparent 0%,rgba(255,255,255,.08) 30%,rgba(255,255,255,.55) 50%,rgba(255,255,255,.08) 70%,transparent 100%);
+  transform:translateX(-160%) skewX(-18deg);
+  animation:rb-shine 3.6s cubic-bezier(.45,0,.2,1) infinite;
+}
+.btn::before,.pill::before,.mbar-go::before,.lp-cta::before{display:none!important}
+.btn>*,.pill>*,.mbar-go>*,.lp-cta>*{position:relative;z-index:1}
+@keyframes rb-shine{0%,55%{transform:translateX(-160%) skewX(-18deg)}100%{transform:translateX(330%) skewX(-18deg)}}
+/* the main calls to action breathe */
+.lp-cta,.cta-breathe,.mbar-go{animation:rb-breathe 2.8s ease-in-out infinite}
+@keyframes rb-breathe{
+  0%,100%{box-shadow:inset 0 1px 0 rgba(255,255,255,.4),inset 0 -2px 5px rgba(60,0,10,.35),0 10px 26px -12px var(--rb-glow),0 0 0 0 rgba(222,35,64,0)}
+  50%{box-shadow:inset 0 1px 0 rgba(255,255,255,.4),inset 0 -2px 5px rgba(60,0,10,.35),0 14px 34px -10px var(--rb-glow),0 0 0 6px rgba(222,35,64,.16)}
+}
+.btn:hover,.pill:hover,.mbar-go:hover,.lp-cta:hover{
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.3) 0%,rgba(255,255,255,.08) 46%,rgba(255,255,255,0) 50%),
+    linear-gradient(180deg,var(--rb-top-h) 0%,var(--rb-mid-h) 55%,var(--rb-bot-h) 100%)!important;
+  transform:translateY(-2px);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.45),inset 0 -2px 5px rgba(60,0,10,.3),0 18px 36px -14px var(--rb-glow),0 0 0 4px rgba(222,35,64,.18);
+}
+.btn:hover::after,.pill:hover::after,.mbar-go:hover::after,.lp-cta:hover::after{animation-duration:1.1s}
+.btn:active,.pill:active,.mbar-go:active,.lp-cta:active{
+  transform:translateY(1px) scale(.97);transition-duration:.08s;
+  box-shadow:inset 0 2px 8px rgba(60,0,10,.45),0 4px 12px -8px var(--rb-glow);
+}
+.btn:focus-visible,.pill:focus-visible,.mbar-go:focus-visible,.lp-cta:focus-visible{
+  outline:2px solid var(--ink);outline-offset:3px;
+}
+/* secondary buttons: deeper wine red, same gloss and streak */
+.btn.ghost,.btn.help,.pricing .pkg:not(.is-fit) .btn.ghost{
+  color:#fff!important;border:0;
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.18) 0%,rgba(255,255,255,.04) 46%,rgba(255,255,255,0) 50%),
+    linear-gradient(180deg,var(--rb-deep-top),var(--rb-deep-bot))!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.25),inset 0 0 0 1px rgba(255,90,110,.35),0 8px 20px -14px var(--rb-glow);
+}
+.btn.ghost:hover,.btn.help:hover{
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.22) 0%,rgba(255,255,255,.05) 46%,rgba(255,255,255,0) 50%),
+    linear-gradient(180deg,#A30F28,#6E0919)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.3),inset 0 0 0 1px rgba(255,110,130,.5),0 14px 30px -14px var(--rb-glow);
+}
+.btn[disabled],.btn:disabled{opacity:.5;cursor:not-allowed;transform:none;animation:none}
+.btn[disabled]::after,.btn:disabled::after{animation:none;display:none!important}
+/* selected toggles light up red too */
+.lang button[aria-pressed=true],.cur-btns button[aria-pressed=true],.seg button[aria-checked=true],.pricing .seg button[aria-checked=true],.viewtoggle button[aria-selected=true]{
+  background:linear-gradient(180deg,var(--rb-top),var(--rb-bot))!important;color:#fff!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.35),0 6px 16px -10px var(--rb-glow)!important;
+}
+@media(prefers-reduced-motion:reduce){
+  .btn::after,.pill::after,.mbar-go::after,.lp-cta::after{animation:none;display:none!important}
+  .lp-cta,.cta-breathe,.mbar-go{animation:none}
+  .btn:hover,.pill:hover,.mbar-go:hover,.lp-cta:hover{transform:none}
+}
+/* the menu pill and the floating "Questions?" pill join the red set */
+.nav-toggle,.help-fab{
+  color:#fff!important;border-color:transparent!important;overflow:hidden;
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.18) 0%,rgba(255,255,255,.04) 46%,rgba(255,255,255,0) 50%),
+    linear-gradient(180deg,var(--rb-deep-top),var(--rb-deep-bot))!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.25),inset 0 0 0 1px rgba(255,90,110,.35),0 8px 20px -14px var(--rb-glow);
+  transition:transform .3s cubic-bezier(.2,.9,.25,1.25),filter .2s ease,opacity .25s ease;
+}
+.nav-toggle:hover,.help-fab:hover{filter:brightness(1.18);transform:translateY(-1px)}
+.nav-toggle:active,.help-fab:active{transform:scale(.96)}
+.help-fab svg{color:#fff}
+.nav-toggle span,.nav-toggle i,.nav-toggle b{color:inherit}
+.nav-toggle span,.nav-toggle span::before,.nav-toggle span::after{background:#fff!important}
