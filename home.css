@@ -1885,3 +1885,8 @@ h1,h2,h3{font-family:"Inter",system-ui,sans-serif;font-weight:700;letter-spacing
 .btn.ghost:hover{box-shadow:inset 0 0 0 1.5px var(--ink)}
 .btn:focus-visible,.pill:focus-visible,.mbar-go:focus-visible{box-shadow:0 0 0 3px var(--bg),0 0 0 5px var(--ink)}
 .nav{background:color-mix(in srgb,var(--bg) 82%,transparent);box-shadow:none;border-bottom:1px solid var(--line)}
+
+/* Header: invisible at the very top, a bar with a hairline once the page moves */
+.nav{border-bottom-color:transparent;background:transparent;backdrop-filter:none;transition:background-color .2s ease-out,border-color .2s ease-out}
+html.is-scrolled .nav{border-bottom-color:var(--line);background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(10px)}
+@media(max-width:980px){.nav-checkbox:checked~.nav-links{background:var(--bg)}}

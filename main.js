@@ -320,6 +320,59 @@
     window.addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(paint) } }, { passive: true })
   }
 
+  // Header: invisible at the very top, a bar with a hairline once the page moves.
+  function initNavState() {
+    const set = () => document.documentElement.classList.toggle('is-scrolled', scrollY > 8)
+    set()
+    addEventListener('scroll', set, { passive: true })
+  }
+
+  // "Voice memo in. Record out.": the stage stays pinned while the visitor scrolls, and the scroll
+  // builds the record (the waveform grows, the steps light up in turn). Native scrolling, never
+  // captured. Without JS, with reduced motion, or on a screen too short to pin it, the page shows
+  // the finished record with every step visible.
+  function initPin() {
+    const sec = document.querySelector('[data-pin]')
+    if (!sec || matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    const stage = sec.querySelector('[data-stage]')
+    const view = sec.querySelector('.lp-pin-view')
+    const track = sec.querySelector('.lp-pin-track')
+    const steps = [...sec.querySelectorAll('.lp-steps li')]
+    const phaseEl = sec.querySelector('[data-phase]')
+    const pctEl = sec.querySelector('[data-pct]')
+    const phases = (sec.querySelector('[data-phases]')?.textContent || '').split('|').filter(Boolean)
+    const top = () => (document.querySelector('.nav')?.offsetHeight || 64) + 8
+    let live = false
+    let ticking = false
+
+    const paint = () => {
+      ticking = false
+      if (!live) return
+      const r = track.getBoundingClientRect()
+      const raw = Math.min(Math.max((top() - r.top) / (r.height - view.offsetHeight), 0), 1)
+      const p = Math.min(raw / 0.85, 1) // the last stretch holds the finished record
+      stage.style.setProperty('--p', p.toFixed(3))
+      const step = p < 0.34 ? 0 : p < 0.67 ? 1 : 2
+      steps.forEach((li, i) => li.classList.toggle('is-on', i === step))
+      const phase = phases[Math.min(phases.length - 1, Math.floor(p * phases.length))]
+      if (phase && phaseEl.textContent !== phase) phaseEl.textContent = phase
+      pctEl.textContent = `${Math.round(p * 100)}%`
+    }
+    // Pin only when the whole scene fits on screen while pinned
+    const setup = () => {
+      sec.classList.add('is-live')
+      live = view.offsetHeight <= innerHeight - top() - 8
+      if (!live) {
+        sec.classList.remove('is-live')
+        stage.style.removeProperty('--p')
+      }
+      paint()
+    }
+    addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(paint) } }, { passive: true })
+    addEventListener('resize', setup, { passive: true })
+    setup()
+  }
+
   // Hero headline: the last words rotate (song, single, EP, album). The page HTML holds only the
   // first phrase, so search engines and screen readers get one clean headline.
   function initSwap() {
@@ -358,6 +411,8 @@
   }
 
   initSwap()
+  initNavState()
+  initPin()
   initTheme()
   initHelpFab()
   initPress()

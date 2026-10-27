@@ -59,12 +59,6 @@
   background:linear-gradient(var(--bg2),var(--bg2)) padding-box,var(--grad) border-box;position:relative;overflow:hidden}
 .lp-stage::before{content:"";position:absolute;inset:0;background:var(--grad-deep);opacity:.9;pointer-events:none}
 .lp-stage>*{position:relative}
-.lp-waves{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:clamp(.75rem,2vw,1.5rem)}
-.lp-wave{margin:0;display:grid;gap:.6rem;text-align:left}
-.lp-wave figcaption{font-size:.8125rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--mute)}
-.lp-wave svg{width:100%;height:clamp(4rem,9vw,6rem)}
-.lp-wave-memo rect{fill:color-mix(in srgb,var(--ink) 45%,transparent)}
-.lp-wave-arrow .ico{width:1.8rem;height:1.8rem;color:var(--ink)}
 .lp-steps{list-style:none;padding:0;margin:clamp(1.75rem,4vw,2.75rem) 0 0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem;counter-reset:none}
 .lp-steps li{position:relative;text-align:left;padding:1.4rem 1.3rem 1.3rem;border-radius:20px;background:color-mix(in srgb,var(--bg) 70%,transparent);border:1px solid var(--line)}
 .lp-steps .ico{width:1.6rem;height:1.6rem;color:var(--ink);margin-bottom:.9rem}
@@ -72,8 +66,6 @@
 .lp-steps h3{font-size:1.25rem;letter-spacing:-.02em;margin:0 0 .35rem}
 .lp-steps p{color:var(--mute);margin:0;font-size:.9375rem;line-height:1.5}
 @media(max-width:760px){
-  .lp-waves{grid-template-columns:minmax(0,1fr)}
-  .lp-wave-arrow{justify-self:center;transform:rotate(90deg)}
   .lp-steps{grid-template-columns:minmax(0,1fr)}
 }
 
@@ -153,3 +145,48 @@
   .lp-badges b{font-size:1.0625rem}
   .lp-badges li>span,.lp-badges a>span{font-size:.75rem}
 }
+
+/* ---------- scroll scene: the stage pins while scrolling builds the record ----------
+   Each bar is drawn at its "record" height and scaled down to its "voice memo" height (--m);
+   --p (0 to 1, set from the scroll position) grows it back. Transform and opacity only. */
+.lp-morph{display:grid;gap:.8rem;text-align:left}
+.lp-phase{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;margin:0;font-size:.8125rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--mute)}
+.lp-phase-pct{font-variant-numeric:tabular-nums;color:var(--ink);letter-spacing:0}
+.lp-morph svg{width:100%;height:clamp(5rem,11vw,7.5rem);overflow:visible}
+.lp-bars rect{transform-box:fill-box;transform-origin:center;transform:scaleY(calc(var(--m) + (1 - var(--m)) * var(--p,1)))}
+.lp-bars-memo{fill:color-mix(in srgb,var(--ink) 45%,transparent);opacity:calc(1 - var(--p,1))}
+.lp-bars-rec{opacity:var(--p,1)}
+.lp-meter{display:block;height:2px;border-radius:2px;background:var(--line);overflow:hidden}
+.lp-meter i{display:block;height:100%;background:var(--grad);transform:scaleX(var(--p,1));transform-origin:left}
+
+.lp-pin.is-live .lp-pin-track{height:260vh}
+.lp-pin.is-live .lp-pin-view{position:sticky;top:calc(var(--nav-h) + .5rem)}
+.lp-pin.is-live .lp-steps li{opacity:.38;transition:opacity .2s ease-out,border-color .2s ease-out}
+.lp-pin.is-live .lp-steps li.is-on{opacity:1;border-color:color-mix(in srgb,#FF5A1F 55%,var(--line))}
+@media(max-width:760px){
+  .lp-pin.is-live .lp-pin-track{height:230vh}
+  .lp-pin.is-live .lp-sub{display:none}
+  /* one step at a time on phones, so the pinned scene fits the screen */
+  .lp-pin.is-live .lp-steps{display:grid}
+  .lp-pin.is-live .lp-steps li{grid-area:1/1;opacity:0;background:var(--bg2);transition:opacity .1s ease-in}
+  .lp-pin.is-live .lp-steps li.is-on{opacity:1;transition:opacity .2s ease-out .1s}
+}
+
+/* ---------- arrival: the hero comes in a beat at a time, lists rise as they reach you ---------- */
+@media(prefers-reduced-motion:no-preference){
+  .js .lp-hero .lp-badges li,.js .lp-hero h1,.js .lp-hero .lp-lede,.js .lp-hero .lp-actions,.js .lp-hero .lp-chips li{animation:lp-in .3s ease-out both}
+  .js .lp-hero .lp-badges li:nth-child(2){animation-delay:40ms}
+  .js .lp-hero .lp-badges li:nth-child(3){animation-delay:80ms}
+  .js .lp-hero h1{animation-delay:120ms}
+  .js .lp-hero .lp-lede{animation-delay:200ms}
+  .js .lp-hero .lp-actions{animation-delay:260ms}
+  .js .lp-hero .lp-chips li{animation-delay:calc(300ms + var(--i,0) * 30ms)}
+  .lp-hero .lp-chips li:nth-child(2){--i:1}.lp-hero .lp-chips li:nth-child(3){--i:2}.lp-hero .lp-chips li:nth-child(4){--i:3}
+  .lp-hero .lp-chips li:nth-child(5){--i:4}.lp-hero .lp-chips li:nth-child(6){--i:5}.lp-hero .lp-chips li:nth-child(7){--i:6}
+  .js .lp-stats .reveal:nth-child(2),.js .lp-for .reveal:nth-child(2),.js .lp-cards .reveal:nth-child(2),.js .lp-wall .reveal:nth-child(2){transition-delay:30ms}
+  .js .lp-stats .reveal:nth-child(3),.js .lp-for .reveal:nth-child(3),.js .lp-cards .reveal:nth-child(3),.js .lp-wall .reveal:nth-child(3){transition-delay:60ms}
+  .js .lp-stats .reveal:nth-child(4),.js .lp-cards .reveal:nth-child(4){transition-delay:90ms}
+  .js .lp-cards .reveal:nth-child(5){transition-delay:120ms}
+  .js .lp-cards .reveal:nth-child(6){transition-delay:150ms}
+}
+@keyframes lp-in{from{opacity:0;transform:translateY(10px)}}
