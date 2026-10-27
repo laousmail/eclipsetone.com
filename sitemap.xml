@@ -41,6 +41,16 @@
     <xhtml:link rel="alternate" hreflang="fr" href="https://eclipsetone.com/fr/privacy/" />
   </url>
   <url>
+    <loc>https://eclipsetone.com/terms/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eclipsetone.com/terms/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://eclipsetone.com/fr/conditions/" />
+  </url>
+  <url>
+    <loc>https://eclipsetone.com/fr/conditions/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eclipsetone.com/terms/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://eclipsetone.com/fr/conditions/" />
+  </url>
+  <url>
     <loc>https://eclipsetone.com/song-production/</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://eclipsetone.com/song-production/" />
     <xhtml:link rel="alternate" hreflang="fr" href="https://eclipsetone.com/fr/production-chanson/" />

@@ -352,7 +352,7 @@
       const raw = Math.min(Math.max((top() - r.top) / (r.height - view.offsetHeight), 0), 1)
       const p = Math.min(raw / 0.85, 1) // the last stretch holds the finished record
       stage.style.setProperty('--p', p.toFixed(3))
-      const step = p < 0.34 ? 0 : p < 0.67 ? 1 : 2
+      const step = Math.min(steps.length - 1, Math.floor(p * steps.length))
       steps.forEach((li, i) => li.classList.toggle('is-on', i === step))
       const phase = phases[Math.min(phases.length - 1, Math.floor(p * phases.length))]
       if (phase && phaseEl.textContent !== phase) phaseEl.textContent = phase

@@ -1,39 +1,47 @@
 [
   {
-    "slug_en": "song-production", "slug_fr": "production-chanson", "start": "Song",
-    "nav_en": "Song production", "nav_fr": "Production de chanson",
+    "slug_en": "song-production",
+    "slug_fr": "production-chanson",
+    "start": "Song",
+    "nav_en": "Song production",
+    "nav_fr": "Production de chanson",
     "title_en": "Song production in Montréal from $599 · EclipseTone",
     "title_fr": "Production de chanson à Montréal dès 599 $ · EclipseTone",
-    "desc_en": "Send a voice memo or lyrics. Real musicians in Montréal produce, mix and master your song. First version in 7 days, $599 per song, 100% yours. Never AI.",
-    "desc_fr": "Envoie un mémo vocal ou tes paroles. De vrais musiciens à Montréal produisent, mixent et masterisent ta chanson. Première version en 7 jours, 599 $ par chanson, 100 % à toi. Jamais d’IA.",
-    "h1_en": "Song production from your voice or lyrics.",
-    "h1_fr": "Production de chanson à partir de ta voix ou de tes paroles.",
-    "lede_en": "Send a voice memo or your lyrics. Real musicians in Montréal build the music around you, then we mix and master it into a song you release under your name.",
-    "lede_fr": "Envoie un mémo vocal ou tes paroles. De vrais musiciens à Montréal construisent la musique autour de toi, puis on la mixe et on la masterise pour que tu la sortes sous ton nom.",
-    "price_en": "Full Song: $599 per song · first version in 7 days",
-    "price_fr": "Chanson complète : 599 $ par chanson · première version en 7 jours",
+    "desc_en": "From a voice memo or lyrics to a finished song: real musicians in Montréal build the music, you record your vocals in our studio, and we mix and master. $599 per song, yours once paid.",
+    "desc_fr": "D’un mémo vocal ou de tes paroles à une chanson finie : de vrais musiciens à Montréal construisent la musique, tu enregistres tes voix dans notre studio, et on mixe et masterise. 599 $ par chanson, à toi une fois payée.",
+    "h1_en": "Song production, from your idea to a finished song.",
+    "h1_fr": "Production de chanson, de ton idée à la chanson finie.",
+    "lede_en": "Send a voice memo or your lyrics. Real musicians in Montréal build the music around your idea, you record your vocals in our studio or one near you, and we mix and master a song you release under your name.",
+    "lede_fr": "Envoie un mémo vocal ou tes paroles. De vrais musiciens à Montréal construisent la musique autour de ton idée, tu enregistres tes voix dans notre studio ou dans un studio près de chez toi, et on mixe et masterise une chanson que tu sors sous ton nom.",
+    "price_en": "Full Song: $599 per song · studio vocal session included",
+    "price_fr": "Chanson complète : 599 $ par chanson · session de voix en studio incluse",
     "price": 599,
     "items_en": [
       "Music played by real musicians: guitar, violin, bass and arrangers",
-      "Vocal direction, mix and master",
-      "2 rounds of changes on the music and 2 on the mix",
-      "You get the song, the beat and your vocals, 100% yours",
+      "Your vocals recorded in one 2-hour session in our Montréal studio, with coaching",
+      "Not near Montréal? Record at a studio near you with our recording guide; we check your takes before the mix",
+      "Mix and master, with 2 rounds of changes on the music and 2 on the mix",
+      "Once paid, the final song, the instrumental and your vocal tracks are yours, in writing",
       "Free extras: clean, instrumental and a cappella versions, plus a 30-second TikTok cut",
-      "Just an idea? Song + Songwriting ($997) adds a 2-hour writing session"
+      "Just an idea? Song + Songwriting ($997) adds a 2-hour writing session, and you keep 100% of the writing"
     ],
     "items_fr": [
       "Musique jouée par de vrais musiciens : guitare, violon, basse et arrangeurs",
-      "Direction vocale, mix et mastering",
-      "2 rondes de changements sur la musique et 2 sur le mix",
-      "Tu reçois la chanson, la prod et tes voix, 100 % à toi",
+      "Tes voix enregistrées pendant une session de 2 heures dans notre studio à Montréal, avec du coaching",
+      "Pas près de Montréal ? Enregistre dans un studio près de chez toi avec notre guide; on vérifie tes prises avant le mix",
+      "Mix et mastering, avec 2 rondes de changements sur la musique et 2 sur le mix",
+      "Une fois payée, la chanson finale, l’instrumental et tes pistes de voix sont à toi, par écrit",
       "Extras gratuits : versions clean, instrumentale et a cappella, plus un extrait TikTok de 30 secondes",
-      "Juste une idée ? Chanson + écriture (997 $) ajoute une séance d’écriture de 2 heures"
+      "Juste une idée ? Chanson + écriture (997 $) ajoute une séance d’écriture de 2 heures, et tu gardes 100 % de l’écriture"
     ],
     "steps": true
   },
   {
-    "slug_en": "mixing", "slug_fr": "mixage", "start": "Mixing",
-    "nav_en": "Mixing", "nav_fr": "Mixage",
+    "slug_en": "mixing",
+    "slug_fr": "mixage",
+    "start": "Mixing",
+    "nav_en": "Mixing",
+    "nav_fr": "Mixage",
     "title_en": "Online mixing from $150 per song · EclipseTone",
     "title_fr": "Mixage en ligne dès 150 $ par chanson · EclipseTone",
     "desc_en": "Already recorded your song? Send each track and we mix it into one clean, balanced song. From $150 per song, 2 rounds of changes, 100% yours.",
@@ -48,19 +56,22 @@
     "items_en": [
       "Mixing of your recorded tracks",
       "2 rounds of changes",
-      "100% yours, released under your name",
-      "Not recorded yet? Book a studio session in Montréal, or go with Full Song online"
+      "Yours once paid, released under your name",
+      "Not recorded yet? Full Song includes a studio vocal session in Montréal"
     ],
     "items_fr": [
       "Mixage de tes pistes enregistrées",
       "2 rondes de changements",
-      "100 % à toi, sorti sous ton nom",
-      "Pas encore enregistré ? Réserve une séance en studio à Montréal, ou choisis la chanson complète en ligne"
+      "À toi une fois payé, sorti sous ton nom",
+      "Pas encore enregistré ? Chanson complète inclut une session de voix en studio à Montréal"
     ]
   },
   {
-    "slug_en": "studio-recording", "slug_fr": "enregistrement-studio", "start": "Studio Recording",
-    "nav_en": "Studio recording", "nav_fr": "Enregistrement en studio",
+    "slug_en": "studio-recording",
+    "slug_fr": "enregistrement-studio",
+    "start": "Studio Recording",
+    "nav_en": "Studio recording",
+    "nav_fr": "Enregistrement en studio",
     "title_en": "Vocal recording studio in Montréal, $350 · EclipseTone",
     "title_fr": "Studio d’enregistrement de voix à Montréal, 350 $ · EclipseTone",
     "desc_en": "Record your vocals in person in Montréal with a singer who coaches you to your best take. 2 hours, vocal production and the mix included, $350.",
@@ -78,7 +89,7 @@
       "Vocal production: best takes, editing, tuning",
       "The mix of your song",
       "2 hours covers lead vocals, backs and harmonies on a typical 4-minute song, if you come rehearsed",
-      "Not in Montréal? Full Song works 100% online"
+      "Already included once in every Full Song. Not near Montréal? Record at a studio near you with our guide"
     ],
     "items_fr": [
       "2 heures de studio, avec Smail toute la séance",
@@ -86,12 +97,15 @@
       "Production vocale : meilleures prises, montage, justesse",
       "Le mix de ta chanson",
       "2 heures suffisent pour la voix principale, les chœurs et les harmonies d’une chanson typique de 4 minutes, si tu arrives préparé·e",
-      "Pas à Montréal ? La chanson complète se fait 100 % en ligne"
+      "Déjà inclus une fois dans chaque Chanson complète. Pas près de Montréal ? Enregistre dans un studio près de chez toi avec notre guide"
     ]
   },
   {
-    "slug_en": "music-video", "slug_fr": "clip", "start": "Music video",
-    "nav_en": "Music video", "nav_fr": "Clip",
+    "slug_en": "music-video",
+    "slug_fr": "clip",
+    "start": "Music video",
+    "nav_en": "Music video",
+    "nav_fr": "Clip",
     "title_en": "Music videos for independent artists in Montréal · EclipseTone",
     "title_fr": "Clips pour artistes indépendants à Montréal · EclipseTone",
     "desc_en": "Music videos shot and edited for your song, plus press photos, cover shoots and short clips for social, by the team that made your song.",
@@ -116,8 +130,12 @@
     ]
   },
   {
-    "slug_en": "cds-usb-cards", "slug_fr": "cd-cartes-usb", "start": "", "cta": "services/#physical",
-    "nav_en": "CDs and USB-C cards", "nav_fr": "CD et cartes USB-C",
+    "slug_en": "cds-usb-cards",
+    "slug_fr": "cd-cartes-usb",
+    "start": "",
+    "cta": "services/#physical",
+    "nav_en": "CDs and USB-C cards",
+    "nav_fr": "CD et cartes USB-C",
     "title_en": "CDs and USB-C music cards from $249 · EclipseTone",
     "title_fr": "CD et cartes musicales USB-C dès 249 $ · EclipseTone",
     "desc_en": "Printed CDs from $249 for 50 and USB-C music cards from $349 for 25. Artwork set up, a proof to approve, ready for your merch table in 2 to 3 weeks.",
@@ -147,8 +165,11 @@
     ]
   },
   {
-    "slug_en": "artist-website", "slug_fr": "site-artiste", "start": "Website",
-    "nav_en": "Artist website", "nav_fr": "Site d’artiste",
+    "slug_en": "artist-website",
+    "slug_fr": "site-artiste",
+    "start": "Website",
+    "nav_en": "Artist website",
+    "nav_fr": "Site d’artiste",
     "title_en": "Artist websites from $500 · EclipseTone",
     "title_fr": "Sites d’artiste dès 500 $ · EclipseTone",
     "desc_en": "A website for your music that you own. One-page Artist Page from $500, or a full Artist Site from $1,500 that updates itself with new releases and shows.",
@@ -178,8 +199,11 @@
     ]
   },
   {
-    "slug_en": "social-media", "slug_fr": "reseaux-sociaux", "start": "Social media",
-    "nav_en": "Social media", "nav_fr": "Réseaux sociaux",
+    "slug_en": "social-media",
+    "slug_fr": "reseaux-sociaux",
+    "start": "Social media",
+    "nav_en": "Social media",
+    "nav_fr": "Réseaux sociaux",
     "title_en": "Social media for musicians: setup and management · EclipseTone",
     "title_fr": "Réseaux sociaux pour musiciens : configuration et gestion · EclipseTone",
     "desc_en": "Profiles, bios, visuals and a content plan for Instagram and TikTok. We set it up, or run it with you, plus release-week help and artist management.",

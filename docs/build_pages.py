@@ -37,6 +37,7 @@ FR_PATHS = {
     'services/index.html': 'fr/services/index.html',
     'blog/index.html': 'fr/blog/index.html',
     'privacy/index.html': 'fr/privacy/index.html',
+    'terms/index.html': 'fr/conditions/index.html',
 }
 FR_PATHS.update({f"{s['slug_en']}/index.html": f"fr/{s['slug_fr']}/index.html" for s in SERVICES})
 FR_PATHS.update({f"blog/{p['slug']}.html": f"blog/{p['slug']}.fr.html" for p in POSTS})
@@ -304,9 +305,10 @@ def build_sources():
 
 # ---------------- one page per service ----------------
 STEPS = [
-    ('You send a voice memo', 'Tu envoies un mémo vocal', 'Or lyrics, or a beat', 'Ou des paroles, ou une prod'),
-    ('We build it in the studio', 'On la construit au studio', 'First version in 7 days', 'Première version en 7 jours'),
-    ('You release it', 'Tu la sors', 'Finished in 2 to 3 weeks, 100% yours', 'Finie en 2 à 3 semaines, 100 % à toi'),
+    ('You send your idea', 'Tu envoies ton idée', 'A voice memo, lyrics or a demo', 'Un mémo vocal, des paroles ou une démo'),
+    ('We build the music', 'On construit la musique', 'Real musicians; first version usually within 7 days', 'De vrais musiciens; première version en général en 7 jours'),
+    ('You record your vocals', 'Tu enregistres tes voix', 'In our Montréal studio, or near you with our guide', 'Dans notre studio à Montréal, ou près de chez toi avec notre guide'),
+    ('We mix and master', 'On mixe et on masterise', 'You approve it; once paid, it’s yours to release', 'Tu l’approuves; une fois payée, elle est à toi pour la sortir'),
 ]
 
 
@@ -395,6 +397,14 @@ def build_privacy():
     publish(doc, 'privacy/index.html')
 
 
+# ---------------- terms (with the refund policy at #refunds) ----------------
+def build_terms():
+    main = (ROOT / 'docs/terms.html').read_text()
+    doc = page('terms/index.html', 'Terms of service · EclipseTone', 'How working with EclipseTone works: quotes, payment in stages, vocal recording, rights, cancelling and refunds.', main,
+               title_fr='Conditions de service · EclipseTone', desc_fr='Comment on travaille avec EclipseTone : soumissions, paiement par étapes, enregistrement des voix, droits, annulation et remboursement.')
+    publish(doc, 'terms/index.html')
+
+
 # ---------------- sitemap ----------------
 def build_sitemap():
     rows = []
@@ -413,5 +423,6 @@ if __name__ == '__main__':
     build_services()
     build_blog()
     build_privacy()
+    build_terms()
     build_sitemap()
     print(f'built {len(FR_PATHS) * 2} pages')
