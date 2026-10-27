@@ -53,7 +53,7 @@
 }
 .steps li::before{
   content:counter(step,decimal-leading-zero);position:absolute;left:1.15rem;top:1.2rem;
-  font:600 1.5rem/1 "Fraunces",Georgia,serif;color:var(--hot);
+  font:600 1.5rem/1 "Inter",system-ui,sans-serif;color:var(--hot);
 }
 .steps h3{font-size:1.2rem;margin-bottom:.35rem}
 .steps p{color:var(--mute);font-size:.98rem}
@@ -140,8 +140,8 @@
   box-shadow:1px 0 0 var(--line),8px 0 14px -10px rgba(0,0,0,.45);
 }
 .compare thead th{vertical-align:bottom;padding-top:1.1rem}
-.compare thead th b{display:block;font:600 1.12rem/1.2 "Fraunces",Georgia,serif;color:var(--ink)}
-.compare thead th span{display:block;font:600 1.3rem/1.2 "Fraunces",Georgia,serif;color:var(--gold)}
+.compare thead th b{display:block;font:600 1.12rem/1.2 "Inter",system-ui,sans-serif;color:var(--ink)}
+.compare thead th span{display:block;font:600 1.3rem/1.2 "Inter",system-ui,sans-serif;color:var(--gold)}
 :root[data-theme=light] .compare thead th span{color:var(--hot)}
 .compare td{color:var(--mute);min-width:6.4rem}
 .compare .yes svg{width:1.2rem;height:1.2rem;color:var(--hot);vertical-align:middle}
@@ -206,7 +206,7 @@
 .web-tier{position:relative;display:flex;flex-direction:column;gap:.7rem;padding:1.4rem 1.3rem;border-radius:1.2rem;border:1.5px solid var(--line);background:var(--bg)}
 .web-tier.is-best{border-color:color-mix(in srgb,var(--hot) 60%,var(--line));background:linear-gradient(165deg,color-mix(in srgb,var(--hot) 10%,var(--bg)),var(--bg));box-shadow:0 26px 60px -34px color-mix(in srgb,var(--hot) 70%,transparent)}
 .web-tier .pkg-badge{position:absolute;top:-.75rem;left:1.2rem;right:auto}
-.web-name{font:600 1.35rem/1.1 "Fraunces",Georgia,serif}
+.web-name{font:600 1.35rem/1.1 "Inter",system-ui,sans-serif}
 .web-tier .price{font-size:clamp(2rem,3.6vw,2.6rem)}
 .web-tier .price small{font-size:.85rem}
 .web-for{color:var(--mute);font-size:.95rem}

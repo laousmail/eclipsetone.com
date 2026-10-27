@@ -245,7 +245,7 @@ FAB = part(r'<a class="help-fab".*?</a>')
 FOOTER = part(r'<footer class="foot">.*?</footer>')
 ICONS = (ROOT / 'docs/icons.html').read_text().strip()
 THEME = part(r'<script>\(function\(\)\{try\{var t=localStorage.*?</script>')
-FONTS = '<link rel="preload" href="{pre}fonts/inter.woff2" as="font" type="font/woff2" crossorigin />\n<link rel="preload" href="{pre}fonts/fraunces.woff2" as="font" type="font/woff2" crossorigin />'
+FONTS = '<link rel="preload" href="{pre}fonts/inter.woff2" as="font" type="font/woff2" crossorigin />'
 
 
 def page(path, title, desc, main, current=None, og_type='website', title_fr=None, desc_fr=None, head_extra=''):

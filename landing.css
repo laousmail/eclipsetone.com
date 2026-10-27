@@ -1,0 +1,155 @@
+/* Landing page (homepage only). Shared tokens, header, footer and buttons live in home.css. */
+
+/* ---------- hero ---------- */
+.lp-hero{position:relative;max-width:68rem;margin:0 auto;padding:clamp(3rem,8vw,6rem) clamp(1rem,5vw,4rem) clamp(2.5rem,5vw,4rem);text-align:center}
+.lp-doodle{position:absolute;fill:none;stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;opacity:.55;pointer-events:none}
+.lp-doodle-l{left:-1rem;top:38%;width:clamp(7rem,14vw,12rem)}
+.lp-doodle-r{right:4%;top:14%;width:clamp(3.5rem,6vw,5rem)}
+@media(max-width:760px){.lp-doodle{display:none}}
+
+.lp-badges{list-style:none;padding:0;margin:0 auto 2rem;display:flex;flex-wrap:wrap;justify-content:center;gap:.6rem 1.6rem}
+.lp-badges li,.lp-badges a{display:flex;flex-direction:column;align-items:center;gap:.1rem;text-decoration:none;color:var(--ink)}
+.lp-badges b{font-size:1.25rem;font-weight:700;letter-spacing:-.02em}
+.lp-badges li>span,.lp-badges a>span{font-size:.8125rem;color:var(--mute);max-width:12rem;line-height:1.3}
+.lp-badges b span{font:inherit;color:inherit}
+.lp-badges li{position:relative;padding:0 1.6rem}
+.lp-badges li::before,.lp-badges li::after{content:"";position:absolute;top:50%;width:1.05rem;height:2.4rem;transform:translateY(-50%);background:color-mix(in srgb,var(--ink) 70%,transparent);
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 44'%3E%3Cpath d='M15 42C6 34 4 22 9 6' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round'/%3E%3Cg%3E%3Cellipse cx='6.5' cy='34' rx='2.2' ry='4.6' transform='rotate(-50 6.5 34)'/%3E%3Cellipse cx='4.6' cy='26' rx='2.1' ry='4.4' transform='rotate(-25 4.6 26)'/%3E%3Cellipse cx='4.8' cy='18' rx='2' ry='4.2' transform='rotate(-5 4.8 18)'/%3E%3Cellipse cx='7' cy='10.5' rx='1.9' ry='3.9' transform='rotate(20 7 10.5)'/%3E%3Cellipse cx='12.2' cy='36.5' rx='1.9' ry='3.9' transform='rotate(70 12.2 36.5)'/%3E%3Cellipse cx='11.5' cy='27.5' rx='1.8' ry='3.6' transform='rotate(55 11.5 27.5)'/%3E%3Cellipse cx='12' cy='19' rx='1.7' ry='3.4' transform='rotate(40 12 19)'/%3E%3C/g%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 44'%3E%3Cpath d='M15 42C6 34 4 22 9 6' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round'/%3E%3Cg%3E%3Cellipse cx='6.5' cy='34' rx='2.2' ry='4.6' transform='rotate(-50 6.5 34)'/%3E%3Cellipse cx='4.6' cy='26' rx='2.1' ry='4.4' transform='rotate(-25 4.6 26)'/%3E%3Cellipse cx='4.8' cy='18' rx='2' ry='4.2' transform='rotate(-5 4.8 18)'/%3E%3Cellipse cx='7' cy='10.5' rx='1.9' ry='3.9' transform='rotate(20 7 10.5)'/%3E%3Cellipse cx='12.2' cy='36.5' rx='1.9' ry='3.9' transform='rotate(70 12.2 36.5)'/%3E%3Cellipse cx='11.5' cy='27.5' rx='1.8' ry='3.6' transform='rotate(55 11.5 27.5)'/%3E%3Cellipse cx='12' cy='19' rx='1.7' ry='3.4' transform='rotate(40 12 19)'/%3E%3C/g%3E%3C/svg%3E") center/contain no-repeat}
+.lp-badges li::before{left:0}
+.lp-badges li::after{right:0;transform:translateY(-50%) scaleX(-1)}
+.lp-badges a:hover>span{color:var(--ink)}
+
+.lp-hero h1{position:relative;font-size:clamp(2.6rem,7.4vw,5.75rem);line-height:1.02;letter-spacing:-.045em;margin:0 auto 1.4rem;max-width:16ch;text-wrap:balance}
+.lp-br{display:block}
+.lp-hero h1{text-shadow:none}
+.lp-swap{position:relative;display:inline-grid;justify-items:start;vertical-align:bottom;white-space:nowrap;transition:width .3s ease-out}
+.lp-swap>span{grid-area:1/1;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;padding-bottom:.06em}
+/* hand-off: the old phrase leaves upward, then the new one rises in (no overlap) */
+.lp-swap>.lp-swap-item{opacity:0;transform:translateY(-.3em);transition:opacity .2s ease-in,transform .2s ease-in}
+.lp-swap>.lp-swap-item.is-next{transform:translateY(.35em);transition:none}
+.lp-swap>.lp-swap-item.is-on{opacity:1;transform:none;transition:opacity .3s ease-out .18s,transform .3s ease-out .18s}
+.lp-swoosh{display:none}
+.lp-swap .lp-swoosh{display:block;position:absolute;left:4%;right:0;bottom:-.18em;width:96%;height:.32em;fill:none;stroke-width:4;stroke-linecap:round;stroke:#FF5A1F}
+.lp-swap .lp-swoosh path+path{stroke:#E11D48}
+
+.lp-lede{max-width:38rem;margin:0 auto 2rem;color:var(--mute);font-size:clamp(1.0625rem,1.6vw,1.1875rem);line-height:1.6}
+.lp-actions{display:grid;justify-items:center;gap:.9rem}
+.lp-cta{display:inline-flex;align-items:center;gap:.6rem;min-height:3.4rem;padding:0 1.8rem;border-radius:99px;background:var(--pill-bg);color:var(--pill-ink);font-weight:700;font-size:1.0625rem;text-decoration:none;transition:transform .15s ease-out,box-shadow .15s ease-out}
+.lp-cta span{color:inherit}
+.lp-cta>span[aria-hidden]{font-size:1.25rem;line-height:1;transition:transform .15s ease-out}
+.lp-cta:hover{transform:translateY(-1px);box-shadow:0 0 0 5px color-mix(in srgb,var(--ink) 14%,transparent)}
+.lp-cta:hover>span[aria-hidden]{transform:translateX(3px)}
+.lp-cta:focus-visible{outline:none;box-shadow:0 0 0 3px var(--bg),0 0 0 5px var(--ink)}
+.lp-note{color:var(--mute);font-size:.875rem;margin:0}
+
+.lp-chips{list-style:none;padding:0;margin:2.4rem auto 0;display:flex;flex-wrap:wrap;justify-content:center;gap:.5rem;max-width:60rem}
+.lp-chips a{display:inline-flex;align-items:center;gap:.5rem;min-height:44px;padding:0 1rem 0 .8rem;border-radius:14px;border:1px solid var(--line);background:var(--bg2);color:var(--ink);font-weight:600;font-size:.9375rem;text-decoration:none;transition:border-color .15s ease-out,transform .15s ease-out}
+.lp-chips .ico{width:1.15rem;height:1.15rem;color:var(--mute)}
+.lp-chips a:hover{border-color:color-mix(in srgb,var(--ink) 40%,var(--line));transform:translateY(-1px)}
+.lp-chips a:hover .ico{color:var(--ink)}
+
+/* ---------- sections ---------- */
+.lp-sec{max-width:74rem;margin:0 auto;padding:clamp(3.5rem,7vw,6rem) clamp(1rem,5vw,4rem);text-align:center}
+.lp-h2{font-size:clamp(2rem,4.8vw,3.5rem);line-height:1.04;letter-spacing:-.04em;max-width:20ch;margin:0 auto .9rem;text-wrap:balance}
+.lp-hl{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.lp-sub{color:var(--mute);max-width:40rem;margin:0 auto 2.5rem;font-size:1.0625rem}
+
+/* ---------- the stage: voice memo in, record out ---------- */
+.lp-stage{border-radius:28px;padding:clamp(1.25rem,4vw,3rem);border:1.5px solid transparent;
+  background:linear-gradient(var(--bg2),var(--bg2)) padding-box,var(--grad) border-box;position:relative;overflow:hidden}
+.lp-stage::before{content:"";position:absolute;inset:0;background:var(--grad-deep);opacity:.9;pointer-events:none}
+.lp-stage>*{position:relative}
+.lp-waves{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:clamp(.75rem,2vw,1.5rem)}
+.lp-wave{margin:0;display:grid;gap:.6rem;text-align:left}
+.lp-wave figcaption{font-size:.8125rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--mute)}
+.lp-wave svg{width:100%;height:clamp(4rem,9vw,6rem)}
+.lp-wave-memo rect{fill:color-mix(in srgb,var(--ink) 45%,transparent)}
+.lp-wave-arrow .ico{width:1.8rem;height:1.8rem;color:var(--ink)}
+.lp-steps{list-style:none;padding:0;margin:clamp(1.75rem,4vw,2.75rem) 0 0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem;counter-reset:none}
+.lp-steps li{position:relative;text-align:left;padding:1.4rem 1.3rem 1.3rem;border-radius:20px;background:color-mix(in srgb,var(--bg) 70%,transparent);border:1px solid var(--line)}
+.lp-steps .ico{width:1.6rem;height:1.6rem;color:var(--ink);margin-bottom:.9rem}
+.lp-step-n{position:absolute;top:1.1rem;right:1.2rem;font-size:.875rem;font-weight:700;color:var(--mute)}
+.lp-steps h3{font-size:1.25rem;letter-spacing:-.02em;margin:0 0 .35rem}
+.lp-steps p{color:var(--mute);margin:0;font-size:.9375rem;line-height:1.5}
+@media(max-width:760px){
+  .lp-waves{grid-template-columns:minmax(0,1fr)}
+  .lp-wave-arrow{justify-self:center;transform:rotate(90deg)}
+  .lp-steps{grid-template-columns:minmax(0,1fr)}
+}
+
+.lp-stats{list-style:none;padding:0;margin:1rem 0 0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1rem}
+.lp-stats li{display:grid;gap:.3rem;text-align:left;padding:1.3rem;border-radius:20px;background:var(--bg2);border:1px solid var(--line)}
+.lp-stats b{font-size:clamp(2.2rem,4vw,3rem);line-height:1;letter-spacing:-.045em;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.lp-stats b small{font-size:.45em;letter-spacing:0;margin-left:.15em}
+.lp-stats b small span{background:inherit;-webkit-background-clip:text;background-clip:text;color:transparent}
+.lp-stats li>span{color:var(--mute);font-size:.9375rem}
+@media(max-width:860px){.lp-stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* ---------- where are you starting from ---------- */
+.lp-for{list-style:none;padding:0;margin:2rem 0 0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem}
+.lp-for a{display:grid;grid-template-rows:auto auto 1fr auto;gap:.5rem;height:100%;text-align:left;padding:1.6rem 1.5rem 1.4rem;border-radius:22px;background:var(--bg2);border:1px solid var(--line);color:var(--ink);text-decoration:none;transition:border-color .15s ease-out,transform .15s ease-out}
+.lp-for-ic{width:2.6rem;height:2.6rem;padding:.6rem;border-radius:50%;margin-bottom:.6rem;color:var(--ink);border:1.5px solid transparent;background:linear-gradient(var(--bg2),var(--bg2)) padding-box,var(--grad) border-box;box-sizing:content-box}
+.lp-for h3{font-size:1.3rem;letter-spacing:-.025em;margin:0}
+.lp-for p{color:var(--mute);margin:0;font-size:.9375rem;line-height:1.5}
+.lp-for-p{display:flex;justify-content:space-between;align-items:center;margin-top:.9rem;padding-top:.9rem;border-top:1px solid var(--line);font-weight:600;font-size:.9375rem}
+.lp-for-p>span[aria-hidden]{color:var(--mute);font-size:1.3rem;transition:transform .15s ease-out}
+.lp-for a:hover{border-color:color-mix(in srgb,var(--ink) 35%,var(--line));transform:translateY(-2px)}
+.lp-for a:hover .lp-for-p>span[aria-hidden]{transform:translateX(3px);color:var(--ink)}
+@media(max-width:860px){.lp-for{grid-template-columns:minmax(0,1fr)}}
+
+/* ---------- services bento ---------- */
+.lp-cards{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem;text-align:left}
+.lp-cards a{position:relative;display:grid;grid-template-rows:auto auto auto 1fr auto;gap:.5rem;height:100%;padding:1.5rem;border-radius:22px;background:var(--bg2);border:1px solid var(--line);color:var(--ink);text-decoration:none;overflow:hidden;transition:border-color .15s ease-out,transform .15s ease-out}
+.lp-card-wide{grid-column:span 2}
+.lp-card-wide a{background:var(--grad-deep);border-color:color-mix(in srgb,#FF5A1F 35%,var(--line))}
+.lp-card-wide h3{font-size:clamp(1.6rem,2.8vw,2.2rem)!important;max-width:16ch}
+.lp-tag{justify-self:start;padding:.3rem .65rem;border-radius:99px;font-size:.75rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;background:color-mix(in srgb,var(--ink) 9%,transparent);color:var(--ink)}
+.lp-card-ic{position:absolute;top:1.4rem;right:1.4rem;width:1.6rem;height:1.6rem;color:var(--mute)}
+.lp-cards h3{font-size:1.35rem;letter-spacing:-.025em;margin:.6rem 0 0}
+.lp-cards p{color:var(--mute);margin:0;font-size:.9375rem;line-height:1.5}
+.lp-card-p{display:flex;justify-content:space-between;align-items:center;margin-top:.9rem;font-weight:600;font-size:.9375rem}
+.lp-card-p>span[aria-hidden]{color:var(--mute);font-size:1.3rem;transition:transform .15s ease-out}
+.lp-cards a:hover{border-color:color-mix(in srgb,var(--ink) 35%,var(--line));transform:translateY(-2px)}
+.lp-cards a:hover .lp-card-p>span[aria-hidden]{transform:translateX(3px);color:var(--ink)}
+.lp-more{margin:1.6rem 0 0}
+.lp-more a{display:inline-flex;align-items:center;gap:.4rem;min-height:44px;font-weight:600;color:var(--ink);text-underline-offset:.25em}
+@media(max-width:960px){.lp-cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:620px){.lp-cards{grid-template-columns:minmax(0,1fr)}.lp-card-wide{grid-column:auto}}
+
+/* ---------- real musicians ---------- */
+.lp-band .instruments{margin:1.5rem auto 2rem}
+.lp-band .instruments li{color:var(--mute)}
+.lp-band .lp-sub{margin-bottom:0}
+@media(max-width:560px){.lp-band .instruments{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.25rem .5rem}}
+
+/* ---------- wall of love ---------- */
+.lp-wall .quotes{display:block;columns:3 18rem;column-gap:1rem;text-align:left;margin-top:2rem}
+.lp-wall .quote{break-inside:avoid;margin:0 0 1rem;border-radius:22px;background:var(--bg2);border:1px solid var(--line);box-shadow:none;padding:1.5rem}
+.lp-wall .quote:hover{transform:none}
+.lp-wall .quote blockquote{font:500 1.0625rem/1.6 "Inter",system-ui,sans-serif;letter-spacing:-.005em}
+.lp-wall .stars{color:#FFB547;opacity:1}
+:root[data-theme=light] .lp-wall .stars{color:#A35200}  /* amber dark enough for 4.5:1 on white */
+
+/* ---------- FAQ ---------- */
+.lp-faq .faq-list{margin:2rem auto 0;text-align:left;max-width:48rem}
+
+/* ---------- closing call to action ---------- */
+.lp-final-in{max-width:none;margin:0;padding:clamp(3rem,7vw,5.5rem) clamp(1.25rem,4vw,3rem);border-radius:32px;border:1.5px solid transparent;
+  background:var(--grad-deep) padding-box,var(--grad) border-box}
+.lp-final h2{font-size:clamp(2.2rem,5.4vw,4rem);letter-spacing:-.045em;margin:0 auto .8rem}
+.lp-final .sub{margin:0 auto 2rem;color:var(--mute)}
+.lp-final .ot-alt{margin-top:1.4rem}
+
+@media(prefers-reduced-motion:reduce){
+  .lp-swap,.lp-swap>.lp-swap-item,.lp-cta,.lp-chips a,.lp-for a,.lp-cards a{transition:none}
+  .lp-cta:hover,.lp-chips a:hover,.lp-for a:hover,.lp-cards a:hover{transform:none}
+}
+
+/* Phone: the three proof badges sit side by side, compact */
+@media(max-width:560px){
+  .lp-badges{flex-wrap:nowrap;gap:0;margin-bottom:1.6rem}
+  .lp-badges li{flex:1 1 0;padding:0 .85rem;min-width:0}
+  .lp-badges li::before,.lp-badges li::after{width:.7rem;height:1.9rem}
+  .lp-badges b{font-size:1.0625rem}
+  .lp-badges li>span,.lp-badges a>span{font-size:.75rem}
+}

@@ -281,7 +281,7 @@
   // Phone bar: shows after the hero, hides near the price form.
   function initMobileBar() {
     const bar = document.querySelector('[data-mbar]')
-    const hero = document.querySelector('.ot-hero .cta, .hero, .page-hero')
+    const hero = document.querySelector('.lp-hero .lp-actions, .ot-hero .cta, .hero, .page-hero')
     if (!bar) return
     document.body.classList.add('has-mbar')
     const form = document.querySelector('#start')
@@ -320,6 +320,44 @@
     window.addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(paint) } }, { passive: true })
   }
 
+  // Hero headline: the last words rotate (song, single, EP, album). The page HTML holds only the
+  // first phrase, so search engines and screen readers get one clean headline.
+  function initSwap() {
+    const swap = document.querySelector('.lp-swap[data-swap]')
+    if (!swap) return
+    const swoosh = swap.closest('h1')?.querySelector('.lp-swoosh')
+    const words = [swap.textContent.trim(), ...swap.dataset.swap.split('|')]
+    swap.textContent = ''
+    const items = words.map((w, i) => {
+      const s = document.createElement('span')
+      s.className = 'lp-swap-item' + (i ? '' : ' is-on')
+      s.textContent = w
+      if (i) s.setAttribute('aria-hidden', 'true')
+      swap.append(s)
+      return s
+    })
+    if (swoosh) swap.append(swoosh)
+    let at = 0
+    // The line fits the phrase on screen, so the headline stays centred with no gap
+    const fit = () => { swap.style.width = `${items[at].getBoundingClientRect().width}px` }
+    document.fonts?.ready.then(fit)
+    fit()
+    addEventListener('resize', fit, { passive: true })
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    setInterval(() => {
+      if (document.hidden) return
+      items[at].classList.remove('is-on')
+      at = (at + 1) % items.length
+      fit()
+      const next = items[at]
+      next.classList.add('is-next')        // start just below, without animating there
+      void next.offsetWidth
+      next.classList.remove('is-next')
+      next.classList.add('is-on')
+    }, 2600)
+  }
+
+  initSwap()
   initTheme()
   initHelpFab()
   initPress()

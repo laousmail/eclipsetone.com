@@ -25,8 +25,8 @@
 <meta name="twitter:image" content="https://eclipsetone.com/og-image.jpg" />
 <meta name="theme-color" content="#070605" />
 <link rel="preload" href="fonts/inter.woff2" as="font" type="font/woff2" crossorigin />
-<link rel="preload" href="fonts/fraunces.woff2" as="font" type="font/woff2" crossorigin />
-<link rel="stylesheet" href="home.css?v=t8" />
+<link rel="stylesheet" href="home.css?v=t9" />
+<link rel="stylesheet" href="landing.css?v=t13" />
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -87,7 +87,7 @@
 <a class="skip" href="#services"><span data-lang="en">Skip to content</span></a>
 
 <header class="nav">
-<a class="brand" href="#top"><img src="logo-192.jpg" alt="" width="36" height="36" />EclipseTone</a>
+<a class="brand" href="#top"><svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true"><defs><linearGradient id="brand-g" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#E11D48"/><stop offset="1" stop-color="#FFB547"/></lineargradient></defs><circle cx="16" cy="16" r="13.5" fill="url(#brand-g)"/><circle cx="19.5" cy="13.5" r="12" class="brand-moon"/></svg>EclipseTone</a>
 <input id="nav-menu" class="nav-checkbox" type="checkbox" />
 <label class="nav-toggle" for="nav-menu" aria-label="Menu" tabindex="0"><span></span><b class="nav-word">Menu</b></label>
 <nav class="nav-links" aria-label="Primary">
@@ -111,79 +111,61 @@
 
 <main id="top">
 
-<!-- HERO: one team, everything around it -->
-<section class="ot-hero">
-<div class="ot-copy">
-<h1><span data-lang="en"><span class="nw">From voice memo</span> <span class="nw">to finished song.</span> <span class="ln2">One team for the rest.</span></span></h1>
-<p class="lede"><span data-lang="en">Real musicians in Montréal produce, mix and master your song from your voice or lyrics. Then the same team makes your video, CDs, website and socials.</span></p>
-<div class="cta">
-<a class="btn big cta-go" href="#start" data-start><span data-lang="en">Start your project</span></a>
+<!-- HERO: centered promise, real proof, every service one tap away -->
+<section class="lp-hero" aria-labelledby="lp-h1">
+<svg class="lp-doodle lp-doodle-l" viewBox="0 0 220 260" aria-hidden="true"><path d="M-10 230c40-10 70-40 64-78-5-30-40-36-52-12-13 26 18 52 52 48 52-6 84-60 70-112-9-34-38-58-70-64"/></svg><svg class="lp-doodle lp-doodle-r" viewBox="0 0 120 120" aria-hidden="true"><path d="M60 8c3 30 10 45 52 52-42 6-49 21-52 52-4-31-11-46-52-52 41-7 48-22 52-52z"/><path d="M98 14c1 9 3 13 14 15-11 2-13 6-14 15-1-9-3-13-14-15 11-2 13-6 14-15z"/></svg>
+<ul class="lp-badges" aria-label="Proof">
+<li><a href="https://youtu.be/b-uEN7ZRtjU" target="_blank" rel="noreferrer"><b>770K+</b><span><span data-lang="en">views on one song</span></span></a></li>
+<li><b>5.0</b><span><span data-lang="en">from every artist who reviewed us</span></span></li>
+<li><b><span data-lang="en">No AI</span></b><span><span data-lang="en">real musicians in Montréal</span></span></li>
+</ul>
+<h1 id="lp-h1"><span data-lang="en">From voice memo <span class="lp-br"></span>to <span class="lp-swap" data-swap="a finished single|a finished EP|a finished album">a finished song</span></span><svg class="lp-swoosh" viewBox="0 0 300 24" preserveAspectRatio="none" aria-hidden="true"><path d="M5 17C55 9 120 6 190 8c40 1 75 4 105 9"/><path d="M40 21c60-6 150-8 230-3" opacity=".55"/></svg></h1>
+<p class="lp-lede"><span data-lang="en">Real musicians in Montréal produce, mix and master your song from your voice or lyrics. Then the same team makes your video, CDs, website and socials.</span></p>
+<div class="lp-actions">
+<a class="lp-cta" href="#start" data-start><span data-lang="en">Start your project</span><span aria-hidden="true">»</span></a>
+<p class="lp-note"><span data-lang="en">Songs from <span class="money" data-cad="599">$599</span> · First version in 7 days · Pay only once you say yes</span></p>
 </div>
-<p class="ot-note"><span data-lang="en">Songs from <span class="money" data-cad="599">$599</span>. First version in 7 days. You only pay once you say yes.</span></p>
-</div>
-
-<div class="hub" data-hub>
-<svg class="hub-lines" viewBox="0 0 100 100" aria-hidden="true" preserveAspectRatio="none">
-<circle class="hub-orbit" cx="50" cy="50" r="39"/>
-<path d="M50 50L50 11"/><path d="M50 50L87.1 38"/><path d="M50 50L72.9 81.6"/><path d="M50 50L27.1 81.6"/><path d="M50 50L12.9 38"/>
-</svg>
-<div class="hub-core" aria-hidden="true" data-eclipse-disc data-depth="0.05">
-<i class="disc-haze"></i><i class="corona"></i><i class="corona-shimmer"></i><i class="moon"></i><i class="moon-rim"></i>
-<b class="hub-name">EclipseTone</b>
-</div>
-<div class="hub-nodes" data-depth="0.1">
-<button type="button" class="node" style="--x:50%;--y:11%" data-start="Song"><span class="knob"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-song"/></svg></span><span class="node-l"><span data-lang="en">Song</span></span></button>
-<button type="button" class="node" style="--x:87.1%;--y:38%" data-start="Music video"><span class="knob"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-video"/></svg></span><span class="node-l"><span data-lang="en">Video</span></span></button>
-<a class="node" style="--x:72.9%;--y:81.6%" href="services/#physical"><span class="knob"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-cd"/></svg></span><span class="node-l"><span data-lang="en">CDs</span></span></a>
-<button type="button" class="node" style="--x:27.1%;--y:81.6%" data-start="Website"><span class="knob"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-web"/></svg></span><span class="node-l"><span data-lang="en">Website</span></span></button>
-<button type="button" class="node" style="--x:12.9%;--y:38%" data-start="Social media"><span class="knob"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-social"/></svg></span><span class="node-l"><span data-lang="en">Social</span></span></button>
-</div>
-</div>
+<ul class="lp-chips" aria-label="Services"><li><a href="song-production/"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-song"/></svg><span><span data-lang="en">Song</span></span></a></li><li><a href="music-video/"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-video"/></svg><span><span data-lang="en">Video</span></span></a></li><li><a href="cds-usb-cards/"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-cd"/></svg><span><span data-lang="en">CDs</span></span></a></li><li><a href="artist-website/"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-web"/></svg><span><span data-lang="en">Website</span></span></a></li><li><a href="social-media/"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-social"/></svg><span><span data-lang="en">Social</span></span></a></li><li><a href="mixing/"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-mix"/></svg><span><span data-lang="en">Mixing</span></span></a></li><li><a href="studio-recording/"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-mic"/></svg><span><span data-lang="en">Studio</span></span></a></li></ul>
 </section>
 
-<!-- PROOF -->
-<section class="ot-proof" aria-label="Proof">
-<a href="https://youtu.be/b-uEN7ZRtjU" target="_blank" rel="noreferrer"><b>770K+</b><span><span data-lang="en">views on one of our songs</span><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-play"/></svg></span></a>
-<p><b>5.0</b><span><span data-lang="en">from every artist who reviewed us</span></span></p>
+<!-- HOW IT WORKS: the stage -->
+<section class="lp-sec" id="how" aria-labelledby="lp-how-h">
+<h2 id="lp-how-h" class="lp-h2"><span data-lang="en">Voice memo in. Record out.</span></h2>
+<p class="lp-sub"><span data-lang="en">Three steps, one team, no AI. You hear every version before it’s final.</span></p>
+<div class="lp-stage">
+<div class="lp-waves" aria-hidden="true">
+<figure class="lp-wave lp-wave-memo"><figcaption><span data-lang="en">Your voice memo</span></figcaption><svg viewBox="0 0 600 100" preserveAspectRatio="none"><rect x="2.0" y="48.0" width="6.0" height="4.0" rx="3.0"/><rect x="12.0" y="46.4" width="6.0" height="7.3" rx="3.0"/><rect x="22.0" y="47.5" width="6.0" height="4.9" rx="3.0"/><rect x="32.0" y="46.9" width="6.0" height="6.1" rx="3.0"/><rect x="42.0" y="46.2" width="6.0" height="7.6" rx="3.0"/><rect x="52.0" y="44.0" width="6.0" height="11.9" rx="3.0"/><rect x="62.0" y="44.9" width="6.0" height="10.3" rx="3.0"/><rect x="72.0" y="47.4" width="6.0" height="5.2" rx="3.0"/><rect x="82.0" y="47.8" width="6.0" height="4.3" rx="3.0"/><rect x="92.0" y="46.7" width="6.0" height="6.5" rx="3.0"/><rect x="102.0" y="43.4" width="6.0" height="13.2" rx="3.0"/><rect x="112.0" y="47.3" width="6.0" height="5.4" rx="3.0"/><rect x="122.0" y="45.0" width="6.0" height="10.1" rx="3.0"/><rect x="132.0" y="48.0" width="6.0" height="4.1" rx="3.0"/><rect x="142.0" y="47.0" width="6.0" height="6.0" rx="3.0"/><rect x="152.0" y="47.3" width="6.0" height="5.3" rx="3.0"/><rect x="162.0" y="43.7" width="6.0" height="12.7" rx="3.0"/><rect x="172.0" y="45.9" width="6.0" height="8.2" rx="3.0"/><rect x="182.0" y="47.3" width="6.0" height="5.4" rx="3.0"/><rect x="192.0" y="46.5" width="6.0" height="7.0" rx="3.0"/><rect x="202.0" y="45.8" width="6.0" height="8.5" rx="3.0"/><rect x="212.0" y="46.2" width="6.0" height="7.6" rx="3.0"/><rect x="222.0" y="47.5" width="6.0" height="4.9" rx="3.0"/><rect x="232.0" y="46.4" width="6.0" height="7.3" rx="3.0"/><rect x="242.0" y="47.9" width="6.0" height="4.1" rx="3.0"/><rect x="252.0" y="44.2" width="6.0" height="11.6" rx="3.0"/><rect x="262.0" y="46.9" width="6.0" height="6.1" rx="3.0"/><rect x="272.0" y="43.9" width="6.0" height="12.3" rx="3.0"/><rect x="282.0" y="47.6" width="6.0" height="4.8" rx="3.0"/><rect x="292.0" y="47.8" width="6.0" height="4.4" rx="3.0"/><rect x="302.0" y="45.8" width="6.0" height="8.4" rx="3.0"/><rect x="312.0" y="44.9" width="6.0" height="10.3" rx="3.0"/><rect x="322.0" y="44.1" width="6.0" height="11.9" rx="3.0"/><rect x="332.0" y="46.7" width="6.0" height="6.5" rx="3.0"/><rect x="342.0" y="47.9" width="6.0" height="4.2" rx="3.0"/><rect x="352.0" y="47.8" width="6.0" height="4.4" rx="3.0"/><rect x="362.0" y="46.2" width="6.0" height="7.7" rx="3.0"/><rect x="372.0" y="47.7" width="6.0" height="4.7" rx="3.0"/><rect x="382.0" y="44.6" width="6.0" height="10.8" rx="3.0"/><rect x="392.0" y="47.7" width="6.0" height="4.5" rx="3.0"/><rect x="402.0" y="46.1" width="6.0" height="7.8" rx="3.0"/><rect x="412.0" y="45.6" width="6.0" height="8.8" rx="3.0"/><rect x="422.0" y="46.5" width="6.0" height="7.0" rx="3.0"/><rect x="432.0" y="46.8" width="6.0" height="6.3" rx="3.0"/><rect x="442.0" y="47.2" width="6.0" height="5.7" rx="3.0"/><rect x="452.0" y="46.7" width="6.0" height="6.6" rx="3.0"/><rect x="462.0" y="46.7" width="6.0" height="6.6" rx="3.0"/><rect x="472.0" y="43.1" width="6.0" height="13.8" rx="3.0"/><rect x="482.0" y="47.6" width="6.0" height="4.7" rx="3.0"/><rect x="492.0" y="47.1" width="6.0" height="5.7" rx="3.0"/><rect x="502.0" y="47.9" width="6.0" height="4.1" rx="3.0"/><rect x="512.0" y="44.7" width="6.0" height="10.5" rx="3.0"/><rect x="522.0" y="45.9" width="6.0" height="8.1" rx="3.0"/><rect x="532.0" y="44.1" width="6.0" height="11.8" rx="3.0"/><rect x="542.0" y="46.2" width="6.0" height="7.5" rx="3.0"/><rect x="552.0" y="48.0" width="6.0" height="4.1" rx="3.0"/><rect x="562.0" y="47.1" width="6.0" height="5.9" rx="3.0"/><rect x="572.0" y="47.1" width="6.0" height="5.8" rx="3.0"/><rect x="582.0" y="43.5" width="6.0" height="13.1" rx="3.0"/><rect x="592.0" y="47.2" width="6.0" height="5.5" rx="3.0"/></svg></figure>
+<span class="lp-wave-arrow"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-arrow"/></svg></span>
+<figure class="lp-wave lp-wave-rec"><figcaption><span data-lang="en">Your record</span></figcaption><svg viewBox="0 0 600 100" preserveAspectRatio="none"><defs><linearGradient id="lp-wg" x1="0" x2="1"><stop offset="0" stop-color="#FFB547"/><stop offset=".5" stop-color="#FF5A1F"/><stop offset="1" stop-color="#E11D48"/></lineargradient></defs><g fill="url(#lp-wg)"><rect x="2.0" y="37.9" width="6.0" height="24.2" rx="3.0"/><rect x="12.0" y="33.7" width="6.0" height="32.5" rx="3.0"/><rect x="22.0" y="26.3" width="6.0" height="47.3" rx="3.0"/><rect x="32.0" y="28.9" width="6.0" height="42.3" rx="3.0"/><rect x="42.0" y="32.4" width="6.0" height="35.2" rx="3.0"/><rect x="52.0" y="25.3" width="6.0" height="49.4" rx="3.0"/><rect x="62.0" y="20.8" width="6.0" height="58.5" rx="3.0"/><rect x="72.0" y="28.3" width="6.0" height="43.4" rx="3.0"/><rect x="82.0" y="28.3" width="6.0" height="43.4" rx="3.0"/><rect x="92.0" y="18.1" width="6.0" height="63.9" rx="3.0"/><rect x="102.0" y="19.8" width="6.0" height="60.4" rx="3.0"/><rect x="112.0" y="28.4" width="6.0" height="43.2" rx="3.0"/><rect x="122.0" y="22.0" width="6.0" height="56.0" rx="3.0"/><rect x="132.0" y="13.8" width="6.0" height="72.3" rx="3.0"/><rect x="142.0" y="22.2" width="6.0" height="55.6" rx="3.0"/><rect x="152.0" y="26.7" width="6.0" height="46.5" rx="3.0"/><rect x="162.0" y="15.6" width="6.0" height="68.9" rx="3.0"/><rect x="172.0" y="14.0" width="6.0" height="72.0" rx="3.0"/><rect x="182.0" y="25.5" width="6.0" height="49.0" rx="3.0"/><rect x="192.0" y="22.7" width="6.0" height="54.6" rx="3.0"/><rect x="202.0" y="11.6" width="6.0" height="76.9" rx="3.0"/><rect x="212.0" y="18.1" width="6.0" height="63.7" rx="3.0"/><rect x="222.0" y="23.3" width="6.0" height="53.4" rx="3.0"/><rect x="232.0" y="17.6" width="6.0" height="64.9" rx="3.0"/><rect x="242.0" y="11.9" width="6.0" height="76.2" rx="3.0"/><rect x="252.0" y="24.0" width="6.0" height="51.9" rx="3.0"/><rect x="262.0" y="23.4" width="6.0" height="53.1" rx="3.0"/><rect x="272.0" y="13.8" width="6.0" height="72.4" rx="3.0"/><rect x="282.0" y="16.7" width="6.0" height="66.7" rx="3.0"/><rect x="292.0" y="20.4" width="6.0" height="59.2" rx="3.0"/><rect x="302.0" y="22.8" width="6.0" height="54.4" rx="3.0"/><rect x="312.0" y="13.7" width="6.0" height="72.7" rx="3.0"/><rect x="322.0" y="24.0" width="6.0" height="52.0" rx="3.0"/><rect x="332.0" y="18.8" width="6.0" height="62.4" rx="3.0"/><rect x="342.0" y="19.5" width="6.0" height="61.0" rx="3.0"/><rect x="352.0" y="17.9" width="6.0" height="64.2" rx="3.0"/><rect x="362.0" y="19.3" width="6.0" height="61.5" rx="3.0"/><rect x="372.0" y="21.0" width="6.0" height="58.0" rx="3.0"/><rect x="382.0" y="18.6" width="6.0" height="62.8" rx="3.0"/><rect x="392.0" y="25.2" width="6.0" height="49.5" rx="3.0"/><rect x="402.0" y="16.6" width="6.0" height="66.9" rx="3.0"/><rect x="412.0" y="25.4" width="6.0" height="49.3" rx="3.0"/><rect x="422.0" y="21.5" width="6.0" height="56.9" rx="3.0"/><rect x="432.0" y="20.5" width="6.0" height="59.0" rx="3.0"/><rect x="442.0" y="18.2" width="6.0" height="63.6" rx="3.0"/><rect x="452.0" y="25.4" width="6.0" height="49.1" rx="3.0"/><rect x="462.0" y="27.6" width="6.0" height="44.7" rx="3.0"/><rect x="472.0" y="17.9" width="6.0" height="64.1" rx="3.0"/><rect x="482.0" y="23.0" width="6.0" height="54.0" rx="3.0"/><rect x="492.0" y="26.9" width="6.0" height="46.3" rx="3.0"/><rect x="502.0" y="24.4" width="6.0" height="51.2" rx="3.0"/><rect x="512.0" y="19.7" width="6.0" height="60.6" rx="3.0"/><rect x="522.0" y="28.7" width="6.0" height="42.7" rx="3.0"/><rect x="532.0" y="31.2" width="6.0" height="37.5" rx="3.0"/><rect x="542.0" y="23.6" width="6.0" height="52.8" rx="3.0"/><rect x="552.0" y="25.4" width="6.0" height="49.2" rx="3.0"/><rect x="562.0" y="33.5" width="6.0" height="33.1" rx="3.0"/><rect x="572.0" y="31.5" width="6.0" height="36.9" rx="3.0"/><rect x="582.0" y="28.1" width="6.0" height="43.7" rx="3.0"/><rect x="592.0" y="35.3" width="6.0" height="29.4" rx="3.0"/></g></svg></figure>
+</div>
+<ol class="lp-steps"><li><span class="lp-step-n" aria-hidden="true">1</span><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-memo"/></svg><h3><span data-lang="en">You send a voice memo</span></h3><p><span data-lang="en">Or lyrics, or a beat. A phone recording is fine.</span></p></li><li><span class="lp-step-n" aria-hidden="true">2</span><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-studio"/></svg><h3><span data-lang="en">We build it in the studio</span></h3><p><span data-lang="en">Real musicians play every part. First version in 7 days.</span></p></li><li><span class="lp-step-n" aria-hidden="true">3</span><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-release"/></svg><h3><span data-lang="en">You release it</span></h3><p><span data-lang="en">Mixed, mastered and 100% yours in 2 to 3 weeks.</span></p></li></ol>
+</div>
+<ul class="lp-stats"><li><b>7<small><span data-lang="en">days</span></small></b><span><span data-lang="en">to your first version</span></span></li><li><b>2+2<small></small></b><span><span data-lang="en">rounds of changes included</span></span></li><li><b>100<small><span data-lang="en">%</span></small></b><span><span data-lang="en">yours, in writing</span></span></li><li><b>24<small><span data-lang="en">h</span></small></b><span><span data-lang="en">to get your price</span></span></li></ul>
 </section>
 
 <!-- BEFORE / AFTER (hidden until proof/pairs.json has entries) -->
 <section class="sec ab" id="listen" data-ab hidden>
-<h2><span data-lang="en">Voice memo in. Record out.</span></h2>
+<h2><span data-lang="en">Hear the difference.</span></h2>
 <div class="ab-list" data-ab-list></div>
 </section>
 
-<!-- SERVICES -->
-<section class="sec ot-services" id="services">
-<h2><span data-lang="en">Pick where you want to start.</span></h2>
-<p class="sub"><span data-lang="en">One thing or all of it. Same team, one price.</span></p>
-<div class="tiles">
-<button type="button" class="tile" data-start="Song"><span class="knob"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-song"/></svg></span><b><span data-lang="en">Your song</span></b><small><span data-lang="en">Made from your voice or lyrics</span></small><span class="tile-p"><span data-lang="en">from <span class="money" data-cad="599">$599</span></span></span></button>
-<button type="button" class="tile" data-start="Music video"><span class="knob"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-video"/></svg></span><b><span data-lang="en">Music video</span></b><small><span data-lang="en">Shot and edited for your song</span></small><span class="tile-p"><span data-lang="en">Priced per project</span></span></button>
-<a class="tile" href="services/#physical"><span class="knob"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-cd"/></svg></span><b><span data-lang="en">CDs and USB‑C cards</span></b><small><span data-lang="en">Something fans can hold</span></small><span class="tile-p"><span data-lang="en">from <span class="money" data-cad="249">$249</span></span></span></a>
-<button type="button" class="tile" data-start="Website"><span class="knob"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-web"/></svg></span><b><span data-lang="en">Your website</span></b><small><span data-lang="en">A home for your music that you own</span></small><span class="tile-p"><span data-lang="en">from <span class="money" data-cad="500">$500</span></span></span></button>
-<button type="button" class="tile" data-start="Social media"><span class="knob"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-social"/></svg></span><b><span data-lang="en">Social media</span></b><small><span data-lang="en">Profiles, content plan, management</span></small><span class="tile-p"><span data-lang="en">Priced per project</span></span></button>
-<button type="button" class="tile" data-start="Mixing"><span class="knob"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-mix"/></svg></span><b><span data-lang="en">Mixing and recording</span></b><small><span data-lang="en">Your song is recorded, or almost</span></small><span class="tile-p"><span data-lang="en">from <span class="money" data-cad="150">$150</span></span></span></button>
-</div>
-<p class="ot-more"><a href="services/"><span data-lang="en">See every price</span></a><span class="tax"><span data-lang="en">In Canadian dollars. Taxes added for clients in Canada.</span></span></p>
+<!-- WHO IT'S FOR -->
+<section class="lp-sec" aria-labelledby="lp-for-h">
+<h2 id="lp-for-h" class="lp-h2"><span data-lang="en">Where are you starting from?</span></h2>
+<ul class="lp-for"><li><a href="song-production/"><svg class="ico lp-for-ic" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-memo"/></svg><h3><span data-lang="en">You have a voice memo</span></h3><p><span data-lang="en">We build the music around your voice: musicians, arrangement, mix and master.</span></p><span class="lp-for-p"><span data-lang="en">Full Song $599</span><span aria-hidden="true">›</span></span></a></li><li><a href="song-production/"><svg class="ico lp-for-ic" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-spark"/></svg><h3><span data-lang="en">You have lyrics or just an idea</span></h3><p><span data-lang="en">We write it with you in a 2-hour session, then make the whole song.</span></p><span class="lp-for-p"><span data-lang="en">Song + Songwriting $997</span><span aria-hidden="true">›</span></span></a></li><li><a href="mixing/"><svg class="ico lp-for-ic" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-mix"/></svg><h3><span data-lang="en">Your song is already recorded</span></h3><p><span data-lang="en">Send each track. We mix it into one clean, balanced song.</span></p><span class="lp-for-p"><span data-lang="en">Mixing, from $150</span><span aria-hidden="true">›</span></span></a></li></ul>
 </section>
 
-<!-- HOW IT WORKS -->
-<section class="sec ot-how" id="how">
-<h2><span data-lang="en">How it works.</span></h2>
-<ol class="flow">
-<li><span class="flow-ic"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-memo"/></svg></span><b><span data-lang="en">You send a voice memo</span></b><small><span data-lang="en">Or lyrics, or a beat</span></small></li>
-<li class="flow-arrow" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24"><use href="#i-arrow"/></svg></li>
-<li><span class="flow-ic"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-studio"/></svg></span><b><span data-lang="en">We build it in the studio</span></b><small><span data-lang="en">First version in 7 days</span></small></li>
-<li class="flow-arrow" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24"><use href="#i-arrow"/></svg></li>
-<li><span class="flow-ic"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-release"/></svg></span><b><span data-lang="en">You release it</span></b><small><span data-lang="en">Finished in 2 to 3 weeks, 100% yours</span></small></li>
-</ol>
+<!-- SERVICES: one team for everything -->
+<section class="lp-sec" id="services" aria-labelledby="lp-svc-h">
+<h2 id="lp-svc-h" class="lp-h2"><span data-lang="en">Everything your release needs. <span class="lp-hl">One team.</span></span></h2>
+<p class="lp-sub"><span data-lang="en">One thing or all of it. Prices in Canadian dollars, taxes added for clients in Canada.</span></p>
+<ul class="lp-cards"><li class="lp-card-wide"><a href="song-production/"><span class="lp-tag"><span data-lang="en">Song</span></span><svg class="ico lp-card-ic" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-song"/></svg><h3><span data-lang="en">Your song, made by real musicians</span></h3><p><span data-lang="en">Guitar, violin, bass and arrangers build the music around your voice. Then mix, master and free clean, instrumental and a cappella versions.</span></p><span class="lp-card-p"><span data-lang="en">from $599</span><span aria-hidden="true">›</span></span></a></li><li class=""><a href="music-video/"><span class="lp-tag"><span data-lang="en">Video</span></span><svg class="ico lp-card-ic" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-video"/></svg><h3><span data-lang="en">A video for your song</span></h3><p><span data-lang="en">Shot and edited by the team that made the song, plus photos and short clips.</span></p><span class="lp-card-p"><span data-lang="en">priced per project</span><span aria-hidden="true">›</span></span></a></li><li class=""><a href="cds-usb-cards/"><span class="lp-tag"><span data-lang="en">Merch</span></span><svg class="ico lp-card-ic" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-cd"/></svg><h3><span data-lang="en">CDs and USB-C cards</span></h3><p><span data-lang="en">Something fans can hold, ready for your merch table in 2 to 3 weeks.</span></p><span class="lp-card-p"><span data-lang="en">from $249</span><span aria-hidden="true">›</span></span></a></li><li class=""><a href="artist-website/"><span class="lp-tag"><span data-lang="en">Website</span></span><svg class="ico lp-card-ic" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-web"/></svg><h3><span data-lang="en">A website you own</span></h3><p><span data-lang="en">Your music, bio, shows and contact in one place that loads fast on any phone.</span></p><span class="lp-card-p"><span data-lang="en">from $500</span><span aria-hidden="true">›</span></span></a></li><li class=""><a href="social-media/"><span class="lp-tag"><span data-lang="en">Social</span></span><svg class="ico lp-card-ic" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-social"/></svg><h3><span data-lang="en">Socials set up and planned</span></h3><p><span data-lang="en">Profiles, visuals and a content plan for Instagram and TikTok.</span></p><span class="lp-card-p"><span data-lang="en">priced per project</span><span aria-hidden="true">›</span></span></a></li><li class=""><a href="studio-recording/"><span class="lp-tag"><span data-lang="en">Studio</span></span><svg class="ico lp-card-ic" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-mic"/></svg><h3><span data-lang="en">Record in Montréal</span></h3><p><span data-lang="en">Two hours in the studio with a singer who coaches you to your best take.</span></p><span class="lp-card-p"><span data-lang="en">$350 per session</span><span aria-hidden="true">›</span></span></a></li></ul>
+<p class="lp-more"><a href="services/"><span data-lang="en">See every price</span><span aria-hidden="true">›</span></a></p>
 </section>
 
 <!-- REAL MUSICIANS -->
-<section class="ot-band">
-<div class="ot-band-in">
-<h2><span data-lang="en">Real musicians. No AI, ever.</span></h2>
+<section class="lp-sec lp-band" aria-labelledby="lp-band-h">
+<h2 id="lp-band-h" class="lp-h2"><span data-lang="en">Real musicians. <span class="lp-hl">No AI, ever.</span></span></h2>
 <ul class="instruments">
 <li><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-guitar"/></svg><span data-lang="en">Guitar</span></li>
 <li><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-violin"/></svg><span data-lang="en">Violin</span></li>
@@ -192,13 +174,12 @@
 <li><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-mic"/></svg><span data-lang="en">Vocals</span></li>
 <li><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-mix"/></svg><span data-lang="en">Mixing</span></li>
 </ul>
-<p><span data-lang="en">A team of real musicians in Montréal: guitar, violin, bass, arrangers and a mixing engineer. Every note on your record is played by a person.</span></p>
-</div>
+<p class="lp-sub"><span data-lang="en">A team of real musicians in Montréal: guitar, violin, bass, arrangers and a mixing engineer. Every note on your record is played by a person.</span></p>
 </section>
 
 <!-- REVIEWS -->
-<section class="sec voices">
-<h2><span data-lang="en">Artists say it better.</span></h2>
+<section class="lp-sec lp-wall" aria-labelledby="lp-wall-h">
+<h2 id="lp-wall-h" class="lp-h2"><span data-lang="en">Artists say it <span class="lp-hl">better.</span></span></h2>
 <div class="quotes">
 <figure class="quote"><p class="stars" aria-label="5 stars">★★★★★</p><blockquote>What I like most about Eclipse Tone Studio is the professionalism, attention to detail, and the creative atmosphere. The team really listens to your vision and helps you bring out the best version of your sound.</blockquote><figcaption>Elias</figcaption></figure>
 <figure class="quote"><p class="stars" aria-label="5 stars">★★★★★</p><blockquote>Le producteur a pris en charge instruments, arrangements, mix et mastering. Son oreille et son talent pour les arrangements sont bluffants, le résultat dépasse mes attentes.</blockquote><figcaption>Red</figcaption></figure>
@@ -207,8 +188,8 @@
 </section>
 
 <!-- FAQ -->
-<section class="sec faq" id="faq">
-<h2>FAQ</h2>
+<section class="lp-sec faq lp-faq" id="faq" aria-labelledby="lp-faq-h">
+<h2 id="lp-faq-h" class="lp-h2"><span data-lang="en">Questions, answered.</span></h2>
 <div class="faq-list">
 <details><summary><span data-lang="en">Who owns the song?</span></summary><p><span data-lang="en">You do. It comes out under your name, and once it’s paid the song, the beat and your vocals are yours, in writing. We may share it on our channels, credited to the team of EclipseTone for the production.</span></p></details>
 <details><summary><span data-lang="en">What do I need to send?</span></summary><p><span data-lang="en">Your vocals (a phone memo is fine to start) or your lyrics, plus one or two songs you like the sound of. Just an idea? We write it with you.</span></p></details>
@@ -232,13 +213,13 @@
 </section>
 
 <!-- START -->
-<section class="sec ot-start" id="start">
-<div class="ot-start-in">
+<section class="lp-sec lp-final" id="start">
+<div class="lp-final-in">
 <h2><span data-lang="en">Start your project.</span></h2>
 <p class="sub"><span data-lang="en">Three quick steps. We reply within 24 hours with your price.</span></p>
 <!-- Scarcity: set the real number and remove "hidden" -->
 <p class="spots" hidden><span data-lang="en"><b>3</b> spots open for November.</span></p>
-<a class="btn big cta-go" href="https://wa.me/14384668971" data-start><span data-lang="en">Start your project</span></a>
+<a class="lp-cta" href="https://wa.me/14384668971" data-start><span data-lang="en">Start your project</span><span aria-hidden="true">»</span></a>
 <p class="ot-alt"><span data-lang="en">Rather just talk?</span> <a href="https://wa.me/14384668971?text=Hi%20EclipseTone%2C%20I%20have%20a%20question%3A%20" target="_blank" rel="noopener"><span data-lang="en">Text us on WhatsApp</span></a></p>
 </div>
 </section>
@@ -256,10 +237,10 @@
 <nav aria-label="Footer"><a href="services/"><span data-lang="en">Prices</span></a><a href="blog/index.html">Blog</a><a href="https://laousmail.com/" target="_blank" rel="noopener">laousmail.com</a><a href="https://instagram.com/eclipsetone" target="_blank" rel="noreferrer">Instagram</a><a href="https://www.tiktok.com/@eclipsetone" target="_blank" rel="noreferrer">TikTok</a><a href="https://wa.me/14384668971">WhatsApp</a><a href="privacy/"><span data-lang="en">Privacy</span></a><a href="privacy/#cookies"><span data-lang="en">Cookies</span></a><a href="fr/" hreflang="fr" lang="fr">Français</a></nav>
 </footer>
 <script src="config.js?v=t1"></script>
-<script src="currency.js?v=t8"></script>
+<script src="currency.js?v=t9"></script>
 <script src="analytics.js?v=t1"></script>
-<script src="main.js?v=t8" defer></script>
-<script src="project.js?v=t8" defer></script>
+<script src="main.js?v=t11" defer></script>
+<script src="project.js?v=t9" defer></script>
 <script src="sound.js?v=t1" defer></script>
 </body>
 </html>

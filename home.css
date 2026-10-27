@@ -1,4 +1,3 @@
-@font-face{font-family:"Fraunces";src:url("fonts/fraunces.woff2") format("woff2"),url("fonts/fraunces.woff") format("woff");font-weight:500 700;font-style:normal;font-display:swap}
 @font-face{font-family:"Inter";src:url("fonts/inter.woff2") format("woff2"),url("fonts/inter.woff") format("woff");font-weight:400 700;font-style:normal;font-display:swap}
 :root,:root[data-theme=dark]{
   /* Dark: warm black, bright warm ink, accents tuned for AA contrast on black */
@@ -25,7 +24,7 @@ body{
   -webkit-font-smoothing:antialiased;overflow-x:hidden;
 }
 h1,h2,h3,.brand,.price{
-  font-family:"Fraunces",Georgia,serif;font-weight:600;
+  font-family:"Inter",system-ui,sans-serif;font-weight:600;
   line-height:1.08;letter-spacing:-.015em;
   font-optical-sizing:auto;
 }
@@ -178,7 +177,7 @@ h1{
   display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1rem 2rem;
 }
 .proofbar li,.proofbar li>a{display:flex;align-items:baseline;gap:.6rem;text-decoration:none;min-width:0}
-.proofbar b{font:600 clamp(1.7rem,3vw,2.3rem)/1 "Fraunces",Georgia,serif;color:var(--gold);flex:0 0 auto}
+.proofbar b{font:600 clamp(1.7rem,3vw,2.3rem)/1 "Inter",system-ui,sans-serif;color:var(--gold);flex:0 0 auto}
 :root[data-theme=light] .proofbar b{color:var(--hot)}
 .proofbar li span{color:var(--mute);font-size:.9rem;line-height:1.3}
 .proofbar a:hover span{color:var(--ink)}
@@ -203,16 +202,16 @@ h2{font-size:clamp(1.9rem,4.4vw,3rem);margin-bottom:1rem;max-width:20ch;text-wra
 /* --- Steps --- */
 .steps3{list-style:none;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.15rem}
 .steps3 li{background:var(--bg2);border:1px solid var(--line);border-radius:1.5rem;padding:1.6rem 1.5rem;display:grid;gap:.6rem;align-content:start}
-.steps3 .n{font:600 2.4rem/1 "Fraunces",Georgia,serif;color:var(--hot)}
+.steps3 .n{font:600 2.4rem/1 "Inter",system-ui,sans-serif;color:var(--hot)}
 .steps3 h3{font-size:1.4rem}
 .steps3 p{color:var(--mute);font-size:.98rem}
 
 /* --- The Record --- */
-.price{font:600 clamp(2.6rem,6vw,4rem)/1 "Fraunces",Georgia,serif;color:var(--gold)}
+.price{font:600 clamp(2.6rem,6vw,4rem)/1 "Inter",system-ui,sans-serif;color:var(--gold)}
 :root[data-theme=light] .price{color:var(--hot)}
 .price small{font:500 1rem/1.2 "Inter",sans-serif;color:var(--mute);margin-left:.4rem;text-decoration:none}
 .fine{color:var(--mute);font-size:.88rem}
-.rp{font:600 1.35rem/1 "Fraunces",Georgia,serif;color:var(--gold)}
+.rp{font:600 1.35rem/1 "Inter",system-ui,sans-serif;color:var(--gold)}
 :root[data-theme=light] .rp{color:var(--hot)}
 
 /* --- Guarantee --- */
@@ -224,7 +223,7 @@ h2{font-size:clamp(1.9rem,4.4vw,3rem);margin-bottom:1rem;max-width:20ch;text-wra
 .quotes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.15rem}
 .quote{margin:0;background:var(--bg2);border:1px solid var(--line);border-radius:1.5rem;padding:1.5rem;display:grid;gap:.8rem;align-content:start}
 .stars{color:var(--gold);letter-spacing:.12em;font-size:.9rem}
-.quote blockquote{font:500 1.18rem/1.4 "Fraunces",Georgia,serif;color:var(--ink)}
+.quote blockquote{font:500 1.18rem/1.4 "Inter",system-ui,sans-serif;color:var(--ink)}
 .quote figcaption{color:var(--mute);font-weight:600;font-size:.9rem}
 
 /* --- Team --- */
@@ -560,7 +559,7 @@ input,select,textarea{box-shadow:inset 0 2px 6px rgba(0,0,0,.18),0 1px 0 var(--s
   box-shadow:0 20px 40px -24px color-mix(in srgb,var(--hot) 60%,transparent);
 }
 .one img{border-radius:50%;flex:0 0 auto}
-.one b{display:block;font:600 1.35rem/1.1 "Fraunces",Georgia,serif}
+.one b{display:block;font:600 1.35rem/1.1 "Inter",system-ui,sans-serif}
 .one span{color:var(--mute);font-size:.9rem}
 .opts{list-style:none;padding:0;display:grid;gap:.5rem;margin-top:auto}
 .opts li{position:relative;padding-left:1.2rem;font-size:.93rem}
@@ -621,7 +620,7 @@ input,select,textarea{box-shadow:inset 0 2px 6px rgba(0,0,0,.18),0 1px 0 var(--s
   padding-inline:clamp(1rem,4vw,3rem);border-bottom:1px solid var(--line);
   background:color-mix(in srgb,var(--bg) 70%,transparent);backdrop-filter:blur(12px);
 }
-.cfg-brand{font:600 1.25rem/1 "Fraunces",Georgia,serif;white-space:nowrap}
+.cfg-brand{font:600 1.25rem/1 "Inter",system-ui,sans-serif;white-space:nowrap}
 .cfg-steps{display:flex;gap:.25rem;margin-inline:auto;flex-wrap:nowrap}
 .cfg-step{
   display:inline-flex;align-items:center;gap:.5rem;padding:.45rem .8rem;border-radius:99px;border:0;background:none;
@@ -669,9 +668,9 @@ input,select,textarea{box-shadow:inset 0 2px 6px rgba(0,0,0,.18),0 1px 0 var(--s
 .cfg-pack input:focus-visible+.cfg-pack-in{outline:2px solid var(--gold);outline-offset:3px}
 .cfg-tag{position:absolute;top:-.7rem;left:1.1rem;font:600 .7rem/1 "Inter",sans-serif;font-style:normal;letter-spacing:.05em;text-transform:uppercase;color:var(--btn-ink);background:linear-gradient(100deg,var(--hot),var(--gold));padding:.35rem .6rem;border-radius:99px}
 .cfg-for{font-size:.76rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--mute);padding-right:2rem}
-.cfg-name{font:600 1.45rem/1.15 "Fraunces",Georgia,serif}
+.cfg-name{font:600 1.45rem/1.15 "Inter",system-ui,sans-serif}
 .cfg-what{color:var(--mute);font-size:.9rem;line-height:1.45}
-.cfg-price{font:600 1.7rem/1 "Fraunces",Georgia,serif;color:var(--gold);margin-top:.35rem}
+.cfg-price{font:600 1.7rem/1 "Inter",system-ui,sans-serif;color:var(--gold);margin-top:.35rem}
 :root[data-theme=light] .cfg-price{color:var(--hot)}
 .cfg-price small{font:500 .8rem "Inter",sans-serif;color:var(--mute)}
 .cfg-radio{position:absolute;top:1.15rem;right:1.15rem;width:1.3rem;height:1.3rem;border-radius:50%;border:1.5px solid var(--line);transition:all .25s}
@@ -689,7 +688,7 @@ input,select,textarea{box-shadow:inset 0 2px 6px rgba(0,0,0,.18),0 1px 0 var(--s
 .cfg-qbtn:hover:not([disabled]){border-color:var(--hot);transform:scale(1.06)}
 .cfg-qbtn:active:not([disabled]){transform:scale(.94)}
 .cfg-qbtn[disabled]{opacity:.35;cursor:default}
-.cfg-qnum{min-width:3ch;text-align:center;font:600 3.4rem/1 "Fraunces",Georgia,serif;font-variant-numeric:tabular-nums}
+.cfg-qnum{min-width:3ch;text-align:center;font:600 3.4rem/1 "Inter",system-ui,sans-serif;font-variant-numeric:tabular-nums}
 .cfg-presets{display:flex;flex-wrap:wrap;gap:.6rem;margin:1.4rem 0 1rem}
 .cfg-presets button{display:inline-flex;align-items:baseline;gap:.45rem;padding:.6rem 1.05rem;border-radius:99px;border:1px solid var(--line);background:var(--bg2);color:var(--ink);font:500 .95rem "Inter",sans-serif;cursor:pointer}
 .cfg-presets small{color:var(--mute);font-size:.8rem}
@@ -755,7 +754,7 @@ input,select,textarea{box-shadow:inset 0 2px 6px rgba(0,0,0,.18),0 1px 0 var(--s
 .cfg-lines.big b{font-size:1.02rem}
 .cfg-total{display:flex;justify-content:space-between;align-items:baseline;padding-top:.6rem}
 .cfg-total span{color:var(--mute);font-size:.9rem}
-.cfg-total b{font:600 2rem/1 "Fraunces",Georgia,serif;color:var(--gold);font-variant-numeric:tabular-nums}
+.cfg-total b{font:600 2rem/1 "Inter",system-ui,sans-serif;color:var(--gold);font-variant-numeric:tabular-nums}
 :root[data-theme=light] .cfg-total b{color:var(--hot)}
 .cfg-plus{color:var(--mute);font-size:.82rem;text-align:right;margin-top:-.4rem}
 .cfg-cart-cta{display:grid;gap:.5rem;margin-top:auto;padding-top:1rem}
@@ -795,7 +794,7 @@ input,select,textarea{box-shadow:inset 0 2px 6px rgba(0,0,0,.18),0 1px 0 var(--s
   }
   .cfg-bar-sum{display:grid;text-align:left;background:none;border:0;color:var(--ink);cursor:pointer;margin-right:auto;padding:.2rem}
   .cfg-bar-sum small{font-size:.72rem;color:var(--mute);text-decoration:underline;text-underline-offset:.15em}
-  .cfg-bar-sum b{font:600 1.5rem/1.1 "Fraunces",Georgia,serif;color:var(--gold)}
+  .cfg-bar-sum b{font:600 1.5rem/1.1 "Inter",system-ui,sans-serif;color:var(--gold)}
   :root[data-theme=light] .cfg-bar-sum b{color:var(--hot)}
   .cfg-bar-sum em{font-style:normal;font-size:1rem;color:var(--mute)}
   .cfg-bar .btn{padding:.75rem 1.3rem}
@@ -818,7 +817,7 @@ input,select,textarea{box-shadow:inset 0 2px 6px rgba(0,0,0,.18),0 1px 0 var(--s
 .cfg-webs{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-top:.6rem;padding-top:.7rem;border-top:1px solid var(--line)}
 .cfg-webs button{display:grid;gap:.15rem;text-align:left;padding:.7rem .8rem;border-radius:.85rem;border:1.5px solid var(--line);background:var(--bg);color:var(--ink);cursor:pointer;font:inherit}
 .cfg-webs .wn{font:600 .88rem "Inter",sans-serif}
-.cfg-webs .wp{font:600 1.2rem/1.1 "Fraunces",Georgia,serif;color:var(--gold)}
+.cfg-webs .wp{font:600 1.2rem/1.1 "Inter",system-ui,sans-serif;color:var(--gold)}
 :root[data-theme=light] .cfg-webs .wp{color:var(--hot)}
 .cfg-webs .ww{font:400 .76rem/1.35 "Inter",sans-serif;color:var(--mute)}
 .cfg-extras{align-items:start}
@@ -1065,7 +1064,7 @@ input,select,textarea{background:var(--bg2);box-shadow:inset 0 1px 3px rgba(0,0,
 .row-t{min-width:0}
 .row-t b{display:block;font-weight:600;font-size:.98rem}
 .row-t small{display:block;color:var(--mute);font-size:.84rem;line-height:1.35}
-.row-p{font:600 1.2rem/1 "Fraunces",Georgia,serif;color:var(--accent);white-space:nowrap}
+.row-p{font:600 1.2rem/1 "Inter",system-ui,sans-serif;color:var(--accent);white-space:nowrap}
 .row-go{color:var(--mute);font-size:1.3rem;transition:transform .2s,color .2s}
 .row-badge{font-style:normal;font-size:.66rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--on-primary);background:var(--primary);padding:.18rem .45rem;border-radius:99px;margin-left:.35rem;vertical-align:middle}
 .menu-help{margin-top:1.4rem;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1rem 1.5rem;
@@ -1173,7 +1172,7 @@ input,select,textarea{background:var(--bg2);box-shadow:inset 0 1px 3px rgba(0,0,
 .page-head .lede{max-width:40rem;color:var(--mute);font-size:1.1rem}
 .back{display:inline-block;margin-bottom:1.2rem;color:var(--mute);text-decoration:none;font-weight:600}
 .back:hover{color:var(--ink)}
-.avatar{flex:none;display:grid;place-items:center;width:3rem;height:3rem;border-radius:50%;font:600 1.3rem/1 "Fraunces",Georgia,serif;color:#fff;
+.avatar{flex:none;display:grid;place-items:center;width:3rem;height:3rem;border-radius:50%;font:600 1.3rem/1 "Inter",system-ui,sans-serif;color:#fff;
   background:radial-gradient(circle at 30% 30%,var(--accent),var(--primary));box-shadow:0 0 0 3px var(--bg2),0 8px 20px -8px rgba(229,56,59,.7)}
 .avatar.big{width:5rem;height:5rem;font-size:2.2rem}
 .profile-id{display:flex;align-items:center;gap:1.1rem}
@@ -1247,7 +1246,7 @@ h1,h2,h3,p,li,summary,label,.team-card-t,.row-t{overflow-wrap:break-word;hyphens
 .sf-contact{margin-top:.9rem}
 .sf-contact-t{font-weight:600;margin:0 0 .5rem}
 .sf-call{display:grid;gap:.6rem;padding:1.1rem;border-radius:1rem;border:1.5px solid var(--accent);background:color-mix(in srgb,var(--accent) 7%,var(--bg2))}
-.sf-call-t{font:600 1.35rem/1.2 "Fraunces",Georgia,serif;margin:0}
+.sf-call-t{font:600 1.35rem/1.2 "Inter",system-ui,sans-serif;margin:0}
 .sf-call-s{margin:0;color:var(--mute)}
 .sf-cal{width:100%;height:680px;border:0;border-radius:.8rem;background:#fff}
 @media(max-width:640px){.sf-cal{height:760px}}
@@ -1280,7 +1279,7 @@ h1,h2,h3,p,li,summary,label,.team-card-t,.row-t{overflow-wrap:break-word;hyphens
 .pk-badge{position:absolute;top:-.75rem;left:1.2rem;padding:.3rem .7rem;border-radius:99px;background:var(--primary);color:#fff;font-style:normal;font-weight:700;font-size:.78rem;letter-spacing:.04em;text-transform:uppercase}
 .pk-for{margin:0;color:var(--mute);font-size:.85rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase}
 .pk h3{font-size:1.6rem;margin:0}
-.pk-price{margin:0;font:600 2.3rem/1 "Fraunces",Georgia,serif;color:var(--accent)}
+.pk-price{margin:0;font:600 2.3rem/1 "Inter",system-ui,sans-serif;color:var(--accent)}
 .pk ul{list-style:none;padding:0;margin:.3rem 0 .6rem;display:grid;gap:.45rem}
 .pk li{display:flex;gap:.55rem;align-items:flex-start;font-size:.97rem}
 .pk li svg{flex:none;width:1.15rem;height:1.15rem;margin-top:.2rem;color:var(--ok)}
@@ -1489,7 +1488,7 @@ h1,h2,h3,p,li,summary,label,.team-card-t,.row-t{overflow-wrap:break-word;hyphens
 @keyframes hub-flow{to{stroke-dashoffset:-14}}
 .hub-core{position:absolute;inset:27%;border-radius:50%;scale:calc(1 + var(--level) * .07);transition:scale .12s linear}
 .hub-core .moon{inset:15%}
-.hub-name{position:absolute;inset:0;display:grid;place-items:center;font:600 clamp(.8rem,1.5vw,1rem)/1 "Fraunces",Georgia,serif;color:color-mix(in srgb,#f4ece1 82%,transparent);letter-spacing:.01em;z-index:2}
+.hub-name{position:absolute;inset:0;display:grid;place-items:center;font:600 clamp(.8rem,1.5vw,1rem)/1 "Inter",system-ui,sans-serif;color:color-mix(in srgb,#f4ece1 82%,transparent);letter-spacing:.01em;z-index:2}
 .hub-nodes{position:absolute;inset:0}
 .node{
   position:absolute;left:var(--x);top:var(--y);transform:translate(-50%,-50%);
@@ -1511,7 +1510,7 @@ h1,h2,h3,p,li,summary,label,.team-card-t,.row-t{overflow-wrap:break-word;hyphens
 /* ---------- proof ---------- */
 .ot-proof{display:flex;flex-wrap:wrap;justify-content:center;gap:1rem clamp(2rem,8vw,6rem);padding:1.6rem clamp(1rem,5vw,4rem);border-block:1px solid var(--line);background:color-mix(in srgb,var(--bg2) 70%,transparent)}
 .ot-proof>*{display:flex;align-items:baseline;gap:.7rem;margin:0;text-decoration:none;min-width:0}
-.ot-proof b{font:600 clamp(2rem,4vw,2.8rem)/1 "Fraunces",Georgia,serif;letter-spacing:-.02em}
+.ot-proof b{font:600 clamp(2rem,4vw,2.8rem)/1 "Inter",system-ui,sans-serif;letter-spacing:-.02em}
 .ot-proof span{color:var(--mute);display:inline-flex;align-items:center;gap:.4rem}
 .ot-proof .ico{width:1rem;height:1rem;color:var(--red-1)}
 .ot-proof a:hover span{color:var(--ink)}
@@ -1528,7 +1527,7 @@ h1,h2,h3,p,li,summary,label,.team-card-t,.row-t{overflow-wrap:break-word;hyphens
   -webkit-tap-highlight-color:transparent;
 }
 .tile .knob{margin-bottom:.55rem}
-.tile b{font:600 1.22rem/1.15 "Fraunces",Georgia,serif;letter-spacing:-.01em}
+.tile b{font:600 1.22rem/1.15 "Inter",system-ui,sans-serif;letter-spacing:-.01em}
 .tile small{color:var(--mute);font-size:.92rem;line-height:1.4}
 .tile-p{margin-top:.7rem;font-weight:600;font-size:.95rem;color:var(--gold);display:flex;align-items:center;justify-content:space-between;gap:.5rem}
 :root[data-theme=light] .tile-p{color:var(--accent)}
@@ -1550,7 +1549,7 @@ h1,h2,h3,p,li,summary,label,.team-card-t,.row-t{overflow-wrap:break-word;hyphens
 .flow-ic{display:grid;place-items:center;width:5.2rem;aspect-ratio:1;border-radius:50%;margin-bottom:.6rem;color:var(--gold);background:radial-gradient(circle at 50% 30%,color-mix(in srgb,var(--gold) 14%,var(--bg2)),var(--bg2) 70%);box-shadow:0 0 0 1px var(--line),0 14px 30px -18px rgba(0,0,0,.8)}
 :root[data-theme=light] .flow-ic{color:var(--accent);background:radial-gradient(circle at 50% 30%,#fff,var(--bg2) 70%)}
 .flow-ic .ico{width:2.1rem;height:2.1rem}
-.flow b{font:600 1.2rem/1.2 "Fraunces",Georgia,serif}
+.flow b{font:600 1.2rem/1.2 "Inter",system-ui,sans-serif}
 .flow small{color:var(--mute);font-size:.95rem}
 .flow-arrow{align-self:center;margin-top:-2.6rem;color:var(--mute)}
 .flow-arrow .ico{width:1.8rem;height:1.8rem}
@@ -1640,7 +1639,7 @@ html.sheet-open .mbar,html.sheet-open .help-fab{opacity:0;pointer-events:none}
 .ans{display:block;width:100%;text-align:left;padding:.85rem 1rem;border-radius:.95rem;background:var(--bg);border:1.5px solid var(--line);color:var(--ink);font:inherit;font-weight:600;cursor:pointer;transition:border-color .15s ease,transform .12s ease,background .15s ease}
 .ans.rich{display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:1rem;align-items:center}
 .ans.rich small{grid-column:1;color:var(--mute);font-weight:500;font-size:.86rem}
-.ans-p{grid-column:2;grid-row:1/span 2;font:600 1.15rem/1 "Fraunces",Georgia,serif;color:var(--gold);white-space:nowrap}
+.ans-p{grid-column:2;grid-row:1/span 2;font:600 1.15rem/1 "Inter",system-ui,sans-serif;color:var(--gold);white-space:nowrap}
 :root[data-theme=light] .ans-p{color:var(--accent)}
 .pane .field{margin-bottom:.85rem}
 .pane .field input,.pane .field textarea{background:var(--bg);font-size:1rem;min-height:3rem}
@@ -1702,7 +1701,7 @@ html{scrollbar-gutter:stable}
   box-shadow:-10px 12px 28px -18px rgba(0,0,0,.45);
   transition:transform .35s cubic-bezier(.22,1,.36,1),border-color .25s ease,color .25s ease;
 }
-.side-artist b{font:600 .95rem/1 "Fraunces",Georgia,serif;letter-spacing:.02em}
+.side-artist b{font:600 .95rem/1 "Inter",system-ui,sans-serif;letter-spacing:.02em}
 .side-artist-k{font:600 .68rem/1 "Inter",system-ui,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:var(--mute)}
 .side-artist:hover,.side-artist:focus-visible{
   transform:translate(0,-50%);
@@ -1851,3 +1850,38 @@ body{font-size:1.0625rem;line-height:1.6}
 
 /* Bot trap in the project form: off-screen for people, still in the page for bots */
 .hp{position:absolute!important;left:-10000px;width:1px;height:1px;overflow:hidden}
+
+/* =========================================================
+   REBRAND 2026 (final word): black stage, eclipse gradient, bold sans
+   One typeface (Inter), white pill buttons, the gradient only on
+   brand moments (logo, highlights, stage frames).
+   ========================================================= */
+:root,:root[data-theme=dark]{
+  --bg:#060606;--bg2:#121111;--bg3:#1a1919;--line:#262423;--ink:#f7f4f0;--mute:#b3aca4;
+  --grad:linear-gradient(100deg,#FFB547 0%,#FF5A1F 45%,#E11D48 100%);
+  --grad-deep:linear-gradient(135deg,#3b0a14 0%,#2a0d06 55%,#160604 100%);
+  --pill-bg:#fff;--pill-ink:#0b0b0b;
+}
+:root[data-theme=light]{
+  --bg:#fbfaf8;--bg2:#ffffff;--bg3:#f2efea;--line:#e4dfd8;--ink:#121010;--mute:#5d564f;
+  --grad:linear-gradient(100deg,#D97706 0%,#EA580C 45%,#BE123C 100%);
+  --grad-deep:linear-gradient(135deg,#ffe4e6 0%,#ffedd5 60%,#fff7ed 100%);
+  --pill-bg:#0b0b0b;--pill-ink:#fff;
+}
+body{background:var(--bg)}
+body::before,body::after{display:none}   /* no ambient haze or grain: a clean black stage */
+h1,h2,h3{font-family:"Inter",system-ui,sans-serif;font-weight:700;letter-spacing:-.035em}
+
+/* Logo: an eclipse drawn in code, sharp at any size */
+.brand{gap:.55rem;font-weight:700;letter-spacing:-.02em}
+.brand-mark{width:30px;height:30px;flex:0 0 auto}
+.brand-moon{fill:var(--bg)}
+
+/* Buttons: white pill on dark, black pill on light */
+.btn,.pill,.mbar-go{background:var(--pill-bg)!important;color:var(--pill-ink)!important;box-shadow:none;border-radius:99px}
+.btn:hover,.pill:hover,.mbar-go:hover{background:var(--pill-bg)!important;box-shadow:0 0 0 4px color-mix(in srgb,var(--ink) 14%,transparent);transform:translateY(-1px)}
+.btn span,.pill span,.mbar-go span{color:inherit}
+.btn.ghost{background:transparent!important;color:var(--ink)!important;box-shadow:inset 0 0 0 1.5px var(--line)}
+.btn.ghost:hover{box-shadow:inset 0 0 0 1.5px var(--ink)}
+.btn:focus-visible,.pill:focus-visible,.mbar-go:focus-visible{box-shadow:0 0 0 3px var(--bg),0 0 0 5px var(--ink)}
+.nav{background:color-mix(in srgb,var(--bg) 82%,transparent);box-shadow:none;border-bottom:1px solid var(--line)}
