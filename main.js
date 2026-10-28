@@ -554,12 +554,13 @@
       const btn = p.querySelector('.pick-btn')
       const menu = p.querySelector('.pick-menu')
       const items = () => [...menu.querySelectorAll('.pick-item')]
-      btn.addEventListener('click', () => {
+      btn.addEventListener('click', (e) => {
         const open = btn.getAttribute('aria-expanded') !== 'true'
         picks.forEach((o) => o !== p && close(o))
         btn.setAttribute('aria-expanded', String(open))
         menu.hidden = !open
-        if (open) (items().find((i) => i.getAttribute('aria-pressed') === 'true' || i.querySelector('.pick-on')) || items()[0]).focus()
+        // Keyboard opens (Enter/Space report no pointer position) move focus into the menu; taps leave it alone
+        if (open && e.detail === 0) (items().find((i) => i.getAttribute('aria-pressed') === 'true' || i.querySelector('.pick-on')) || items()[0]).focus()
       })
       menu.addEventListener('click', (e) => { if (e.target.closest('.pick-item')) close(p, true) })
       p.addEventListener('keydown', (e) => {
@@ -569,9 +570,12 @@
         const list = items(), i = list.indexOf(document.activeElement)
         list[(i + (e.key === 'ArrowDown' ? 1 : -1) + list.length) % list.length].focus()
       })
-      p.addEventListener('focusout', (e) => { if (!p.contains(e.relatedTarget)) close(p) })
     })
-    document.addEventListener('click', (e) => picks.forEach((p) => { if (!p.contains(e.target)) close(p) }))
+    // Close on a tap or click elsewhere, or when keyboard focus moves elsewhere. Not on blur: Safari doesn't
+    // focus tapped buttons, so a blur-based close would shut the menu before the tap on an option lands.
+    const outside = (e) => picks.forEach((p) => { if (!p.contains(e.target)) close(p) })
+    document.addEventListener('pointerdown', outside)
+    document.addEventListener('focusin', outside)
   }
 
   initSwap()
