@@ -410,6 +410,130 @@
     }, 2600)
   }
 
+
+  const still = () => matchMedia('(prefers-reduced-motion: reduce)').matches
+
+  // Sections fade up as they arrive; siblings follow one another. Without JS everything stays visible.
+  function initAutoReveal() {
+    const SEL = '.lp-sec>.lp-h2,.lp-sec>.lp-sub,.lp-for>li,.lp-cards>li,.lp-wall li,.lp-faq details,.lp-final-in,.lp-band .instruments>*,.sec>h2,.pkg-head,.steps3>li,.faq-list>details'
+    document.querySelectorAll(SEL).forEach((el) => {
+      if (el.classList.contains('reveal') || el.closest('[data-pin]')) return
+      el.classList.add('reveal')
+      const i = [...el.parentElement.children].indexOf(el)
+      if (i > 0) el.style.transitionDelay = `${Math.min(i, 5) * 60}ms`
+    })
+  }
+
+  // Numbers count up the first time they come into view.
+  function initCountUp() {
+    if (still() || !('IntersectionObserver' in window)) return
+    const nums = [...document.querySelectorAll('.lp-stats b')].map((b) => [b, b.firstChild]).filter(([, t]) => t && t.nodeType === 3 && /^\d+$/.test(t.textContent.trim()))
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (!e.isIntersecting) return
+        io.unobserve(e.target)
+        const t = e.target.firstChild, end = +t.textContent.trim(), t0 = performance.now()
+        const tick = (now) => {
+          const k = Math.min((now - t0) / 1100, 1)
+          t.textContent = String(Math.round(end * (1 - Math.pow(1 - k, 3))))
+          if (k < 1) requestAnimationFrame(tick)
+        }
+        t.textContent = '0'
+        requestAnimationFrame(tick)
+      })
+    }, { threshold: 0.6 })
+    nums.forEach(([b]) => io.observe(b))
+  }
+
+  // A thin red line at the top shows how far down the page you are.
+  function initScrollProgress() {
+    const bar = document.createElement('div')
+    bar.className = 'scroll-prog'
+    bar.setAttribute('aria-hidden', 'true')
+    document.body.appendChild(bar)
+    let ticking = false
+    const paint = () => {
+      ticking = false
+      const max = document.documentElement.scrollHeight - innerHeight
+      bar.style.transform = `scaleX(${max > 0 ? Math.min(scrollY / max, 1) : 0})`
+      document.documentElement.classList.toggle('is-moved', scrollY > 40)
+    }
+    addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(paint) } }, { passive: true })
+    addEventListener('resize', paint, { passive: true })
+    paint()
+  }
+
+  // The pinned scene: dots follow the step, and the hint says "keep scrolling" until the record is ready.
+  function initPinHint() {
+    const sec = document.querySelector('[data-pin]')
+    const hint = sec?.querySelector('.lp-pin-hint')
+    if (!hint) return
+    const dots = [...hint.querySelectorAll('.lp-dots i')]
+    const steps = [...sec.querySelectorAll('.lp-steps li')]
+    const sync = () => {
+      const on = steps.findIndex((li) => li.classList.contains('is-on'))
+      dots.forEach((d, i) => d.classList.toggle('on', i <= on))
+      hint.classList.toggle('is-done', (sec.querySelector('[data-pct]')?.textContent || '') === '100%')
+    }
+    new MutationObserver(sync).observe(sec, { subtree: true, attributes: true, attributeFilter: ['class'], childList: true, characterData: true })
+    sync()
+  }
+
+  // Rows that scroll sideways fade at the edge that has more, and nudge once so people see they move.
+  function initScrollRows() {
+    const rows = [...document.querySelectorAll('.jumpbar-in,.compare-wrap,.lp-chips,[data-scrolly]')]
+    rows.forEach((row) => {
+      const set = () => {
+        const more = row.scrollWidth > row.clientWidth + 4
+        row.classList.toggle('is-scrolly', more)
+        row.classList.toggle('at-start', row.scrollLeft < 4)
+        row.classList.toggle('at-end', row.scrollLeft + row.clientWidth >= row.scrollWidth - 4)
+      }
+      row.addEventListener('scroll', set, { passive: true })
+      addEventListener('resize', set, { passive: true })
+      set()
+      if (still() || !('IntersectionObserver' in window)) return
+      const io = new IntersectionObserver(([e]) => {
+        if (!e.isIntersecting || !row.classList.contains('is-scrolly') || row.scrollLeft > 4) return
+        io.disconnect()
+        setTimeout(() => {
+          row.scrollTo({ left: 56, behavior: 'smooth' })
+          setTimeout(() => row.scrollTo({ left: 0, behavior: 'smooth' }), 650)
+        }, 500)
+      }, { threshold: 0.9 })
+      io.observe(row)
+    })
+  }
+
+  // Buttons that show only an icon get a small label on hover or keyboard focus.
+  function initTips() {
+    const tip = document.createElement('div')
+    tip.className = 'tip'
+    tip.setAttribute('role', 'tooltip')
+    tip.id = 'ui-tip'
+    document.body.appendChild(tip)
+    const name = (el) => el.dataset.tip || el.getAttribute('aria-label') || el.querySelector('.sr')?.textContent.trim() || ''
+    const targets = [...document.querySelectorAll('button,a,[role=button],label[tabindex]')].filter((el) => !el.innerText.trim() && name(el))
+    const show = (el) => {
+      tip.textContent = name(el)
+      tip.classList.add('on')
+      const r = el.getBoundingClientRect(), t = tip.getBoundingClientRect()
+      const left = Math.min(Math.max(8, r.left + r.width / 2 - t.width / 2), innerWidth - t.width - 8)
+      const top = r.bottom + 8 + t.height < innerHeight ? r.bottom + 8 : r.top - t.height - 8
+      tip.style.left = `${left}px`
+      tip.style.top = `${top}px`
+    }
+    const hide = () => tip.classList.remove('on')
+    targets.forEach((el) => {
+      el.addEventListener('pointerenter', (e) => { if (e.pointerType === 'mouse') show(el) })
+      el.addEventListener('pointerleave', hide)
+      el.addEventListener('focus', () => { if (el.matches(':focus-visible')) show(el) })
+      el.addEventListener('blur', hide)
+      el.addEventListener('click', hide)
+    })
+    addEventListener('scroll', hide, { passive: true })
+  }
+
   initSwap()
   initNavState()
   initPin()
@@ -419,7 +543,13 @@
   initMobileBar()
   initDepth()
   initLang()
+  initAutoReveal()
   initReveal()
+  initCountUp()
+  initScrollProgress()
+  initPinHint()
+  initScrollRows()
+  initTips()
   initNavMenu()
   initDiscFromMarkup()
   initJumpbar()

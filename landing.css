@@ -5,7 +5,7 @@
 .lp-doodle{position:absolute;fill:none;stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;opacity:.55;pointer-events:none}
 .lp-doodle-l{left:-1rem;top:38%;width:clamp(7rem,14vw,12rem)}
 .lp-doodle-r{right:4%;top:14%;width:clamp(3.5rem,6vw,5rem)}
-@media(max-width:760px){.lp-doodle{display:none}}
+@media(max-width:1100px){.lp-doodle{display:none}}
 
 .lp-badges{list-style:none;padding:0;margin:0 auto 2rem;display:flex;flex-wrap:wrap;justify-content:center;gap:.6rem 1.6rem}
 .lp-badges li,.lp-badges a{display:flex;flex-direction:column;align-items:center;gap:.1rem;text-decoration:none;color:var(--ink)}
@@ -191,3 +191,44 @@
   .js .lp-cards .reveal:nth-child(6){transition-delay:150ms}
 }
 @keyframes lp-in{from{opacity:0;transform:translateY(10px)}}
+
+/* =========================================================
+   MOTION + GUIDES (homepage)
+   ========================================================= */
+@media(max-width:360px){.lp-hero h1{font-size:2.3rem}}
+/* doodles drift and the star twinkles */
+.lp-doodle-l{animation:lp-float 7s ease-in-out infinite}
+.lp-doodle-r{animation:lp-twinkle 4.5s ease-in-out infinite;transform-origin:50% 50%}
+@keyframes lp-float{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-12px) rotate(-3deg)}}
+@keyframes lp-twinkle{0%,100%{transform:scale(1) rotate(0);opacity:.55}50%{transform:scale(1.12) rotate(14deg);opacity:.9}}
+/* service chips: the icon bounces on hover */
+.lp-chips a .ico{transition:transform .35s cubic-bezier(.2,.9,.25,1.6)}
+.lp-chips a:hover .ico{transform:translateY(-2px) rotate(-8deg) scale(1.12);color:#FF5A1F}
+/* scroll cue under the hero */
+.lp-scrollcue{display:flex;width:max-content;max-width:100%;align-items:center;gap:.6rem;margin:2.2rem auto 0;color:var(--mute);font-size:.875rem;font-weight:600;text-decoration:none;transition:color .2s ease-out,opacity .4s ease-out}
+.lp-scrollcue:hover{color:var(--ink)}
+.lp-mouse{position:relative;width:22px;height:34px;border-radius:12px;box-shadow:inset 0 0 0 2px currentColor;flex:0 0 auto}
+.lp-mouse i{position:absolute;left:50%;top:7px;width:4px;height:7px;margin-left:-2px;border-radius:2px;background:#FF5A1F;animation:lp-wheel 1.6s ease-in-out infinite}
+@keyframes lp-wheel{0%{transform:translateY(0);opacity:1}70%{transform:translateY(10px);opacity:0}100%{transform:translateY(0);opacity:0}}
+html.is-moved .lp-scrollcue{opacity:0;pointer-events:none}
+@media(max-width:760px){
+  .lp-scrollcue{position:fixed;z-index:58;left:50%;bottom:calc(1rem + env(safe-area-inset-bottom,0px));transform:translateX(-50%);margin:0;padding:.55rem;border-radius:99px;
+    background:color-mix(in srgb,var(--bg) 72%,transparent);backdrop-filter:blur(8px);box-shadow:0 0 0 1px var(--line)}
+  .lp-scrollcue>span:not(.lp-mouse){position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+}
+/* pinned scene guide: four dots and a hint */
+.lp-pin-hint{display:none;align-items:center;justify-content:center;gap:.7rem;margin:-.4rem 0 1rem;color:var(--mute);font-size:.8125rem;font-weight:600}
+.lp-pin.is-live .lp-pin-hint{display:flex}
+.lp-dots{display:inline-flex;gap:.35rem}
+.lp-dots i{width:18px;height:4px;border-radius:2px;background:var(--line);transition:background .3s ease-out,width .3s ease-out}
+.lp-dots i.on{background:linear-gradient(90deg,#FF5A1F,#E11D48);width:26px}
+.lp-hint-go::after{content:"↓";display:inline-block;margin-left:.35rem;color:#FF5A1F;animation:lp-nudge 1.4s ease-in-out infinite}
+@keyframes lp-nudge{0%,100%{transform:translateY(0)}50%{transform:translateY(4px)}}
+.lp-hint-done{display:none;color:var(--ink)}
+.lp-hint-done::before{content:"✓";margin-right:.35rem;color:#22c55e}
+.lp-pin-hint.is-done .lp-hint-go{display:none}
+.lp-pin-hint.is-done .lp-hint-done{display:inline}
+@media(prefers-reduced-motion:reduce){
+  .lp-doodle-l,.lp-doodle-r,.lp-mouse i,.lp-hint-go::after{animation:none}
+  .lp-chips a:hover .ico{transform:none}
+}
