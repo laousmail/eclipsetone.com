@@ -8,6 +8,7 @@
   let cur = 'CAD'
   try { const c = localStorage.getItem(KEY); if (c === 'USD' || c === 'EUR') cur = c } catch { /* private mode */ }
   const fr = () => document.documentElement.lang === 'fr'
+  const SYM = { CAD: 'CA$', USD: 'US$', EUR: '€' }
 
   function fmt(cad, opts = {}) {
     const decimals = opts.decimals ?? (cad % 1 ? 2 : 0)
@@ -30,7 +31,8 @@
   function paint() {
     document.querySelectorAll('.money[data-cad]').forEach((el) => { el.textContent = fmt(parseFloat(el.dataset.cad)) })
     document.querySelectorAll('button[data-cur]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.cur === cur)))
-    document.querySelectorAll('select[data-cur-select]').forEach((sel) => { sel.value = cur })
+    document.querySelectorAll('[data-cur-sym]').forEach((el) => { el.textContent = SYM[cur] })
+    document.querySelectorAll('[data-cur-code]').forEach((el) => { el.textContent = cur })
     document.querySelectorAll('[data-cur-note]').forEach((el) => { el.hidden = cur === 'CAD' })
     document.documentElement.dataset.currency = cur
   }
@@ -45,10 +47,6 @@
   document.addEventListener('click', (e) => {
     const b = e.target.closest('button[data-cur]')
     if (b) set(b.dataset.cur)
-  })
-  document.addEventListener('change', (e) => {
-    const sel = e.target.closest('select[data-cur-select]')
-    if (sel && ['CAD', 'USD', 'EUR'].includes(sel.value)) set(sel.value)
   })
   new MutationObserver(paint).observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] })
   document.addEventListener('DOMContentLoaded', paint)

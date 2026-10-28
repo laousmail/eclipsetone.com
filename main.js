@@ -68,7 +68,7 @@
   function setLang(lang) {
     const next = lang === 'fr' ? 'fr' : 'en'
     document.documentElement.lang = next
-    document.querySelectorAll('[data-lang-btn]:not(.lang-one)').forEach((btn) => {
+    document.querySelectorAll('[data-lang-btn]:not(.pick-item)').forEach((btn) => {
       btn.setAttribute('aria-pressed', btn.getAttribute('data-lang-btn') === next ? 'true' : 'false')
     })
     // Refresh theme toggle labels for the active language.
@@ -540,6 +540,40 @@
     addEventListener('scroll', hide, { passive: true })
   }
 
+  // Header pickers (language, currency): the button shows the current choice, the menu lists the others.
+  function initPickers() {
+    const picks = [...document.querySelectorAll('[data-pick]')]
+    const close = (p, focus) => {
+      const btn = p.querySelector('.pick-btn')
+      if (btn.getAttribute('aria-expanded') !== 'true') return
+      btn.setAttribute('aria-expanded', 'false')
+      p.querySelector('.pick-menu').hidden = true
+      if (focus) btn.focus()
+    }
+    picks.forEach((p) => {
+      const btn = p.querySelector('.pick-btn')
+      const menu = p.querySelector('.pick-menu')
+      const items = () => [...menu.querySelectorAll('.pick-item')]
+      btn.addEventListener('click', () => {
+        const open = btn.getAttribute('aria-expanded') !== 'true'
+        picks.forEach((o) => o !== p && close(o))
+        btn.setAttribute('aria-expanded', String(open))
+        menu.hidden = !open
+        if (open) (items().find((i) => i.getAttribute('aria-pressed') === 'true' || i.querySelector('.pick-on')) || items()[0]).focus()
+      })
+      menu.addEventListener('click', (e) => { if (e.target.closest('.pick-item')) close(p, true) })
+      p.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') { close(p, true); return }
+        if (!['ArrowDown', 'ArrowUp'].includes(e.key) || menu.hidden) return
+        e.preventDefault()
+        const list = items(), i = list.indexOf(document.activeElement)
+        list[(i + (e.key === 'ArrowDown' ? 1 : -1) + list.length) % list.length].focus()
+      })
+      p.addEventListener('focusout', (e) => { if (!p.contains(e.relatedTarget)) close(p) })
+    })
+    document.addEventListener('click', (e) => picks.forEach((p) => { if (!p.contains(e.target)) close(p) }))
+  }
+
   initSwap()
   initNavState()
   initPin()
@@ -556,6 +590,7 @@
   initPinHint()
   initScrollRows()
   initTips()
+  initPickers()
   initNavMenu()
   initDiscFromMarkup()
   initJumpbar()

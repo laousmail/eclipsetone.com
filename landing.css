@@ -211,11 +211,7 @@
 .lp-mouse i{position:absolute;left:50%;top:7px;width:4px;height:7px;margin-left:-2px;border-radius:2px;background:#FF5A1F;animation:lp-wheel 1.6s ease-in-out infinite}
 @keyframes lp-wheel{0%{transform:translateY(0);opacity:1}70%{transform:translateY(10px);opacity:0}100%{transform:translateY(0);opacity:0}}
 html.is-moved .lp-scrollcue{opacity:0;pointer-events:none}
-@media(max-width:760px){
-  .lp-scrollcue{position:fixed;z-index:58;left:50%;bottom:calc(1rem + env(safe-area-inset-bottom,0px));transform:translateX(-50%);margin:0;padding:.55rem;border-radius:99px;
-    background:color-mix(in srgb,var(--bg) 72%,transparent);backdrop-filter:blur(8px);box-shadow:0 0 0 1px var(--line)}
-  .lp-scrollcue>span:not(.lp-mouse){position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
-}
+@media(max-width:760px){.lp-scrollcue{display:none}}
 /* pinned scene guide: four dots and a hint */
 .lp-pin-hint{display:none;align-items:center;justify-content:center;gap:.7rem;margin:-.4rem 0 1rem;color:var(--mute);font-size:.8125rem;font-weight:600}
 .lp-pin.is-live .lp-pin-hint{display:flex}
