@@ -232,3 +232,8 @@ html.is-moved .lp-scrollcue{opacity:0;pointer-events:none}
   .lp-doodle-l,.lp-doodle-r,.lp-mouse i,.lp-hint-go::after{animation:none}
   .lp-chips a:hover .ico{transform:none}
 }
+
+/* the pinned scene sits clear of the header */
+.lp-pin.is-live .lp-pin-view{top:calc(var(--nav-real,var(--nav-h)) + 1.25rem)}
+.lp-pin.is-live .lp-pin-view>.lp-sub{margin-bottom:1rem}
+.lp-pin.is-live .lp-pin-hint{margin:0 0 1rem}

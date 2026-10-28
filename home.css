@@ -2028,3 +2028,42 @@ html.is-scrolled .nav{border-bottom-color:var(--line);background:color-mix(in sr
 }
 /* a title and the price under it never share a line box */
 h3+.price{margin-top:.35rem}
+
+/* =========================================================
+   HEADER: solid once the page moves, offsets from its real
+   height, language + currency next to the menu
+   ========================================================= */
+html.is-scrolled .nav{background:color-mix(in srgb,var(--bg) 95%,transparent);backdrop-filter:blur(12px)}
+.jumpbar{top:var(--nav-real,var(--nav-h))}
+[id]{scroll-margin-top:calc(var(--nav-real,var(--nav-h)) + 3rem)}
+
+.lang-one,.cur-pick select{
+  display:inline-flex;align-items:center;justify-content:center;min-height:40px;border:0;border-radius:99px;cursor:pointer;
+  color:#fff;font:700 .85rem/1 "Inter",system-ui,sans-serif;letter-spacing:.02em;
+  background:linear-gradient(180deg,rgba(255,255,255,.18) 0%,rgba(255,255,255,.04) 46%,rgba(255,255,255,0) 50%),linear-gradient(180deg,var(--rb-deep-top),var(--rb-deep-bot));
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.25),inset 0 0 0 1px rgba(255,90,110,.35),0 8px 20px -14px var(--rb-glow);
+  transition:filter .2s ease,transform .3s cubic-bezier(.2,.9,.25,1.25);
+}
+.lang-one{min-width:44px;padding:0 .7rem}
+.lang-one:hover,.cur-pick select:hover{filter:brightness(1.18);transform:translateY(-1px)}
+.lang-one:active,.cur-pick select:active{transform:scale(.96)}
+.lang-one:focus-visible,.cur-pick select:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.cur-pick{position:relative;display:inline-flex;flex:0 0 auto}
+.cur-pick select{-webkit-appearance:none;appearance:none;padding:0 1.7rem 0 .8rem}
+.cur-pick select option{color:#111;background:#fff}
+.cur-pick::after{content:"";position:absolute;right:.75rem;top:50%;width:.4rem;height:.4rem;margin-top:-.3rem;border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg);pointer-events:none}
+.lang-one{display:none}
+
+@media(max-width:980px){
+  .tools{order:2;margin-left:auto}
+  .nav-toggle{order:3;margin-left:0}
+  .tools>.lang-one{display:inline-flex}
+}
+@media(max-width:420px){
+  .nav{gap:.35rem;padding-inline:.7rem}
+  .nav-word{display:none!important}
+  .nav-toggle{padding:0;width:42px;height:40px;justify-content:center}
+  .cur-pick select{padding:0 1.5rem 0 .65rem;font-size:.8rem}
+  .cur-pick::after{right:.62rem}
+}
+@media(max-width:340px){.brand{font-size:.9rem}.brand-mark{width:26px;height:26px}}

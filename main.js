@@ -68,7 +68,7 @@
   function setLang(lang) {
     const next = lang === 'fr' ? 'fr' : 'en'
     document.documentElement.lang = next
-    document.querySelectorAll('[data-lang-btn]').forEach((btn) => {
+    document.querySelectorAll('[data-lang-btn]:not(.lang-one)').forEach((btn) => {
       btn.setAttribute('aria-pressed', btn.getAttribute('data-lang-btn') === next ? 'true' : 'false')
     })
     // Refresh theme toggle labels for the active language.
@@ -325,6 +325,12 @@
     const set = () => document.documentElement.classList.toggle('is-scrolled', scrollY > 8)
     set()
     addEventListener('scroll', set, { passive: true })
+    // The header's real height drives sticky offsets and anchor landings, so nothing slides under it
+    const nav = document.querySelector('.nav')
+    const measure = () => { if (nav) document.documentElement.style.setProperty('--nav-real', `${nav.offsetHeight}px`) }
+    measure()
+    addEventListener('resize', measure, { passive: true })
+    if (nav && 'ResizeObserver' in window) new ResizeObserver(measure).observe(nav)
   }
 
   // "Voice memo in. Record out.": the stage stays pinned while the visitor scrolls, and the scroll
@@ -341,7 +347,7 @@
     const phaseEl = sec.querySelector('[data-phase]')
     const pctEl = sec.querySelector('[data-pct]')
     const phases = (sec.querySelector('[data-phases]')?.textContent || '').split('|').filter(Boolean)
-    const top = () => (document.querySelector('.nav')?.offsetHeight || 64) + 8
+    const top = () => (document.querySelector('.nav')?.offsetHeight || 64) + 20
     let live = false
     let ticking = false
 
