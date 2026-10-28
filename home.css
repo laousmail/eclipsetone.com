@@ -2088,23 +2088,18 @@ html.is-scrolled .nav{background:color-mix(in srgb,var(--bg) 95%,transparent);ba
 @media(max-width:360px){.pick-btn>.pick-sym{display:none!important}}
 @media(max-width:340px){.brand{font-size:.9rem}.brand-mark{width:26px;height:26px}.pick-chev{display:none}}
 @media(prefers-reduced-motion:reduce){.pick-menu{animation:none}.pick-chev{transition:none}}
-/* Each picker has its own color: language in royal blue, currency in gold, menu stays wine red */
-.pick-lang .pick-btn{
-  background:linear-gradient(180deg,rgba(255,255,255,.26) 0%,rgba(255,255,255,.06) 46%,rgba(255,255,255,0) 50%),linear-gradient(180deg,#3B74F2,#2552D0 55%,#1C3FA8)!important;
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.35),inset 0 0 0 1px rgba(140,180,255,.45),0 8px 20px -12px rgba(37,82,208,.75);color:#fff;
+/* Pickers are quiet: a dark pill with a hairline. The flag and the gold currency symbol carry the color. */
+.pick .pick-btn{
+  background:var(--bg2)!important;color:var(--ink);text-shadow:none;
+  box-shadow:inset 0 0 0 1px var(--line);
 }
-.pick-cur .pick-btn{
-  background:linear-gradient(180deg,rgba(255,255,255,.4) 0%,rgba(255,255,255,.1) 46%,rgba(255,255,255,0) 50%),linear-gradient(180deg,#FCD34D,#F5A524 55%,#D97706)!important;
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.55),inset 0 0 0 1px rgba(255,236,170,.6),0 8px 20px -12px rgba(217,119,6,.8);color:#1a0a02;text-shadow:none;
-}
-.pick-cur .pick-btn .pick-sym{opacity:.75}
-.pick-lang .pick-item:hover,.pick-lang .pick-item:focus-visible{background:rgba(59,116,242,.16)}
-.pick-lang .pick-item:has(.pick-on){background:rgba(59,116,242,.24)}
-.pick-lang .pick-on::after{border-color:#5B8CFF}
-.pick-cur .pick-item:hover,.pick-cur .pick-item:focus-visible{background:rgba(245,165,36,.16)}
-.pick-cur .pick-item[aria-pressed=true]{background:rgba(245,165,36,.24)}
-.pick-cur .pick-item[aria-pressed=true]::after{border-color:#F5A524}
+.pick .pick-btn:hover{filter:none;box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--ink) 35%,var(--line))}
+.pick .pick-btn[aria-expanded=true]{box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--ink) 55%,var(--line))}
+.pick-cur .pick-btn .pick-sym{color:#F5A524;opacity:1}
+:root[data-theme=light] .pick-cur .pick-btn .pick-sym{color:#B45309}
+.pick .flag{box-shadow:0 0 0 1px var(--line)}
+.pick-item:hover,.pick-item:focus-visible{background:color-mix(in srgb,var(--ink) 7%,transparent)}
+.pick-item[aria-pressed=true],.pick-item:has(.pick-on){background:color-mix(in srgb,var(--ink) 11%,transparent)}
+.pick-item[aria-pressed=true]::after,.pick-on::after{border-color:var(--ink)}
 .pick-cur .pick-item .pick-sym{color:#F5A524}
 :root[data-theme=light] .pick-cur .pick-item .pick-sym{color:#B45309}
-:root[data-theme=light] .pick-cur .pick-item[aria-pressed=true]::after{border-color:#B45309}
-:root[data-theme=light] .pick-lang .pick-on::after{border-color:#2552D0}
