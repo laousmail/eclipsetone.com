@@ -1,6 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
-  <rect width="64" height="64" rx="12" fill="#050505"/>
-  <circle cx="30" cy="32" r="16" fill="#e85a1a"/>
-  <circle cx="36" cy="32" r="15" fill="#050505"/>
-  <circle cx="42" cy="28" r="2.2" fill="#ff7b00" opacity="0.95"/>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="242 232 145 145"><defs><linearGradient id="et-c" x1="0" y1="0" x2=".3" y2="1"><stop offset="0" stop-color="#F0924A"/><stop offset=".45" stop-color="#CF5128"/><stop offset="1" stop-color="#B53A1C"/></linearGradient><linearGradient id="et-r" x1="1" y1=".2" x2="0" y2="1"><stop offset="0" stop-color="#D9B58C"/><stop offset=".5" stop-color="#9A5A3E"/><stop offset="1" stop-color="#6E3A2A"/></linearGradient></defs><rect x="242" y="232" width="145" height="145" rx="28" fill="#141311"/><circle cx="314.5" cy="304.5" r="63" fill="none" stroke="url(#et-r)" stroke-width="2.6"/><path fill="url(#et-c)" d="M312.9 247A57.5 57.5 0 1 0 360.3 339.3A52 52 0 1 1 312.9 247Z"/><g fill="#EFECE4"><path d="M325 289.5L371 269.5V277.5L348 284V327H354V283L333 290Z"/><ellipse cx="342.5" cy="325.5" rx="10.5" ry="7.5" transform="rotate(-22 342.5 325.5)"/><rect x="348" y="279" width="6" height="48"/></g></svg>

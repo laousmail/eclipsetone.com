@@ -2103,3 +2103,11 @@ html.is-scrolled .nav{background:color-mix(in srgb,var(--bg) 95%,transparent);ba
 .pick-item[aria-pressed=true]::after,.pick-on::after{border-color:var(--ink)}
 .pick-cur .pick-item .pick-sym{color:#F5A524}
 :root[data-theme=light] .pick-cur .pick-item .pick-sym{color:#B45309}
+/* LOGO: drawn moon mark + wordmark (the wordmark PNG is a mask, so it takes the text color in both themes) */
+.brand{--m:34px;gap:calc(var(--m)*.22);color:var(--ink)}
+.brand .brand-mark{width:var(--m);height:var(--m)}
+.brand-word{display:block;flex:0 0 auto;width:calc(var(--m)*4.165);height:calc(var(--m)*.692);margin-top:calc(var(--m)*.083);background:currentColor;
+  -webkit-mask:url("brand-word.png") center/100% 100% no-repeat;mask:url("brand-word.png") center/100% 100% no-repeat}
+@media(max-width:640px){.brand{--m:30px}}
+@media(max-width:420px){.brand{--m:24px}.pick-chev{display:none}}
+@media(max-width:359px){.brand{--m:30px}.brand-word{display:none}}
