@@ -47,6 +47,9 @@
       q: ['When do you want to come in?', 'Tu veux venir quand ?'],
       a: [['week', 'This week', 'Cette semaine'], ['two', 'In the next 2 weeks', 'Dans les 2 prochaines semaines'], ['flex', 'I’m flexible', 'Je suis flexible']],
       always: ['warn', ['Song', 'full'], 'In person, at our studio in Montréal, 2 hours with Smail. Not nearby? A full song works 100% online.', 'En personne, à notre studio à Montréal, 2 heures avec Smail. Pas dans le coin ? Une chanson complète se fait 100 % en ligne.'] },
+    'Film & media': { icon: 'video', label: ['Film & media', 'Film et médias'], call: true,
+      q: ['What does your project need?', 'De quoi ton projet a besoin ?'],
+      a: [['music', 'Original music', 'Musique originale'], ['design', 'Sound design', 'Design sonore'], ['mix', 'Mixing or voice-over', 'Mixage ou voix hors champ'], ['atmos', 'Dolby Atmos mix', 'Mix Dolby Atmos']] },
     'Not sure': { icon: 'spark', label: ['Not sure yet', 'Pas encore sûr'], call: true,
       q: ['What do you have right now?', 'Tu as quoi en ce moment ?'],
       a: [['song', 'A recorded song', 'Une chanson enregistrée'], ['vocals', 'Recorded vocals', 'Des voix enregistrées'], ['lyrics', 'Lyrics', 'Des paroles'], ['idea', 'Just an idea', 'Juste une idée']],
@@ -57,9 +60,9 @@
         idea: ['ok', ['Song', 'write'], 'Song + Songwriting ($997) is the one for you.', 'Chanson + écriture (997 $) est faite pour toi.'],
       } },
   }
-  const ORDER = ['Song', 'Music video', 'Website', 'Social media', 'Mixing', 'Studio Recording', 'Not sure']
+  const ORDER = ['Song', 'Music video', 'Website', 'Social media', 'Mixing', 'Studio Recording', 'Film & media', 'Not sure']
   // Old package names still work as openers (from links, bookmarks and the prices page).
-  const ALIAS = { 'Full Song': ['Song', 'full'], 'Song + Songwriting': ['Song', 'write'], 'Song + Launch': ['Song', 'launch'], '3-Song EP': ['Song', 'ep'], 'Website design': ['Website', ''], 'Artist management': ['Social media', 'manage'] }
+  const ALIAS = { 'Full Song': ['Song', 'full'], 'Song + Songwriting': ['Song', 'write'], 'Song + Launch': ['Song', 'launch'], '3-Song EP': ['Song', 'ep'], 'Website design': ['Website', ''], 'Artist management': ['Social media', 'manage'], 'Film music': ['Film & media', 'music'], 'Sound design': ['Film & media', 'design'], 'Film mixing': ['Film & media', 'mix'], 'Dolby Atmos': ['Film & media', 'atmos'] }
 
   const money = (n) => (window.etMoney ? window.etMoney(n) : '$' + n)
   const ansOf = (s) => (SERVICES[s.pick]?.a || []).find((x) => x[0] === s.answer)
