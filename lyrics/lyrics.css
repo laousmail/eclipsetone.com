@@ -1,0 +1,14 @@
+/* Eclipse Lyrics page: phone screenshots of the app, one per step */
+.ly-head h1{max-width:18ch}
+.ly-note{margin-top:1rem;color:var(--mute);font-size:.9375rem}
+.ly-shots h2{font-size:clamp(1.5rem,3vw,2rem);margin-bottom:1.4rem}
+.ly-steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1.2rem}
+.ly-steps li{display:grid;gap:.5rem;align-content:start;color:var(--mute);line-height:1.55}
+.ly-steps b{color:var(--ink);font-size:1.05rem;margin-top:.4rem}
+.ly-steps img{width:100%;height:auto;aspect-ratio:1/2;border-radius:1.4rem;border:1px solid var(--line);box-shadow:var(--lift);background:#060606}
+@media(max-width:900px){.ly-steps{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:520px){
+  /* Swipe through the steps on a phone */
+  .ly-steps{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:72%;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:.6rem;margin-inline:-1rem;padding-inline:1rem;scroll-padding-inline:1rem}
+  .ly-steps li{scroll-snap-align:start}
+}
