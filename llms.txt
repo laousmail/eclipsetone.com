@@ -42,6 +42,10 @@
 - [Sound design](https://eclipsetone.com/sound-design/)
 - [Film mixing and recording](https://eclipsetone.com/film-mixing-recording/)
 
+## Free tool
+
+- [Eclipse Lyrics](https://lyrics.eclipsetone.com/): free browser tool by EclipseTone to time lyrics to a song, export subtitles (SRT, VTT, LRC) for YouTube, CapCut, Premiere, DaVinci and Final Cut, and render lyric videos (9:16, 4:5, 1:1, 16:9, up to 4K) or a lyrics-only transparent / green-screen layer. No account; audio stays on the device. English, French and Kabyle.
+
 ## En français
 
 Le site complet existe en français : [eclipsetone.com/fr/](https://eclipsetone.com/fr/)
