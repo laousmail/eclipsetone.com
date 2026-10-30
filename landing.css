@@ -108,6 +108,9 @@
 .lp-more a{display:inline-flex;align-items:center;gap:.4rem;min-height:44px;font-weight:600;color:var(--ink);text-underline-offset:.25em}
 @media(max-width:960px){.lp-cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:620px){.lp-cards{grid-template-columns:minmax(0,1fr)}.lp-card-wide{grid-column:auto}}
+/* Free tool: one card, centred */
+#free-tools .lp-cards{grid-template-columns:minmax(0,46rem);justify-content:center}
+#free-tools .lp-card-wide{grid-column:auto}
 
 /* ---------- real musicians ---------- */
 .lp-band .instruments{margin:1.5rem auto 2rem}
