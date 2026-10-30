@@ -44,7 +44,7 @@
 
 ## Free tool
 
-- [Eclipse Lyrics](https://laousmail.github.io/Eclipse-Lyrics/): free browser tool by EclipseTone to time lyrics to a song, export subtitles (SRT, VTT, LRC) for YouTube, CapCut, Premiere, DaVinci and Final Cut, and render lyric videos (9:16, 4:5, 1:1, 16:9, up to 4K) or a lyrics-only transparent / green-screen layer. No account; audio stays on the device. English, French and Kabyle.
+- [Eclipse Lyrics](https://eclipsetone.com/lyrics/): free browser tool by EclipseTone to time lyrics to a song, export subtitles (SRT, VTT, LRC) for YouTube, CapCut, Premiere, DaVinci and Final Cut, and render lyric videos (9:16, 4:5, 1:1, 16:9, up to 4K) or a lyrics-only transparent / green-screen layer. No account; audio stays on the device. English, French and Kabyle.
 
 ## En français
 

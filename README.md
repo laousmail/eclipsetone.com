@@ -37,6 +37,7 @@ Other files:
 | `analytics.js` | GoatCounter visits and button events (off until `config.js` has a code) |
 | `robots.txt`, `llms.txt` | For search engines and AI assistants. Update `llms.txt` when prices change |
 | `docs/icons.html` | Icon set used on every page (copied in by the build) |
+| `lyrics/` | eclipsetone.com/lyrics/ forwards to the Eclipse Lyrics app at lyrics.eclipsetone.com, or to its github.io address while the subdomain isn't live (`lyrics/go.js`) |
 | `og-image.jpg` | Share preview for WhatsApp, Instagram, iMessage |
 
 Setup steps for the lead sheet, analytics and MailerLite: [`docs/SETUP.md`](docs/SETUP.md). `docs/` and `src/` are not published.
