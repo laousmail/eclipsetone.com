@@ -8,6 +8,7 @@ Edit the bilingual sources, then run:  python3 docs/build_pages.py
 - docs/services.json: one page per service
 - docs/blog.json: blog posts
 - docs/privacy.html: privacy policy
+- docs/lyrics.html: the Eclipse Lyrics page (the free tool at lyrics.eclipsetone.com)
 
 Each page is written twice: English at its normal address, French under fr/ (blog posts keep
 their .fr.html address). Each version keeps only its own language, links to the other one
@@ -38,6 +39,7 @@ FR_PATHS = {
     'blog/index.html': 'fr/blog/index.html',
     'privacy/index.html': 'fr/privacy/index.html',
     'terms/index.html': 'fr/conditions/index.html',
+    'lyrics/index.html': 'fr/paroles/index.html',
 }
 FR_PATHS.update({f"{s['slug_en']}/index.html": f"fr/{s['slug_fr']}/index.html" for s in SERVICES})
 FR_PATHS.update({f"blog/{p['slug']}.html": f"blog/{p['slug']}.fr.html" for p in POSTS})
@@ -405,6 +407,30 @@ def build_terms():
     publish(doc, 'terms/index.html')
 
 
+# ---------------- Eclipse Lyrics (free tool) ----------------
+def build_lyrics():
+    main = (ROOT / 'docs/lyrics.html').read_text()
+    ld = f'''<link rel="stylesheet" href="lyrics.css?v={VERSION}" />
+<script type="application/ld+json">
+{{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Eclipse Lyrics",
+  "url": "https://lyrics.eclipsetone.com/",
+  "applicationCategory": "MultimediaApplication",
+  "operatingSystem": "Any (web browser)",
+  "inLanguage": ["en", "fr", "kab"],
+  "offers": {{"@type": "Offer", "price": "0", "priceCurrency": "CAD"}},
+  "publisher": {{"@type": "Organization", "name": "EclipseTone Productions", "url": "{SITE}"}}
+}}
+</script>
+'''
+    doc = page('lyrics/index.html', 'Free lyric video and subtitle maker · Eclipse Lyrics', 'Time your lyrics to your song in your browser, then export a lyric video, SRT subtitles or a transparent lyrics layer. Free, no account, nothing uploaded.', main,
+               title_fr='Lyric video et sous-titres gratuits · Eclipse Lyrics', desc_fr='Cale tes paroles sur ta chanson dans ton navigateur, puis exporte un lyric video, des sous-titres SRT ou un calque de paroles transparent. Gratuit, sans compte, rien n’est envoyé.',
+               head_extra=ld)
+    publish(doc, 'lyrics/index.html')
+
+
 # ---------------- sitemap ----------------
 def build_sitemap():
     rows = []
@@ -424,5 +450,6 @@ if __name__ == '__main__':
     build_blog()
     build_privacy()
     build_terms()
+    build_lyrics()
     build_sitemap()
     print(f'built {len(FR_PATHS) * 2} pages')
